@@ -34,17 +34,17 @@
     }
 
     header {
-      min-height: 330px;
+      min-height: 340px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 50px 20px;
+      padding: 55px 20px;
       border-bottom: 1px solid var(--borde);
     }
 
     .hero {
-      max-width: 950px;
+      max-width: 980px;
       width: 100%;
     }
 
@@ -78,7 +78,7 @@
     }
 
     main {
-      max-width: 1050px;
+      max-width: 1100px;
       margin: 35px auto;
       padding: 0 20px 40px;
     }
@@ -116,29 +116,19 @@
       font-size: 25px;
     }
 
+    h3 {
+      margin-top: 0;
+    }
+
     p {
       line-height: 1.6;
       color: #dbeafe;
     }
 
-    .tags {
-      margin-top: 14px;
-    }
-
-    .tag {
-      display: inline-block;
-      background: rgba(56,189,248,0.12);
-      color: var(--blanco);
-      border: 1px solid rgba(56,189,248,0.35);
-      padding: 9px 13px;
-      margin: 6px;
-      border-radius: 999px;
-      font-size: 14px;
-    }
-
     ul {
       line-height: 1.7;
       color: #dbeafe;
+      padding-left: 22px;
     }
 
     .button {
@@ -177,12 +167,72 @@
       margin-top: 14px;
     }
 
+    .skill-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .skill-card {
+      background: rgba(7, 17, 31, 0.75);
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      padding: 20px;
+      transition: all 0.25s ease;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--celeste);
+      box-shadow: 0 10px 25px rgba(56,189,248,0.12);
+    }
+
+    .skill-card h3 {
+      color: var(--dorado);
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .skill-card p {
+      font-size: 14px;
+      color: var(--gris);
+    }
+
+    .tags {
+      margin-top: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(56,189,248,0.12);
+      color: var(--blanco);
+      border: 1px solid rgba(56,189,248,0.35);
+      padding: 9px 13px;
+      margin: 5px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .mini-label {
+      color: var(--verde-terminal);
+      font-family: "Courier New", monospace;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
     footer {
       text-align: center;
       padding: 25px;
       color: var(--gris);
       border-top: 1px solid var(--borde);
       font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .skill-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 700px) {
@@ -196,6 +246,11 @@
 
       section {
         padding: 20px;
+      }
+
+      .button {
+        width: 100%;
+        text-align: center;
       }
     }
   </style>
@@ -238,6 +293,7 @@
   <main>
 
     <section>
+      <div class="mini-label">> perfil profesional</div>
       <h2>Sobre mí</h2>
 
       <p>
@@ -256,45 +312,99 @@
     </section>
 
     <section>
-      <h2>Áreas de interés</h2>
+      <div class="mini-label">> áreas principales</div>
+      <h2>Áreas y herramientas clave</h2>
 
-      <div class="tags">
-        <span class="tag">Ingeniería Civil</span>
-        <span class="tag">Geotecnia</span>
-        <span class="tag">Pavimentos</span>
-        <span class="tag">Análisis de Datos</span>
-        <span class="tag">Python</span>
-        <span class="tag">SQL</span>
-        <span class="tag">Power BI</span>
-        <span class="tag">Gestión Ejecutiva</span>
-        <span class="tag">Planificación</span>
-        <span class="tag">Control Documental</span>
-        <span class="tag">Reportabilidad Técnica</span>
+      <div class="skill-grid">
+
+        <div class="skill-card">
+          <h3>Ingeniería Civil</h3>
+          <p>
+            Herramientas y conocimientos técnicos aplicados a obra,
+            oficina técnica, geotecnia, pavimentos e infraestructura.
+          </p>
+
+          <div class="tags">
+            <span class="tag">AutoCAD</span>
+            <span class="tag">Civil 3D</span>
+            <span class="tag">Revit</span>
+            <span class="tag">Geotecnia</span>
+            <span class="tag">Pavimentos</span>
+            <span class="tag">Presupuestos</span>
+            <span class="tag">Cubicaciones</span>
+            <span class="tag">Ensayos de laboratorio</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Data & Analytics</h3>
+          <p>
+            Procesamiento, modelado y análisis de información para generar
+            reportes, tableros, indicadores y soporte a decisiones.
+          </p>
+
+          <div class="tags">
+            <span class="tag">Excel avanzado</span>
+            <span class="tag">Power Query</span>
+            <span class="tag">Power Pivot</span>
+            <span class="tag">Modelado de datos</span>
+            <span class="tag">Power BI</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Python</span>
+            <span class="tag">ETL</span>
+          </div>
+        </div>
+
+        <div class="skill-card">
+          <h3>Gestión Ejecutiva</h3>
+          <p>
+            Seguimiento técnico, planificación, control documental y reportabilidad
+            para apoyar decisiones de gestión en proyectos.
+          </p>
+
+          <div class="tags">
+            <span class="tag">MS Project</span>
+            <span class="tag">Primavera P6</span>
+            <span class="tag">Planificación</span>
+            <span class="tag">Curva S</span>
+            <span class="tag">SPI / CPI</span>
+            <span class="tag">KPIs</span>
+            <span class="tag">Control documental</span>
+            <span class="tag">Reportabilidad técnica</span>
+          </div>
+        </div>
+
       </div>
     </section>
 
     <section>
-      <h2>Proyectos y enfoque técnico</h2>
+      <div class="mini-label">> aplicación profesional</div>
+      <h2>Aplicación profesional</h2>
 
       <ul>
-        <li>Proyectos de Python aplicados al análisis, limpieza y organización de datos.</li>
-        <li>Dashboards y reportes técnicos para seguimiento de información de proyectos.</li>
         <li>Procesamiento de datos de laboratorio, obra y oficina técnica.</li>
+        <li>Dashboards y reportes técnicos para seguimiento de KPIs de proyectos.</li>
         <li>Análisis de información para soporte a decisiones en ingeniería civil.</li>
         <li>Organización, trazabilidad y control documental de proyectos técnicos.</li>
-        <li>Gestión ejecutiva de información para planificación, seguimiento y reportabilidad.</li>
+        <li>Planificación, seguimiento y reportabilidad con enfoque ejecutivo.</li>
+        <li>Integración de herramientas de ingeniería, data analytics y gestión de proyectos.</li>
       </ul>
     </section>
 
     <section>
+      <div class="mini-label">> credenciales disponibles</div>
       <h2>Credenciales y referencias</h2>
 
       <p>
-        Documentación profesional seleccionada para consulta: título profesional,
+        Documentación profesional seleccionada para consulta: CV, título profesional,
         certificado de maestría, tarjeta profesional y referencias laborales.
       </p>
 
       <div class="grid-buttons">
+        <a class="button gold" href="docs/cv-william-saenz.pdf" target="_blank">
+          CV profesional
+        </a>
+
         <a class="button gold" href="docs/titulo-profesional-apostillado.pdf" target="_blank">
           Título profesional
         </a>
@@ -318,10 +428,11 @@
     </section>
 
     <section>
-      <h2>Contacto profesional</h2>
+      <div class="mini-label">> contacto profesional</div>
+      <h2>Contacto</h2>
 
       <p>
-        Podés contactarme para oportunidades vinculadas con ingeniería civil,
+        Disponible para oportunidades vinculadas con ingeniería civil,
         análisis de datos, gestión técnica, oficina técnica, planificación,
         control documental y proyectos de infraestructura.
       </p>
