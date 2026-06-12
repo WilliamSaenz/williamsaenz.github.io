@@ -1,68 +1,202 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>William D. Saenz | Portafolio Técnico</title>
+
   <style>
+    :root {
+      --fondo: #07111f;
+      --azul-marino: #0b1f33;
+      --azul-card: #101d2f;
+      --celeste: #38bdf8;
+      --azul-linkedin: #0a66c2;
+      --dorado: #c9a24d;
+      --verde-terminal: #39ff14;
+      --blanco: #f8fafc;
+      --gris: #94a3b8;
+      --borde: rgba(255,255,255,0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      background: #f4f6f8;
-      color: #1f2933;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 35%),
+        linear-gradient(180deg, #07111f 0%, #0b1f33 100%);
+      color: var(--blanco);
     }
 
     header {
-      background: #0b1f33;
-      color: white;
-      padding: 50px 20px;
+      min-height: 330px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      padding: 50px 20px;
+      border-bottom: 1px solid var(--borde);
     }
 
-    header h1 {
+    .hero {
+      max-width: 950px;
+      width: 100%;
+    }
+
+    .terminal-line {
+      color: var(--verde-terminal);
+      font-family: "Courier New", monospace;
+      font-size: 16px;
+      margin-bottom: 18px;
+      min-height: 22px;
+    }
+
+    h1 {
       margin: 0;
-      font-size: 38px;
+      font-size: 46px;
+      letter-spacing: 1px;
     }
 
-    header p {
-      font-size: 18px;
-      margin-top: 10px;
+    .subtitle {
+      margin-top: 14px;
+      color: var(--gris);
+      font-size: 20px;
+    }
+
+    .highlight {
+      color: var(--dorado);
+      font-weight: bold;
+    }
+
+    .hero-buttons {
+      margin-top: 28px;
     }
 
     main {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      max-width: 1050px;
+      margin: 35px auto;
+      padding: 0 20px 40px;
+    }
+
+    section {
+      background: rgba(16, 29, 47, 0.92);
+      border: 1px solid var(--borde);
+      border-radius: 18px;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(18px);
+      animation: aparecer 0.8s ease forwards;
+    }
+
+    section:nth-child(1) { animation-delay: 0.4s; }
+    section:nth-child(2) { animation-delay: 0.8s; }
+    section:nth-child(3) { animation-delay: 1.2s; }
+    section:nth-child(4) { animation-delay: 1.6s; }
+    section:nth-child(5) { animation-delay: 2s; }
+
+    @keyframes aparecer {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     h2 {
-      color: #0b1f33;
-      border-bottom: 2px solid #d9e2ec;
-      padding-bottom: 8px;
+      margin-top: 0;
+      color: var(--celeste);
+      border-bottom: 1px solid var(--borde);
+      padding-bottom: 10px;
+      font-size: 25px;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #dbeafe;
+    }
+
+    .tags {
+      margin-top: 14px;
     }
 
     .tag {
       display: inline-block;
-      background: #e6f0ff;
-      color: #0b1f33;
-      padding: 8px 12px;
-      margin: 5px;
-      border-radius: 20px;
+      background: rgba(56,189,248,0.12);
+      color: var(--blanco);
+      border: 1px solid rgba(56,189,248,0.35);
+      padding: 9px 13px;
+      margin: 6px;
+      border-radius: 999px;
       font-size: 14px;
     }
 
-    a {
-      color: #0b63ce;
+    ul {
+      line-height: 1.7;
+      color: #dbeafe;
+    }
+
+    .button {
+      display: inline-block;
+      background: transparent;
+      color: var(--blanco);
+      border: 1px solid var(--celeste);
+      padding: 11px 16px;
+      border-radius: 10px;
       text-decoration: none;
       font-weight: bold;
+      margin: 7px 7px 7px 0;
+      transition: all 0.25s ease;
+    }
+
+    .button:hover {
+      background: var(--celeste);
+      color: #07111f;
+      transform: translateY(-2px);
+    }
+
+    .button.gold {
+      border-color: var(--dorado);
+      color: var(--dorado);
+    }
+
+    .button.gold:hover {
+      background: var(--dorado);
+      color: #07111f;
+    }
+
+    .grid-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
     }
 
     footer {
       text-align: center;
-      padding: 20px;
-      color: #666;
+      padding: 25px;
+      color: var(--gris);
+      border-top: 1px solid var(--borde);
+      font-size: 14px;
+    }
+
+    @media (max-width: 700px) {
+      h1 {
+        font-size: 34px;
+      }
+
+      .subtitle {
+        font-size: 17px;
+      }
+
+      section {
+        padding: 20px;
+      }
     }
   </style>
 </head>
@@ -70,45 +204,78 @@
 <body>
 
   <header>
-    <h1>William D. Saenz</h1>
-    <p>Ingeniería Civil, Análisis de Datos y Gestión Ejecutiva para proyectos técnicos</p>
+    <div class="hero">
+      <div class="terminal-line" id="terminal"></div>
+
+      <h1>William D. Saenz</h1>
+
+      <p class="subtitle">
+        Ingeniería Civil, Análisis de Datos y
+        <span class="highlight">Gestión Ejecutiva</span>
+        para proyectos técnicos
+      </p>
+
+      <div class="hero-buttons">
+        <a class="button gold" href="docs/cv-william-saenz.pdf" target="_blank">
+          Ver CV profesional
+        </a>
+
+        <a class="button" href="https://www.linkedin.com/in/william-saenz-s" target="_blank">
+          LinkedIn
+        </a>
+
+        <a class="button" href="mailto:williamsaenz343@gmail.com">
+          Correo
+        </a>
+
+        <a class="button" href="https://wa.me/5491170654364" target="_blank">
+          WhatsApp
+        </a>
+      </div>
+    </div>
   </header>
 
   <main>
+
     <section>
       <h2>Sobre mí</h2>
+
       <p>
         Soy Ingeniero Civil con experiencia en gestión técnica, control documental,
-        geotecnia, pavimentos, planificación de obra y análisis de datos. Mi perfil integra
-        ingeniería, data analytics y gestión ejecutiva para organizar información técnica,
-        generar reportes claros, dar trazabilidad a procesos y apoyar la toma de decisiones
-        en proyectos de infraestructura.
+        geotecnia, pavimentos, planificación de obra y análisis de datos.
+        Mi perfil integra ingeniería, data analytics y gestión ejecutiva para organizar
+        información técnica, generar reportes claros, dar trazabilidad a procesos
+        y apoyar la toma de decisiones en proyectos de infraestructura.
       </p>
-      
+
       <p>
         Actualmente complemento mi formación con Ciencia de Datos, orientando mi carrera
-        hacia soluciones data-driven aplicadas a ingeniería civil, operaciones, oficina técnica
-        y seguimiento ejecutivo de proyectos. 
+        hacia soluciones data-driven aplicadas a ingeniería civil, operaciones,
+        oficina técnica y seguimiento ejecutivo de proyectos.
       </p>
     </section>
 
     <section>
       <h2>Áreas de interés</h2>
-      <span class="tag">Ingeniería Civil</span>
-      <span class="tag">Geotecnia</span>
-      <span class="tag">Pavimentos</span>
-      <span class="tag">Análisis de Datos</span>
-      <span class="tag">Python</span>
-      <span class="tag">SQL</span>
-      <span class="tag">Power BI</span>
-      <span class="tag">Gestión Ejecutiva</span>
-      <span class="tag">Planificación</span>
-      <span class="tag">Control Documental</span>
-      <span class="tag">Reportabilidad Técnica</span>
+
+      <div class="tags">
+        <span class="tag">Ingeniería Civil</span>
+        <span class="tag">Geotecnia</span>
+        <span class="tag">Pavimentos</span>
+        <span class="tag">Análisis de Datos</span>
+        <span class="tag">Python</span>
+        <span class="tag">SQL</span>
+        <span class="tag">Power BI</span>
+        <span class="tag">Gestión Ejecutiva</span>
+        <span class="tag">Planificación</span>
+        <span class="tag">Control Documental</span>
+        <span class="tag">Reportabilidad Técnica</span>
+      </div>
     </section>
 
     <section>
-      <h2>Proyectos</h2>
+      <h2>Proyectos y enfoque técnico</h2>
+
       <ul>
         <li>Proyectos de Python aplicados al análisis, limpieza y organización de datos.</li>
         <li>Dashboards y reportes técnicos para seguimiento de información de proyectos.</li>
@@ -120,27 +287,86 @@
     </section>
 
     <section>
-      <h2>Contacto</h2>
-      <p>
-        Portafolio:
-        <a href="https://williamsaenz.github.io/" target="_blank">
-          williamsaenz.github.io
-        </a>
-      </p>
+      <h2>Credenciales y referencias</h2>
 
       <p>
-        LinkedIn:
-        <a href="https://www.linkedin.com/in/william-saenz-s" target="_blank">
-          linkedin.com/in/william-saenz-s
+        Documentación profesional seleccionada para consulta: título profesional,
+        certificado de maestría, tarjeta profesional y referencias laborales.
+      </p>
+
+      <div class="grid-buttons">
+        <a class="button gold" href="docs/titulo-profesional-apostillado.pdf" target="_blank">
+          Título profesional
         </a>
-      </p> 
-     
+
+        <a class="button gold" href="docs/certificado-maestria.pdf" target="_blank">
+          Certificado de maestría
+        </a>
+
+        <a class="button gold" href="docs/tarjeta-profesional-copnia.pdf" target="_blank">
+          Tarjeta profesional COPNIA
+        </a>
+
+        <a class="button" href="docs/referencia-practica-profesional.pdf" target="_blank">
+          Referencia práctica profesional
+        </a>
+
+        <a class="button" href="docs/referencia-laboratorio-suelos.pdf" target="_blank">
+          Referencia laboratorio mecánica de suelos
+        </a>
+      </div>
     </section>
+
+    <section>
+      <h2>Contacto profesional</h2>
+
+      <p>
+        Podés contactarme para oportunidades vinculadas con ingeniería civil,
+        análisis de datos, gestión técnica, oficina técnica, planificación,
+        control documental y proyectos de infraestructura.
+      </p>
+
+      <div class="grid-buttons">
+        <a class="button" href="https://williamsaenz.github.io/" target="_blank">
+          Portafolio
+        </a>
+
+        <a class="button" href="https://www.linkedin.com/in/william-saenz-s" target="_blank">
+          LinkedIn
+        </a>
+
+        <a class="button" href="mailto:williamsaenz343@gmail.com">
+          williamsaenz343@gmail.com
+        </a>
+
+        <a class="button" href="https://wa.me/5491170654364" target="_blank">
+          WhatsApp
+        </a>
+      </div>
+    </section>
+
   </main>
 
   <footer>
-    © 2026 William D. Saenz | Portafolio Técnico
+    © 2026 William D. Saenz | Ingeniería Civil + Data + Gestión Ejecutiva
   </footer>
+
+  <script>
+    const texto = "> cargando portafolio técnico... sistema listo";
+    const terminal = document.getElementById("terminal");
+    let i = 0;
+
+    function escribir() {
+      if (i < texto.length) {
+        terminal.textContent += texto.charAt(i);
+        i++;
+        setTimeout(escribir, 55);
+      }
+    }
+
+    escribir();
+  </script>
 
 </body>
 </html>
+```
