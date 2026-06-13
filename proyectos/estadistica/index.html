@@ -1,50 +1,176 @@
+```html
 <!DOCTYPE html>
 <html lang="es" class="notranslate">
 <head>
   <meta charset="UTF-8">
   <meta name="google" content="notranslate">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proyecto de Estadística | William D. Saenz</title>
+  <title>Estadística | William D. Saenz</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #07111f 0%, #0b1f33 100%);
+      color: #f8fafc;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 55px 20px 30px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .terminal {
+      color: #39ff14;
+      font-family: "Courier New", monospace;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 42px;
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      font-size: 18px;
+      margin-top: 12px;
+    }
+
+    main {
+      max-width: 950px;
+      margin: 35px auto;
+      padding: 0 20px 40px;
+    }
+
+    .card {
+      background: rgba(16, 29, 47, 0.92);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #38bdf8;
+      box-shadow: 0 12px 30px rgba(56,189,248,0.15);
+    }
+
+    h2 {
+      color: #c9a24d;
+      margin-top: 0;
+    }
+
+    p {
+      color: #dbeafe;
+      line-height: 1.6;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(56,189,248,0.12);
+      color: #f8fafc;
+      border: 1px solid rgba(56,189,248,0.35);
+      padding: 8px 12px;
+      margin: 5px 5px 10px 0;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .button {
+      display: inline-block;
+      color: #f8fafc;
+      border: 1px solid #38bdf8;
+      padding: 11px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 7px 7px 7px 0;
+    }
+
+    .button:hover {
+      background: #38bdf8;
+      color: #07111f;
+    }
+
+    .gold {
+      border-color: #c9a24d;
+      color: #c9a24d;
+    }
+
+    .gold:hover {
+      background: #c9a24d;
+      color: #07111f;
+    }
+
+    footer {
+      text-align: center;
+      color: #94a3b8;
+      padding: 25px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      font-size: 14px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Proyecto de Estadística</h1>
 
-  <p>
-    Proyecto orientado al análisis estadístico de datos técnicos,
-    interpretación de resultados y generación de conclusiones para soporte
-    a la toma de decisiones.
-  </p>
+  <header>
+    <div class="terminal">&gt; cargando proyectos de estadística...</div>
+    <h1>Proyectos de Estadística</h1>
+    <p class="subtitle">
+      Trabajos de análisis estadístico, regresión, test de hipótesis y data aplicada a ingeniería.
+    </p>
+  </header>
 
-  <h2>Objetivo</h2>
-  <p>
-    Aplicar herramientas estadísticas para analizar información proveniente
-    de ensayos, procesos técnicos, indicadores de gestión o datos de proyectos.
-  </p>
+  <main>
 
-  <h2>Herramientas aplicadas</h2>
-  <ul>
-    <li>Estadística descriptiva</li>
-    <li>Análisis exploratorio de datos</li>
-    <li>Excel</li>
-    <li>Python</li>
-    <li>Visualización de datos</li>
-    <li>Interpretación técnica de resultados</li>
-  </ul>
+    <div class="card">
+      <h2>01 · Análisis estadístico meteorológico</h2>
 
-  <h2>Aplicación profesional</h2>
-  <p>
-    Este proyecto conecta análisis estadístico, ingeniería civil y ciencia de datos
-    para mejorar la lectura de información técnica y apoyar decisiones.
-  </p>
+      <p>
+        Proyecto académico aplicado a datos meteorológicos de Corrientes, Mercedes.
+        Se analiza la relación entre temperatura, humedad, presión atmosférica y
+        radiación solar global mediante estadística descriptiva, regresión lineal,
+        test de hipótesis y análisis no paramétrico.
+      </p>
 
-  <p>
-    <a href="../">Volver a proyectos</a>
-  </p>
+      <span class="tag">Python</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">Regresión lineal</span>
+      <span class="tag">Test de hipótesis</span>
+      <span class="tag">Spearman</span>
+      <span class="tag">Data aplicada</span>
+      <span class="tag">Meteorología</span>
 
-  <p>
-    <a href="../../">Volver al portafolio principal</a>
-  </p>
+      <br>
+
+      <a class="button gold" href="01-analisis-estadistico-meteorologico/">
+        Ver proyecto
+      </a>
+    </div>
+
+    <div>
+      <a class="button" href="../">
+        Volver a proyectos
+      </a>
+
+      <a class="button" href="../../">
+        Volver al portafolio principal
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 William D. Saenz | Proyectos de Estadística
+  </footer>
+
 </body>
 </html>
 ```
-
