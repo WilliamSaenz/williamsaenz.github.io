@@ -1,1 +1,1615 @@
+<!DOCTYPE html>
+<html lang="es" class="notranslate">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01 · Sistema Académico Interactivo | William D. Saenz</title>
+
+  <style>
+    :root {
+      --bg1: #07111f;
+      --bg2: #0b1f33;
+      --panel: rgba(16, 29, 47, 0.92);
+      --panel2: rgba(7, 17, 31, 0.78);
+      --line: rgba(255,255,255,0.12);
+      --text: #f8fafc;
+      --muted: #94a3b8;
+      --body: #dbeafe;
+      --cyan: #38bdf8;
+      --gold: #c9a24d;
+      --green: #39ff14;
+      --danger: #fb7185;
+      --ok: #22c55e;
+      --warn: #f59e0b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      color: var(--text);
+    }
+
+    header {
+      text-align: center;
+      padding: 55px 20px 35px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .terminal {
+      color: var(--green);
+      font-family: "Courier New", monospace;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 40px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 18px;
+      margin-top: 12px;
+    }
+
+    main {
+      max-width: 1120px;
+      margin: 35px auto;
+      padding: 0 20px 40px;
+    }
+
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    h2 {
+      color: var(--cyan);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+
+    h3 {
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    p, li, label {
+      color: var(--body);
+      line-height: 1.6;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(56,189,248,0.12);
+      color: var(--text);
+      border: 1px solid rgba(56,189,248,0.35);
+      padding: 8px 12px;
+      margin: 5px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .button {
+      display: inline-block;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--cyan);
+      padding: 11px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 7px 7px 7px 0;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .button:hover {
+      background: var(--cyan);
+      color: var(--bg1);
+      transform: translateY(-2px);
+    }
+
+    .gold {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .gold:hover {
+      background: var(--gold);
+      color: var(--bg1);
+    }
+
+    .danger {
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+
+    .danger:hover {
+      background: var(--danger);
+      color: var(--bg1);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 18px;
+    }
+
+    .card {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 20px;
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      border-color: var(--cyan);
+      transform: translateY(-3px);
+    }
+
+    .metric {
+      font-size: 30px;
+      color: var(--gold);
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .small {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(56,189,248,0.35);
+      background: rgba(7,17,31,0.85);
+      color: var(--text);
+      outline: none;
+      margin-top: 6px;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(56,189,248,0.12);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .form-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 16px;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      color: var(--body);
+      font-size: 14px;
+    }
+
+    th {
+      color: var(--text);
+      background: rgba(56,189,248,0.10);
+    }
+
+    tr:hover td {
+      background: rgba(56,189,248,0.06);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 5px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: bold;
+      border: 1px solid var(--line);
+    }
+
+    .pill-ok { color: var(--ok); border-color: rgba(34,197,94,0.5); }
+    .pill-bad { color: var(--danger); border-color: rgba(251,113,133,0.5); }
+    .pill-warn { color: var(--warn); border-color: rgba(245,158,11,0.5); }
+
+    .result-box {
+      background: rgba(56,189,248,0.08);
+      border: 1px solid rgba(56,189,248,0.22);
+      border-radius: 14px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .chart-wrap {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 14px;
+      margin-top: 15px;
+      overflow-x: auto;
+    }
+
+    svg {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .pie {
+      width: 210px;
+      height: 210px;
+      border-radius: 50%;
+      margin: 20px auto 10px;
+      border: 8px solid rgba(255,255,255,0.10);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 25px;
+      border-top: 1px solid var(--line);
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .grid, .grid-3, .form-grid, .form-grid-3 {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+
+  <header>
+    <div class="terminal">&gt; cargando sistema académico interactivo...</div>
+    <h1>01 · Sistema Académico Interactivo</h1>
+    <p class="subtitle">
+      Prototipo web para registrar estudiantes, analizar rendimiento académico y visualizar indicadores del curso.
+    </p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Resumen ejecutivo</h2>
+      <p>
+        Sistema académico interactivo inspirado en un proyecto desarrollado en Python.
+        Permite cargar estudiantes, calcular promedios, buscar por legajo, evaluar la situación académica,
+        comparar materias y visualizar gráficos de rendimiento.
+      </p>
+
+      <span class="tag">Python traducido a Web</span>
+      <span class="tag">HTML</span>
+      <span class="tag">CSS</span>
+      <span class="tag">JavaScript</span>
+      <span class="tag">CSV</span>
+      <span class="tag">POO conceptual</span>
+      <span class="tag">Gestión académica</span>
+    </section>
+
+    <section>
+      <h2>Panel de botones</h2>
+      <a class="button gold" href="#datos">Base de datos</a>
+      <a class="button gold" href="#dashboard">Dashboard</a>
+      <a class="button" href="#carga">Ingresar estudiantes</a>
+      <a class="button" href="#buscar">Buscar por legajo</a>
+      <a class="button" href="#individual">Promedios individuales</a>
+      <a class="button" href="#materias">Promedio por materia</a>
+      <a class="button" href="#detalle">Detalle por materia</a>
+      <a class="button" href="#graficos">Gráficos principales</a>
+      <a class="button gold" href="#decisiones">Conclusiones prácticas</a>
+    </section>
+
+
+    <section id="datos">
+      <h2>Base de datos del curso</h2>
+      <p>
+        Elegí cómo querés iniciar el análisis: usar una base de ejemplo, comenzar desde cero
+        o importar tu propio archivo de estudiantes en formato CSV o Excel.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Usar base de ejemplo</h3>
+          <p>
+            Carga estudiantes de prueba para recorrer el sistema, ver indicadores y validar el funcionamiento.
+          </p>
+          <button class="button gold" type="button" onclick="usarBaseInicial()">Cargar datos de ejemplo</button>
+        </div>
+
+        <div class="card">
+          <h3>Comenzar desde cero</h3>
+          <p>
+            Limpia la base local y permite que el docente cargue estudiantes manualmente desde el formulario.
+          </p>
+          <button class="button danger" type="button" onclick="iniciarBaseVacia()">Empezar vacío</button>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:18px;">
+        <h3>Importar archivo CSV o Excel</h3>
+        <p>
+          El archivo debe incluir las columnas: Legajo, Nombre, Apellido, Programación,
+          Base de Datos, Análisis Estadístico, Arquitecturas en la Nube,
+          Aprendizaje Automático y Captura de la Información.
+        </p>
+
+        <div class="form-grid">
+          <label>
+            Seleccionar archivo
+            <input type="file" id="archivoEstudiantes" accept=".csv,.xlsx,.xls">
+          </label>
+          <label>
+            Acción
+            <button class="button gold" type="button" onclick="importarArchivoEstudiantes()">Importar archivo</button>
+          </label>
+        </div>
+
+        <p class="note">
+          CSV funciona directamente. Para Excel, la página usa una librería JavaScript externa
+          para leer archivos .xlsx desde el navegador.
+        </p>
+
+        <div id="estadoImportacion" class="result-box"></div>
+      </div>
+    </section>
+
+    <section id="dashboard">
+      <h2>Dashboard del curso</h2>
+      <div id="dashboardCards" class="grid-3"></div>
+      <div id="insightGeneral" class="result-box"></div>
+    </section>
+
+    <section id="carga">
+      <h2>Ingreso de estudiantes</h2>
+      <p>
+        Ingresá la cantidad de estudiantes que querés cargar. El sistema genera los formularios,
+        valida notas entre 1 y 10 y asigna legajos automáticamente.
+      </p>
+
+      <div class="form-grid">
+        <label>
+          Cantidad de estudiantes a cargar
+          <input type="number" id="cantidadNuevos" min="1" max="20" value="1">
+        </label>
+        <label>
+          Acción
+          <button class="button gold" type="button" onclick="prepararCarga()">Preparar carga</button>
+        </label>
+      </div>
+
+      <div id="formulariosCarga"></div>
+    </section>
+
+    <section id="buscar">
+      <h2>Buscar estudiante por legajo</h2>
+      <div class="form-grid">
+        <label>
+          Legajo
+          <input type="number" id="buscarLegajo" placeholder="Ejemplo: 1">
+        </label>
+        <label>
+          Consulta
+          <button class="button gold" type="button" onclick="buscarEstudiante()">Buscar estudiante</button>
+        </label>
+      </div>
+      <div id="resultadoBusqueda"></div>
+    </section>
+
+    <section id="individual">
+      <h2>Promedios individuales</h2>
+      <p>
+        Tabla de seguimiento estudiante por estudiante: promedio con aplazos, promedio sin aplazos,
+        cantidad de materias aprobadas y situación académica.
+      </p>
+      <div id="tablaIndividual"></div>
+    </section>
+
+    <section id="materias">
+      <h2>Promedio y aprobación por materia</h2>
+      <p>
+        Comparación del rendimiento por asignatura para detectar fortalezas, materias críticas
+        y áreas donde conviene reforzar acompañamiento académico.
+      </p>
+      <div id="tablaMaterias"></div>
+    </section>
+
+    <section id="detalle">
+      <h2>Detalle por materia</h2>
+      <div class="form-grid">
+        <label>
+          Seleccioná una materia
+          <select id="materiaDetalle"></select>
+        </label>
+        <label>
+          Acción
+          <button class="button gold" type="button" onclick="renderDetalleMateria()">Ver detalle</button>
+        </label>
+      </div>
+      <div id="detalleMateria"></div>
+    </section>
+
+    <section id="graficos">
+      <h2>Gráficos principales</h2>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Promedio por asignatura</h3>
+          <p class="small">
+            Permite ver qué materias concentran mejor o menor rendimiento promedio.
+          </p>
+          <div id="graficoPromedios" class="chart-wrap"></div>
+        </div>
+
+        <div class="card">
+          <h3>% aprobación por asignatura</h3>
+          <p class="small">
+            Permite detectar materias con mayor riesgo académico.
+          </p>
+          <div id="graficoAprobacion" class="chart-wrap"></div>
+        </div>
+
+        <div class="card">
+          <h3>Distribución académica</h3>
+          <p class="small">
+            Resume estudiantes aprobados y reprobados según criterio de aprobación total.
+          </p>
+          <div id="graficoSituacion"></div>
+        </div>
+
+        <div class="card">
+          <h3>Ranking de promedios</h3>
+          <p class="small">
+            Ordena estudiantes por rendimiento general y permite detectar extremos.
+          </p>
+          <div id="graficoRanking" class="chart-wrap"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="decisiones">
+      <h2>Conclusiones prácticas</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Detectar materias críticas</h3>
+          <p>
+            El promedio y el porcentaje de aprobación por materia ayudan a decidir dónde reforzar clases,
+            tutorías o materiales de apoyo.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Priorizar estudiantes en riesgo</h3>
+          <p>
+            La búsqueda por legajo y los promedios individuales permiten identificar alumnos con aplazos
+            o varias materias desaprobadas.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Medir desempeño del curso</h3>
+          <p>
+            El dashboard resume total de estudiantes, aprobación general, mejor estudiante y materia con
+            mayor o menor rendimiento.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Convertir notas en decisiones</h3>
+          <p>
+            El sistema transforma un archivo de notas en indicadores claros para gestión académica,
+            seguimiento docente y mejora continua.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Acciones de datos</h2>
+      <button class="button gold" type="button" onclick="exportarCSV()">Exportar CSV actualizado</button>
+      <button class="button danger" type="button" onclick="reiniciarDatos()">Restaurar base inicial</button>
+      <p class="note">
+        Nota: esta versión funciona como prototipo web estático. Los datos nuevos se guardan en el navegador
+        mediante almacenamiento local. Para uso institucional multiusuario se necesitaría una base de datos.
+      </p>
+    </section>
+
+    <section>
+      <h2>Navegación</h2>
+      <a class="button" href="../">Volver a programación</a>
+      <a class="button" href="../../">Volver a proyectos</a>
+      <a class="button" href="../../../">Volver al portafolio principal</a>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 William D. Saenz | Sistema Académico Interactivo
+  </footer>
+
+  <script>
+    const ASIGNATURAS = [
+      "Programación",
+      "Base de Datos",
+      "Análisis Estadístico",
+      "Arquitecturas en la Nube",
+      "Aprendizaje Automático",
+      "Captura de la Información"
+    ];
+
+    const DATA_INICIAL = [
+  {
+    "legajo": 1,
+    "nombre": "Ana",
+    "apellido": "García",
+    "notas": {
+      "Programación": 8.0,
+      "Base de Datos": 7.0,
+      "Análisis Estadístico": 9.0,
+      "Arquitecturas en la Nube": 6.0,
+      "Aprendizaje Automático": 10.0,
+      "Captura de la Información": 4.0
+    }
+  },
+  {
+    "legajo": 2,
+    "nombre": "Carlos",
+    "apellido": "Rodríguez",
+    "notas": {
+      "Programación": 5.0,
+      "Base de Datos": 6.0,
+      "Análisis Estadístico": 7.0,
+      "Arquitecturas en la Nube": 2.0,
+      "Aprendizaje Automático": 2.0,
+      "Captura de la Información": 9.0
+    }
+  },
+  {
+    "legajo": 3,
+    "nombre": "Elena",
+    "apellido": "Martínez",
+    "notas": {
+      "Programación": 9.0,
+      "Base de Datos": 9.0,
+      "Análisis Estadístico": 8.0,
+      "Arquitecturas en la Nube": 2.0,
+      "Aprendizaje Automático": 6.0,
+      "Captura de la Información": 7.0
+    }
+  },
+  {
+    "legajo": 4,
+    "nombre": "Juan",
+    "apellido": "López",
+    "notas": {
+      "Programación": 4.0,
+      "Base de Datos": 3.0,
+      "Análisis Estadístico": 5.0,
+      "Arquitecturas en la Nube": 6.0,
+      "Aprendizaje Automático": 7.0,
+      "Captura de la Información": 8.0
+    }
+  },
+  {
+    "legajo": 5,
+    "nombre": "María",
+    "apellido": "Fernández",
+    "notas": {
+      "Programación": 10.0,
+      "Base de Datos": 9.0,
+      "Análisis Estadístico": 8.0,
+      "Arquitecturas en la Nube": 9.0,
+      "Aprendizaje Automático": 10.0,
+      "Captura de la Información": 9.0
+    }
+  },
+  {
+    "legajo": 6,
+    "nombre": "Pedro",
+    "apellido": "Sánchez",
+    "notas": {
+      "Programación": 3.0,
+      "Base de Datos": 4.0,
+      "Análisis Estadístico": 2.0,
+      "Arquitecturas en la Nube": 5.0,
+      "Aprendizaje Automático": 3.0,
+      "Captura de la Información": 6.0
+    }
+  },
+  {
+    "legajo": 7,
+    "nombre": "Lucía",
+    "apellido": "Díaz",
+    "notas": {
+      "Programación": 7.0,
+      "Base de Datos": 8.0,
+      "Análisis Estadístico": 6.0,
+      "Arquitecturas en la Nube": 7.0,
+      "Aprendizaje Automático": 8.0,
+      "Captura de la Información": 7.0
+    }
+  },
+  {
+    "legajo": 8,
+    "nombre": "Diego",
+    "apellido": "Torres",
+    "notas": {
+      "Programación": 6.0,
+      "Base de Datos": 5.0,
+      "Análisis Estadístico": 7.0,
+      "Arquitecturas en la Nube": 4.0,
+      "Aprendizaje Automático": 6.0,
+      "Captura de la Información": 5.0
+    }
+  },
+  {
+    "legajo": 9,
+    "nombre": "Sofía",
+    "apellido": "Ramírez",
+    "notas": {
+      "Programación": 9.0,
+      "Base de Datos": 10.0,
+      "Análisis Estadístico": 9.0,
+      "Arquitecturas en la Nube": 8.0,
+      "Aprendizaje Automático": 7.0,
+      "Captura de la Información": 8.0
+    }
+  },
+  {
+    "legajo": 10,
+    "nombre": "Martín",
+    "apellido": "Herrera",
+    "notas": {
+      "Programación": 2.0,
+      "Base de Datos": 3.0,
+      "Análisis Estadístico": 4.0,
+      "Arquitecturas en la Nube": 1.0,
+      "Aprendizaje Automático": 5.0,
+      "Captura de la Información": 3.0
+    }
+  },
+  {
+    "legajo": 11,
+    "nombre": "Valentina",
+    "apellido": "Castro",
+    "notas": {
+      "Programación": 8.0,
+      "Base de Datos": 7.0,
+      "Análisis Estadístico": 8.0,
+      "Arquitecturas en la Nube": 9.0,
+      "Aprendizaje Automático": 6.0,
+      "Captura de la Información": 7.0
+    }
+  },
+  {
+    "legajo": 12,
+    "nombre": "Nicolás",
+    "apellido": "Moreno",
+    "notas": {
+      "Programación": 6.0,
+      "Base de Datos": 6.0,
+      "Análisis Estadístico": 5.0,
+      "Arquitecturas en la Nube": 7.0,
+      "Aprendizaje Automático": 4.0,
+      "Captura de la Información": 6.0
+    }
+  },
+  {
+    "legajo": 13,
+    "nombre": "Camila",
+    "apellido": "Ruiz",
+    "notas": {
+      "Programación": 7.0,
+      "Base de Datos": 8.0,
+      "Análisis Estadístico": 9.0,
+      "Arquitecturas en la Nube": 6.0,
+      "Aprendizaje Automático": 8.0,
+      "Captura de la Información": 5.0
+    }
+  },
+  {
+    "legajo": 14,
+    "nombre": "Federico",
+    "apellido": "Álvarez",
+    "notas": {
+      "Programación": 4.0,
+      "Base de Datos": 5.0,
+      "Análisis Estadístico": 3.0,
+      "Arquitecturas en la Nube": 6.0,
+      "Aprendizaje Automático": 2.0,
+      "Captura de la Información": 7.0
+    }
+  },
+  {
+    "legajo": 15,
+    "nombre": "Laura",
+    "apellido": "Méndez",
+    "notas": {
+      "Programación": 10.0,
+      "Base de Datos": 8.0,
+      "Análisis Estadístico": 9.0,
+      "Arquitecturas en la Nube": 7.0,
+      "Aprendizaje Automático": 9.0,
+      "Captura de la Información": 10.0
+    }
+  },
+  {
+    "legajo": 16,
+    "nombre": "Agustín",
+    "apellido": "Romero",
+    "notas": {
+      "Programación": 7.0,
+      "Base de Datos": 6.0,
+      "Análisis Estadístico": 8.0,
+      "Arquitecturas en la Nube": 5.0,
+      "Aprendizaje Automático": 7.0,
+      "Captura de la Información": 6.0
+    }
+  },
+  {
+    "legajo": 17,
+    "nombre": "Florencia",
+    "apellido": "Gómez",
+    "notas": {
+      "Programación": 9.0,
+      "Base de Datos": 8.0,
+      "Análisis Estadístico": 7.0,
+      "Arquitecturas en la Nube": 8.0,
+      "Aprendizaje Automático": 9.0,
+      "Captura de la Información": 8.0
+    }
+  },
+  {
+    "legajo": 18,
+    "nombre": "Ramiro",
+    "apellido": "Acosta",
+    "notas": {
+      "Programación": 3.0,
+      "Base de Datos": 2.0,
+      "Análisis Estadístico": 4.0,
+      "Arquitecturas en la Nube": 3.0,
+      "Aprendizaje Automático": 5.0,
+      "Captura de la Información": 4.0
+    }
+  },
+  {
+    "legajo": 19,
+    "nombre": "Julieta",
+    "apellido": "Peralta",
+    "notas": {
+      "Programación": 8.0,
+      "Base de Datos": 9.0,
+      "Análisis Estadístico": 7.0,
+      "Arquitecturas en la Nube": 6.0,
+      "Aprendizaje Automático": 8.0,
+      "Captura de la Información": 9.0
+    }
+  },
+  {
+    "legajo": 20,
+    "nombre": "Sebastián",
+    "apellido": "Molina",
+    "notas": {
+      "Programación": 5.0,
+      "Base de Datos": 4.0,
+      "Análisis Estadístico": 6.0,
+      "Arquitecturas en la Nube": 7.0,
+      "Aprendizaje Automático": 3.0,
+      "Captura de la Información": 5.0
+    }
+  },
+  {
+    "legajo": 21,
+    "nombre": "Daniela",
+    "apellido": "Ríos",
+    "notas": {
+      "Programación": 10.0,
+      "Base de Datos": 10.0,
+      "Análisis Estadístico": 9.0,
+      "Arquitecturas en la Nube": 8.0,
+      "Aprendizaje Automático": 10.0,
+      "Captura de la Información": 9.0
+    }
+  },
+  {
+    "legajo": 22,
+    "nombre": "Tomás",
+    "apellido": "Vega",
+    "notas": {
+      "Programación": 6.0,
+      "Base de Datos": 7.0,
+      "Análisis Estadístico": 5.0,
+      "Arquitecturas en la Nube": 4.0,
+      "Aprendizaje Automático": 6.0,
+      "Captura de la Información": 7.0
+    }
+  },
+  {
+    "legajo": 23,
+    "nombre": "Milagros",
+    "apellido": "Silva",
+    "notas": {
+      "Programación": 7.0,
+      "Base de Datos": 6.0,
+      "Análisis Estadístico": 8.0,
+      "Arquitecturas en la Nube": 7.0,
+      "Aprendizaje Automático": 5.0,
+      "Captura de la Información": 6.0
+    }
+  },
+  {
+    "legajo": 24,
+    "nombre": "Emilio",
+    "apellido": "Paz",
+    "notas": {
+      "Programación": 4.0,
+      "Base de Datos": 5.0,
+      "Análisis Estadístico": 3.0,
+      "Arquitecturas en la Nube": 2.0,
+      "Aprendizaje Automático": 4.0,
+      "Captura de la Información": 6.0
+    }
+  },
+  {
+    "legajo": 25,
+    "nombre": "Rocío",
+    "apellido": "Luna",
+    "notas": {
+      "Programación": 8.0,
+      "Base de Datos": 9.0,
+      "Análisis Estadístico": 8.0,
+      "Arquitecturas en la Nube": 7.0,
+      "Aprendizaje Automático": 7.0,
+      "Captura de la Información": 8.0
+    }
+  },
+  {
+    "legajo": 26,
+    "nombre": "Ignacio",
+    "apellido": "Cabrera",
+    "notas": {
+      "Programación": 6.0,
+      "Base de Datos": 5.0,
+      "Análisis Estadístico": 7.0,
+      "Arquitecturas en la Nube": 6.0,
+      "Aprendizaje Automático": 8.0,
+      "Captura de la Información": 5.0
+    }
+  },
+  {
+    "legajo": 27,
+    "nombre": "Abril",
+    "apellido": "Suárez",
+    "notas": {
+      "Programación": 9.0,
+      "Base de Datos": 8.0,
+      "Análisis Estadístico": 10.0,
+      "Arquitecturas en la Nube": 7.0,
+      "Aprendizaje Automático": 9.0,
+      "Captura de la Información": 8.0
+    }
+  },
+  {
+    "legajo": 28,
+    "nombre": "Gonzalo",
+    "apellido": "Medina",
+    "notas": {
+      "Programación": 3.0,
+      "Base de Datos": 4.0,
+      "Análisis Estadístico": 5.0,
+      "Arquitecturas en la Nube": 3.0,
+      "Aprendizaje Automático": 2.0,
+      "Captura de la Información": 4.0
+    }
+  },
+  {
+    "legajo": 29,
+    "nombre": "Carolina",
+    "apellido": "Bustos",
+    "notas": {
+      "Programación": 7.0,
+      "Base de Datos": 7.0,
+      "Análisis Estadístico": 6.0,
+      "Arquitecturas en la Nube": 8.0,
+      "Aprendizaje Automático": 7.0,
+      "Captura de la Información": 6.0
+    }
+  },
+  {
+    "legajo": 30,
+    "nombre": "Leandro",
+    "apellido": "Figueroa",
+    "notas": {
+      "Programación": 5.0,
+      "Base de Datos": 6.0,
+      "Análisis Estadístico": 4.0,
+      "Arquitecturas en la Nube": 5.0,
+      "Aprendizaje Automático": 6.0,
+      "Captura de la Información": 3.0
+    }
+  },
+  {
+    "legajo": 31,
+    "nombre": "Maria",
+    "apellido": "saenz",
+    "notas": {
+      "Programación": 5.0,
+      "Base de Datos": 6.0,
+      "Análisis Estadístico": 5.0,
+      "Arquitecturas en la Nube": 6.0,
+      "Aprendizaje Automático": 7.0,
+      "Captura de la Información": 7.0
+    }
+  }
+];
+
+    const STORAGE_KEY = "wds_sistema_academico_interactivo_v1";
+    let estudiantes = cargarDatos();
+
+    function cargarDatos() {
+      const guardado = localStorage.getItem(STORAGE_KEY);
+      if (guardado) {
+        try {
+          return JSON.parse(guardado);
+        } catch (e) {
+          return JSON.parse(JSON.stringify(DATA_INICIAL));
+        }
+      }
+      return JSON.parse(JSON.stringify(DATA_INICIAL));
+    }
+
+    function guardarDatos() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(estudiantes));
+    }
+
+    function proximoLegajo() {
+      if (estudiantes.length === 0) return 1;
+      return Math.max(...estudiantes.map(e => Number(e.legajo))) + 1;
+    }
+
+    function promedio(est) {
+      const vals = ASIGNATURAS.map(m => Number(est.notas[m]));
+      return vals.reduce((a, b) => a + b, 0) / vals.length;
+    }
+
+    function promedioSinAplazos(est) {
+      const vals = ASIGNATURAS.map(m => Number(est.notas[m])).filter(n => n >= 4);
+      if (vals.length === 0) return 0;
+      return vals.reduce((a, b) => a + b, 0) / vals.length;
+    }
+
+    function aprobadas(est) {
+      return ASIGNATURAS.filter(m => Number(est.notas[m]) >= 6).length;
+    }
+
+    function desaprobadas(est) {
+      return ASIGNATURAS.filter(m => Number(est.notas[m]) >= 4 && Number(est.notas[m]) < 6).length;
+    }
+
+    function aplazos(est) {
+      return ASIGNATURAS.filter(m => Number(est.notas[m]) < 4).length;
+    }
+
+    function situacion(est) {
+      return aprobadas(est) === ASIGNATURAS.length ? "Aprobado" : "Reprobado";
+    }
+
+    function clasificarNota(n) {
+      n = Number(n);
+      if (n >= 6) return '<span class="pill pill-ok">Aprobado</span>';
+      if (n >= 4) return '<span class="pill pill-warn">Desaprobado</span>';
+      return '<span class="pill pill-bad">Aplazo</span>';
+    }
+
+    function promedioMateria(materia) {
+      if (estudiantes.length === 0) return 0;
+      const suma = estudiantes.reduce((acc, est) => acc + Number(est.notas[materia]), 0);
+      return suma / estudiantes.length;
+    }
+
+    function aprobacionMateria(materia) {
+      if (estudiantes.length === 0) return 0;
+      const aprob = estudiantes.filter(est => Number(est.notas[materia]) >= 6).length;
+      return (aprob / estudiantes.length) * 100;
+    }
+
+    function promedioGeneralCurso() {
+      if (estudiantes.length === 0) return 0;
+      return estudiantes.reduce((acc, est) => acc + promedio(est), 0) / estudiantes.length;
+    }
+
+    function porcentajeAprobacionGeneral() {
+      if (estudiantes.length === 0) return 0;
+      const aprob = estudiantes.filter(e => situacion(e) === "Aprobado").length;
+      return (aprob / estudiantes.length) * 100;
+    }
+
+    function mejorEstudiante() {
+      if (estudiantes.length === 0) return null;
+      return estudiantes.slice().sort((a, b) => promedio(b) - promedio(a))[0];
+    }
+
+    function materiaMayorRendimiento() {
+      return ASIGNATURAS.slice().sort((a, b) => promedioMateria(b) - promedioMateria(a))[0];
+    }
+
+    function materiaMenorRendimiento() {
+      return ASIGNATURAS.slice().sort((a, b) => promedioMateria(a) - promedioMateria(b))[0];
+    }
+
+    function renderDashboard() {
+      const total = estudiantes.length;
+      const aprobados = estudiantes.filter(e => situacion(e) === "Aprobado").length;
+      const reprobados = total - aprobados;
+      const mejor = mejorEstudiante();
+      const mejorMateria = materiaMayorRendimiento();
+      const peorMateria = materiaMenorRendimiento();
+
+      document.getElementById("dashboardCards").innerHTML = `
+        <div class="card">
+          <div class="metric">${total}</div>
+          <h3>Estudiantes cargados</h3>
+          <p>Total de alumnos disponibles para análisis.</p>
+        </div>
+        <div class="card">
+          <div class="metric">${promedioGeneralCurso().toFixed(2)}</div>
+          <h3>Promedio general</h3>
+          <p>Rendimiento promedio del curso completo.</p>
+        </div>
+        <div class="card">
+          <div class="metric">${porcentajeAprobacionGeneral().toFixed(1)}%</div>
+          <h3>Aprobación total</h3>
+          <p>Estudiantes que aprobaron todas las materias.</p>
+        </div>
+        <div class="card">
+          <div class="metric">${aprobados} / ${reprobados}</div>
+          <h3>Aprobados / Reprobados</h3>
+          <p>Distribución general de situación académica.</p>
+        </div>
+        <div class="card">
+          <div class="metric">${mejor ? promedio(mejor).toFixed(2) : "-"}</div>
+          <h3>Mejor promedio</h3>
+          <p>${mejor ? mejor.nombre + " " + mejor.apellido : "Sin datos"}</p>
+        </div>
+        <div class="card">
+          <div class="metric">${promedioMateria(peorMateria).toFixed(2)}</div>
+          <h3>Materia a reforzar</h3>
+          <p>${peorMateria}</p>
+        </div>
+      `;
+
+      document.getElementById("insightGeneral").innerHTML = `
+        <h3>Lectura ejecutiva</h3>
+        <p>
+          La materia con mejor rendimiento promedio es <strong>${mejorMateria}</strong>
+          (${promedioMateria(mejorMateria).toFixed(2)}), mientras que la materia que requiere mayor seguimiento es
+          <strong>${peorMateria}</strong> (${promedioMateria(peorMateria).toFixed(2)}).
+        </p>
+      `;
+    }
+
+    function prepararCarga() {
+      const n = Number(document.getElementById("cantidadNuevos").value);
+      if (!Number.isInteger(n) || n < 1 || n > 20) {
+        alert("Ingresá una cantidad entre 1 y 20.");
+        return;
+      }
+
+      let html = "";
+      let legajo = proximoLegajo();
+
+      for (let i = 0; i < n; i++) {
+        html += `
+          <div class="card">
+            <h3>Estudiante ${i + 1} · Legajo ${legajo + i}</h3>
+            <div class="form-grid">
+              <label>Nombre
+                <input type="text" id="nombre_${i}" placeholder="Nombre">
+              </label>
+              <label>Apellido
+                <input type="text" id="apellido_${i}" placeholder="Apellido">
+              </label>
+            </div>
+            <div class="form-grid-3">
+              ${ASIGNATURAS.map((m, j) => `
+                <label>${m}
+                  <input type="number" id="nota_${i}_${j}" min="1" max="10" step="0.1" placeholder="1 a 10">
+                </label>
+              `).join("")}
+            </div>
+          </div>
+        `;
+      }
+
+      html += `<button class="button gold" type="button" onclick="guardarNuevos(${n})">Guardar estudiantes</button>`;
+      document.getElementById("formulariosCarga").innerHTML = html;
+    }
+
+    function guardarNuevos(n) {
+      let nuevos = [];
+      let legajo = proximoLegajo();
+
+      for (let i = 0; i < n; i++) {
+        const nombre = document.getElementById(`nombre_${i}`).value.trim();
+        const apellido = document.getElementById(`apellido_${i}`).value.trim();
+
+        if (!nombre || !apellido) {
+          alert("Completá nombre y apellido en todos los formularios.");
+          return;
+        }
+
+        const notas = {};
+        for (let j = 0; j < ASIGNATURAS.length; j++) {
+          const val = Number(document.getElementById(`nota_${i}_${j}`).value);
+          if (isNaN(val) || val < 1 || val > 10) {
+            alert("Todas las notas deben estar entre 1 y 10.");
+            return;
+          }
+          notas[ASIGNATURAS[j]] = val;
+        }
+
+        nuevos.push({ legajo: legajo + i, nombre, apellido, notas });
+      }
+
+      estudiantes = estudiantes.concat(nuevos);
+      guardarDatos();
+      document.getElementById("formulariosCarga").innerHTML = `<div class="result-box">Estudiantes guardados correctamente.</div>`;
+      renderAll();
+    }
+
+    function buscarEstudiante() {
+      const legajo = Number(document.getElementById("buscarLegajo").value);
+      const est = estudiantes.find(e => Number(e.legajo) === legajo);
+
+      if (!est) {
+        document.getElementById("resultadoBusqueda").innerHTML = `<div class="result-box">No se encontró estudiante con ese legajo.</div>`;
+        return;
+      }
+
+      document.getElementById("resultadoBusqueda").innerHTML = `
+        <div class="result-box">
+          <h3>${est.nombre} ${est.apellido} · Legajo ${est.legajo}</h3>
+          <p>
+            Promedio con aplazos: <strong>${promedio(est).toFixed(2)}</strong> ·
+            Promedio sin aplazos: <strong>${promedioSinAplazos(est).toFixed(2)}</strong> ·
+            Situación: <strong>${situacion(est)}</strong>
+          </p>
+          <table>
+            <thead><tr><th>Materia</th><th>Nota</th><th>Estado</th></tr></thead>
+            <tbody>
+              ${ASIGNATURAS.map(m => `<tr><td>${m}</td><td>${Number(est.notas[m]).toFixed(1)}</td><td>${clasificarNota(est.notas[m])}</td></tr>`).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
+    function renderTablaIndividual() {
+      const ordenados = estudiantes.slice().sort((a, b) => promedio(b) - promedio(a));
+      document.getElementById("tablaIndividual").innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Legajo</th>
+              <th>Estudiante</th>
+              <th>Promedio</th>
+              <th>Sin aplazos</th>
+              <th>Aprobadas</th>
+              <th>Aplazos</th>
+              <th>Situación</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${ordenados.map(est => `
+              <tr>
+                <td>${est.legajo}</td>
+                <td>${est.nombre} ${est.apellido}</td>
+                <td>${promedio(est).toFixed(2)}</td>
+                <td>${promedioSinAplazos(est).toFixed(2)}</td>
+                <td>${aprobadas(est)} / ${ASIGNATURAS.length}</td>
+                <td>${aplazos(est)}</td>
+                <td>${situacion(est) === "Aprobado" ? '<span class="pill pill-ok">Aprobado</span>' : '<span class="pill pill-bad">Reprobado</span>'}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function renderTablaMaterias() {
+      document.getElementById("tablaMaterias").innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Materia</th>
+              <th>Promedio</th>
+              <th>% aprobación</th>
+              <th>Lectura</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${ASIGNATURAS.map(m => {
+              const prom = promedioMateria(m);
+              const pct = aprobacionMateria(m);
+              const lectura = pct >= 70 ? "Buen desempeño" : pct >= 50 ? "Seguimiento medio" : "Materia crítica";
+              return `
+                <tr>
+                  <td>${m}</td>
+                  <td>${prom.toFixed(2)}</td>
+                  <td>${pct.toFixed(1)}%</td>
+                  <td>${lectura}</td>
+                </tr>
+              `;
+            }).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function cargarSelectMaterias() {
+      document.getElementById("materiaDetalle").innerHTML = ASIGNATURAS.map(m => `<option value="${m}">${m}</option>`).join("");
+    }
+
+    function renderDetalleMateria() {
+      const materia = document.getElementById("materiaDetalle").value || ASIGNATURAS[0];
+      const lista = estudiantes.slice().sort((a, b) => Number(b.notas[materia]) - Number(a.notas[materia]));
+      const notas = lista.map(e => Number(e.notas[materia]));
+      const aprob = notas.filter(n => n >= 6).length;
+
+      document.getElementById("detalleMateria").innerHTML = `
+        <div class="result-box">
+          <h3>${materia}</h3>
+          <p>
+            Promedio: <strong>${promedioMateria(materia).toFixed(2)}</strong> ·
+            Nota máxima: <strong>${Math.max(...notas).toFixed(1)}</strong> ·
+            Nota mínima: <strong>${Math.min(...notas).toFixed(1)}</strong> ·
+            Aprobación: <strong>${(aprob/notas.length*100).toFixed(1)}%</strong>
+          </p>
+        </div>
+        <table>
+          <thead><tr><th>Posición</th><th>Legajo</th><th>Estudiante</th><th>Nota</th><th>Estado</th></tr></thead>
+          <tbody>
+            ${lista.map((est, i) => `
+              <tr>
+                <td>${i + 1}</td>
+                <td>${est.legajo}</td>
+                <td>${est.nombre} ${est.apellido}</td>
+                <td>${Number(est.notas[materia]).toFixed(1)}</td>
+                <td>${clasificarNota(est.notas[materia])}</td>
+              </tr>
+            `).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function barChart(labels, values, options = {}) {
+      const width = 720, height = 360, pad = 58;
+      const maxVal = options.max || Math.max(...values, 10);
+      const barW = (width - pad * 2) / values.length * 0.62;
+      const gap = (width - pad * 2) / values.length;
+      const threshold = options.threshold ?? null;
+      const suffix = options.suffix || "";
+      const title = options.title || "";
+
+      let bars = "";
+      values.forEach((v, i) => {
+        const h = (v / maxVal) * (height - pad * 2);
+        const x = pad + i * gap + (gap - barW) / 2;
+        const y = height - pad - h;
+        const color = v >= (threshold ?? 0) ? "#38bdf8" : "#c9a24d";
+        bars += `
+          <rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="7" fill="${color}" opacity="0.9"></rect>
+          <text x="${x + barW/2}" y="${y - 8}" text-anchor="middle" fill="#07111f" font-size="13" font-weight="bold">${v.toFixed(1)}${suffix}</text>
+          <text x="${x + barW/2}" y="${height - 25}" text-anchor="end" fill="#07111f" font-size="12" transform="rotate(-25 ${x + barW/2},${height - 25})">${labels[i]}</text>
+        `;
+      });
+
+      let line = "";
+      if (threshold !== null) {
+        const y = height - pad - (threshold / maxVal) * (height - pad * 2);
+        line = `
+          <line x1="${pad}" y1="${y}" x2="${width-pad}" y2="${y}" stroke="#fb7185" stroke-width="2" stroke-dasharray="7 6"></line>
+          <text x="${width - pad}" y="${y - 8}" text-anchor="end" fill="#fb7185" font-size="13" font-weight="bold">Umbral ${threshold}${suffix}</text>
+        `;
+      }
+
+      return `
+        <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${title}">
+          <rect x="0" y="0" width="${width}" height="${height}" rx="12" fill="#ffffff"></rect>
+          <text x="${pad}" y="30" fill="#07111f" font-size="18" font-weight="bold">${title}</text>
+          <line x1="${pad}" y1="${height-pad}" x2="${width-pad}" y2="${height-pad}" stroke="#0f172a" stroke-width="1"></line>
+          <line x1="${pad}" y1="${pad}" x2="${pad}" y2="${height-pad}" stroke="#0f172a" stroke-width="1"></line>
+          ${line}
+          ${bars}
+        </svg>
+      `;
+    }
+
+    function renderGraficos() {
+      const etiquetas = ASIGNATURAS.map(m => m.replace("Análisis ", "An. ").replace("Arquitecturas en la Nube", "Arq. Nube").replace("Aprendizaje Automático", "Ap. Auto").replace("Captura de la Información", "Cap. Info"));
+      const proms = ASIGNATURAS.map(m => promedioMateria(m));
+      const pcts = ASIGNATURAS.map(m => aprobacionMateria(m));
+
+      document.getElementById("graficoPromedios").innerHTML = barChart(etiquetas, proms, {
+        max: 10, threshold: 6, title: "Promedio por asignatura"
+      });
+
+      document.getElementById("graficoAprobacion").innerHTML = barChart(etiquetas, pcts, {
+        max: 100, threshold: 60, suffix: "%", title: "% de aprobación por asignatura"
+      });
+
+      const aprob = estudiantes.filter(e => situacion(e) === "Aprobado").length;
+      const total = estudiantes.length || 1;
+      const pct = aprob / total * 100;
+      document.getElementById("graficoSituacion").innerHTML = `
+        <div class="pie" style="background: conic-gradient(#22c55e 0 ${pct}%, #fb7185 ${pct}% 100%);"></div>
+        <p style="text-align:center;">
+          <strong>${pct.toFixed(1)}%</strong> aprobados · <strong>${(100-pct).toFixed(1)}%</strong> reprobados
+        </p>
+      `;
+
+      const top = estudiantes.slice().sort((a,b) => promedio(b)-promedio(a)).slice(0, 10);
+      document.getElementById("graficoRanking").innerHTML = barChart(
+        top.map(e => `${e.nombre} ${e.apellido.charAt(0)}.`),
+        top.map(e => promedio(e)),
+        { max: 10, threshold: 6, title: "Top 10 promedios individuales" }
+      );
+    }
+
+
+    function usarBaseInicial() {
+      if (!confirm("¿Cargar la base de ejemplo? Esto reemplazará los datos actuales guardados en este navegador.")) return;
+      estudiantes = JSON.parse(JSON.stringify(DATA_INICIAL));
+      guardarDatos();
+      renderAll();
+      document.getElementById("estadoImportacion").innerHTML = `<strong>Base de ejemplo cargada.</strong> Ya podés revisar dashboard, materias y gráficos.`;
+    }
+
+    function iniciarBaseVacia() {
+      if (!confirm("¿Comenzar con una base vacía? Esto borrará los datos actuales guardados en este navegador.")) return;
+      estudiantes = [];
+      guardarDatos();
+      renderAll();
+      document.getElementById("estadoImportacion").innerHTML = `<strong>Base vacía creada.</strong> Ahora podés cargar estudiantes manualmente o importar un archivo.`;
+    }
+
+    function normalizarClave(valor) {
+      return String(valor || "")
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[̀-ͯ]/g, "")
+        .replace(/[^a-z0-9]/g, "");
+    }
+
+    function parsearLineaCSV(linea) {
+      const resultado = [];
+      let actual = "";
+      let dentroComillas = false;
+
+      for (let i = 0; i < linea.length; i++) {
+        const c = linea[i];
+        const siguiente = linea[i + 1];
+
+        if (c === '"' && dentroComillas && siguiente === '"') {
+          actual += '"';
+          i++;
+        } else if (c === '"') {
+          dentroComillas = !dentroComillas;
+        } else if (c === ',' && !dentroComillas) {
+          resultado.push(actual.trim());
+          actual = "";
+        } else {
+          actual += c;
+        }
+      }
+      resultado.push(actual.trim());
+      return resultado;
+    }
+
+    function leerCSV(texto) {
+      const limpio = texto.replace(/^﻿/, "");
+      const lineas = limpio.split(/\r?\n/).filter(l => l.trim() !== "");
+      if (lineas.length < 2) return [];
+
+      const headers = parsearLineaCSV(lineas[0]);
+      return lineas.slice(1).map(linea => {
+        const valores = parsearLineaCSV(linea);
+        const obj = {};
+        headers.forEach((h, i) => obj[h] = valores[i]);
+        return obj;
+      });
+    }
+
+    function filasAEstudiantes(filas) {
+      const errores = [];
+      const convertidos = [];
+
+      const alias = {
+        legajo: ["legajo", "id", "numero", "nrolegajo"],
+        nombre: ["nombre", "nombres"],
+        apellido: ["apellido", "apellidos"],
+      };
+
+      function buscarValor(fila, nombresPosibles) {
+        const mapa = {};
+        Object.keys(fila).forEach(k => mapa[normalizarClave(k)] = fila[k]);
+        for (const nombre of nombresPosibles) {
+          const key = normalizarClave(nombre);
+          if (mapa[key] !== undefined && mapa[key] !== null && String(mapa[key]).trim() !== "") {
+            return mapa[key];
+          }
+        }
+        return "";
+      }
+
+      filas.forEach((fila, idx) => {
+        const filaNumero = idx + 2;
+        const nombre = String(buscarValor(fila, alias.nombre)).trim();
+        const apellido = String(buscarValor(fila, alias.apellido)).trim();
+        let legajo = Number(buscarValor(fila, alias.legajo));
+        if (!Number.isFinite(legajo) || legajo <= 0) legajo = idx + 1;
+
+        if (!nombre || !apellido) {
+          errores.push(`Fila ${filaNumero}: falta nombre o apellido.`);
+          return;
+        }
+
+        const notas = {};
+        for (const materia of ASIGNATURAS) {
+          const valor = buscarValor(fila, [materia]);
+          const nota = Number(String(valor).replace(",", "."));
+          if (!Number.isFinite(nota) || nota < 1 || nota > 10) {
+            errores.push(`Fila ${filaNumero}: nota inválida en ${materia}. Debe estar entre 1 y 10.`);
+            return;
+          }
+          notas[materia] = nota;
+        }
+
+        convertidos.push({ legajo, nombre, apellido, notas });
+      });
+
+      return { convertidos, errores };
+    }
+
+    function importarArchivoEstudiantes() {
+      const input = document.getElementById("archivoEstudiantes");
+      const estado = document.getElementById("estadoImportacion");
+      const archivo = input.files[0];
+
+      if (!archivo) {
+        estado.innerHTML = "Seleccioná un archivo CSV o Excel para importar.";
+        return;
+      }
+
+      const nombre = archivo.name.toLowerCase();
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        try {
+          let filas = [];
+
+          if (nombre.endsWith(".csv")) {
+            filas = leerCSV(e.target.result);
+          } else if (nombre.endsWith(".xlsx") || nombre.endsWith(".xls")) {
+            if (typeof XLSX === "undefined") {
+              estado.innerHTML = "No se pudo cargar el lector de Excel. Probá con CSV o revisá tu conexión.";
+              return;
+            }
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: "array" });
+            const hoja = workbook.Sheets[workbook.SheetNames[0]];
+            filas = XLSX.utils.sheet_to_json(hoja, { defval: "" });
+          } else {
+            estado.innerHTML = "Formato no compatible. Usá CSV, XLSX o XLS.";
+            return;
+          }
+
+          const { convertidos, errores } = filasAEstudiantes(filas);
+
+          if (errores.length > 0) {
+            estado.innerHTML = `<strong>No se importó el archivo.</strong><br>${errores.slice(0, 8).join("<br>")}${errores.length > 8 ? "<br>..." : ""}`;
+            return;
+          }
+
+          if (convertidos.length === 0) {
+            estado.innerHTML = "El archivo no contiene estudiantes válidos.";
+            return;
+          }
+
+          estudiantes = convertidos;
+          guardarDatos();
+          renderAll();
+          estado.innerHTML = `<strong>Archivo importado correctamente.</strong> Se cargaron ${convertidos.length} estudiantes.`;
+        } catch (error) {
+          estado.innerHTML = "Error al leer el archivo. Revisá columnas, formato y valores de notas.";
+        }
+      };
+
+      if (nombre.endsWith(".csv")) {
+        reader.readAsText(archivo, "utf-8");
+      } else {
+        reader.readAsArrayBuffer(archivo);
+      }
+    }
+
+    function exportarCSV() {
+      const headers = ["Legajo", "Nombre", "Apellido", ...ASIGNATURAS];
+      const rows = estudiantes.map(e => [
+        e.legajo, e.nombre, e.apellido, ...ASIGNATURAS.map(m => e.notas[m])
+      ]);
+      const csv = [headers, ...rows].map(r => r.map(v => `"${String(v).replaceAll('"','""')}"`).join(",")).join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "estudiantes_actualizado.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function reiniciarDatos() {
+      if (!confirm("¿Seguro que querés restaurar la base inicial? Se borrarán los datos agregados en este navegador.")) return;
+      localStorage.removeItem(STORAGE_KEY);
+      estudiantes = JSON.parse(JSON.stringify(DATA_INICIAL));
+      renderAll();
+    }
+
+    function renderAll() {
+      renderDashboard();
+      renderTablaIndividual();
+      renderTablaMaterias();
+      cargarSelectMaterias();
+      renderDetalleMateria();
+      renderGraficos();
+    }
+
+    renderAll();
+  </script>
+
+</body>
+</html>
 
