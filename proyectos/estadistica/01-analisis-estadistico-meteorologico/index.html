@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es" class="notranslate">
 <head>
@@ -38,7 +39,7 @@
     }
 
     main {
-      max-width: 1050px;
+      max-width: 1080px;
       margin: 35px auto;
       padding: 0 20px 40px;
     }
@@ -73,17 +74,6 @@
       padding-left: 22px;
     }
 
-    .tag {
-      display: inline-block;
-      background: rgba(56,189,248,0.12);
-      color: #f8fafc;
-      border: 1px solid rgba(56,189,248,0.35);
-      padding: 8px 12px;
-      margin: 5px;
-      border-radius: 999px;
-      font-size: 14px;
-    }
-
     .button {
       display: inline-block;
       color: #f8fafc;
@@ -112,14 +102,25 @@
       color: #07111f;
     }
 
-    .decision-grid {
+    .tag {
+      display: inline-block;
+      background: rgba(56,189,248,0.12);
+      color: #f8fafc;
+      border: 1px solid rgba(56,189,248,0.35);
+      padding: 8px 12px;
+      margin: 5px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 18px;
       margin-top: 18px;
     }
 
-    .decision-card {
+    .card {
       background: rgba(7, 17, 31, 0.75);
       border: 1px solid rgba(255,255,255,0.12);
       border-radius: 16px;
@@ -127,7 +128,7 @@
       transition: all 0.25s ease;
     }
 
-    .decision-card:hover {
+    .card:hover {
       border-color: #38bdf8;
       transform: translateY(-3px);
     }
@@ -139,6 +140,14 @@
       margin-bottom: 6px;
     }
 
+    .graph {
+      width: 100%;
+      border-radius: 14px;
+      margin-top: 15px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: #ffffff;
+    }
+
     footer {
       text-align: center;
       color: #94a3b8;
@@ -148,7 +157,7 @@
     }
 
     @media (max-width: 850px) {
-      .decision-grid {
+      .grid {
         grid-template-columns: 1fr;
       }
 
@@ -165,192 +174,225 @@
     <div class="terminal">&gt; cargando data aplicada a ingeniería...</div>
     <h1>01 · Análisis Estadístico Meteorológico</h1>
     <p class="subtitle">
-      Datos reales, regresión, test de hipótesis y conclusiones prácticas para toma de decisiones.
+      Datos meteorológicos reales, modelos estadísticos y conclusiones prácticas para toma de decisiones.
     </p>
   </header>
 
   <main>
 
     <section>
-      <h2>Descripción del proyecto</h2>
+      <h2>Resumen ejecutivo</h2>
 
       <p>
-        Análisis estadístico aplicado a datos meteorológicos reales de Corrientes, Mercedes.
-        El objetivo fue identificar qué variables ayudan a explicar la radiación solar global
-        y traducir los resultados en criterios útiles para toma de decisiones.
+        Este proyecto analiza datos meteorológicos diarios de Corrientes, Mercedes,
+        con foco en comprender qué variables ayudan a explicar la radiación solar global.
       </p>
 
       <p>
-        Se trabajó con temperatura, humedad media, presión atmosférica y radiación global,
-        aplicando estadística descriptiva, regresión lineal, test de hipótesis y análisis
-        no paramétrico.
-      </p>
-    </section>
-
-    <section>
-      <h2>Dataset utilizado</h2>
-
-      <p>
-        Dataset meteorológico con 554 registros diarios del período 2023–2024.
-        La variable principal de estudio fue la radiación solar global, medida en MJ/m².
+        El análisis permite transformar datos de temperatura, humedad, presión y radiación
+        en criterios prácticos para decisiones vinculadas con energía solar, ambiente,
+        infraestructura y planificación operativa.
       </p>
 
-      <ul>
-        <li><strong>Ubicación:</strong> Corrientes, Mercedes.</li>
-        <li><strong>Período:</strong> enero 2023 a noviembre 2024.</li>
-        <li><strong>Variables:</strong> fecha, temperatura, humedad media, presión media y radiación global.</li>
-        <li><strong>Uso principal:</strong> análisis de factores asociados a la radiación solar.</li>
-      </ul>
-
-      <a class="button gold" href="https://raw.githubusercontent.com/celestesmartinez/Trabajo_Final_Analisis_Estadistico_UNAJ_WC/main/04_Corrientes_Mercedes.csv" target="_blank">
-        Ver dataset original
-      </a>
-    </section>
-
-    <section>
-      <h2>Herramientas aplicadas</h2>
-
-      <span class="tag">Python</span>
-      <span class="tag">Pandas</span>
-      <span class="tag">NumPy</span>
-      <span class="tag">Matplotlib</span>
-      <span class="tag">Seaborn</span>
-      <span class="tag">SciPy</span>
-      <span class="tag">Statsmodels</span>
-      <span class="tag">Regresión lineal</span>
-      <span class="tag">Test de hipótesis</span>
-      <span class="tag">Spearman</span>
-      <span class="tag">Data aplicada</span>
+      <span class="tag">Estadística aplicada</span>
       <span class="tag">Meteorología</span>
+      <span class="tag">Data analytics</span>
+      <span class="tag">Regresión lineal</span>
+      <span class="tag">Python</span>
       <span class="tag">Ingeniería</span>
     </section>
 
     <section>
-      <h2>Resultados clave</h2>
+      <h2>Accesos rápidos</h2>
 
-      <div class="decision-grid">
+      <a class="button gold" href="#parametros">Parámetros clave</a>
+      <a class="button" href="#radiacion">Distribución de radiación</a>
+      <a class="button" href="#dispersion">Temperatura vs radiación</a>
+      <a class="button" href="#humedad">Humedad</a>
+      <a class="button" href="#presion">Presión atmosférica</a>
+      <a class="button" href="#diagnostico">Diagnóstico del modelo</a>
+      <a class="button" href="#robustez">Pearson vs Spearman</a>
+      <a class="button gold" href="#decisiones">Conclusiones prácticas</a>
+    </section>
 
-        <div class="decision-card">
+    <section id="parametros">
+      <h2>Parámetros clave del estudio</h2>
+
+      <div class="grid">
+
+        <div class="card">
           <div class="metric">554</div>
           <h3>Registros diarios</h3>
           <p>
-            La base permite analizar comportamiento meteorológico con continuidad temporal
+            Base de datos meteorológica diaria para analizar comportamiento climático
             entre 2023 y 2024.
           </p>
         </div>
 
-        <div class="decision-card">
+        <div class="card">
+          <div class="metric">18.22</div>
+          <h3>Radiación media</h3>
+          <p>
+            Radiación solar global promedio aproximada, medida en MJ/m².
+          </p>
+        </div>
+
+        <div class="card">
           <div class="metric">R² = 8.58%</div>
           <h3>Modelo simple</h3>
           <p>
             La temperatura tiene relación positiva con la radiación, pero por sí sola
-            explica una parte limitada del fenómeno.
+            explica poco del fenómeno.
           </p>
         </div>
 
-        <div class="decision-card">
+        <div class="card">
           <div class="metric">R² = 45.79%</div>
           <h3>Modelo múltiple</h3>
           <p>
-            Al incorporar humedad y presión atmosférica, el modelo mejora de forma importante
-            su capacidad explicativa.
-          </p>
-        </div>
-
-        <div class="decision-card">
-          <div class="metric">ρ = 0.3197</div>
-          <h3>Spearman</h3>
-          <p>
-            El análisis no paramétrico confirma una relación positiva robusta entre temperatura
-            y radiación solar.
+            Al sumar humedad y presión atmosférica, la capacidad explicativa mejora
+            de forma importante.
           </p>
         </div>
 
       </div>
     </section>
 
-    <section>
-      <h2>Conclusiones prácticas</h2>
+    <section id="radiacion">
+      <h2>Gráfico 1 · Distribución de radiación solar global</h2>
 
-      <div class="decision-grid">
+      <p>
+        Permite observar la variabilidad de la radiación diaria. Es útil para evaluar
+        disponibilidad solar, dispersión de valores y comportamiento general del recurso.
+      </p>
 
-        <div class="decision-card">
+      <img class="graph" src="graficos/distribucion-radiacion-global.png" alt="Distribución de radiación solar global">
+    </section>
+
+    <section id="dispersion">
+      <h2>Gráfico 2 · Temperatura vs radiación</h2>
+
+      <p>
+        Muestra una relación positiva entre temperatura y radiación solar. Sin embargo,
+        la dispersión de puntos evidencia que la temperatura no alcanza como único predictor.
+      </p>
+
+      <img class="graph" src="graficos/dispersion-temperatura-radiacion.png" alt="Dispersión entre temperatura y radiación solar">
+    </section>
+
+    <section id="humedad">
+      <h2>Gráfico 3 · Distribución de humedad media</h2>
+
+      <p>
+        La humedad es una variable crítica porque se asocia con nubosidad y menor
+        disponibilidad solar. En el modelo múltiple, su efecto sobre la radiación es negativo.
+      </p>
+
+      <img class="graph" src="graficos/distribucion-humedad.png" alt="Distribución de humedad media">
+    </section>
+
+    <section id="presion">
+      <h2>Gráfico 4 · Distribución de presión atmosférica</h2>
+
+      <p>
+        La presión aporta contexto meteorológico. Valores más estables o elevados pueden
+        relacionarse con condiciones más despejadas, mejorando la interpretación del modelo.
+      </p>
+
+      <img class="graph" src="graficos/distribucion-presion.png" alt="Distribución de presión atmosférica">
+    </section>
+
+    <section id="diagnostico">
+      <h2>Gráfico 5 · Diagnóstico del modelo estadístico</h2>
+
+      <p>
+        El diagnóstico de residuos permite revisar si el modelo es confiable. Se observa
+        que el modelo simple es útil como aproximación inicial, pero presenta limitaciones
+        propias de una serie meteorológica temporal.
+      </p>
+
+      <img class="graph" src="graficos/diagnostico-residuos-modelo.png" alt="Diagnóstico de residuos del modelo">
+    </section>
+
+    <section id="robustez">
+      <h2>Gráfico 6 · Comparación Pearson vs Spearman</h2>
+
+      <p>
+        Pearson y Spearman confirman una asociación positiva entre temperatura y radiación.
+        La similitud entre ambos resultados refuerza que la relación observada no depende
+        únicamente de supuestos paramétricos estrictos.
+      </p>
+
+      <img class="graph" src="graficos/pearson-vs-spearman.png" alt="Comparación Pearson versus Spearman">
+    </section>
+
+    <section id="decisiones">
+      <h2>Conclusiones prácticas para toma de decisiones</h2>
+
+      <div class="grid">
+
+        <div class="card">
           <h3>No estimar radiación solo con temperatura</h3>
           <p>
-            La temperatura sirve como señal inicial, pero no alcanza para decisiones técnicas.
-            La radiación depende también de humedad, presión, nubosidad y estacionalidad.
+            La temperatura sirve como señal inicial, pero el modelo simple explica poco.
+            Para decisiones técnicas se necesitan más variables.
           </p>
         </div>
 
-        <div class="decision-card">
-          <h3>La humedad es una variable crítica</h3>
+        <div class="card">
+          <h3>Incorporar humedad mejora el análisis</h3>
           <p>
-            A mayor humedad, menor radiación probable. Esto puede indicar condiciones de mayor
-            nubosidad y menor disponibilidad solar útil.
+            La humedad tiene efecto negativo sobre la radiación. Días más húmedos suelen
+            implicar menor disponibilidad solar útil.
           </p>
         </div>
 
-        <div class="decision-card">
-          <h3>La presión aporta contexto operativo</h3>
+        <div class="card">
+          <h3>Usar presión como variable de contexto</h3>
           <p>
-            La presión ayuda a interpretar condiciones más estables o despejadas,
-            mejorando la lectura meteorológica del modelo.
+            La presión atmosférica ayuda a interpretar condiciones más estables o despejadas.
           </p>
         </div>
 
-        <div class="decision-card">
-          <h3>Separar el análisis por estación</h3>
+        <div class="card">
+          <h3>Separar por estación o mes</h3>
           <p>
-            La estacionalidad es importante. Para planificación energética, ambiental u operativa,
-            conviene analizar por mes o estación del año.
+            La radiación y la temperatura tienen comportamiento estacional. Analizar por mes
+            o estación mejoraría la calidad de las decisiones.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Aplicación en energía solar</h3>
+          <p>
+            El análisis puede apoyar estudios preliminares de disponibilidad solar,
+            planificación de operación y evaluación de condiciones ambientales.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Próximo paso técnico</h3>
+          <p>
+            Agregar nubosidad, viento, mes, estación del año y rezagos temporales permitiría
+            construir modelos predictivos más precisos.
           </p>
         </div>
 
       </div>
-    </section>
-
-    <section>
-      <h2>Lectura práctica</h2>
-
-      <p>
-        Para proyectos de energía solar, infraestructura, ambiente o planificación operativa,
-        este análisis muestra que una estimación simple puede ser insuficiente. Al incorporar
-        más variables meteorológicas, la decisión se vuelve más confiable.
-      </p>
-
-      <p>
-        La conclusión central es directa: para estimar radiación solar y evaluar condiciones
-        de aprovechamiento solar, conviene trabajar con modelos multivariables.
-      </p>
-    </section>
-
-    <section>
-      <h2>Material del proyecto</h2>
-
-      <p>
-        Acceso al notebook ejecutable y al dataset original utilizado para el análisis.
-      </p>
-
-      <a class="button gold" href="https://colab.research.google.com/drive/1bB78A9lqCzhCLS-xRFHRKUNomz4mccou?usp=sharing" target="_blank">
-        Abrir notebook en Google Colab
-      </a>
-
-      <a class="button" href="https://raw.githubusercontent.com/celestesmartinez/Trabajo_Final_Analisis_Estadistico_UNAJ_WC/main/04_Corrientes_Mercedes.csv" target="_blank">
-        Ver dataset CSV
-      </a>
     </section>
 
     <section>
       <h2>Valor profesional</h2>
 
       <p>
-        Este proyecto demuestra capacidad para analizar datos reales, interpretar modelos
-        estadísticos y convertir resultados técnicos en conclusiones prácticas.
+        Este caso muestra cómo convertir datos meteorológicos en información práctica.
+        No se limita a calcular métricas: interpreta resultados y los traduce en criterios
+        útiles para ingeniería, energía, ambiente y planificación.
       </p>
 
       <p>
-        Integra data analytics, estadística aplicada, meteorología e interpretación ingenieril
-        para apoyar decisiones en proyectos técnicos.
+        El enfoque integra estadística aplicada, análisis de datos e interpretación técnica,
+        fortaleciendo el perfil de data aplicada a ingeniería.
       </p>
     </section>
 
@@ -378,3 +420,4 @@
 
 </body>
 </html>
+```
