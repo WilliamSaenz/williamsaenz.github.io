@@ -1,0 +1,236 @@
+```html
+<!DOCTYPE html>
+<html lang="es" class="notranslate">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>01 · Análisis Estadístico Meteorológico | William D. Saenz</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #07111f 0%, #0b1f33 100%);
+      color: #f8fafc;
+    }
+
+    header {
+      text-align: center;
+      padding: 55px 20px 35px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .terminal {
+      color: #39ff14;
+      font-family: "Courier New", monospace;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 40px;
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      font-size: 18px;
+      margin-top: 12px;
+    }
+
+    main {
+      max-width: 980px;
+      margin: 35px auto;
+      padding: 0 20px 40px;
+    }
+
+    section {
+      background: rgba(16, 29, 47, 0.92);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    h2 {
+      color: #38bdf8;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+      padding-bottom: 10px;
+      margin-top: 0;
+    }
+
+    p, li {
+      color: #dbeafe;
+      line-height: 1.6;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(56,189,248,0.12);
+      color: #f8fafc;
+      border: 1px solid rgba(56,189,248,0.35);
+      padding: 8px 12px;
+      margin: 5px;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .button {
+      display: inline-block;
+      color: #f8fafc;
+      border: 1px solid #38bdf8;
+      padding: 11px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 7px 7px 7px 0;
+    }
+
+    .button:hover {
+      background: #38bdf8;
+      color: #07111f;
+    }
+
+    .gold {
+      border-color: #c9a24d;
+      color: #c9a24d;
+    }
+
+    .gold:hover {
+      background: #c9a24d;
+      color: #07111f;
+    }
+
+    footer {
+      text-align: center;
+      color: #94a3b8;
+      padding: 25px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="terminal">&gt; cargando proyecto de data aplicada...</div>
+    <h1>01 · Análisis Estadístico Meteorológico</h1>
+    <p class="subtitle">
+      Regresión, test de hipótesis y análisis no paramétrico aplicado a datos meteorológicos.
+    </p>
+  </header>
+
+  <main>
+
+    <section>
+      <h2>Descripción del proyecto</h2>
+      <p>
+        Proyecto académico desarrollado en la Maestría en Ciencia de Datos de la UNAJ.
+        El trabajo analiza datos diarios de una estación meteorológica ubicada en
+        Corrientes, Mercedes, durante el período 2023–2024.
+      </p>
+
+      <p>
+        El objetivo fue aplicar estadística descriptiva, regresión lineal, test de hipótesis
+        y métodos no paramétricos para estudiar la relación entre temperatura, humedad,
+        presión atmosférica y radiación solar global.
+      </p>
+    </section>
+
+    <section>
+      <h2>Dataset utilizado</h2>
+      <p>
+        Dataset meteorológico con 554 registros diarios. Incluye fecha de medición,
+        temperatura del aire a 150 cm, humedad media, presión media y radiación global.
+        La variable principal de análisis fue la radiación solar global.
+      </p>
+
+      <a class="button gold" href="https://raw.githubusercontent.com/celestesmartinez/Trabajo_Final_Analisis_Estadistico_UNAJ_WC/main/04_Corrientes_Mercedes.csv" target="_blank">
+        Ver dataset original
+      </a>
+    </section>
+
+    <section>
+      <h2>Herramientas y conceptos aplicados</h2>
+
+      <span class="tag">Python</span>
+      <span class="tag">Pandas</span>
+      <span class="tag">NumPy</span>
+      <span class="tag">Matplotlib</span>
+      <span class="tag">Seaborn</span>
+      <span class="tag">SciPy</span>
+      <span class="tag">Statsmodels</span>
+      <span class="tag">Regresión lineal</span>
+      <span class="tag">Test de hipótesis</span>
+      <span class="tag">Spearman</span>
+      <span class="tag">Análisis meteorológico</span>
+    </section>
+
+    <section>
+      <h2>Principales resultados</h2>
+      <ul>
+        <li>Temperatura y radiación muestran estacionalidad anual marcada.</li>
+        <li>Existe relación positiva entre temperatura del aire y radiación solar global.</li>
+        <li>El modelo simple Temperatura → Radiación obtuvo un R² aproximado de 8.58%.</li>
+        <li>El modelo múltiple con Temperatura, Humedad y Presión elevó el R² a 45.79%.</li>
+        <li>La humedad presentó efecto negativo sobre la radiación solar.</li>
+        <li>Spearman confirmó la robustez de la relación observada.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Archivos del proyecto</h2>
+      <p>
+        Material principal del análisis estadístico.
+      </p>
+
+      <a class="button gold" href="informe-analisis-estadistico-meteorologico.pdf" target="_blank">
+        Ver informe del proyecto
+      </a>
+
+      <a class="button" href="trabajo-final-analisis-estadistico-2026.ipynb" target="_blank">
+        Ver notebook
+      </a>
+
+      <a class="button" href="https://raw.githubusercontent.com/celestesmartinez/Trabajo_Final_Analisis_Estadistico_UNAJ_WC/main/04_Corrientes_Mercedes.csv" target="_blank">
+        Dataset CSV
+      </a>
+    </section>
+
+    <section>
+      <h2>Valor profesional</h2>
+      <p>
+        Este proyecto demuestra capacidad para trabajar con datos reales,
+        aplicar modelos estadísticos, interpretar resultados, validar supuestos
+        y comunicar hallazgos técnicos de forma clara. Es una muestra de análisis
+        de datos aplicado a variables ambientales y de ingeniería.
+      </p>
+    </section>
+
+    <section>
+      <h2>Navegación</h2>
+
+      <a class="button" href="../">
+        Volver a estadística
+      </a>
+
+      <a class="button" href="../../">
+        Volver a proyectos
+      </a>
+
+      <a class="button" href="../../../">
+        Volver al portafolio principal
+      </a>
+    </section>
+
+  </main>
+
+  <footer>
+    © 2026 William D. Saenz | Data aplicada a ingeniería
+  </footer>
+
+</body>
+</html>
+```
