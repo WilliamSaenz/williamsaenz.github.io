@@ -92,11 +92,31 @@
       line-height: 1.6;
     }
 
+    textarea {
+      width: 100%;
+      min-height: 145px;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(56,189,248,0.35);
+      background: rgba(7,17,31,0.85);
+      color: var(--text);
+      outline: none;
+      margin-top: 6px;
+      resize: vertical;
+      font-family: Arial, sans-serif;
+    }
+
+    textarea:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(56,189,248,0.12);
+    }
+
     .quickbar {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 18px;
+      justify-content: center;
+      margin-top: 20px;
     }
 
     .button {
@@ -110,6 +130,7 @@
       font-weight: bold;
       cursor: pointer;
       transition: all 0.25s ease;
+      margin: 5px 5px 5px 0;
     }
 
     .button:hover {
@@ -347,16 +368,17 @@
     <div class="terminal">&gt; cargando sistema académico interactivo...</div>
     <h1>01 · Sistema Académico Interactivo</h1>
     <p class="subtitle">
-      Cargar datos, diagnosticar rendimiento académico y tomar decisiones con indicadores claros.
+      Sistema web para cargar estudiantes, personalizar materias, analizar rendimiento y tomar decisiones académicas.
     </p>
 
 ```
 <div class="quickbar">
-  <a class="button gold" href="#acciones">Acciones rápidas</a>
-  <a class="button" href="#diagnostico">Diagnóstico</a>
+  <a class="button gold" href="#datos">Datos</a>
   <a class="button" href="#dashboard">Dashboard</a>
-  <a class="button" href="#materias">Materias</a>
+  <a class="button" href="#diagnostico">Diagnóstico</a>
   <a class="button" href="#estudiantes">Estudiantes</a>
+  <a class="button" href="#materias">Materias</a>
+  <a class="button" href="#detalle">Detalle</a>
   <a class="button" href="#graficos">Gráficos</a>
   <a class="button" href="#navegacion">Volver</a>
 </div>
@@ -367,72 +389,102 @@
   <main>
 
 ```
-<section id="acciones">
-  <h2>Acciones rápidas</h2>
+<section>
+  <h2>Resumen ejecutivo</h2>
   <p>
-    Usá esta zona para descargar una plantilla, cargar datos, exportar resultados
-    y reiniciar el sistema. La opción recomendada es trabajar con Excel .xlsx.
+    Este sistema permite trabajar de tres formas: descargar una plantilla Excel editable,
+    importar esa plantilla con las materias que el usuario defina, o usar la base precargada
+    de estudiantes para hacer análisis inmediato.
+  </p>
+
+  <span class="tag">Excel editable</span>
+  <span class="tag">Materias dinámicas</span>
+  <span class="tag">Base precargada</span>
+  <span class="tag">Dashboard</span>
+  <span class="tag">Diagnóstico</span>
+  <span class="tag">Toma de decisiones</span>
+</section>
+
+<section id="datos">
+  <h2>Gestión de datos</h2>
+  <p>
+    Flujo recomendado: descargá el template Excel, editá las materias si hace falta,
+    completá los estudiantes y volvé a cargar el archivo.
   </p>
 
   <div class="grid">
     <div class="card">
-      <h3>1 · Descargar plantilla Excel</h3>
+      <h3>1 · Descargar template editable</h3>
       <p>
-        Genera un archivo .xlsx listo para completar con estudiantes y notas.
-        Esta opción evita problemas con tildes y caracteres especiales.
+        Podés modificar, agregar o quitar materias desde esta lista antes de descargar el Excel.
+        También podés cambiar los nombres de materias directamente en el archivo.
       </p>
+
+      <label>
+        Materias del template, una por línea
+        <textarea id="materiasTemplate"></textarea>
+      </label>
+
       <button class="button green" type="button" onclick="descargarTemplateExcel()">
         Descargar template Excel
       </button>
     </div>
 
     <div class="card">
-      <h3>2 · Importar archivo</h3>
+      <h3>2 · Cargar template o archivo</h3>
       <p>
-        Subí el Excel completado o un CSV. El sistema validará nombres, legajos y notas entre 1 y 10.
+        El sistema detecta automáticamente las materias del archivo.
+        Las columnas fijas son: Legajo, Nombre y Apellido. Todo lo demás se interpreta como materia.
       </p>
+
       <input type="file" id="archivoEstudiantes" accept=".xlsx,.xls,.csv">
+
       <button class="button gold" type="button" onclick="importarArchivoEstudiantes()">
         Importar datos
       </button>
+
       <div id="estadoImportacion" class="result-box"></div>
     </div>
 
     <div class="card">
-      <h3>3 · Exportar resultados</h3>
+      <h3>3 · Usar base precargada</h3>
       <p>
-        Descargá la base actual en Excel o CSV corregido para abrir en Excel sin romper tildes.
+        Carga los estudiantes precargados originales para analizar el sistema sin subir archivos.
       </p>
-      <button class="button green" type="button" onclick="exportarExcel()">
-        Exportar Excel
-      </button>
-      <button class="button" type="button" onclick="exportarCSV()">
-        Exportar CSV compatible
-      </button>
-    </div>
 
-    <div class="card">
-      <h3>4 · Base del sistema</h3>
-      <p>
-        Cargá datos de ejemplo o comenzá desde cero. Ideal para probar el sistema sin tocar archivos.
-      </p>
       <button class="button gold" type="button" onclick="usarBaseInicial()">
-        Cargar ejemplo
+        Cargar alumnos precargados
       </button>
+
       <button class="button danger" type="button" onclick="iniciarBaseVacia()">
         Empezar vacío
       </button>
     </div>
-  </div>
-</section>
 
-<section id="diagnostico">
-  <h2>Diagnóstico automático</h2>
-  <p>
-    Lectura rápida para tomar decisiones: materias críticas, estudiantes en riesgo
-    y prioridad de intervención.
-  </p>
-  <div id="diagnosticoGeneral"></div>
+    <div class="card">
+      <h3>4 · Exportar resultados</h3>
+      <p>
+        Exporta la base actual en Excel o CSV compatible con Excel.
+        Para evitar errores de tildes, se recomienda Excel.
+      </p>
+
+      <button class="button green" type="button" onclick="exportarExcel()">
+        Exportar Excel
+      </button>
+
+      <button class="button" type="button" onclick="exportarCSV()">
+        Exportar CSV compatible
+      </button>
+    </div>
+  </div>
+
+  <div class="result-box">
+    <h3>Materias activas del sistema</h3>
+    <p class="small">
+      Estas materias se usan actualmente para cálculos, tablas, gráficos y diagnóstico.
+    </p>
+    <div id="materiasActivas"></div>
+  </div>
 </section>
 
 <section id="dashboard">
@@ -441,12 +493,13 @@
   <div id="insightGeneral" class="result-box"></div>
 </section>
 
-<section id="materias">
-  <h2>Análisis por materia</h2>
+<section id="diagnostico">
+  <h2>Diagnóstico automático</h2>
   <p>
-    Permite detectar materias fuertes, materias críticas y porcentaje de aprobación.
+    Lectura rápida para tomar decisiones: materias críticas, estudiantes en riesgo,
+    seguimiento y acciones sugeridas.
   </p>
-  <div id="tablaMaterias"></div>
+  <div id="diagnosticoGeneral"></div>
 </section>
 
 <section id="estudiantes">
@@ -470,8 +523,8 @@
 
     <div class="card">
       <h3>Agregar estudiante manualmente</h3>
-      <p class="small">
-        Útil para cargar un caso puntual sin usar Excel.
+      <p>
+        Permite cargar un estudiante con las materias activas actuales.
       </p>
       <button class="button gold" type="button" onclick="mostrarFormularioManual()">
         Abrir formulario manual
@@ -481,8 +534,17 @@
 
   <div id="formularioManual" class="hidden"></div>
 
-  <h3>Tabla general</h3>
+  <h3>Tabla general de estudiantes</h3>
   <div id="tablaIndividual"></div>
+</section>
+
+<section id="materias">
+  <h2>Análisis por materia</h2>
+  <p>
+    Comparación del rendimiento por asignatura para detectar fortalezas,
+    materias críticas y áreas donde conviene reforzar.
+  </p>
+  <div id="tablaMaterias"></div>
 </section>
 
 <section id="detalle">
@@ -505,26 +567,34 @@
 
   <div class="grid">
     <div class="card">
-      <h3>Promedio por asignatura</h3>
-      <p class="small">Detecta materias con mayor o menor rendimiento promedio.</p>
+      <h3>Promedio por materia</h3>
+      <p class="small">
+        Permite ver qué materias concentran mejor o menor rendimiento promedio.
+      </p>
       <div id="graficoPromedios" class="chart-wrap"></div>
     </div>
 
     <div class="card">
-      <h3>% aprobación por asignatura</h3>
-      <p class="small">Detecta materias con mayor riesgo académico.</p>
+      <h3>% aprobación por materia</h3>
+      <p class="small">
+        Permite detectar materias con mayor riesgo académico.
+      </p>
       <div id="graficoAprobacion" class="chart-wrap"></div>
     </div>
 
     <div class="card">
       <h3>Distribución académica</h3>
-      <p class="small">Resume estudiantes aprobados, en seguimiento y críticos.</p>
+      <p class="small">
+        Resume estudiantes aprobados, en seguimiento y críticos.
+      </p>
       <div id="graficoSituacion"></div>
     </div>
 
     <div class="card">
       <h3>Ranking de promedios</h3>
-      <p class="small">Muestra los mejores promedios generales.</p>
+      <p class="small">
+        Ordena estudiantes por rendimiento general.
+      </p>
       <div id="graficoRanking" class="chart-wrap"></div>
     </div>
   </div>
@@ -545,7 +615,7 @@
   </footer>
 
   <script>
-    const ASIGNATURAS = [
+    const MATERIAS_INICIALES = [
       "Programación",
       "Base de Datos",
       "Análisis Estadístico",
@@ -556,89 +626,445 @@
 
     const DATA_INICIAL = [
       {
-        legajo: 1,
-        nombre: "Ana",
-        apellido: "García",
-        notas: {
-          "Programación": 8,
-          "Base de Datos": 7,
-          "Análisis Estadístico": 9,
-          "Arquitecturas en la Nube": 6,
-          "Aprendizaje Automático": 10,
-          "Captura de la Información": 4
+        "legajo": 1,
+        "nombre": "Ana",
+        "apellido": "García",
+        "notas": {
+          "Programación": 8.0,
+          "Base de Datos": 7.0,
+          "Análisis Estadístico": 9.0,
+          "Arquitecturas en la Nube": 6.0,
+          "Aprendizaje Automático": 10.0,
+          "Captura de la Información": 4.0
         }
       },
       {
-        legajo: 2,
-        nombre: "Carlos",
-        apellido: "Rodríguez",
-        notas: {
-          "Programación": 5,
-          "Base de Datos": 6,
-          "Análisis Estadístico": 7,
-          "Arquitecturas en la Nube": 2,
-          "Aprendizaje Automático": 2,
-          "Captura de la Información": 9
+        "legajo": 2,
+        "nombre": "Carlos",
+        "apellido": "Rodríguez",
+        "notas": {
+          "Programación": 5.0,
+          "Base de Datos": 6.0,
+          "Análisis Estadístico": 7.0,
+          "Arquitecturas en la Nube": 2.0,
+          "Aprendizaje Automático": 2.0,
+          "Captura de la Información": 9.0
         }
       },
       {
-        legajo: 3,
-        nombre: "Elena",
-        apellido: "Martínez",
-        notas: {
-          "Programación": 9,
-          "Base de Datos": 9,
-          "Análisis Estadístico": 8,
-          "Arquitecturas en la Nube": 2,
-          "Aprendizaje Automático": 6,
-          "Captura de la Información": 7
+        "legajo": 3,
+        "nombre": "Elena",
+        "apellido": "Martínez",
+        "notas": {
+          "Programación": 9.0,
+          "Base de Datos": 9.0,
+          "Análisis Estadístico": 8.0,
+          "Arquitecturas en la Nube": 2.0,
+          "Aprendizaje Automático": 6.0,
+          "Captura de la Información": 7.0
         }
       },
       {
-        legajo: 4,
-        nombre: "Juan",
-        apellido: "López",
-        notas: {
-          "Programación": 4,
-          "Base de Datos": 3,
-          "Análisis Estadístico": 5,
-          "Arquitecturas en la Nube": 6,
-          "Aprendizaje Automático": 7,
-          "Captura de la Información": 8
+        "legajo": 4,
+        "nombre": "Juan",
+        "apellido": "López",
+        "notas": {
+          "Programación": 4.0,
+          "Base de Datos": 3.0,
+          "Análisis Estadístico": 5.0,
+          "Arquitecturas en la Nube": 6.0,
+          "Aprendizaje Automático": 7.0,
+          "Captura de la Información": 8.0
         }
       },
       {
-        legajo: 5,
-        nombre: "María",
-        apellido: "Fernández",
-        notas: {
-          "Programación": 10,
-          "Base de Datos": 9,
-          "Análisis Estadístico": 8,
-          "Arquitecturas en la Nube": 9,
-          "Aprendizaje Automático": 10,
-          "Captura de la Información": 9
+        "legajo": 5,
+        "nombre": "María",
+        "apellido": "Fernández",
+        "notas": {
+          "Programación": 10.0,
+          "Base de Datos": 9.0,
+          "Análisis Estadístico": 8.0,
+          "Arquitecturas en la Nube": 9.0,
+          "Aprendizaje Automático": 10.0,
+          "Captura de la Información": 9.0
+        }
+      },
+      {
+        "legajo": 6,
+        "nombre": "Pedro",
+        "apellido": "Sánchez",
+        "notas": {
+          "Programación": 3.0,
+          "Base de Datos": 4.0,
+          "Análisis Estadístico": 2.0,
+          "Arquitecturas en la Nube": 5.0,
+          "Aprendizaje Automático": 3.0,
+          "Captura de la Información": 6.0
+        }
+      },
+      {
+        "legajo": 7,
+        "nombre": "Lucía",
+        "apellido": "Díaz",
+        "notas": {
+          "Programación": 7.0,
+          "Base de Datos": 8.0,
+          "Análisis Estadístico": 6.0,
+          "Arquitecturas en la Nube": 7.0,
+          "Aprendizaje Automático": 8.0,
+          "Captura de la Información": 7.0
+        }
+      },
+      {
+        "legajo": 8,
+        "nombre": "Diego",
+        "apellido": "Torres",
+        "notas": {
+          "Programación": 6.0,
+          "Base de Datos": 5.0,
+          "Análisis Estadístico": 7.0,
+          "Arquitecturas en la Nube": 4.0,
+          "Aprendizaje Automático": 6.0,
+          "Captura de la Información": 5.0
+        }
+      },
+      {
+        "legajo": 9,
+        "nombre": "Sofía",
+        "apellido": "Ramírez",
+        "notas": {
+          "Programación": 9.0,
+          "Base de Datos": 10.0,
+          "Análisis Estadístico": 9.0,
+          "Arquitecturas en la Nube": 8.0,
+          "Aprendizaje Automático": 7.0,
+          "Captura de la Información": 8.0
+        }
+      },
+      {
+        "legajo": 10,
+        "nombre": "Martín",
+        "apellido": "Herrera",
+        "notas": {
+          "Programación": 2.0,
+          "Base de Datos": 3.0,
+          "Análisis Estadístico": 4.0,
+          "Arquitecturas en la Nube": 1.0,
+          "Aprendizaje Automático": 5.0,
+          "Captura de la Información": 3.0
+        }
+      },
+      {
+        "legajo": 11,
+        "nombre": "Valentina",
+        "apellido": "Castro",
+        "notas": {
+          "Programación": 8.0,
+          "Base de Datos": 7.0,
+          "Análisis Estadístico": 8.0,
+          "Arquitecturas en la Nube": 9.0,
+          "Aprendizaje Automático": 6.0,
+          "Captura de la Información": 7.0
+        }
+      },
+      {
+        "legajo": 12,
+        "nombre": "Nicolás",
+        "apellido": "Moreno",
+        "notas": {
+          "Programación": 6.0,
+          "Base de Datos": 6.0,
+          "Análisis Estadístico": 5.0,
+          "Arquitecturas en la Nube": 7.0,
+          "Aprendizaje Automático": 4.0,
+          "Captura de la Información": 6.0
+        }
+      },
+      {
+        "legajo": 13,
+        "nombre": "Camila",
+        "apellido": "Ruiz",
+        "notas": {
+          "Programación": 7.0,
+          "Base de Datos": 8.0,
+          "Análisis Estadístico": 9.0,
+          "Arquitecturas en la Nube": 6.0,
+          "Aprendizaje Automático": 8.0,
+          "Captura de la Información": 5.0
+        }
+      },
+      {
+        "legajo": 14,
+        "nombre": "Federico",
+        "apellido": "Álvarez",
+        "notas": {
+          "Programación": 4.0,
+          "Base de Datos": 5.0,
+          "Análisis Estadístico": 3.0,
+          "Arquitecturas en la Nube": 6.0,
+          "Aprendizaje Automático": 2.0,
+          "Captura de la Información": 7.0
+        }
+      },
+      {
+        "legajo": 15,
+        "nombre": "Laura",
+        "apellido": "Méndez",
+        "notas": {
+          "Programación": 10.0,
+          "Base de Datos": 8.0,
+          "Análisis Estadístico": 9.0,
+          "Arquitecturas en la Nube": 7.0,
+          "Aprendizaje Automático": 9.0,
+          "Captura de la Información": 10.0
+        }
+      },
+      {
+        "legajo": 16,
+        "nombre": "Agustín",
+        "apellido": "Romero",
+        "notas": {
+          "Programación": 7.0,
+          "Base de Datos": 6.0,
+          "Análisis Estadístico": 8.0,
+          "Arquitecturas en la Nube": 5.0,
+          "Aprendizaje Automático": 7.0,
+          "Captura de la Información": 6.0
+        }
+      },
+      {
+        "legajo": 17,
+        "nombre": "Florencia",
+        "apellido": "Gómez",
+        "notas": {
+          "Programación": 9.0,
+          "Base de Datos": 8.0,
+          "Análisis Estadístico": 7.0,
+          "Arquitecturas en la Nube": 8.0,
+          "Aprendizaje Automático": 9.0,
+          "Captura de la Información": 8.0
+        }
+      },
+      {
+        "legajo": 18,
+        "nombre": "Ramiro",
+        "apellido": "Acosta",
+        "notas": {
+          "Programación": 3.0,
+          "Base de Datos": 2.0,
+          "Análisis Estadístico": 4.0,
+          "Arquitecturas en la Nube": 3.0,
+          "Aprendizaje Automático": 5.0,
+          "Captura de la Información": 4.0
+        }
+      },
+      {
+        "legajo": 19,
+        "nombre": "Julieta",
+        "apellido": "Peralta",
+        "notas": {
+          "Programación": 8.0,
+          "Base de Datos": 9.0,
+          "Análisis Estadístico": 7.0,
+          "Arquitecturas en la Nube": 6.0,
+          "Aprendizaje Automático": 8.0,
+          "Captura de la Información": 9.0
+        }
+      },
+      {
+        "legajo": 20,
+        "nombre": "Sebastián",
+        "apellido": "Molina",
+        "notas": {
+          "Programación": 5.0,
+          "Base de Datos": 4.0,
+          "Análisis Estadístico": 6.0,
+          "Arquitecturas en la Nube": 7.0,
+          "Aprendizaje Automático": 3.0,
+          "Captura de la Información": 5.0
+        }
+      },
+      {
+        "legajo": 21,
+        "nombre": "Daniela",
+        "apellido": "Ríos",
+        "notas": {
+          "Programación": 10.0,
+          "Base de Datos": 10.0,
+          "Análisis Estadístico": 9.0,
+          "Arquitecturas en la Nube": 8.0,
+          "Aprendizaje Automático": 10.0,
+          "Captura de la Información": 9.0
+        }
+      },
+      {
+        "legajo": 22,
+        "nombre": "Tomás",
+        "apellido": "Vega",
+        "notas": {
+          "Programación": 6.0,
+          "Base de Datos": 7.0,
+          "Análisis Estadístico": 5.0,
+          "Arquitecturas en la Nube": 4.0,
+          "Aprendizaje Automático": 6.0,
+          "Captura de la Información": 7.0
+        }
+      },
+      {
+        "legajo": 23,
+        "nombre": "Milagros",
+        "apellido": "Silva",
+        "notas": {
+          "Programación": 7.0,
+          "Base de Datos": 6.0,
+          "Análisis Estadístico": 8.0,
+          "Arquitecturas en la Nube": 7.0,
+          "Aprendizaje Automático": 5.0,
+          "Captura de la Información": 6.0
+        }
+      },
+      {
+        "legajo": 24,
+        "nombre": "Emilio",
+        "apellido": "Paz",
+        "notas": {
+          "Programación": 4.0,
+          "Base de Datos": 5.0,
+          "Análisis Estadístico": 3.0,
+          "Arquitecturas en la Nube": 2.0,
+          "Aprendizaje Automático": 4.0,
+          "Captura de la Información": 6.0
+        }
+      },
+      {
+        "legajo": 25,
+        "nombre": "Rocío",
+        "apellido": "Luna",
+        "notas": {
+          "Programación": 8.0,
+          "Base de Datos": 9.0,
+          "Análisis Estadístico": 8.0,
+          "Arquitecturas en la Nube": 7.0,
+          "Aprendizaje Automático": 7.0,
+          "Captura de la Información": 8.0
+        }
+      },
+      {
+        "legajo": 26,
+        "nombre": "Ignacio",
+        "apellido": "Cabrera",
+        "notas": {
+          "Programación": 6.0,
+          "Base de Datos": 5.0,
+          "Análisis Estadístico": 7.0,
+          "Arquitecturas en la Nube": 6.0,
+          "Aprendizaje Automático": 8.0,
+          "Captura de la Información": 5.0
+        }
+      },
+      {
+        "legajo": 27,
+        "nombre": "Abril",
+        "apellido": "Suárez",
+        "notas": {
+          "Programación": 9.0,
+          "Base de Datos": 8.0,
+          "Análisis Estadístico": 10.0,
+          "Arquitecturas en la Nube": 7.0,
+          "Aprendizaje Automático": 9.0,
+          "Captura de la Información": 8.0
+        }
+      },
+      {
+        "legajo": 28,
+        "nombre": "Gonzalo",
+        "apellido": "Medina",
+        "notas": {
+          "Programación": 3.0,
+          "Base de Datos": 4.0,
+          "Análisis Estadístico": 5.0,
+          "Arquitecturas en la Nube": 3.0,
+          "Aprendizaje Automático": 2.0,
+          "Captura de la Información": 4.0
+        }
+      },
+      {
+        "legajo": 29,
+        "nombre": "Carolina",
+        "apellido": "Bustos",
+        "notas": {
+          "Programación": 7.0,
+          "Base de Datos": 7.0,
+          "Análisis Estadístico": 6.0,
+          "Arquitecturas en la Nube": 8.0,
+          "Aprendizaje Automático": 7.0,
+          "Captura de la Información": 6.0
+        }
+      },
+      {
+        "legajo": 30,
+        "nombre": "Leandro",
+        "apellido": "Figueroa",
+        "notas": {
+          "Programación": 5.0,
+          "Base de Datos": 6.0,
+          "Análisis Estadístico": 4.0,
+          "Arquitecturas en la Nube": 5.0,
+          "Aprendizaje Automático": 6.0,
+          "Captura de la Información": 3.0
+        }
+      },
+      {
+        "legajo": 31,
+        "nombre": "Maria",
+        "apellido": "saenz",
+        "notas": {
+          "Programación": 5.0,
+          "Base de Datos": 6.0,
+          "Análisis Estadístico": 5.0,
+          "Arquitecturas en la Nube": 6.0,
+          "Aprendizaje Automático": 7.0,
+          "Captura de la Información": 7.0
         }
       }
     ];
 
-    const STORAGE_KEY = "wds_sistema_academico_interactivo_v2";
+    const STORAGE_KEY_ESTUDIANTES = "wds_sia_estudiantes_v3";
+    const STORAGE_KEY_MATERIAS = "wds_sia_materias_v3";
+
+    let materias = cargarMaterias();
     let estudiantes = cargarDatos();
 
-    function cargarDatos() {
-      const guardado = localStorage.getItem(STORAGE_KEY);
+    function copiaProfunda(obj) {
+      return JSON.parse(JSON.stringify(obj));
+    }
+
+    function cargarMaterias() {
+      const guardado = localStorage.getItem(STORAGE_KEY_MATERIAS);
       if (guardado) {
         try {
-          return JSON.parse(guardado);
-        } catch (e) {
-          return JSON.parse(JSON.stringify(DATA_INICIAL));
-        }
+          const parsed = JSON.parse(guardado);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        } catch (e) {}
       }
-      return JSON.parse(JSON.stringify(DATA_INICIAL));
+      return copiaProfunda(MATERIAS_INICIALES);
+    }
+
+    function cargarDatos() {
+      const guardado = localStorage.getItem(STORAGE_KEY_ESTUDIANTES);
+      if (guardado) {
+        try {
+          const parsed = JSON.parse(guardado);
+          if (Array.isArray(parsed)) return parsed;
+        } catch (e) {}
+      }
+      return copiaProfunda(DATA_INICIAL);
     }
 
     function guardarDatos() {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(estudiantes));
+      localStorage.setItem(STORAGE_KEY_ESTUDIANTES, JSON.stringify(estudiantes));
+      localStorage.setItem(STORAGE_KEY_MATERIAS, JSON.stringify(materias));
     }
 
     function normalizarClave(valor) {
@@ -654,38 +1080,72 @@
       return String(valor || "").trim();
     }
 
+    function obtenerMateriasDesdeTextarea() {
+      const texto = document.getElementById("materiasTemplate").value || "";
+      const lista = texto
+        .split(/\r?\n/)
+        .map(m => limpiarTexto(m))
+        .filter(m => m !== "");
+
+      const unicas = [];
+      const vistas = new Set();
+
+      lista.forEach(m => {
+        const key = normalizarClave(m);
+        if (!vistas.has(key)) {
+          vistas.add(key);
+          unicas.push(m);
+        }
+      });
+
+      return unicas.length > 0 ? unicas : copiaProfunda(materias);
+    }
+
+    function inicializarTextareaMaterias() {
+      document.getElementById("materiasTemplate").value = materias.join("\n");
+    }
+
     function proximoLegajo() {
       if (estudiantes.length === 0) return 1;
-      return Math.max(...estudiantes.map(e => Number(e.legajo))) + 1;
+      return Math.max(...estudiantes.map(e => Number(e.legajo) || 0)) + 1;
+    }
+
+    function notasValidas(est) {
+      return materias.map(m => Number(est.notas[m])).filter(n => Number.isFinite(n));
     }
 
     function promedio(est) {
-      const vals = ASIGNATURAS.map(m => Number(est.notas[m]));
+      const vals = notasValidas(est);
+      if (vals.length === 0) return 0;
       return vals.reduce((a, b) => a + b, 0) / vals.length;
     }
 
     function promedioSinAplazos(est) {
-      const vals = ASIGNATURAS.map(m => Number(est.notas[m])).filter(n => n >= 4);
+      const vals = notasValidas(est).filter(n => n >= 4);
       if (vals.length === 0) return 0;
       return vals.reduce((a, b) => a + b, 0) / vals.length;
     }
 
     function aprobadas(est) {
-      return ASIGNATURAS.filter(m => Number(est.notas[m]) >= 6).length;
+      return materias.filter(m => Number(est.notas[m]) >= 6).length;
     }
 
     function desaprobadas(est) {
-      return ASIGNATURAS.filter(m => Number(est.notas[m]) >= 4 && Number(est.notas[m]) < 6).length;
+      return materias.filter(m => Number(est.notas[m]) >= 4 && Number(est.notas[m]) < 6).length;
     }
 
     function aplazos(est) {
-      return ASIGNATURAS.filter(m => Number(est.notas[m]) < 4).length;
+      return materias.filter(m => Number(est.notas[m]) < 4).length;
     }
 
     function situacion(est) {
-      if (aprobadas(est) === ASIGNATURAS.length) return "Aprobado";
+      return aprobadas(est) === materias.length ? "Aprobado" : "Reprobado";
+    }
+
+    function nivelRiesgo(est) {
       if (aplazos(est) > 0 || promedio(est) < 6) return "Crítico";
-      return "Seguimiento";
+      if (situacion(est) === "Reprobado") return "Seguimiento";
+      return "Estable";
     }
 
     function clasificarNota(n) {
@@ -698,20 +1158,35 @@
     function clasificarSituacion(est) {
       const s = situacion(est);
       if (s === "Aprobado") return '<span class="pill pill-ok">Aprobado</span>';
-      if (s === "Seguimiento") return '<span class="pill pill-warn">Seguimiento</span>';
+      return '<span class="pill pill-bad">Reprobado</span>';
+    }
+
+    function clasificarRiesgo(est) {
+      const r = nivelRiesgo(est);
+      if (r === "Estable") return '<span class="pill pill-ok">Estable</span>';
+      if (r === "Seguimiento") return '<span class="pill pill-warn">Seguimiento</span>';
       return '<span class="pill pill-bad">Crítico</span>';
     }
 
     function promedioMateria(materia) {
       if (estudiantes.length === 0) return 0;
-      const suma = estudiantes.reduce((acc, est) => acc + Number(est.notas[materia]), 0);
-      return suma / estudiantes.length;
+      const valores = estudiantes
+        .map(est => Number(est.notas[materia]))
+        .filter(n => Number.isFinite(n));
+
+      if (valores.length === 0) return 0;
+      return valores.reduce((a, b) => a + b, 0) / valores.length;
     }
 
     function aprobacionMateria(materia) {
       if (estudiantes.length === 0) return 0;
-      const aprob = estudiantes.filter(est => Number(est.notas[materia]) >= 6).length;
-      return (aprob / estudiantes.length) * 100;
+      const valores = estudiantes
+        .map(est => Number(est.notas[materia]))
+        .filter(n => Number.isFinite(n));
+
+      if (valores.length === 0) return 0;
+      const aprob = valores.filter(n => n >= 6).length;
+      return (aprob / valores.length) * 100;
     }
 
     function promedioGeneralCurso() {
@@ -719,7 +1194,7 @@
       return estudiantes.reduce((acc, est) => acc + promedio(est), 0) / estudiantes.length;
     }
 
-    function porcentajeAprobadosGenerales() {
+    function porcentajeAprobacionGeneral() {
       if (estudiantes.length === 0) return 0;
       const aprob = estudiantes.filter(e => situacion(e) === "Aprobado").length;
       return (aprob / estudiantes.length) * 100;
@@ -731,190 +1206,176 @@
     }
 
     function materiaMayorRendimiento() {
-      if (estudiantes.length === 0) return "-";
-      return ASIGNATURAS.slice().sort((a, b) => promedioMateria(b) - promedioMateria(a))[0];
+      if (materias.length === 0) return "-";
+      return materias.slice().sort((a, b) => promedioMateria(b) - promedioMateria(a))[0];
     }
 
     function materiaMenorRendimiento() {
-      if (estudiantes.length === 0) return "-";
-      return ASIGNATURAS.slice().sort((a, b) => promedioMateria(a) - promedioMateria(b))[0];
+      if (materias.length === 0) return "-";
+      return materias.slice().sort((a, b) => promedioMateria(a) - promedioMateria(b))[0];
     }
 
-    function estudiantesEnRiesgo() {
-      return estudiantes.filter(est => situacion(est) === "Crítico");
+    function estudiantesCriticos() {
+      return estudiantes.filter(est => nivelRiesgo(est) === "Crítico");
     }
 
-    function estudiantesEnSeguimiento() {
-      return estudiantes.filter(est => situacion(est) === "Seguimiento");
+    function estudiantesSeguimiento() {
+      return estudiantes.filter(est => nivelRiesgo(est) === "Seguimiento");
+    }
+
+    function renderMateriasActivas() {
+      const cont = document.getElementById("materiasActivas");
+      cont.innerHTML = materias.map(m => `<span class="tag">${m}</span>`).join("");
     }
 
     function renderDashboard() {
       const total = estudiantes.length;
       const aprobados = estudiantes.filter(e => situacion(e) === "Aprobado").length;
-      const seguimiento = estudiantesEnSeguimiento().length;
-      const criticos = estudiantesEnRiesgo().length;
+      const reprobados = total - aprobados;
+      const criticos = estudiantesCriticos().length;
+      const seguimiento = estudiantesSeguimiento().length;
       const mejor = mejorEstudiante();
+      const mejorMateria = materiaMayorRendimiento();
       const peorMateria = materiaMenorRendimiento();
 
       document.getElementById("dashboardCards").innerHTML = `
         <div class="card">
           <div class="metric">${total}</div>
-          <h3>Estudiantes</h3>
-          <p>Total cargado para análisis.</p>
+          <h3>Estudiantes cargados</h3>
+          <p>Total de alumnos disponibles para análisis.</p>
         </div>
+
+        <div class="card">
+          <div class="metric">${materias.length}</div>
+          <h3>Materias activas</h3>
+          <p>Cantidad de materias detectadas en el sistema.</p>
+        </div>
+
         <div class="card">
           <div class="metric">${promedioGeneralCurso().toFixed(2)}</div>
           <h3>Promedio general</h3>
-          <p>Rendimiento promedio del curso.</p>
+          <p>Rendimiento promedio del curso completo.</p>
         </div>
+
         <div class="card">
-          <div class="metric">${porcentajeAprobadosGenerales().toFixed(1)}%</div>
-          <h3>Aprobación integral</h3>
+          <div class="metric">${porcentajeAprobacionGeneral().toFixed(1)}%</div>
+          <h3>Aprobación total</h3>
           <p>Estudiantes que aprobaron todas las materias.</p>
         </div>
+
         <div class="card">
-          <div class="metric">${aprobados} / ${seguimiento} / ${criticos}</div>
-          <h3>Aprobados / Seguimiento / Críticos</h3>
-          <p>Distribución de situación académica.</p>
+          <div class="metric">${aprobados} / ${reprobados}</div>
+          <h3>Aprobados / Reprobados</h3>
+          <p>Distribución general de situación académica.</p>
         </div>
+
+        <div class="card">
+          <div class="metric">${seguimiento} / ${criticos}</div>
+          <h3>Seguimiento / Críticos</h3>
+          <p>Prioridad de acompañamiento académico.</p>
+        </div>
+
         <div class="card">
           <div class="metric">${mejor ? promedio(mejor).toFixed(2) : "-"}</div>
           <h3>Mejor promedio</h3>
           <p>${mejor ? mejor.nombre + " " + mejor.apellido : "Sin datos"}</p>
         </div>
+
         <div class="card">
           <div class="metric">${peorMateria !== "-" ? promedioMateria(peorMateria).toFixed(2) : "-"}</div>
           <h3>Materia a reforzar</h3>
           <p>${peorMateria}</p>
         </div>
+
+        <div class="card">
+          <div class="metric">${mejorMateria !== "-" ? promedioMateria(mejorMateria).toFixed(2) : "-"}</div>
+          <h3>Materia fuerte</h3>
+          <p>${mejorMateria}</p>
+        </div>
       `;
-
-      renderInsightGeneral();
-    }
-
-    function renderInsightGeneral() {
-      if (estudiantes.length === 0) {
-        document.getElementById("insightGeneral").innerHTML = `
-          <h3>Lectura ejecutiva</h3>
-          <p>No hay estudiantes cargados. Descargá el template, completalo y volvé a importarlo.</p>
-        `;
-        return;
-      }
-
-      const mejorMateria = materiaMayorRendimiento();
-      const peorMateria = materiaMenorRendimiento();
-      const riesgo = estudiantesEnRiesgo().length;
 
       document.getElementById("insightGeneral").innerHTML = `
         <h3>Lectura ejecutiva</h3>
         <p>
-          La materia con mejor rendimiento es <strong>${mejorMateria}</strong>
-          (${promedioMateria(mejorMateria).toFixed(2)}). La materia prioritaria para reforzar es
-          <strong>${peorMateria}</strong> (${promedioMateria(peorMateria).toFixed(2)}).
-          Hay <strong>${riesgo}</strong> estudiante(s) en situación crítica.
+          La materia con mejor rendimiento promedio es <strong>${mejorMateria}</strong>
+          (${mejorMateria !== "-" ? promedioMateria(mejorMateria).toFixed(2) : "-"}), mientras que la materia que requiere mayor seguimiento es
+          <strong>${peorMateria}</strong> (${peorMateria !== "-" ? promedioMateria(peorMateria).toFixed(2) : "-"}).
+          Hay <strong>${criticos}</strong> estudiante(s) en situación crítica.
         </p>
       `;
     }
 
     function renderDiagnostico() {
-      const cont = document.getElementById("diagnosticoGeneral");
+      const contenedor = document.getElementById("diagnosticoGeneral");
 
-      if (estudiantes.length === 0) {
-        cont.innerHTML = `
+      if (estudiantes.length === 0 || materias.length === 0) {
+        contenedor.innerHTML = `
           <div class="result-box diagnostico-warn">
-            <h3>Sin datos cargados</h3>
-            <p>Primero importá un archivo o cargá la base de ejemplo.</p>
+            <h3>Sin datos suficientes</h3>
+            <p>Importá un archivo, cargá alumnos precargados o agregá estudiantes manualmente.</p>
           </div>
         `;
         return;
       }
 
-      const prom = promedioGeneralCurso();
-      const criticos = estudiantesEnRiesgo();
-      const seguimiento = estudiantesEnSeguimiento();
-      const peorMateria = materiaMenorRendimiento();
-      const aprobacionPeor = aprobacionMateria(peorMateria);
+      const promCurso = promedioGeneralCurso();
+      const materiaCritica = materiaMenorRendimiento();
+      const aprobacionCritica = aprobacionMateria(materiaCritica);
+      const criticos = estudiantesCriticos();
+      const seguimiento = estudiantesSeguimiento();
 
       let clase = "diagnostico-ok";
-      let titulo = "Curso estable";
+      let diagnostico = "Curso estable";
       let decision = "Mantener seguimiento general y reforzar contenidos puntuales.";
 
-      if (prom < 6 || criticos.length / estudiantes.length >= 0.35 || aprobacionPeor < 50) {
+      if (promCurso < 6 || aprobacionCritica < 50 || criticos.length / estudiantes.length >= 0.35) {
         clase = "diagnostico-bad";
-        titulo = "Intervención prioritaria";
+        diagnostico = "Intervención prioritaria";
         decision = "Reforzar la materia crítica, revisar contenidos base y acompañar estudiantes con aplazos.";
-      } else if (prom < 7 || seguimiento.length > 0 || aprobacionPeor < 70) {
+      } else if (promCurso < 7 || aprobacionCritica < 70 || seguimiento.length > 0) {
         clase = "diagnostico-warn";
-        titulo = "Seguimiento necesario";
-        decision = "Planificar actividades de refuerzo y monitorear estudiantes con promedio menor a 6.";
+        diagnostico = "Seguimiento necesario";
+        decision = "Aplicar actividades de refuerzo, recuperación y práctica guiada.";
       }
 
       const nombresCriticos = criticos
-        .slice(0, 6)
+        .slice(0, 8)
         .map(e => `${e.nombre} ${e.apellido}`)
         .join(", ") || "Sin estudiantes críticos";
 
-      cont.innerHTML = `
+      contenedor.innerHTML = `
         <div class="result-box ${clase}">
-          <h3>${titulo}</h3>
+          <h3>Diagnóstico: ${diagnostico}</h3>
+
           <p>
-            Promedio general: <strong>${prom.toFixed(2)}</strong>.
-            Materia más crítica: <strong>${peorMateria}</strong>
-            con <strong>${aprobacionPeor.toFixed(1)}%</strong> de aprobación.
+            Promedio general del curso:
+            <strong>${promCurso.toFixed(2)}</strong>.
           </p>
+
           <p>
-            Estudiantes críticos: <strong>${criticos.length}</strong>.
-            Estudiantes en seguimiento: <strong>${seguimiento.length}</strong>.
+            Materia prioritaria:
+            <strong>${materiaCritica}</strong>,
+            con promedio de
+            <strong>${promedioMateria(materiaCritica).toFixed(2)}</strong>
+            y aprobación de
+            <strong>${aprobacionCritica.toFixed(1)}%</strong>.
           </p>
+
+          <p>
+            Estudiantes críticos:
+            <strong>${criticos.length}</strong>.
+            Estudiantes en seguimiento:
+            <strong>${seguimiento.length}</strong>.
+          </p>
+
           <p>
             <strong>Decisión sugerida:</strong> ${decision}
           </p>
+
           <p>
             <strong>Priorizar:</strong> ${nombresCriticos}.
           </p>
         </div>
-      `;
-    }
-
-    function renderTablaMaterias() {
-      document.getElementById("tablaMaterias").innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>Materia</th>
-              <th>Promedio</th>
-              <th>% aprobación</th>
-              <th>Diagnóstico</th>
-              <th>Decisión sugerida</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${ASIGNATURAS.map(m => {
-              const prom = promedioMateria(m);
-              const pct = aprobacionMateria(m);
-              let lectura = "Buen desempeño";
-              let decision = "Mantener estrategia actual.";
-
-              if (pct < 50 || prom < 5.5) {
-                lectura = "Crítica";
-                decision = "Reforzar contenidos y revisar causas de bajo rendimiento.";
-              } else if (pct < 70 || prom < 6.5) {
-                lectura = "Seguimiento";
-                decision = "Aplicar actividad de recuperación o práctica guiada.";
-              }
-
-              return `
-                <tr>
-                  <td>${m}</td>
-                  <td>${prom.toFixed(2)}</td>
-                  <td>${pct.toFixed(1)}%</td>
-                  <td>${lectura}</td>
-                  <td>${decision}</td>
-                </tr>
-              `;
-            }).join("")}
-          </tbody>
-        </table>
       `;
     }
 
@@ -937,8 +1398,10 @@
               <th>Promedio</th>
               <th>Sin aplazos</th>
               <th>Aprobadas</th>
+              <th>Desaprobadas</th>
               <th>Aplazos</th>
               <th>Situación</th>
+              <th>Riesgo</th>
             </tr>
           </thead>
           <tbody>
@@ -948,9 +1411,11 @@
                 <td>${est.nombre} ${est.apellido}</td>
                 <td>${promedio(est).toFixed(2)}</td>
                 <td>${promedioSinAplazos(est).toFixed(2)}</td>
-                <td>${aprobadas(est)} / ${ASIGNATURAS.length}</td>
+                <td>${aprobadas(est)} / ${materias.length}</td>
+                <td>${desaprobadas(est)}</td>
                 <td>${aplazos(est)}</td>
                 <td>${clasificarSituacion(est)}</td>
+                <td>${clasificarRiesgo(est)}</td>
               </tr>
             `).join("")}
           </tbody>
@@ -958,65 +1423,83 @@
       `;
     }
 
-    function buscarEstudiante() {
-      const legajo = Number(document.getElementById("buscarLegajo").value);
-      const est = estudiantes.find(e => Number(e.legajo) === legajo);
-
-      if (!est) {
-        document.getElementById("resultadoBusqueda").innerHTML = `
-          <div class="result-box">No se encontró estudiante con ese legajo.</div>
+    function renderTablaMaterias() {
+      if (materias.length === 0) {
+        document.getElementById("tablaMaterias").innerHTML = `
+          <div class="result-box">No hay materias activas.</div>
         `;
         return;
       }
 
-      document.getElementById("resultadoBusqueda").innerHTML = `
-        <div class="result-box">
-          <h3>${est.nombre} ${est.apellido} · Legajo ${est.legajo}</h3>
-          <p>
-            Promedio: <strong>${promedio(est).toFixed(2)}</strong> ·
-            Sin aplazos: <strong>${promedioSinAplazos(est).toFixed(2)}</strong> ·
-            Situación: <strong>${situacion(est)}</strong>
-          </p>
-          <table>
-            <thead>
-              <tr>
-                <th>Materia</th>
-                <th>Nota</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${ASIGNATURAS.map(m => `
+      document.getElementById("tablaMaterias").innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Materia</th>
+              <th>Promedio</th>
+              <th>% aprobación</th>
+              <th>Aprobados</th>
+              <th>Seguimiento</th>
+              <th>Aplazos</th>
+              <th>Diagnóstico</th>
+              <th>Decisión sugerida</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${materias.map(m => {
+              const prom = promedioMateria(m);
+              const pct = aprobacionMateria(m);
+              const aprob = estudiantes.filter(est => Number(est.notas[m]) >= 6).length;
+              const seg = estudiantes.filter(est => Number(est.notas[m]) >= 4 && Number(est.notas[m]) < 6).length;
+              const apl = estudiantes.filter(est => Number(est.notas[m]) < 4).length;
+
+              let lectura = "Buen desempeño";
+              let decision = "Mantener estrategia actual.";
+
+              if (pct < 50 || prom < 5.5) {
+                lectura = "Crítica";
+                decision = "Reforzar contenidos y revisar causas de bajo rendimiento.";
+              } else if (pct < 70 || prom < 6.5) {
+                lectura = "Seguimiento";
+                decision = "Aplicar actividad de recuperación o práctica guiada.";
+              }
+
+              return `
                 <tr>
                   <td>${m}</td>
-                  <td>${Number(est.notas[m]).toFixed(1)}</td>
-                  <td>${clasificarNota(est.notas[m])}</td>
+                  <td>${prom.toFixed(2)}</td>
+                  <td>${pct.toFixed(1)}%</td>
+                  <td>${aprob}</td>
+                  <td>${seg}</td>
+                  <td>${apl}</td>
+                  <td>${lectura}</td>
+                  <td>${decision}</td>
                 </tr>
-              `).join("")}
-            </tbody>
-          </table>
-        </div>
+              `;
+            }).join("")}
+          </tbody>
+        </table>
       `;
     }
 
     function cargarSelectMaterias() {
-      document.getElementById("materiaDetalle").innerHTML =
-        ASIGNATURAS.map(m => `<option value="${m}">${m}</option>`).join("");
+      const select = document.getElementById("materiaDetalle");
+      select.innerHTML = materias.map(m => `<option value="${m}">${m}</option>`).join("");
     }
 
     function renderDetalleMateria() {
       const contenedor = document.getElementById("detalleMateria");
 
-      if (estudiantes.length === 0) {
+      if (estudiantes.length === 0 || materias.length === 0) {
         contenedor.innerHTML = `
-          <div class="result-box">No hay estudiantes cargados.</div>
+          <div class="result-box">No hay estudiantes o materias cargadas.</div>
         `;
         return;
       }
 
-      const materia = document.getElementById("materiaDetalle").value || ASIGNATURAS[0];
+      const materia = document.getElementById("materiaDetalle").value || materias[0];
       const lista = estudiantes.slice().sort((a, b) => Number(a.notas[materia]) - Number(b.notas[materia]));
-      const notas = lista.map(e => Number(e.notas[materia]));
+      const notas = lista.map(e => Number(e.notas[materia])).filter(n => Number.isFinite(n));
       const aprob = notas.filter(n => n >= 6).length;
       const porcentaje = notas.length > 0 ? (aprob / notas.length * 100) : 0;
 
@@ -1030,6 +1513,7 @@
             Aprobación: <strong>${porcentaje.toFixed(1)}%</strong>
           </p>
         </div>
+
         <table>
           <thead>
             <tr>
@@ -1055,6 +1539,49 @@
       `;
     }
 
+    function buscarEstudiante() {
+      const legajo = Number(document.getElementById("buscarLegajo").value);
+      const est = estudiantes.find(e => Number(e.legajo) === legajo);
+
+      if (!est) {
+        document.getElementById("resultadoBusqueda").innerHTML = `
+          <div class="result-box">No se encontró estudiante con ese legajo.</div>
+        `;
+        return;
+      }
+
+      document.getElementById("resultadoBusqueda").innerHTML = `
+        <div class="result-box">
+          <h3>${est.nombre} ${est.apellido} · Legajo ${est.legajo}</h3>
+          <p>
+            Promedio: <strong>${promedio(est).toFixed(2)}</strong> ·
+            Sin aplazos: <strong>${promedioSinAplazos(est).toFixed(2)}</strong> ·
+            Situación: <strong>${situacion(est)}</strong> ·
+            Riesgo: <strong>${nivelRiesgo(est)}</strong>
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Materia</th>
+                <th>Nota</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${materias.map(m => `
+                <tr>
+                  <td>${m}</td>
+                  <td>${Number(est.notas[m]).toFixed(1)}</td>
+                  <td>${clasificarNota(est.notas[m])}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
+      `;
+    }
+
     function mostrarFormularioManual() {
       const cont = document.getElementById("formularioManual");
       cont.classList.remove("hidden");
@@ -1074,7 +1601,7 @@
           </div>
 
           <div class="form-grid-3">
-            ${ASIGNATURAS.map((m, i) => `
+            ${materias.map((m, i) => `
               <label>
                 ${m}
                 <input type="number" id="manualNota_${i}" min="1" max="10" step="0.1" placeholder="1 a 10">
@@ -1097,13 +1624,13 @@
       }
 
       const notas = {};
-      for (let i = 0; i < ASIGNATURAS.length; i++) {
+      for (let i = 0; i < materias.length; i++) {
         const val = Number(document.getElementById(`manualNota_${i}`).value);
         if (!Number.isFinite(val) || val < 1 || val > 10) {
           alert("Todas las notas deben estar entre 1 y 10.");
           return;
         }
-        notas[ASIGNATURAS[i]] = val;
+        notas[materias[i]] = val;
       }
 
       estudiantes.push({
@@ -1119,49 +1646,65 @@
     }
 
     function descargarTemplateExcel() {
-      const headers = ["Legajo", "Nombre", "Apellido", ...ASIGNATURAS];
+      if (typeof XLSX === "undefined") {
+        alert("No se pudo cargar la librería para generar Excel. Revisá la conexión.");
+        return;
+      }
 
-      const ejemplo = [
+      const materiasTemplate = obtenerMateriasDesdeTextarea();
+      const headers = ["Legajo", "Nombre", "Apellido", ...materiasTemplate];
+
+      const filas = [
         headers,
-        [1, "Ana", "García", 8, 7, 9, 6, 10, 4],
-        [2, "Carlos", "Rodríguez", 5, 6, 7, 2, 2, 9],
-        [3, "María", "Fernández", "", "", "", "", "", ""],
-        [4, "Sofía", "Ramírez", "", "", "", "", "", ""],
-        [5, "Tomás", "Vega", "", "", "", "", "", ""]
+        [1, "Ana", "García", "", "", "", "", "", "", "", "", "", ""].slice(0, headers.length),
+        [2, "Carlos", "Rodríguez", "", "", "", "", "", "", "", "", "", ""].slice(0, headers.length),
+        [3, "María", "Fernández", "", "", "", "", "", "", "", "", "", ""].slice(0, headers.length),
+        [4, "Sofía", "Ramírez", "", "", "", "", "", "", "", "", "", ""].slice(0, headers.length),
+        [5, "Tomás", "Vega", "", "", "", "", "", "", "", "", "", ""].slice(0, headers.length)
       ];
 
       const instrucciones = [
         ["Instrucciones"],
-        ["1. No cambies los nombres de las columnas."],
-        ["2. Las notas deben estar entre 1 y 10."],
-        ["3. Se recomienda usar archivo .xlsx para evitar errores de tildes."],
-        ["4. Luego subí este archivo desde el botón Importar datos."]
+        ["1. No cambies las columnas Legajo, Nombre y Apellido."],
+        ["2. Podés cambiar, agregar o quitar columnas de materias después de Apellido."],
+        ["3. Las notas deben estar entre 1 y 10."],
+        ["4. Guardá el archivo como .xlsx."],
+        ["5. Luego subilo desde el botón Importar datos."],
+        ["6. Excel .xlsx evita errores con tildes y caracteres especiales."]
       ];
 
       const wb = XLSX.utils.book_new();
-      const wsNotas = XLSX.utils.aoa_to_sheet(ejemplo);
+      const wsNotas = XLSX.utils.aoa_to_sheet(filas);
       const wsInfo = XLSX.utils.aoa_to_sheet(instrucciones);
+      const wsMaterias = XLSX.utils.aoa_to_sheet([["Materias sugeridas"], ...materiasTemplate.map(m => [m])]);
 
       wsNotas["!cols"] = [
         { wch: 10 },
         { wch: 18 },
         { wch: 18 },
-        ...ASIGNATURAS.map(() => ({ wch: 24 }))
+        ...materiasTemplate.map(() => ({ wch: 26 }))
       ];
 
       XLSX.utils.book_append_sheet(wb, wsNotas, "Notas");
+      XLSX.utils.book_append_sheet(wb, wsMaterias, "Materias");
       XLSX.utils.book_append_sheet(wb, wsInfo, "Instrucciones");
 
-      XLSX.writeFile(wb, "template_sistema_academico.xlsx");
+      XLSX.writeFile(wb, "template_sistema_academico_editable.xlsx");
     }
 
     function exportarExcel() {
-      const headers = ["Legajo", "Nombre", "Apellido", ...ASIGNATURAS];
+      if (typeof XLSX === "undefined") {
+        alert("No se pudo cargar la librería para exportar Excel. Revisá la conexión.");
+        return;
+      }
+
+      const headers = ["Legajo", "Nombre", "Apellido", ...materias];
+
       const rows = estudiantes.map(e => [
         e.legajo,
         e.nombre,
         e.apellido,
-        ...ASIGNATURAS.map(m => e.notas[m])
+        ...materias.map(m => e.notas[m])
       ]);
 
       const wb = XLSX.utils.book_new();
@@ -1171,29 +1714,50 @@
         { wch: 10 },
         { wch: 18 },
         { wch: 18 },
-        ...ASIGNATURAS.map(() => ({ wch: 24 }))
+        ...materias.map(() => ({ wch: 26 }))
       ];
 
+      const diagnostico = [
+        ["Indicador", "Valor"],
+        ["Estudiantes", estudiantes.length],
+        ["Materias", materias.length],
+        ["Promedio general", promedioGeneralCurso().toFixed(2)],
+        ["Aprobación total", porcentajeAprobacionGeneral().toFixed(1) + "%"],
+        ["Materia a reforzar", materiaMenorRendimiento()],
+        ["Estudiantes críticos", estudiantesCriticos().length],
+        ["Estudiantes en seguimiento", estudiantesSeguimiento().length]
+      ];
+
+      const wsDiag = XLSX.utils.aoa_to_sheet(diagnostico);
+
       XLSX.utils.book_append_sheet(wb, ws, "Estudiantes");
+      XLSX.utils.book_append_sheet(wb, wsDiag, "Diagnóstico");
+
       XLSX.writeFile(wb, "estudiantes_actualizado.xlsx");
     }
 
     function exportarCSV() {
-      const headers = ["Legajo", "Nombre", "Apellido", ...ASIGNATURAS];
+      const headers = ["Legajo", "Nombre", "Apellido", ...materias];
+
       const rows = estudiantes.map(e => [
         e.legajo,
         e.nombre,
         e.apellido,
-        ...ASIGNATURAS.map(m => e.notas[m])
+        ...materias.map(m => e.notas[m])
       ]);
 
       const separador = ";";
-      const csvEscape = valor => `"${String(valor ?? "").replaceAll('"', '""')}"`;
+
+      const csvEscape = valor => {
+        return `"${String(valor ?? "").replaceAll('"', '""')}"`;
+      };
+
       const contenido = [headers, ...rows]
         .map(r => r.map(csvEscape).join(separador))
         .join("\n");
 
       const csv = "\uFEFFsep=;\n" + contenido;
+
       const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
 
@@ -1203,6 +1767,12 @@
       a.click();
 
       URL.revokeObjectURL(url);
+    }
+
+    function detectarSeparador(linea) {
+      const puntoYComa = (linea.match(/;/g) || []).length;
+      const coma = (linea.match(/,/g) || []).length;
+      return puntoYComa > coma ? ";" : ",";
     }
 
     function parsearLineaCSV(linea, separador) {
@@ -1231,12 +1801,6 @@
       return resultado;
     }
 
-    function detectarSeparador(linea) {
-      const puntoYComa = (linea.match(/;/g) || []).length;
-      const coma = (linea.match(/,/g) || []).length;
-      return puntoYComa > coma ? ";" : ",";
-    }
-
     function leerCSV(texto) {
       let limpio = texto.replace(/^\uFEFF/, "");
       let lineas = limpio.split(/\r?\n/).filter(l => l.trim() !== "");
@@ -1258,37 +1822,84 @@
       });
     }
 
+    function detectarColumnas(filas) {
+      if (!filas || filas.length === 0) return null;
+
+      const columnas = Object.keys(filas[0]);
+
+      const aliasLegajo = ["legajo", "id", "numero", "nrolegajo"];
+      const aliasNombre = ["nombre", "nombres"];
+      const aliasApellido = ["apellido", "apellidos"];
+
+      let colLegajo = "";
+      let colNombre = "";
+      let colApellido = "";
+
+      columnas.forEach(col => {
+        const key = normalizarClave(col);
+        if (aliasLegajo.includes(key)) colLegajo = col;
+        if (aliasNombre.includes(key)) colNombre = col;
+        if (aliasApellido.includes(key)) colApellido = col;
+      });
+
+      const columnasBase = new Set([
+        normalizarClave(colLegajo),
+        normalizarClave(colNombre),
+        normalizarClave(colApellido)
+      ]);
+
+      const materiasDetectadas = columnas
+        .filter(col => !columnasBase.has(normalizarClave(col)))
+        .map(col => limpiarTexto(col))
+        .filter(col => col !== "");
+
+      return {
+        colLegajo,
+        colNombre,
+        colApellido,
+        materiasDetectadas
+      };
+    }
+
     function filasAEstudiantes(filas) {
       const errores = [];
       const convertidos = [];
 
-      const alias = {
-        legajo: ["legajo", "id", "numero", "nrolegajo"],
-        nombre: ["nombre", "nombres"],
-        apellido: ["apellido", "apellidos"]
-      };
+      const columnas = detectarColumnas(filas);
 
-      function buscarValor(fila, nombresPosibles) {
-        const mapa = {};
-        Object.keys(fila).forEach(k => {
-          mapa[normalizarClave(k)] = fila[k];
-        });
-
-        for (const nombre of nombresPosibles) {
-          const key = normalizarClave(nombre);
-          if (mapa[key] !== undefined && mapa[key] !== null && String(mapa[key]).trim() !== "") {
-            return mapa[key];
-          }
-        }
-
-        return "";
+      if (!columnas) {
+        return {
+          convertidos: [],
+          errores: ["El archivo no contiene filas válidas."]
+        };
       }
+
+      if (!columnas.colNombre || !columnas.colApellido) {
+        return {
+          convertidos: [],
+          errores: ["El archivo debe tener columnas Nombre y Apellido."]
+        };
+      }
+
+      if (!columnas.materiasDetectadas || columnas.materiasDetectadas.length === 0) {
+        return {
+          convertidos: [],
+          errores: ["El archivo debe tener al menos una materia después de Apellido."]
+        };
+      }
+
+      const nuevasMaterias = columnas.materiasDetectadas;
 
       filas.forEach((fila, idx) => {
         const filaNumero = idx + 2;
-        const nombre = limpiarTexto(buscarValor(fila, alias.nombre));
-        const apellido = limpiarTexto(buscarValor(fila, alias.apellido));
-        let legajo = Number(buscarValor(fila, alias.legajo));
+
+        const nombre = limpiarTexto(fila[columnas.colNombre]);
+        const apellido = limpiarTexto(fila[columnas.colApellido]);
+
+        const filaVacia = Object.values(fila).every(v => limpiarTexto(v) === "");
+        if (filaVacia) return;
+
+        let legajo = Number(fila[columnas.colLegajo]);
 
         if (!Number.isFinite(legajo) || legajo <= 0) {
           legajo = idx + 1;
@@ -1301,8 +1912,8 @@
 
         const notas = {};
 
-        for (const materia of ASIGNATURAS) {
-          const valor = buscarValor(fila, [materia]);
+        for (const materia of nuevasMaterias) {
+          const valor = fila[materia];
           const nota = Number(String(valor).replace(",", "."));
 
           if (!Number.isFinite(nota) || nota < 1 || nota > 10) {
@@ -1313,10 +1924,19 @@
           notas[materia] = nota;
         }
 
-        convertidos.push({ legajo, nombre, apellido, notas });
+        convertidos.push({
+          legajo,
+          nombre,
+          apellido,
+          notas
+        });
       });
 
-      return { convertidos, errores };
+      return {
+        convertidos,
+        errores,
+        nuevasMaterias
+      };
     }
 
     function importarArchivoEstudiantes() {
@@ -1353,7 +1973,7 @@
             return;
           }
 
-          const { convertidos, errores } = filasAEstudiantes(filas);
+          const { convertidos, errores, nuevasMaterias } = filasAEstudiantes(filas);
 
           if (errores.length > 0) {
             estado.innerHTML = `
@@ -1369,13 +1989,16 @@
             return;
           }
 
+          materias = nuevasMaterias;
           estudiantes = convertidos;
+
           guardarDatos();
+          inicializarTextareaMaterias();
           renderAll();
 
           estado.innerHTML = `
             <strong>Archivo importado correctamente.</strong>
-            Se cargaron ${convertidos.length} estudiantes.
+            Se cargaron ${convertidos.length} estudiantes y ${materias.length} materias.
           `;
         } catch (error) {
           estado.innerHTML = "Error al leer el archivo. Revisá columnas, formato y valores de notas.";
@@ -1390,31 +2013,41 @@
     }
 
     function usarBaseInicial() {
-      if (!confirm("¿Cargar la base de ejemplo? Esto reemplazará los datos actuales guardados.")) return;
-      estudiantes = JSON.parse(JSON.stringify(DATA_INICIAL));
+      if (!confirm("¿Cargar los alumnos precargados? Esto reemplazará los datos actuales guardados.")) return;
+
+      materias = copiaProfunda(MATERIAS_INICIALES);
+      estudiantes = copiaProfunda(DATA_INICIAL);
+
       guardarDatos();
+      inicializarTextareaMaterias();
       renderAll();
+
       document.getElementById("estadoImportacion").innerHTML =
-        "<strong>Base de ejemplo cargada.</strong>";
+        "<strong>Alumnos precargados cargados correctamente.</strong>";
     }
 
     function iniciarBaseVacia() {
       if (!confirm("¿Comenzar con una base vacía? Esto borrará los datos actuales guardados.")) return;
+
+      materias = obtenerMateriasDesdeTextarea();
       estudiantes = [];
+
       guardarDatos();
       renderAll();
+
       document.getElementById("estadoImportacion").innerHTML =
         "<strong>Base vacía creada.</strong> Ahora podés importar un archivo o cargar estudiantes manualmente.";
     }
 
-    function reiniciarDatos() {
-      localStorage.removeItem(STORAGE_KEY);
-      estudiantes = JSON.parse(JSON.stringify(DATA_INICIAL));
-      guardarDatos();
-      renderAll();
-    }
-
     function barChart(labels, values, options = {}) {
+      if (!values || values.length === 0) {
+        return `
+          <div style="color:#07111f; padding:15px;">
+            No hay datos para graficar.
+          </div>
+        `;
+      }
+
       const width = 720;
       const height = 360;
       const pad = 58;
@@ -1462,32 +2095,32 @@
     }
 
     function renderGraficos() {
-      const etiquetas = ASIGNATURAS.map(m =>
+      const etiquetas = materias.map(m =>
         m.replace("Análisis ", "An. ")
          .replace("Arquitecturas en la Nube", "Arq. Nube")
          .replace("Aprendizaje Automático", "Ap. Auto")
          .replace("Captura de la Información", "Cap. Info")
       );
 
-      const proms = ASIGNATURAS.map(m => promedioMateria(m));
-      const pcts = ASIGNATURAS.map(m => aprobacionMateria(m));
+      const proms = materias.map(m => promedioMateria(m));
+      const pcts = materias.map(m => aprobacionMateria(m));
 
       document.getElementById("graficoPromedios").innerHTML = barChart(etiquetas, proms, {
         max: 10,
         threshold: 6,
-        title: "Promedio por asignatura"
+        title: "Promedio por materia"
       });
 
       document.getElementById("graficoAprobacion").innerHTML = barChart(etiquetas, pcts, {
         max: 100,
         threshold: 60,
         suffix: "%",
-        title: "% de aprobación por asignatura"
+        title: "% de aprobación por materia"
       });
 
       const aprob = estudiantes.filter(e => situacion(e) === "Aprobado").length;
-      const seguimiento = estudiantes.filter(e => situacion(e) === "Seguimiento").length;
-      const criticos = estudiantes.filter(e => situacion(e) === "Crítico").length;
+      const seguimiento = estudiantes.filter(e => nivelRiesgo(e) === "Seguimiento").length;
+      const criticos = estudiantes.filter(e => nivelRiesgo(e) === "Crítico").length;
       const total = estudiantes.length || 1;
 
       const pctA = aprob / total * 100;
@@ -1519,15 +2152,17 @@
     }
 
     function renderAll() {
-      renderDiagnostico();
+      renderMateriasActivas();
       renderDashboard();
-      renderTablaMaterias();
+      renderDiagnostico();
       renderTablaIndividual();
+      renderTablaMaterias();
       cargarSelectMaterias();
       renderDetalleMateria();
       renderGraficos();
     }
 
+    inicializarTextareaMaterias();
     renderAll();
   </script>
 
