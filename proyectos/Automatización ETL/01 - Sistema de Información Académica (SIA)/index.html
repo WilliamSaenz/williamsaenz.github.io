@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es" class="notranslate">
 <head>
   <meta charset="UTF-8">
@@ -10,7 +11,7 @@
     :root {
       --bg1: #07111f;
       --bg2: #0b1f33;
-      --panel: rgba(16, 29, 47, 0.92);
+      --panel: rgba(16, 29, 47, 0.94);
       --panel2: rgba(7, 17, 31, 0.78);
       --line: rgba(255,255,255,0.12);
       --text: #f8fafc;
@@ -29,8 +30,11 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 35%),
+        linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
       color: var(--text);
+      min-height: 100vh;
     }
 
     header {
@@ -57,7 +61,7 @@
     }
 
     main {
-      max-width: 1120px;
+      max-width: 1180px;
       margin: 35px auto;
       padding: 0 20px 40px;
     }
@@ -88,15 +92,11 @@
       line-height: 1.6;
     }
 
-    .tag {
-      display: inline-block;
-      background: rgba(56,189,248,0.12);
-      color: var(--text);
-      border: 1px solid rgba(56,189,248,0.35);
-      padding: 8px 12px;
-      margin: 5px;
-      border-radius: 999px;
-      font-size: 14px;
+    .quickbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
     }
 
     .button {
@@ -108,7 +108,6 @@
       border-radius: 10px;
       text-decoration: none;
       font-weight: bold;
-      margin: 7px 7px 7px 0;
       cursor: pointer;
       transition: all 0.25s ease;
     }
@@ -136,6 +135,16 @@
 
     .danger:hover {
       background: var(--danger);
+      color: var(--bg1);
+    }
+
+    .green {
+      border-color: var(--ok);
+      color: var(--ok);
+    }
+
+    .green:hover {
+      background: var(--ok);
       color: var(--bg1);
     }
 
@@ -175,6 +184,17 @@
 
     .small {
       color: var(--muted);
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(56,189,248,0.12);
+      color: var(--text);
+      border: 1px solid rgba(56,189,248,0.35);
+      padding: 8px 12px;
+      margin: 5px 5px 5px 0;
+      border-radius: 999px;
       font-size: 14px;
     }
 
@@ -254,6 +274,18 @@
       margin-top: 16px;
     }
 
+    .diagnostico-ok {
+      border-left: 5px solid var(--ok);
+    }
+
+    .diagnostico-warn {
+      border-left: 5px solid var(--warn);
+    }
+
+    .diagnostico-bad {
+      border-left: 5px solid var(--danger);
+    }
+
     .chart-wrap {
       background: #ffffff;
       border-radius: 14px;
@@ -282,6 +314,10 @@
       margin-top: 10px;
     }
 
+    .hidden {
+      display: none;
+    }
+
     footer {
       text-align: center;
       color: var(--muted);
@@ -300,7 +336,9 @@
       }
     }
   </style>
+
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
 </head>
 
 <body>
@@ -309,259 +347,196 @@
     <div class="terminal">&gt; cargando sistema académico interactivo...</div>
     <h1>01 · Sistema Académico Interactivo</h1>
     <p class="subtitle">
-      Prototipo web para registrar estudiantes, analizar rendimiento académico y visualizar indicadores del curso.
+      Cargar datos, diagnosticar rendimiento académico y tomar decisiones con indicadores claros.
     </p>
+
+```
+<div class="quickbar">
+  <a class="button gold" href="#acciones">Acciones rápidas</a>
+  <a class="button" href="#diagnostico">Diagnóstico</a>
+  <a class="button" href="#dashboard">Dashboard</a>
+  <a class="button" href="#materias">Materias</a>
+  <a class="button" href="#estudiantes">Estudiantes</a>
+  <a class="button" href="#graficos">Gráficos</a>
+  <a class="button" href="#navegacion">Volver</a>
+</div>
+```
+
   </header>
 
   <main>
 
-    <section>
-      <h2>Resumen ejecutivo</h2>
+```
+<section id="acciones">
+  <h2>Acciones rápidas</h2>
+  <p>
+    Usá esta zona para descargar una plantilla, cargar datos, exportar resultados
+    y reiniciar el sistema. La opción recomendada es trabajar con Excel .xlsx.
+  </p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>1 · Descargar plantilla Excel</h3>
       <p>
-        Sistema académico interactivo inspirado en un proyecto desarrollado en Python.
-        Permite cargar estudiantes, calcular promedios, buscar por legajo, evaluar la situación académica,
-        comparar materias y visualizar gráficos de rendimiento.
+        Genera un archivo .xlsx listo para completar con estudiantes y notas.
+        Esta opción evita problemas con tildes y caracteres especiales.
       </p>
+      <button class="button green" type="button" onclick="descargarTemplateExcel()">
+        Descargar template Excel
+      </button>
+    </div>
 
-      <span class="tag">Python traducido a Web</span>
-      <span class="tag">HTML</span>
-      <span class="tag">CSS</span>
-      <span class="tag">JavaScript</span>
-      <span class="tag">CSV</span>
-      <span class="tag">POO conceptual</span>
-      <span class="tag">Gestión académica</span>
-    </section>
-
-    <section>
-      <h2>Panel de botones</h2>
-      <a class="button gold" href="#datos">Base de datos</a>
-      <a class="button gold" href="#dashboard">Dashboard</a>
-      <a class="button" href="#carga">Ingresar estudiantes</a>
-      <a class="button" href="#buscar">Buscar por legajo</a>
-      <a class="button" href="#individual">Promedios individuales</a>
-      <a class="button" href="#materias">Promedio por materia</a>
-      <a class="button" href="#detalle">Detalle por materia</a>
-      <a class="button" href="#graficos">Gráficos principales</a>
-      <a class="button gold" href="#decisiones">Conclusiones prácticas</a>
-    </section>
-
-
-    <section id="datos">
-      <h2>Base de datos del curso</h2>
+    <div class="card">
+      <h3>2 · Importar archivo</h3>
       <p>
-        Elegí cómo querés iniciar el análisis: usar una base de ejemplo, comenzar desde cero
-        o importar tu propio archivo de estudiantes en formato CSV o Excel.
+        Subí el Excel completado o un CSV. El sistema validará nombres, legajos y notas entre 1 y 10.
       </p>
+      <input type="file" id="archivoEstudiantes" accept=".xlsx,.xls,.csv">
+      <button class="button gold" type="button" onclick="importarArchivoEstudiantes()">
+        Importar datos
+      </button>
+      <div id="estadoImportacion" class="result-box"></div>
+    </div>
 
-      <div class="grid">
-        <div class="card">
-          <h3>Usar base de ejemplo</h3>
-          <p>
-            Carga estudiantes de prueba para recorrer el sistema, ver indicadores y validar el funcionamiento.
-          </p>
-          <button class="button gold" type="button" onclick="usarBaseInicial()">Cargar datos de ejemplo</button>
-        </div>
-
-        <div class="card">
-          <h3>Comenzar desde cero</h3>
-          <p>
-            Limpia la base local y permite que el docente cargue estudiantes manualmente desde el formulario.
-          </p>
-          <button class="button danger" type="button" onclick="iniciarBaseVacia()">Empezar vacío</button>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:18px;">
-        <h3>Importar archivo CSV o Excel</h3>
-        <p>
-          El archivo debe incluir las columnas: Legajo, Nombre, Apellido, Programación,
-          Base de Datos, Análisis Estadístico, Arquitecturas en la Nube,
-          Aprendizaje Automático y Captura de la Información.
-        </p>
-
-        <div class="form-grid">
-          <label>
-            Seleccionar archivo
-            <input type="file" id="archivoEstudiantes" accept=".csv,.xlsx,.xls">
-          </label>
-          <label>
-            Acción
-            <button class="button gold" type="button" onclick="importarArchivoEstudiantes()">Importar archivo</button>
-          </label>
-        </div>
-
-        <p class="note">
-          CSV funciona directamente. Para Excel, la página usa una librería JavaScript externa
-          para leer archivos .xlsx desde el navegador.
-        </p>
-
-        <div id="estadoImportacion" class="result-box"></div>
-      </div>
-    </section>
-
-    <section id="dashboard">
-      <h2>Dashboard del curso</h2>
-      <div id="dashboardCards" class="grid-3"></div>
-      <div id="insightGeneral" class="result-box"></div>
-    </section>
-
-    <section id="carga">
-      <h2>Ingreso de estudiantes</h2>
+    <div class="card">
+      <h3>3 · Exportar resultados</h3>
       <p>
-        Ingresá la cantidad de estudiantes que querés cargar. El sistema genera los formularios,
-        valida notas entre 1 y 10 y asigna legajos automáticamente.
+        Descargá la base actual en Excel o CSV corregido para abrir en Excel sin romper tildes.
       </p>
+      <button class="button green" type="button" onclick="exportarExcel()">
+        Exportar Excel
+      </button>
+      <button class="button" type="button" onclick="exportarCSV()">
+        Exportar CSV compatible
+      </button>
+    </div>
 
-      <div class="form-grid">
-        <label>
-          Cantidad de estudiantes a cargar
-          <input type="number" id="cantidadNuevos" min="1" max="20" value="1">
-        </label>
-        <label>
-          Acción
-          <button class="button gold" type="button" onclick="prepararCarga()">Preparar carga</button>
-        </label>
-      </div>
+    <div class="card">
+      <h3>4 · Base del sistema</h3>
+      <p>
+        Cargá datos de ejemplo o comenzá desde cero. Ideal para probar el sistema sin tocar archivos.
+      </p>
+      <button class="button gold" type="button" onclick="usarBaseInicial()">
+        Cargar ejemplo
+      </button>
+      <button class="button danger" type="button" onclick="iniciarBaseVacia()">
+        Empezar vacío
+      </button>
+    </div>
+  </div>
+</section>
 
-      <div id="formulariosCarga"></div>
-    </section>
+<section id="diagnostico">
+  <h2>Diagnóstico automático</h2>
+  <p>
+    Lectura rápida para tomar decisiones: materias críticas, estudiantes en riesgo
+    y prioridad de intervención.
+  </p>
+  <div id="diagnosticoGeneral"></div>
+</section>
 
-    <section id="buscar">
-      <h2>Buscar estudiante por legajo</h2>
+<section id="dashboard">
+  <h2>Dashboard del curso</h2>
+  <div id="dashboardCards" class="grid-3"></div>
+  <div id="insightGeneral" class="result-box"></div>
+</section>
+
+<section id="materias">
+  <h2>Análisis por materia</h2>
+  <p>
+    Permite detectar materias fuertes, materias críticas y porcentaje de aprobación.
+  </p>
+  <div id="tablaMaterias"></div>
+</section>
+
+<section id="estudiantes">
+  <h2>Seguimiento de estudiantes</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Buscar por legajo</h3>
       <div class="form-grid">
         <label>
           Legajo
           <input type="number" id="buscarLegajo" placeholder="Ejemplo: 1">
         </label>
         <label>
-          Consulta
-          <button class="button gold" type="button" onclick="buscarEstudiante()">Buscar estudiante</button>
+          Acción
+          <button class="button gold" type="button" onclick="buscarEstudiante()">Buscar</button>
         </label>
       </div>
       <div id="resultadoBusqueda"></div>
-    </section>
+    </div>
 
-    <section id="individual">
-      <h2>Promedios individuales</h2>
-      <p>
-        Tabla de seguimiento estudiante por estudiante: promedio con aplazos, promedio sin aplazos,
-        cantidad de materias aprobadas y situación académica.
+    <div class="card">
+      <h3>Agregar estudiante manualmente</h3>
+      <p class="small">
+        Útil para cargar un caso puntual sin usar Excel.
       </p>
-      <div id="tablaIndividual"></div>
-    </section>
+      <button class="button gold" type="button" onclick="mostrarFormularioManual()">
+        Abrir formulario manual
+      </button>
+    </div>
+  </div>
 
-    <section id="materias">
-      <h2>Promedio y aprobación por materia</h2>
-      <p>
-        Comparación del rendimiento por asignatura para detectar fortalezas, materias críticas
-        y áreas donde conviene reforzar acompañamiento académico.
-      </p>
-      <div id="tablaMaterias"></div>
-    </section>
+  <div id="formularioManual" class="hidden"></div>
 
-    <section id="detalle">
-      <h2>Detalle por materia</h2>
-      <div class="form-grid">
-        <label>
-          Seleccioná una materia
-          <select id="materiaDetalle"></select>
-        </label>
-        <label>
-          Acción
-          <button class="button gold" type="button" onclick="renderDetalleMateria()">Ver detalle</button>
-        </label>
-      </div>
-      <div id="detalleMateria"></div>
-    </section>
+  <h3>Tabla general</h3>
+  <div id="tablaIndividual"></div>
+</section>
 
-    <section id="graficos">
-      <h2>Gráficos principales</h2>
+<section id="detalle">
+  <h2>Detalle por materia</h2>
+  <div class="form-grid">
+    <label>
+      Seleccioná una materia
+      <select id="materiaDetalle"></select>
+    </label>
+    <label>
+      Acción
+      <button class="button gold" type="button" onclick="renderDetalleMateria()">Ver detalle</button>
+    </label>
+  </div>
+  <div id="detalleMateria"></div>
+</section>
 
-      <div class="grid">
-        <div class="card">
-          <h3>Promedio por asignatura</h3>
-          <p class="small">
-            Permite ver qué materias concentran mejor o menor rendimiento promedio.
-          </p>
-          <div id="graficoPromedios" class="chart-wrap"></div>
-        </div>
+<section id="graficos">
+  <h2>Gráficos principales</h2>
 
-        <div class="card">
-          <h3>% aprobación por asignatura</h3>
-          <p class="small">
-            Permite detectar materias con mayor riesgo académico.
-          </p>
-          <div id="graficoAprobacion" class="chart-wrap"></div>
-        </div>
+  <div class="grid">
+    <div class="card">
+      <h3>Promedio por asignatura</h3>
+      <p class="small">Detecta materias con mayor o menor rendimiento promedio.</p>
+      <div id="graficoPromedios" class="chart-wrap"></div>
+    </div>
 
-        <div class="card">
-          <h3>Distribución académica</h3>
-          <p class="small">
-            Resume estudiantes aprobados y reprobados según criterio de aprobación total.
-          </p>
-          <div id="graficoSituacion"></div>
-        </div>
+    <div class="card">
+      <h3>% aprobación por asignatura</h3>
+      <p class="small">Detecta materias con mayor riesgo académico.</p>
+      <div id="graficoAprobacion" class="chart-wrap"></div>
+    </div>
 
-        <div class="card">
-          <h3>Ranking de promedios</h3>
-          <p class="small">
-            Ordena estudiantes por rendimiento general y permite detectar extremos.
-          </p>
-          <div id="graficoRanking" class="chart-wrap"></div>
-        </div>
-      </div>
-    </section>
+    <div class="card">
+      <h3>Distribución académica</h3>
+      <p class="small">Resume estudiantes aprobados, en seguimiento y críticos.</p>
+      <div id="graficoSituacion"></div>
+    </div>
 
-    <section id="decisiones">
-      <h2>Conclusiones prácticas</h2>
-      <div class="grid">
-        <div class="card">
-          <h3>Detectar materias críticas</h3>
-          <p>
-            El promedio y el porcentaje de aprobación por materia ayudan a decidir dónde reforzar clases,
-            tutorías o materiales de apoyo.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Priorizar estudiantes en riesgo</h3>
-          <p>
-            La búsqueda por legajo y los promedios individuales permiten identificar alumnos con aplazos
-            o varias materias desaprobadas.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Medir desempeño del curso</h3>
-          <p>
-            El dashboard resume total de estudiantes, aprobación general, mejor estudiante y materia con
-            mayor o menor rendimiento.
-          </p>
-        </div>
-        <div class="card">
-          <h3>Convertir notas en decisiones</h3>
-          <p>
-            El sistema transforma un archivo de notas en indicadores claros para gestión académica,
-            seguimiento docente y mejora continua.
-          </p>
-        </div>
-      </div>
-    </section>
+    <div class="card">
+      <h3>Ranking de promedios</h3>
+      <p class="small">Muestra los mejores promedios generales.</p>
+      <div id="graficoRanking" class="chart-wrap"></div>
+    </div>
+  </div>
+</section>
 
-    <section>
-      <h2>Acciones de datos</h2>
-      <button class="button gold" type="button" onclick="exportarCSV()">Exportar CSV actualizado</button>
-      <button class="button danger" type="button" onclick="reiniciarDatos()">Restaurar base inicial</button>
-      <p class="note">
-        Nota: esta versión funciona como prototipo web estático. Los datos nuevos se guardan en el navegador
-        mediante almacenamiento local. Para uso institucional multiusuario se necesitaría una base de datos.
-      </p>
-    </section>
-
-    <section>
-      <h2>Navegación</h2>
-      <a class="button" href="../">Volver a Automatización ETL</a>
-      <a class="button" href="../../">Volver a proyectos</a>
-      <a class="button" href="../../../">Volver al portafolio principal</a>
-    </section>
+<section id="navegacion">
+  <h2>Navegación</h2>
+  <a class="button" href="../">Volver a Automatización ETL</a>
+  <a class="button" href="../../">Volver a proyectos</a>
+  <a class="button" href="../../../">Volver al portafolio principal</a>
+</section>
+```
 
   </main>
 
@@ -580,412 +555,74 @@
     ];
 
     const DATA_INICIAL = [
-  {
-    "legajo": 1,
-    "nombre": "Ana",
-    "apellido": "García",
-    "notas": {
-      "Programación": 8.0,
-      "Base de Datos": 7.0,
-      "Análisis Estadístico": 9.0,
-      "Arquitecturas en la Nube": 6.0,
-      "Aprendizaje Automático": 10.0,
-      "Captura de la Información": 4.0
-    }
-  },
-  {
-    "legajo": 2,
-    "nombre": "Carlos",
-    "apellido": "Rodríguez",
-    "notas": {
-      "Programación": 5.0,
-      "Base de Datos": 6.0,
-      "Análisis Estadístico": 7.0,
-      "Arquitecturas en la Nube": 2.0,
-      "Aprendizaje Automático": 2.0,
-      "Captura de la Información": 9.0
-    }
-  },
-  {
-    "legajo": 3,
-    "nombre": "Elena",
-    "apellido": "Martínez",
-    "notas": {
-      "Programación": 9.0,
-      "Base de Datos": 9.0,
-      "Análisis Estadístico": 8.0,
-      "Arquitecturas en la Nube": 2.0,
-      "Aprendizaje Automático": 6.0,
-      "Captura de la Información": 7.0
-    }
-  },
-  {
-    "legajo": 4,
-    "nombre": "Juan",
-    "apellido": "López",
-    "notas": {
-      "Programación": 4.0,
-      "Base de Datos": 3.0,
-      "Análisis Estadístico": 5.0,
-      "Arquitecturas en la Nube": 6.0,
-      "Aprendizaje Automático": 7.0,
-      "Captura de la Información": 8.0
-    }
-  },
-  {
-    "legajo": 5,
-    "nombre": "María",
-    "apellido": "Fernández",
-    "notas": {
-      "Programación": 10.0,
-      "Base de Datos": 9.0,
-      "Análisis Estadístico": 8.0,
-      "Arquitecturas en la Nube": 9.0,
-      "Aprendizaje Automático": 10.0,
-      "Captura de la Información": 9.0
-    }
-  },
-  {
-    "legajo": 6,
-    "nombre": "Pedro",
-    "apellido": "Sánchez",
-    "notas": {
-      "Programación": 3.0,
-      "Base de Datos": 4.0,
-      "Análisis Estadístico": 2.0,
-      "Arquitecturas en la Nube": 5.0,
-      "Aprendizaje Automático": 3.0,
-      "Captura de la Información": 6.0
-    }
-  },
-  {
-    "legajo": 7,
-    "nombre": "Lucía",
-    "apellido": "Díaz",
-    "notas": {
-      "Programación": 7.0,
-      "Base de Datos": 8.0,
-      "Análisis Estadístico": 6.0,
-      "Arquitecturas en la Nube": 7.0,
-      "Aprendizaje Automático": 8.0,
-      "Captura de la Información": 7.0
-    }
-  },
-  {
-    "legajo": 8,
-    "nombre": "Diego",
-    "apellido": "Torres",
-    "notas": {
-      "Programación": 6.0,
-      "Base de Datos": 5.0,
-      "Análisis Estadístico": 7.0,
-      "Arquitecturas en la Nube": 4.0,
-      "Aprendizaje Automático": 6.0,
-      "Captura de la Información": 5.0
-    }
-  },
-  {
-    "legajo": 9,
-    "nombre": "Sofía",
-    "apellido": "Ramírez",
-    "notas": {
-      "Programación": 9.0,
-      "Base de Datos": 10.0,
-      "Análisis Estadístico": 9.0,
-      "Arquitecturas en la Nube": 8.0,
-      "Aprendizaje Automático": 7.0,
-      "Captura de la Información": 8.0
-    }
-  },
-  {
-    "legajo": 10,
-    "nombre": "Martín",
-    "apellido": "Herrera",
-    "notas": {
-      "Programación": 2.0,
-      "Base de Datos": 3.0,
-      "Análisis Estadístico": 4.0,
-      "Arquitecturas en la Nube": 1.0,
-      "Aprendizaje Automático": 5.0,
-      "Captura de la Información": 3.0
-    }
-  },
-  {
-    "legajo": 11,
-    "nombre": "Valentina",
-    "apellido": "Castro",
-    "notas": {
-      "Programación": 8.0,
-      "Base de Datos": 7.0,
-      "Análisis Estadístico": 8.0,
-      "Arquitecturas en la Nube": 9.0,
-      "Aprendizaje Automático": 6.0,
-      "Captura de la Información": 7.0
-    }
-  },
-  {
-    "legajo": 12,
-    "nombre": "Nicolás",
-    "apellido": "Moreno",
-    "notas": {
-      "Programación": 6.0,
-      "Base de Datos": 6.0,
-      "Análisis Estadístico": 5.0,
-      "Arquitecturas en la Nube": 7.0,
-      "Aprendizaje Automático": 4.0,
-      "Captura de la Información": 6.0
-    }
-  },
-  {
-    "legajo": 13,
-    "nombre": "Camila",
-    "apellido": "Ruiz",
-    "notas": {
-      "Programación": 7.0,
-      "Base de Datos": 8.0,
-      "Análisis Estadístico": 9.0,
-      "Arquitecturas en la Nube": 6.0,
-      "Aprendizaje Automático": 8.0,
-      "Captura de la Información": 5.0
-    }
-  },
-  {
-    "legajo": 14,
-    "nombre": "Federico",
-    "apellido": "Álvarez",
-    "notas": {
-      "Programación": 4.0,
-      "Base de Datos": 5.0,
-      "Análisis Estadístico": 3.0,
-      "Arquitecturas en la Nube": 6.0,
-      "Aprendizaje Automático": 2.0,
-      "Captura de la Información": 7.0
-    }
-  },
-  {
-    "legajo": 15,
-    "nombre": "Laura",
-    "apellido": "Méndez",
-    "notas": {
-      "Programación": 10.0,
-      "Base de Datos": 8.0,
-      "Análisis Estadístico": 9.0,
-      "Arquitecturas en la Nube": 7.0,
-      "Aprendizaje Automático": 9.0,
-      "Captura de la Información": 10.0
-    }
-  },
-  {
-    "legajo": 16,
-    "nombre": "Agustín",
-    "apellido": "Romero",
-    "notas": {
-      "Programación": 7.0,
-      "Base de Datos": 6.0,
-      "Análisis Estadístico": 8.0,
-      "Arquitecturas en la Nube": 5.0,
-      "Aprendizaje Automático": 7.0,
-      "Captura de la Información": 6.0
-    }
-  },
-  {
-    "legajo": 17,
-    "nombre": "Florencia",
-    "apellido": "Gómez",
-    "notas": {
-      "Programación": 9.0,
-      "Base de Datos": 8.0,
-      "Análisis Estadístico": 7.0,
-      "Arquitecturas en la Nube": 8.0,
-      "Aprendizaje Automático": 9.0,
-      "Captura de la Información": 8.0
-    }
-  },
-  {
-    "legajo": 18,
-    "nombre": "Ramiro",
-    "apellido": "Acosta",
-    "notas": {
-      "Programación": 3.0,
-      "Base de Datos": 2.0,
-      "Análisis Estadístico": 4.0,
-      "Arquitecturas en la Nube": 3.0,
-      "Aprendizaje Automático": 5.0,
-      "Captura de la Información": 4.0
-    }
-  },
-  {
-    "legajo": 19,
-    "nombre": "Julieta",
-    "apellido": "Peralta",
-    "notas": {
-      "Programación": 8.0,
-      "Base de Datos": 9.0,
-      "Análisis Estadístico": 7.0,
-      "Arquitecturas en la Nube": 6.0,
-      "Aprendizaje Automático": 8.0,
-      "Captura de la Información": 9.0
-    }
-  },
-  {
-    "legajo": 20,
-    "nombre": "Sebastián",
-    "apellido": "Molina",
-    "notas": {
-      "Programación": 5.0,
-      "Base de Datos": 4.0,
-      "Análisis Estadístico": 6.0,
-      "Arquitecturas en la Nube": 7.0,
-      "Aprendizaje Automático": 3.0,
-      "Captura de la Información": 5.0
-    }
-  },
-  {
-    "legajo": 21,
-    "nombre": "Daniela",
-    "apellido": "Ríos",
-    "notas": {
-      "Programación": 10.0,
-      "Base de Datos": 10.0,
-      "Análisis Estadístico": 9.0,
-      "Arquitecturas en la Nube": 8.0,
-      "Aprendizaje Automático": 10.0,
-      "Captura de la Información": 9.0
-    }
-  },
-  {
-    "legajo": 22,
-    "nombre": "Tomás",
-    "apellido": "Vega",
-    "notas": {
-      "Programación": 6.0,
-      "Base de Datos": 7.0,
-      "Análisis Estadístico": 5.0,
-      "Arquitecturas en la Nube": 4.0,
-      "Aprendizaje Automático": 6.0,
-      "Captura de la Información": 7.0
-    }
-  },
-  {
-    "legajo": 23,
-    "nombre": "Milagros",
-    "apellido": "Silva",
-    "notas": {
-      "Programación": 7.0,
-      "Base de Datos": 6.0,
-      "Análisis Estadístico": 8.0,
-      "Arquitecturas en la Nube": 7.0,
-      "Aprendizaje Automático": 5.0,
-      "Captura de la Información": 6.0
-    }
-  },
-  {
-    "legajo": 24,
-    "nombre": "Emilio",
-    "apellido": "Paz",
-    "notas": {
-      "Programación": 4.0,
-      "Base de Datos": 5.0,
-      "Análisis Estadístico": 3.0,
-      "Arquitecturas en la Nube": 2.0,
-      "Aprendizaje Automático": 4.0,
-      "Captura de la Información": 6.0
-    }
-  },
-  {
-    "legajo": 25,
-    "nombre": "Rocío",
-    "apellido": "Luna",
-    "notas": {
-      "Programación": 8.0,
-      "Base de Datos": 9.0,
-      "Análisis Estadístico": 8.0,
-      "Arquitecturas en la Nube": 7.0,
-      "Aprendizaje Automático": 7.0,
-      "Captura de la Información": 8.0
-    }
-  },
-  {
-    "legajo": 26,
-    "nombre": "Ignacio",
-    "apellido": "Cabrera",
-    "notas": {
-      "Programación": 6.0,
-      "Base de Datos": 5.0,
-      "Análisis Estadístico": 7.0,
-      "Arquitecturas en la Nube": 6.0,
-      "Aprendizaje Automático": 8.0,
-      "Captura de la Información": 5.0
-    }
-  },
-  {
-    "legajo": 27,
-    "nombre": "Abril",
-    "apellido": "Suárez",
-    "notas": {
-      "Programación": 9.0,
-      "Base de Datos": 8.0,
-      "Análisis Estadístico": 10.0,
-      "Arquitecturas en la Nube": 7.0,
-      "Aprendizaje Automático": 9.0,
-      "Captura de la Información": 8.0
-    }
-  },
-  {
-    "legajo": 28,
-    "nombre": "Gonzalo",
-    "apellido": "Medina",
-    "notas": {
-      "Programación": 3.0,
-      "Base de Datos": 4.0,
-      "Análisis Estadístico": 5.0,
-      "Arquitecturas en la Nube": 3.0,
-      "Aprendizaje Automático": 2.0,
-      "Captura de la Información": 4.0
-    }
-  },
-  {
-    "legajo": 29,
-    "nombre": "Carolina",
-    "apellido": "Bustos",
-    "notas": {
-      "Programación": 7.0,
-      "Base de Datos": 7.0,
-      "Análisis Estadístico": 6.0,
-      "Arquitecturas en la Nube": 8.0,
-      "Aprendizaje Automático": 7.0,
-      "Captura de la Información": 6.0
-    }
-  },
-  {
-    "legajo": 30,
-    "nombre": "Leandro",
-    "apellido": "Figueroa",
-    "notas": {
-      "Programación": 5.0,
-      "Base de Datos": 6.0,
-      "Análisis Estadístico": 4.0,
-      "Arquitecturas en la Nube": 5.0,
-      "Aprendizaje Automático": 6.0,
-      "Captura de la Información": 3.0
-    }
-  },
-  {
-    "legajo": 31,
-    "nombre": "Maria",
-    "apellido": "saenz",
-    "notas": {
-      "Programación": 5.0,
-      "Base de Datos": 6.0,
-      "Análisis Estadístico": 5.0,
-      "Arquitecturas en la Nube": 6.0,
-      "Aprendizaje Automático": 7.0,
-      "Captura de la Información": 7.0
-    }
-  }
-];
+      {
+        legajo: 1,
+        nombre: "Ana",
+        apellido: "García",
+        notas: {
+          "Programación": 8,
+          "Base de Datos": 7,
+          "Análisis Estadístico": 9,
+          "Arquitecturas en la Nube": 6,
+          "Aprendizaje Automático": 10,
+          "Captura de la Información": 4
+        }
+      },
+      {
+        legajo: 2,
+        nombre: "Carlos",
+        apellido: "Rodríguez",
+        notas: {
+          "Programación": 5,
+          "Base de Datos": 6,
+          "Análisis Estadístico": 7,
+          "Arquitecturas en la Nube": 2,
+          "Aprendizaje Automático": 2,
+          "Captura de la Información": 9
+        }
+      },
+      {
+        legajo: 3,
+        nombre: "Elena",
+        apellido: "Martínez",
+        notas: {
+          "Programación": 9,
+          "Base de Datos": 9,
+          "Análisis Estadístico": 8,
+          "Arquitecturas en la Nube": 2,
+          "Aprendizaje Automático": 6,
+          "Captura de la Información": 7
+        }
+      },
+      {
+        legajo: 4,
+        nombre: "Juan",
+        apellido: "López",
+        notas: {
+          "Programación": 4,
+          "Base de Datos": 3,
+          "Análisis Estadístico": 5,
+          "Arquitecturas en la Nube": 6,
+          "Aprendizaje Automático": 7,
+          "Captura de la Información": 8
+        }
+      },
+      {
+        legajo: 5,
+        nombre: "María",
+        apellido: "Fernández",
+        notas: {
+          "Programación": 10,
+          "Base de Datos": 9,
+          "Análisis Estadístico": 8,
+          "Arquitecturas en la Nube": 9,
+          "Aprendizaje Automático": 10,
+          "Captura de la Información": 9
+        }
+      }
+    ];
 
-    const STORAGE_KEY = "wds_sistema_academico_interactivo_v1";
+    const STORAGE_KEY = "wds_sistema_academico_interactivo_v2";
     let estudiantes = cargarDatos();
 
     function cargarDatos() {
@@ -1002,6 +639,19 @@
 
     function guardarDatos() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(estudiantes));
+    }
+
+    function normalizarClave(valor) {
+      return String(valor || "")
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]/g, "");
+    }
+
+    function limpiarTexto(valor) {
+      return String(valor || "").trim();
     }
 
     function proximoLegajo() {
@@ -1033,14 +683,23 @@
     }
 
     function situacion(est) {
-      return aprobadas(est) === ASIGNATURAS.length ? "Aprobado" : "Reprobado";
+      if (aprobadas(est) === ASIGNATURAS.length) return "Aprobado";
+      if (aplazos(est) > 0 || promedio(est) < 6) return "Crítico";
+      return "Seguimiento";
     }
 
     function clasificarNota(n) {
       n = Number(n);
       if (n >= 6) return '<span class="pill pill-ok">Aprobado</span>';
-      if (n >= 4) return '<span class="pill pill-warn">Desaprobado</span>';
+      if (n >= 4) return '<span class="pill pill-warn">Seguimiento</span>';
       return '<span class="pill pill-bad">Aplazo</span>';
+    }
+
+    function clasificarSituacion(est) {
+      const s = situacion(est);
+      if (s === "Aprobado") return '<span class="pill pill-ok">Aprobado</span>';
+      if (s === "Seguimiento") return '<span class="pill pill-warn">Seguimiento</span>';
+      return '<span class="pill pill-bad">Crítico</span>';
     }
 
     function promedioMateria(materia) {
@@ -1060,7 +719,7 @@
       return estudiantes.reduce((acc, est) => acc + promedio(est), 0) / estudiantes.length;
     }
 
-    function porcentajeAprobacionGeneral() {
+    function porcentajeAprobadosGenerales() {
       if (estudiantes.length === 0) return 0;
       const aprob = estudiantes.filter(e => situacion(e) === "Aprobado").length;
       return (aprob / estudiantes.length) * 100;
@@ -1072,41 +731,51 @@
     }
 
     function materiaMayorRendimiento() {
+      if (estudiantes.length === 0) return "-";
       return ASIGNATURAS.slice().sort((a, b) => promedioMateria(b) - promedioMateria(a))[0];
     }
 
     function materiaMenorRendimiento() {
+      if (estudiantes.length === 0) return "-";
       return ASIGNATURAS.slice().sort((a, b) => promedioMateria(a) - promedioMateria(b))[0];
+    }
+
+    function estudiantesEnRiesgo() {
+      return estudiantes.filter(est => situacion(est) === "Crítico");
+    }
+
+    function estudiantesEnSeguimiento() {
+      return estudiantes.filter(est => situacion(est) === "Seguimiento");
     }
 
     function renderDashboard() {
       const total = estudiantes.length;
       const aprobados = estudiantes.filter(e => situacion(e) === "Aprobado").length;
-      const reprobados = total - aprobados;
+      const seguimiento = estudiantesEnSeguimiento().length;
+      const criticos = estudiantesEnRiesgo().length;
       const mejor = mejorEstudiante();
-      const mejorMateria = materiaMayorRendimiento();
       const peorMateria = materiaMenorRendimiento();
 
       document.getElementById("dashboardCards").innerHTML = `
         <div class="card">
           <div class="metric">${total}</div>
-          <h3>Estudiantes cargados</h3>
-          <p>Total de alumnos disponibles para análisis.</p>
+          <h3>Estudiantes</h3>
+          <p>Total cargado para análisis.</p>
         </div>
         <div class="card">
           <div class="metric">${promedioGeneralCurso().toFixed(2)}</div>
           <h3>Promedio general</h3>
-          <p>Rendimiento promedio del curso completo.</p>
+          <p>Rendimiento promedio del curso.</p>
         </div>
         <div class="card">
-          <div class="metric">${porcentajeAprobacionGeneral().toFixed(1)}%</div>
-          <h3>Aprobación total</h3>
+          <div class="metric">${porcentajeAprobadosGenerales().toFixed(1)}%</div>
+          <h3>Aprobación integral</h3>
           <p>Estudiantes que aprobaron todas las materias.</p>
         </div>
         <div class="card">
-          <div class="metric">${aprobados} / ${reprobados}</div>
-          <h3>Aprobados / Reprobados</h3>
-          <p>Distribución general de situación académica.</p>
+          <div class="metric">${aprobados} / ${seguimiento} / ${criticos}</div>
+          <h3>Aprobados / Seguimiento / Críticos</h3>
+          <p>Distribución de situación académica.</p>
         </div>
         <div class="card">
           <div class="metric">${mejor ? promedio(mejor).toFixed(2) : "-"}</div>
@@ -1114,120 +783,151 @@
           <p>${mejor ? mejor.nombre + " " + mejor.apellido : "Sin datos"}</p>
         </div>
         <div class="card">
-          <div class="metric">${promedioMateria(peorMateria).toFixed(2)}</div>
+          <div class="metric">${peorMateria !== "-" ? promedioMateria(peorMateria).toFixed(2) : "-"}</div>
           <h3>Materia a reforzar</h3>
           <p>${peorMateria}</p>
         </div>
       `;
 
+      renderInsightGeneral();
+    }
+
+    function renderInsightGeneral() {
+      if (estudiantes.length === 0) {
+        document.getElementById("insightGeneral").innerHTML = `
+          <h3>Lectura ejecutiva</h3>
+          <p>No hay estudiantes cargados. Descargá el template, completalo y volvé a importarlo.</p>
+        `;
+        return;
+      }
+
+      const mejorMateria = materiaMayorRendimiento();
+      const peorMateria = materiaMenorRendimiento();
+      const riesgo = estudiantesEnRiesgo().length;
+
       document.getElementById("insightGeneral").innerHTML = `
         <h3>Lectura ejecutiva</h3>
         <p>
-          La materia con mejor rendimiento promedio es <strong>${mejorMateria}</strong>
-          (${promedioMateria(mejorMateria).toFixed(2)}), mientras que la materia que requiere mayor seguimiento es
+          La materia con mejor rendimiento es <strong>${mejorMateria}</strong>
+          (${promedioMateria(mejorMateria).toFixed(2)}). La materia prioritaria para reforzar es
           <strong>${peorMateria}</strong> (${promedioMateria(peorMateria).toFixed(2)}).
+          Hay <strong>${riesgo}</strong> estudiante(s) en situación crítica.
         </p>
       `;
     }
 
-    function prepararCarga() {
-      const n = Number(document.getElementById("cantidadNuevos").value);
-      if (!Number.isInteger(n) || n < 1 || n > 20) {
-        alert("Ingresá una cantidad entre 1 y 20.");
-        return;
-      }
+    function renderDiagnostico() {
+      const cont = document.getElementById("diagnosticoGeneral");
 
-      let html = "";
-      let legajo = proximoLegajo();
-
-      for (let i = 0; i < n; i++) {
-        html += `
-          <div class="card">
-            <h3>Estudiante ${i + 1} · Legajo ${legajo + i}</h3>
-            <div class="form-grid">
-              <label>Nombre
-                <input type="text" id="nombre_${i}" placeholder="Nombre">
-              </label>
-              <label>Apellido
-                <input type="text" id="apellido_${i}" placeholder="Apellido">
-              </label>
-            </div>
-            <div class="form-grid-3">
-              ${ASIGNATURAS.map((m, j) => `
-                <label>${m}
-                  <input type="number" id="nota_${i}_${j}" min="1" max="10" step="0.1" placeholder="1 a 10">
-                </label>
-              `).join("")}
-            </div>
+      if (estudiantes.length === 0) {
+        cont.innerHTML = `
+          <div class="result-box diagnostico-warn">
+            <h3>Sin datos cargados</h3>
+            <p>Primero importá un archivo o cargá la base de ejemplo.</p>
           </div>
         `;
-      }
-
-      html += `<button class="button gold" type="button" onclick="guardarNuevos(${n})">Guardar estudiantes</button>`;
-      document.getElementById("formulariosCarga").innerHTML = html;
-    }
-
-    function guardarNuevos(n) {
-      let nuevos = [];
-      let legajo = proximoLegajo();
-
-      for (let i = 0; i < n; i++) {
-        const nombre = document.getElementById(`nombre_${i}`).value.trim();
-        const apellido = document.getElementById(`apellido_${i}`).value.trim();
-
-        if (!nombre || !apellido) {
-          alert("Completá nombre y apellido en todos los formularios.");
-          return;
-        }
-
-        const notas = {};
-        for (let j = 0; j < ASIGNATURAS.length; j++) {
-          const val = Number(document.getElementById(`nota_${i}_${j}`).value);
-          if (isNaN(val) || val < 1 || val > 10) {
-            alert("Todas las notas deben estar entre 1 y 10.");
-            return;
-          }
-          notas[ASIGNATURAS[j]] = val;
-        }
-
-        nuevos.push({ legajo: legajo + i, nombre, apellido, notas });
-      }
-
-      estudiantes = estudiantes.concat(nuevos);
-      guardarDatos();
-      document.getElementById("formulariosCarga").innerHTML = `<div class="result-box">Estudiantes guardados correctamente.</div>`;
-      renderAll();
-    }
-
-    function buscarEstudiante() {
-      const legajo = Number(document.getElementById("buscarLegajo").value);
-      const est = estudiantes.find(e => Number(e.legajo) === legajo);
-
-      if (!est) {
-        document.getElementById("resultadoBusqueda").innerHTML = `<div class="result-box">No se encontró estudiante con ese legajo.</div>`;
         return;
       }
 
-      document.getElementById("resultadoBusqueda").innerHTML = `
-        <div class="result-box">
-          <h3>${est.nombre} ${est.apellido} · Legajo ${est.legajo}</h3>
+      const prom = promedioGeneralCurso();
+      const criticos = estudiantesEnRiesgo();
+      const seguimiento = estudiantesEnSeguimiento();
+      const peorMateria = materiaMenorRendimiento();
+      const aprobacionPeor = aprobacionMateria(peorMateria);
+
+      let clase = "diagnostico-ok";
+      let titulo = "Curso estable";
+      let decision = "Mantener seguimiento general y reforzar contenidos puntuales.";
+
+      if (prom < 6 || criticos.length / estudiantes.length >= 0.35 || aprobacionPeor < 50) {
+        clase = "diagnostico-bad";
+        titulo = "Intervención prioritaria";
+        decision = "Reforzar la materia crítica, revisar contenidos base y acompañar estudiantes con aplazos.";
+      } else if (prom < 7 || seguimiento.length > 0 || aprobacionPeor < 70) {
+        clase = "diagnostico-warn";
+        titulo = "Seguimiento necesario";
+        decision = "Planificar actividades de refuerzo y monitorear estudiantes con promedio menor a 6.";
+      }
+
+      const nombresCriticos = criticos
+        .slice(0, 6)
+        .map(e => `${e.nombre} ${e.apellido}`)
+        .join(", ") || "Sin estudiantes críticos";
+
+      cont.innerHTML = `
+        <div class="result-box ${clase}">
+          <h3>${titulo}</h3>
           <p>
-            Promedio con aplazos: <strong>${promedio(est).toFixed(2)}</strong> ·
-            Promedio sin aplazos: <strong>${promedioSinAplazos(est).toFixed(2)}</strong> ·
-            Situación: <strong>${situacion(est)}</strong>
+            Promedio general: <strong>${prom.toFixed(2)}</strong>.
+            Materia más crítica: <strong>${peorMateria}</strong>
+            con <strong>${aprobacionPeor.toFixed(1)}%</strong> de aprobación.
           </p>
-          <table>
-            <thead><tr><th>Materia</th><th>Nota</th><th>Estado</th></tr></thead>
-            <tbody>
-              ${ASIGNATURAS.map(m => `<tr><td>${m}</td><td>${Number(est.notas[m]).toFixed(1)}</td><td>${clasificarNota(est.notas[m])}</td></tr>`).join("")}
-            </tbody>
-          </table>
+          <p>
+            Estudiantes críticos: <strong>${criticos.length}</strong>.
+            Estudiantes en seguimiento: <strong>${seguimiento.length}</strong>.
+          </p>
+          <p>
+            <strong>Decisión sugerida:</strong> ${decision}
+          </p>
+          <p>
+            <strong>Priorizar:</strong> ${nombresCriticos}.
+          </p>
         </div>
       `;
     }
 
+    function renderTablaMaterias() {
+      document.getElementById("tablaMaterias").innerHTML = `
+        <table>
+          <thead>
+            <tr>
+              <th>Materia</th>
+              <th>Promedio</th>
+              <th>% aprobación</th>
+              <th>Diagnóstico</th>
+              <th>Decisión sugerida</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${ASIGNATURAS.map(m => {
+              const prom = promedioMateria(m);
+              const pct = aprobacionMateria(m);
+              let lectura = "Buen desempeño";
+              let decision = "Mantener estrategia actual.";
+
+              if (pct < 50 || prom < 5.5) {
+                lectura = "Crítica";
+                decision = "Reforzar contenidos y revisar causas de bajo rendimiento.";
+              } else if (pct < 70 || prom < 6.5) {
+                lectura = "Seguimiento";
+                decision = "Aplicar actividad de recuperación o práctica guiada.";
+              }
+
+              return `
+                <tr>
+                  <td>${m}</td>
+                  <td>${prom.toFixed(2)}</td>
+                  <td>${pct.toFixed(1)}%</td>
+                  <td>${lectura}</td>
+                  <td>${decision}</td>
+                </tr>
+              `;
+            }).join("")}
+          </tbody>
+        </table>
+      `;
+    }
+
     function renderTablaIndividual() {
-      const ordenados = estudiantes.slice().sort((a, b) => promedio(b) - promedio(a));
+      const ordenados = estudiantes.slice().sort((a, b) => promedio(a) - promedio(b));
+
+      if (ordenados.length === 0) {
+        document.getElementById("tablaIndividual").innerHTML = `
+          <div class="result-box">No hay estudiantes cargados.</div>
+        `;
+        return;
+      }
+
       document.getElementById("tablaIndividual").innerHTML = `
         <table>
           <thead>
@@ -1250,7 +950,7 @@
                 <td>${promedioSinAplazos(est).toFixed(2)}</td>
                 <td>${aprobadas(est)} / ${ASIGNATURAS.length}</td>
                 <td>${aplazos(est)}</td>
-                <td>${situacion(est) === "Aprobado" ? '<span class="pill pill-ok">Aprobado</span>' : '<span class="pill pill-bad">Reprobado</span>'}</td>
+                <td>${clasificarSituacion(est)}</td>
               </tr>
             `).join("")}
           </tbody>
@@ -1258,58 +958,88 @@
       `;
     }
 
-    function renderTablaMaterias() {
-      document.getElementById("tablaMaterias").innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>Materia</th>
-              <th>Promedio</th>
-              <th>% aprobación</th>
-              <th>Lectura</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${ASIGNATURAS.map(m => {
-              const prom = promedioMateria(m);
-              const pct = aprobacionMateria(m);
-              const lectura = pct >= 70 ? "Buen desempeño" : pct >= 50 ? "Seguimiento medio" : "Materia crítica";
-              return `
+    function buscarEstudiante() {
+      const legajo = Number(document.getElementById("buscarLegajo").value);
+      const est = estudiantes.find(e => Number(e.legajo) === legajo);
+
+      if (!est) {
+        document.getElementById("resultadoBusqueda").innerHTML = `
+          <div class="result-box">No se encontró estudiante con ese legajo.</div>
+        `;
+        return;
+      }
+
+      document.getElementById("resultadoBusqueda").innerHTML = `
+        <div class="result-box">
+          <h3>${est.nombre} ${est.apellido} · Legajo ${est.legajo}</h3>
+          <p>
+            Promedio: <strong>${promedio(est).toFixed(2)}</strong> ·
+            Sin aplazos: <strong>${promedioSinAplazos(est).toFixed(2)}</strong> ·
+            Situación: <strong>${situacion(est)}</strong>
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Materia</th>
+                <th>Nota</th>
+                <th>Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${ASIGNATURAS.map(m => `
                 <tr>
                   <td>${m}</td>
-                  <td>${prom.toFixed(2)}</td>
-                  <td>${pct.toFixed(1)}%</td>
-                  <td>${lectura}</td>
+                  <td>${Number(est.notas[m]).toFixed(1)}</td>
+                  <td>${clasificarNota(est.notas[m])}</td>
                 </tr>
-              `;
-            }).join("")}
-          </tbody>
-        </table>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
       `;
     }
 
     function cargarSelectMaterias() {
-      document.getElementById("materiaDetalle").innerHTML = ASIGNATURAS.map(m => `<option value="${m}">${m}</option>`).join("");
+      document.getElementById("materiaDetalle").innerHTML =
+        ASIGNATURAS.map(m => `<option value="${m}">${m}</option>`).join("");
     }
 
     function renderDetalleMateria() {
+      const contenedor = document.getElementById("detalleMateria");
+
+      if (estudiantes.length === 0) {
+        contenedor.innerHTML = `
+          <div class="result-box">No hay estudiantes cargados.</div>
+        `;
+        return;
+      }
+
       const materia = document.getElementById("materiaDetalle").value || ASIGNATURAS[0];
-      const lista = estudiantes.slice().sort((a, b) => Number(b.notas[materia]) - Number(a.notas[materia]));
+      const lista = estudiantes.slice().sort((a, b) => Number(a.notas[materia]) - Number(b.notas[materia]));
       const notas = lista.map(e => Number(e.notas[materia]));
       const aprob = notas.filter(n => n >= 6).length;
+      const porcentaje = notas.length > 0 ? (aprob / notas.length * 100) : 0;
 
-      document.getElementById("detalleMateria").innerHTML = `
+      contenedor.innerHTML = `
         <div class="result-box">
           <h3>${materia}</h3>
           <p>
             Promedio: <strong>${promedioMateria(materia).toFixed(2)}</strong> ·
-            Nota máxima: <strong>${Math.max(...notas).toFixed(1)}</strong> ·
             Nota mínima: <strong>${Math.min(...notas).toFixed(1)}</strong> ·
-            Aprobación: <strong>${(aprob/notas.length*100).toFixed(1)}%</strong>
+            Nota máxima: <strong>${Math.max(...notas).toFixed(1)}</strong> ·
+            Aprobación: <strong>${porcentaje.toFixed(1)}%</strong>
           </p>
         </div>
         <table>
-          <thead><tr><th>Posición</th><th>Legajo</th><th>Estudiante</th><th>Nota</th><th>Estado</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Prioridad</th>
+              <th>Legajo</th>
+              <th>Estudiante</th>
+              <th>Nota</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
           <tbody>
             ${lista.map((est, i) => `
               <tr>
@@ -1325,21 +1055,384 @@
       `;
     }
 
+    function mostrarFormularioManual() {
+      const cont = document.getElementById("formularioManual");
+      cont.classList.remove("hidden");
+
+      cont.innerHTML = `
+        <section>
+          <h2>Carga manual</h2>
+          <div class="form-grid">
+            <label>
+              Nombre
+              <input type="text" id="manualNombre" placeholder="Nombre">
+            </label>
+            <label>
+              Apellido
+              <input type="text" id="manualApellido" placeholder="Apellido">
+            </label>
+          </div>
+
+          <div class="form-grid-3">
+            ${ASIGNATURAS.map((m, i) => `
+              <label>
+                ${m}
+                <input type="number" id="manualNota_${i}" min="1" max="10" step="0.1" placeholder="1 a 10">
+              </label>
+            `).join("")}
+          </div>
+
+          <button class="button gold" type="button" onclick="guardarManual()">Guardar estudiante</button>
+        </section>
+      `;
+    }
+
+    function guardarManual() {
+      const nombre = limpiarTexto(document.getElementById("manualNombre").value);
+      const apellido = limpiarTexto(document.getElementById("manualApellido").value);
+
+      if (!nombre || !apellido) {
+        alert("Completá nombre y apellido.");
+        return;
+      }
+
+      const notas = {};
+      for (let i = 0; i < ASIGNATURAS.length; i++) {
+        const val = Number(document.getElementById(`manualNota_${i}`).value);
+        if (!Number.isFinite(val) || val < 1 || val > 10) {
+          alert("Todas las notas deben estar entre 1 y 10.");
+          return;
+        }
+        notas[ASIGNATURAS[i]] = val;
+      }
+
+      estudiantes.push({
+        legajo: proximoLegajo(),
+        nombre,
+        apellido,
+        notas
+      });
+
+      guardarDatos();
+      document.getElementById("formularioManual").classList.add("hidden");
+      renderAll();
+    }
+
+    function descargarTemplateExcel() {
+      const headers = ["Legajo", "Nombre", "Apellido", ...ASIGNATURAS];
+
+      const ejemplo = [
+        headers,
+        [1, "Ana", "García", 8, 7, 9, 6, 10, 4],
+        [2, "Carlos", "Rodríguez", 5, 6, 7, 2, 2, 9],
+        [3, "María", "Fernández", "", "", "", "", "", ""],
+        [4, "Sofía", "Ramírez", "", "", "", "", "", ""],
+        [5, "Tomás", "Vega", "", "", "", "", "", ""]
+      ];
+
+      const instrucciones = [
+        ["Instrucciones"],
+        ["1. No cambies los nombres de las columnas."],
+        ["2. Las notas deben estar entre 1 y 10."],
+        ["3. Se recomienda usar archivo .xlsx para evitar errores de tildes."],
+        ["4. Luego subí este archivo desde el botón Importar datos."]
+      ];
+
+      const wb = XLSX.utils.book_new();
+      const wsNotas = XLSX.utils.aoa_to_sheet(ejemplo);
+      const wsInfo = XLSX.utils.aoa_to_sheet(instrucciones);
+
+      wsNotas["!cols"] = [
+        { wch: 10 },
+        { wch: 18 },
+        { wch: 18 },
+        ...ASIGNATURAS.map(() => ({ wch: 24 }))
+      ];
+
+      XLSX.utils.book_append_sheet(wb, wsNotas, "Notas");
+      XLSX.utils.book_append_sheet(wb, wsInfo, "Instrucciones");
+
+      XLSX.writeFile(wb, "template_sistema_academico.xlsx");
+    }
+
+    function exportarExcel() {
+      const headers = ["Legajo", "Nombre", "Apellido", ...ASIGNATURAS];
+      const rows = estudiantes.map(e => [
+        e.legajo,
+        e.nombre,
+        e.apellido,
+        ...ASIGNATURAS.map(m => e.notas[m])
+      ]);
+
+      const wb = XLSX.utils.book_new();
+      const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+
+      ws["!cols"] = [
+        { wch: 10 },
+        { wch: 18 },
+        { wch: 18 },
+        ...ASIGNATURAS.map(() => ({ wch: 24 }))
+      ];
+
+      XLSX.utils.book_append_sheet(wb, ws, "Estudiantes");
+      XLSX.writeFile(wb, "estudiantes_actualizado.xlsx");
+    }
+
+    function exportarCSV() {
+      const headers = ["Legajo", "Nombre", "Apellido", ...ASIGNATURAS];
+      const rows = estudiantes.map(e => [
+        e.legajo,
+        e.nombre,
+        e.apellido,
+        ...ASIGNATURAS.map(m => e.notas[m])
+      ]);
+
+      const separador = ";";
+      const csvEscape = valor => `"${String(valor ?? "").replaceAll('"', '""')}"`;
+      const contenido = [headers, ...rows]
+        .map(r => r.map(csvEscape).join(separador))
+        .join("\n");
+
+      const csv = "\uFEFFsep=;\n" + contenido;
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "estudiantes_actualizado_utf8.csv";
+      a.click();
+
+      URL.revokeObjectURL(url);
+    }
+
+    function parsearLineaCSV(linea, separador) {
+      const resultado = [];
+      let actual = "";
+      let dentroComillas = false;
+
+      for (let i = 0; i < linea.length; i++) {
+        const c = linea[i];
+        const siguiente = linea[i + 1];
+
+        if (c === '"' && dentroComillas && siguiente === '"') {
+          actual += '"';
+          i++;
+        } else if (c === '"') {
+          dentroComillas = !dentroComillas;
+        } else if (c === separador && !dentroComillas) {
+          resultado.push(actual.trim());
+          actual = "";
+        } else {
+          actual += c;
+        }
+      }
+
+      resultado.push(actual.trim());
+      return resultado;
+    }
+
+    function detectarSeparador(linea) {
+      const puntoYComa = (linea.match(/;/g) || []).length;
+      const coma = (linea.match(/,/g) || []).length;
+      return puntoYComa > coma ? ";" : ",";
+    }
+
+    function leerCSV(texto) {
+      let limpio = texto.replace(/^\uFEFF/, "");
+      let lineas = limpio.split(/\r?\n/).filter(l => l.trim() !== "");
+
+      if (lineas[0] && lineas[0].toLowerCase().startsWith("sep=")) {
+        lineas = lineas.slice(1);
+      }
+
+      if (lineas.length < 2) return [];
+
+      const separador = detectarSeparador(lineas[0]);
+      const headers = parsearLineaCSV(lineas[0], separador);
+
+      return lineas.slice(1).map(linea => {
+        const valores = parsearLineaCSV(linea, separador);
+        const obj = {};
+        headers.forEach((h, i) => obj[h] = valores[i]);
+        return obj;
+      });
+    }
+
+    function filasAEstudiantes(filas) {
+      const errores = [];
+      const convertidos = [];
+
+      const alias = {
+        legajo: ["legajo", "id", "numero", "nrolegajo"],
+        nombre: ["nombre", "nombres"],
+        apellido: ["apellido", "apellidos"]
+      };
+
+      function buscarValor(fila, nombresPosibles) {
+        const mapa = {};
+        Object.keys(fila).forEach(k => {
+          mapa[normalizarClave(k)] = fila[k];
+        });
+
+        for (const nombre of nombresPosibles) {
+          const key = normalizarClave(nombre);
+          if (mapa[key] !== undefined && mapa[key] !== null && String(mapa[key]).trim() !== "") {
+            return mapa[key];
+          }
+        }
+
+        return "";
+      }
+
+      filas.forEach((fila, idx) => {
+        const filaNumero = idx + 2;
+        const nombre = limpiarTexto(buscarValor(fila, alias.nombre));
+        const apellido = limpiarTexto(buscarValor(fila, alias.apellido));
+        let legajo = Number(buscarValor(fila, alias.legajo));
+
+        if (!Number.isFinite(legajo) || legajo <= 0) {
+          legajo = idx + 1;
+        }
+
+        if (!nombre || !apellido) {
+          errores.push(`Fila ${filaNumero}: falta nombre o apellido.`);
+          return;
+        }
+
+        const notas = {};
+
+        for (const materia of ASIGNATURAS) {
+          const valor = buscarValor(fila, [materia]);
+          const nota = Number(String(valor).replace(",", "."));
+
+          if (!Number.isFinite(nota) || nota < 1 || nota > 10) {
+            errores.push(`Fila ${filaNumero}: nota inválida en ${materia}. Debe estar entre 1 y 10.`);
+            return;
+          }
+
+          notas[materia] = nota;
+        }
+
+        convertidos.push({ legajo, nombre, apellido, notas });
+      });
+
+      return { convertidos, errores };
+    }
+
+    function importarArchivoEstudiantes() {
+      const input = document.getElementById("archivoEstudiantes");
+      const estado = document.getElementById("estadoImportacion");
+      const archivo = input.files[0];
+
+      if (!archivo) {
+        estado.innerHTML = "Seleccioná un archivo Excel o CSV para importar.";
+        return;
+      }
+
+      const nombre = archivo.name.toLowerCase();
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        try {
+          let filas = [];
+
+          if (nombre.endsWith(".csv")) {
+            filas = leerCSV(e.target.result);
+          } else if (nombre.endsWith(".xlsx") || nombre.endsWith(".xls")) {
+            if (typeof XLSX === "undefined") {
+              estado.innerHTML = "No se pudo cargar el lector de Excel. Revisá tu conexión.";
+              return;
+            }
+
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: "array" });
+            const hoja = workbook.Sheets[workbook.SheetNames[0]];
+            filas = XLSX.utils.sheet_to_json(hoja, { defval: "" });
+          } else {
+            estado.innerHTML = "Formato no compatible. Usá XLSX, XLS o CSV.";
+            return;
+          }
+
+          const { convertidos, errores } = filasAEstudiantes(filas);
+
+          if (errores.length > 0) {
+            estado.innerHTML = `
+              <strong>No se importó el archivo.</strong><br>
+              ${errores.slice(0, 10).join("<br>")}
+              ${errores.length > 10 ? "<br>..." : ""}
+            `;
+            return;
+          }
+
+          if (convertidos.length === 0) {
+            estado.innerHTML = "El archivo no contiene estudiantes válidos.";
+            return;
+          }
+
+          estudiantes = convertidos;
+          guardarDatos();
+          renderAll();
+
+          estado.innerHTML = `
+            <strong>Archivo importado correctamente.</strong>
+            Se cargaron ${convertidos.length} estudiantes.
+          `;
+        } catch (error) {
+          estado.innerHTML = "Error al leer el archivo. Revisá columnas, formato y valores de notas.";
+        }
+      };
+
+      if (nombre.endsWith(".csv")) {
+        reader.readAsText(archivo, "utf-8");
+      } else {
+        reader.readAsArrayBuffer(archivo);
+      }
+    }
+
+    function usarBaseInicial() {
+      if (!confirm("¿Cargar la base de ejemplo? Esto reemplazará los datos actuales guardados.")) return;
+      estudiantes = JSON.parse(JSON.stringify(DATA_INICIAL));
+      guardarDatos();
+      renderAll();
+      document.getElementById("estadoImportacion").innerHTML =
+        "<strong>Base de ejemplo cargada.</strong>";
+    }
+
+    function iniciarBaseVacia() {
+      if (!confirm("¿Comenzar con una base vacía? Esto borrará los datos actuales guardados.")) return;
+      estudiantes = [];
+      guardarDatos();
+      renderAll();
+      document.getElementById("estadoImportacion").innerHTML =
+        "<strong>Base vacía creada.</strong> Ahora podés importar un archivo o cargar estudiantes manualmente.";
+    }
+
+    function reiniciarDatos() {
+      localStorage.removeItem(STORAGE_KEY);
+      estudiantes = JSON.parse(JSON.stringify(DATA_INICIAL));
+      guardarDatos();
+      renderAll();
+    }
+
     function barChart(labels, values, options = {}) {
-      const width = 720, height = 360, pad = 58;
+      const width = 720;
+      const height = 360;
+      const pad = 58;
       const maxVal = options.max || Math.max(...values, 10);
-      const barW = (width - pad * 2) / values.length * 0.62;
-      const gap = (width - pad * 2) / values.length;
+      const barW = (width - pad * 2) / Math.max(values.length, 1) * 0.62;
+      const gap = (width - pad * 2) / Math.max(values.length, 1);
       const threshold = options.threshold ?? null;
       const suffix = options.suffix || "";
       const title = options.title || "";
 
       let bars = "";
+
       values.forEach((v, i) => {
         const h = (v / maxVal) * (height - pad * 2);
         const x = pad + i * gap + (gap - barW) / 2;
         const y = height - pad - h;
         const color = v >= (threshold ?? 0) ? "#38bdf8" : "#c9a24d";
+
         bars += `
           <rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="7" fill="${color}" opacity="0.9"></rect>
           <text x="${x + barW/2}" y="${y - 8}" text-anchor="middle" fill="#07111f" font-size="13" font-weight="bold">${v.toFixed(1)}${suffix}</text>
@@ -1369,29 +1462,55 @@
     }
 
     function renderGraficos() {
-      const etiquetas = ASIGNATURAS.map(m => m.replace("Análisis ", "An. ").replace("Arquitecturas en la Nube", "Arq. Nube").replace("Aprendizaje Automático", "Ap. Auto").replace("Captura de la Información", "Cap. Info"));
+      const etiquetas = ASIGNATURAS.map(m =>
+        m.replace("Análisis ", "An. ")
+         .replace("Arquitecturas en la Nube", "Arq. Nube")
+         .replace("Aprendizaje Automático", "Ap. Auto")
+         .replace("Captura de la Información", "Cap. Info")
+      );
+
       const proms = ASIGNATURAS.map(m => promedioMateria(m));
       const pcts = ASIGNATURAS.map(m => aprobacionMateria(m));
 
       document.getElementById("graficoPromedios").innerHTML = barChart(etiquetas, proms, {
-        max: 10, threshold: 6, title: "Promedio por asignatura"
+        max: 10,
+        threshold: 6,
+        title: "Promedio por asignatura"
       });
 
       document.getElementById("graficoAprobacion").innerHTML = barChart(etiquetas, pcts, {
-        max: 100, threshold: 60, suffix: "%", title: "% de aprobación por asignatura"
+        max: 100,
+        threshold: 60,
+        suffix: "%",
+        title: "% de aprobación por asignatura"
       });
 
       const aprob = estudiantes.filter(e => situacion(e) === "Aprobado").length;
+      const seguimiento = estudiantes.filter(e => situacion(e) === "Seguimiento").length;
+      const criticos = estudiantes.filter(e => situacion(e) === "Crítico").length;
       const total = estudiantes.length || 1;
-      const pct = aprob / total * 100;
+
+      const pctA = aprob / total * 100;
+      const pctS = seguimiento / total * 100;
+      const pctC = criticos / total * 100;
+
       document.getElementById("graficoSituacion").innerHTML = `
-        <div class="pie" style="background: conic-gradient(#22c55e 0 ${pct}%, #fb7185 ${pct}% 100%);"></div>
+        <div class="pie" style="background: conic-gradient(
+          #22c55e 0 ${pctA}%,
+          #f59e0b ${pctA}% ${pctA + pctS}%,
+          #fb7185 ${pctA + pctS}% 100%
+        );"></div>
         <p style="text-align:center;">
-          <strong>${pct.toFixed(1)}%</strong> aprobados · <strong>${(100-pct).toFixed(1)}%</strong> reprobados
+          <strong>${pctA.toFixed(1)}%</strong> aprobados ·
+          <strong>${pctS.toFixed(1)}%</strong> seguimiento ·
+          <strong>${pctC.toFixed(1)}%</strong> críticos
         </p>
       `;
 
-      const top = estudiantes.slice().sort((a,b) => promedio(b)-promedio(a)).slice(0, 10);
+      const top = estudiantes.slice()
+        .sort((a,b) => promedio(b) - promedio(a))
+        .slice(0, 10);
+
       document.getElementById("graficoRanking").innerHTML = barChart(
         top.map(e => `${e.nombre} ${e.apellido.charAt(0)}.`),
         top.map(e => promedio(e)),
@@ -1399,209 +1518,11 @@
       );
     }
 
-
-    function usarBaseInicial() {
-      if (!confirm("¿Cargar la base de ejemplo? Esto reemplazará los datos actuales guardados en este navegador.")) return;
-      estudiantes = JSON.parse(JSON.stringify(DATA_INICIAL));
-      guardarDatos();
-      renderAll();
-      document.getElementById("estadoImportacion").innerHTML = `<strong>Base de ejemplo cargada.</strong> Ya podés revisar dashboard, materias y gráficos.`;
-    }
-
-    function iniciarBaseVacia() {
-      if (!confirm("¿Comenzar con una base vacía? Esto borrará los datos actuales guardados en este navegador.")) return;
-      estudiantes = [];
-      guardarDatos();
-      renderAll();
-      document.getElementById("estadoImportacion").innerHTML = `<strong>Base vacía creada.</strong> Ahora podés cargar estudiantes manualmente o importar un archivo.`;
-    }
-
-    function normalizarClave(valor) {
-      return String(valor || "")
-        .trim()
-        .toLowerCase()
-        .normalize("NFD")
-        .replace(/[̀-ͯ]/g, "")
-        .replace(/[^a-z0-9]/g, "");
-    }
-
-    function parsearLineaCSV(linea) {
-      const resultado = [];
-      let actual = "";
-      let dentroComillas = false;
-
-      for (let i = 0; i < linea.length; i++) {
-        const c = linea[i];
-        const siguiente = linea[i + 1];
-
-        if (c === '"' && dentroComillas && siguiente === '"') {
-          actual += '"';
-          i++;
-        } else if (c === '"') {
-          dentroComillas = !dentroComillas;
-        } else if (c === ',' && !dentroComillas) {
-          resultado.push(actual.trim());
-          actual = "";
-        } else {
-          actual += c;
-        }
-      }
-      resultado.push(actual.trim());
-      return resultado;
-    }
-
-    function leerCSV(texto) {
-      const limpio = texto.replace(/^﻿/, "");
-      const lineas = limpio.split(/\r?\n/).filter(l => l.trim() !== "");
-      if (lineas.length < 2) return [];
-
-      const headers = parsearLineaCSV(lineas[0]);
-      return lineas.slice(1).map(linea => {
-        const valores = parsearLineaCSV(linea);
-        const obj = {};
-        headers.forEach((h, i) => obj[h] = valores[i]);
-        return obj;
-      });
-    }
-
-    function filasAEstudiantes(filas) {
-      const errores = [];
-      const convertidos = [];
-
-      const alias = {
-        legajo: ["legajo", "id", "numero", "nrolegajo"],
-        nombre: ["nombre", "nombres"],
-        apellido: ["apellido", "apellidos"],
-      };
-
-      function buscarValor(fila, nombresPosibles) {
-        const mapa = {};
-        Object.keys(fila).forEach(k => mapa[normalizarClave(k)] = fila[k]);
-        for (const nombre of nombresPosibles) {
-          const key = normalizarClave(nombre);
-          if (mapa[key] !== undefined && mapa[key] !== null && String(mapa[key]).trim() !== "") {
-            return mapa[key];
-          }
-        }
-        return "";
-      }
-
-      filas.forEach((fila, idx) => {
-        const filaNumero = idx + 2;
-        const nombre = String(buscarValor(fila, alias.nombre)).trim();
-        const apellido = String(buscarValor(fila, alias.apellido)).trim();
-        let legajo = Number(buscarValor(fila, alias.legajo));
-        if (!Number.isFinite(legajo) || legajo <= 0) legajo = idx + 1;
-
-        if (!nombre || !apellido) {
-          errores.push(`Fila ${filaNumero}: falta nombre o apellido.`);
-          return;
-        }
-
-        const notas = {};
-        for (const materia of ASIGNATURAS) {
-          const valor = buscarValor(fila, [materia]);
-          const nota = Number(String(valor).replace(",", "."));
-          if (!Number.isFinite(nota) || nota < 1 || nota > 10) {
-            errores.push(`Fila ${filaNumero}: nota inválida en ${materia}. Debe estar entre 1 y 10.`);
-            return;
-          }
-          notas[materia] = nota;
-        }
-
-        convertidos.push({ legajo, nombre, apellido, notas });
-      });
-
-      return { convertidos, errores };
-    }
-
-    function importarArchivoEstudiantes() {
-      const input = document.getElementById("archivoEstudiantes");
-      const estado = document.getElementById("estadoImportacion");
-      const archivo = input.files[0];
-
-      if (!archivo) {
-        estado.innerHTML = "Seleccioná un archivo CSV o Excel para importar.";
-        return;
-      }
-
-      const nombre = archivo.name.toLowerCase();
-      const reader = new FileReader();
-
-      reader.onload = function(e) {
-        try {
-          let filas = [];
-
-          if (nombre.endsWith(".csv")) {
-            filas = leerCSV(e.target.result);
-          } else if (nombre.endsWith(".xlsx") || nombre.endsWith(".xls")) {
-            if (typeof XLSX === "undefined") {
-              estado.innerHTML = "No se pudo cargar el lector de Excel. Probá con CSV o revisá tu conexión.";
-              return;
-            }
-            const data = new Uint8Array(e.target.result);
-            const workbook = XLSX.read(data, { type: "array" });
-            const hoja = workbook.Sheets[workbook.SheetNames[0]];
-            filas = XLSX.utils.sheet_to_json(hoja, { defval: "" });
-          } else {
-            estado.innerHTML = "Formato no compatible. Usá CSV, XLSX o XLS.";
-            return;
-          }
-
-          const { convertidos, errores } = filasAEstudiantes(filas);
-
-          if (errores.length > 0) {
-            estado.innerHTML = `<strong>No se importó el archivo.</strong><br>${errores.slice(0, 8).join("<br>")}${errores.length > 8 ? "<br>..." : ""}`;
-            return;
-          }
-
-          if (convertidos.length === 0) {
-            estado.innerHTML = "El archivo no contiene estudiantes válidos.";
-            return;
-          }
-
-          estudiantes = convertidos;
-          guardarDatos();
-          renderAll();
-          estado.innerHTML = `<strong>Archivo importado correctamente.</strong> Se cargaron ${convertidos.length} estudiantes.`;
-        } catch (error) {
-          estado.innerHTML = "Error al leer el archivo. Revisá columnas, formato y valores de notas.";
-        }
-      };
-
-      if (nombre.endsWith(".csv")) {
-        reader.readAsText(archivo, "utf-8");
-      } else {
-        reader.readAsArrayBuffer(archivo);
-      }
-    }
-
-    function exportarCSV() {
-      const headers = ["Legajo", "Nombre", "Apellido", ...ASIGNATURAS];
-      const rows = estudiantes.map(e => [
-        e.legajo, e.nombre, e.apellido, ...ASIGNATURAS.map(m => e.notas[m])
-      ]);
-      const csv = [headers, ...rows].map(r => r.map(v => `"${String(v).replaceAll('"','""')}"`).join(",")).join("\n");
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = "estudiantes_actualizado.csv";
-      a.click();
-      URL.revokeObjectURL(url);
-    }
-
-    function reiniciarDatos() {
-      if (!confirm("¿Seguro que querés restaurar la base inicial? Se borrarán los datos agregados en este navegador.")) return;
-      localStorage.removeItem(STORAGE_KEY);
-      estudiantes = JSON.parse(JSON.stringify(DATA_INICIAL));
-      renderAll();
-    }
-
     function renderAll() {
+      renderDiagnostico();
       renderDashboard();
-      renderTablaIndividual();
       renderTablaMaterias();
+      renderTablaIndividual();
       cargarSelectMaterias();
       renderDetalleMateria();
       renderGraficos();
@@ -1612,5 +1533,3 @@
 
 </body>
 </html>
-
-
