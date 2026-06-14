@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="es" class="notranslate">
 <head>
   <meta charset="UTF-8">
@@ -12,7 +11,7 @@
       --bg1: #07111f;
       --bg2: #0b1f33;
       --panel: rgba(16, 29, 47, 0.94);
-      --panel2: rgba(7, 17, 31, 0.78);
+      --panel2: rgba(7, 17, 31, 0.82);
       --line: rgba(255,255,255,0.12);
       --text: #f8fafc;
       --muted: #94a3b8;
@@ -27,6 +26,8 @@
 
     * { box-sizing: border-box; }
 
+    html { scroll-behavior: smooth; }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
@@ -37,36 +38,59 @@
       min-height: 100vh;
     }
 
-    header {
-      text-align: center;
-      padding: 55px 20px 35px;
+    .app-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(7, 17, 31, 0.96);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid var(--line);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    .header-inner {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px 20px 14px;
+      text-align: center;
     }
 
     .terminal {
       color: var(--green);
       font-family: "Courier New", monospace;
-      margin-bottom: 15px;
+      margin-bottom: 7px;
+      font-size: 13px;
     }
 
     h1 {
       margin: 0;
-      font-size: 40px;
+      font-size: 30px;
+      line-height: 1.15;
     }
 
     .subtitle {
       color: var(--muted);
-      font-size: 18px;
-      margin-top: 12px;
+      font-size: 15px;
+      margin: 8px 0 0;
+    }
+
+    .nav-panel {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      justify-content: center;
+      padding: 12px 20px 16px;
+      max-width: 1180px;
+      margin: 0 auto;
     }
 
     main {
       max-width: 1180px;
-      margin: 35px auto;
+      margin: 26px auto;
       padding: 0 20px 40px;
     }
 
-    section {
+    section, .vista {
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 18px;
@@ -74,6 +98,9 @@
       margin-bottom: 24px;
       box-shadow: 0 12px 30px rgba(0,0,0,0.25);
     }
+
+    .vista { display: none; }
+    .vista-activa { display: block; }
 
     h2 {
       color: var(--cyan);
@@ -94,7 +121,7 @@
 
     textarea {
       width: 100%;
-      min-height: 145px;
+      min-height: 135px;
       padding: 12px;
       border-radius: 10px;
       border: 1px solid rgba(56,189,248,0.35);
@@ -111,20 +138,12 @@
       box-shadow: 0 0 0 3px rgba(56,189,248,0.12);
     }
 
-    .quickbar {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 20px;
-    }
-
     .button {
       display: inline-block;
       color: var(--text);
       background: transparent;
       border: 1px solid var(--cyan);
-      padding: 11px 16px;
+      padding: 10px 14px;
       border-radius: 10px;
       text-decoration: none;
       font-weight: bold;
@@ -133,7 +152,7 @@
       margin: 5px 5px 5px 0;
     }
 
-    .button:hover {
+    .button:hover, .button.active {
       background: var(--cyan);
       color: var(--bg1);
       transform: translateY(-2px);
@@ -144,7 +163,7 @@
       color: var(--gold);
     }
 
-    .gold:hover {
+    .gold:hover, .gold.active {
       background: var(--gold);
       color: var(--bg1);
     }
@@ -189,6 +208,7 @@
       border-radius: 16px;
       padding: 20px;
       transition: all 0.25s ease;
+      overflow-x: auto;
     }
 
     .card:hover {
@@ -249,12 +269,18 @@
       margin-bottom: 14px;
     }
 
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 16px;
       overflow: hidden;
       border-radius: 12px;
+      min-width: 760px;
     }
 
     th, td {
@@ -268,6 +294,9 @@
     th {
       color: var(--text);
       background: rgba(56,189,248,0.10);
+      position: sticky;
+      top: 0;
+      z-index: 1;
     }
 
     tr:hover td {
@@ -295,17 +324,9 @@
       margin-top: 16px;
     }
 
-    .diagnostico-ok {
-      border-left: 5px solid var(--ok);
-    }
-
-    .diagnostico-warn {
-      border-left: 5px solid var(--warn);
-    }
-
-    .diagnostico-bad {
-      border-left: 5px solid var(--danger);
-    }
+    .diagnostico-ok { border-left: 5px solid var(--ok); }
+    .diagnostico-warn { border-left: 5px solid var(--warn); }
+    .diagnostico-bad { border-left: 5px solid var(--danger); }
 
     .chart-wrap {
       background: #ffffff;
@@ -335,9 +356,7 @@
       margin-top: 10px;
     }
 
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
 
     footer {
       text-align: center;
@@ -348,266 +367,234 @@
     }
 
     @media (max-width: 900px) {
-      .grid, .grid-3, .form-grid, .form-grid-3 {
-        grid-template-columns: 1fr;
-      }
-
-      h1 {
-        font-size: 32px;
-      }
+      h1 { font-size: 24px; }
+      .subtitle { font-size: 13px; }
+      .grid, .grid-3, .form-grid, .form-grid-3 { grid-template-columns: 1fr; }
+      .nav-panel { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
+      .button { white-space: nowrap; }
     }
   </style>
 
   <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-
 </head>
 
 <body>
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="terminal">&gt; cargando sistema académico interactivo...</div>
+      <h1>01 · Sistema Académico Interactivo</h1>
+      <p class="subtitle">
+        Cargar datos, diagnosticar rendimiento académico y tomar decisiones con indicadores claros.
+      </p>
+    </div>
 
-  <header>
-    <div class="terminal">&gt; cargando sistema académico interactivo...</div>
-    <h1>01 · Sistema Académico Interactivo</h1>
-    <p class="subtitle">
-      Sistema web para cargar estudiantes, personalizar materias, analizar rendimiento y tomar decisiones académicas.
-    </p>
-
-```
-<div class="quickbar">
-  <a class="button gold" href="#datos">Datos</a>
-  <a class="button" href="#dashboard">Dashboard</a>
-  <a class="button" href="#diagnostico">Diagnóstico</a>
-  <a class="button" href="#estudiantes">Estudiantes</a>
-  <a class="button" href="#materias">Materias</a>
-  <a class="button" href="#detalle">Detalle</a>
-  <a class="button" href="#graficos">Gráficos</a>
-  <a class="button" href="#navegacion">Volver</a>
-</div>
-```
-
+    <nav class="nav-panel">
+      <button class="button gold nav-btn active" data-vista="datos" onclick="mostrarVista('datos')">Acciones rápidas</button>
+      <button class="button nav-btn" data-vista="diagnostico" onclick="mostrarVista('diagnostico')">Diagnóstico</button>
+      <button class="button nav-btn" data-vista="dashboard" onclick="mostrarVista('dashboard')">Dashboard</button>
+      <button class="button nav-btn" data-vista="materias" onclick="mostrarVista('materias')">Materias</button>
+      <button class="button nav-btn" data-vista="estudiantes" onclick="mostrarVista('estudiantes')">Estudiantes</button>
+      <button class="button nav-btn" data-vista="detalle" onclick="mostrarVista('detalle')">Detalle</button>
+      <button class="button nav-btn" data-vista="graficos" onclick="mostrarVista('graficos')">Gráficos</button>
+      <button class="button nav-btn" data-vista="navegacion" onclick="mostrarVista('navegacion')">Volver</button>
+    </nav>
   </header>
 
   <main>
-
-```
-<section>
-  <h2>Resumen ejecutivo</h2>
-  <p>
-    Este sistema permite trabajar de tres formas: descargar una plantilla Excel editable,
-    importar esa plantilla con las materias que el usuario defina, o usar la base precargada
-    de estudiantes para hacer análisis inmediato.
-  </p>
-
-  <span class="tag">Excel editable</span>
-  <span class="tag">Materias dinámicas</span>
-  <span class="tag">Base precargada</span>
-  <span class="tag">Dashboard</span>
-  <span class="tag">Diagnóstico</span>
-  <span class="tag">Toma de decisiones</span>
-</section>
-
-<section id="datos">
-  <h2>Gestión de datos</h2>
-  <p>
-    Flujo recomendado: descargá el template Excel, editá las materias si hace falta,
-    completá los estudiantes y volvé a cargar el archivo.
-  </p>
-
-  <div class="grid">
-    <div class="card">
-      <h3>1 · Descargar template editable</h3>
+    <section id="vista-datos" class="vista vista-activa">
+      <h2>Acciones rápidas</h2>
       <p>
-        Podés modificar, agregar o quitar materias desde esta lista antes de descargar el Excel.
-        También podés cambiar los nombres de materias directamente en el archivo.
+        Trabajá con tres caminos: descargar un template Excel editable, cargar ese template con las materias que quieras,
+        o usar la base precargada de alumnos para analizar directamente.
       </p>
 
-      <label>
-        Materias del template, una por línea
-        <textarea id="materiasTemplate"></textarea>
-      </label>
+      <div class="grid">
+        <div class="card">
+          <h3>1 · Descargar template Excel editable</h3>
+          <p>
+            Podés modificar, agregar o quitar materias desde esta lista. El Excel se genera con hojas de notas,
+            instrucciones, materias y ejemplo. Recomendado para evitar problemas con tildes.
+          </p>
 
-      <button class="button green" type="button" onclick="descargarTemplateExcel()">
-        Descargar template Excel
-      </button>
-    </div>
+          <label>
+            Materias del template, una por línea
+            <textarea id="materiasTemplate"></textarea>
+          </label>
 
-    <div class="card">
-      <h3>2 · Cargar template o archivo</h3>
+          <button class="button green" type="button" onclick="descargarTemplateExcel()">
+            Descargar template Excel
+          </button>
+        </div>
+
+        <div class="card">
+          <h3>2 · Cargar template o archivo</h3>
+          <p>
+            Subí el Excel completado. Las columnas fijas son Legajo, Nombre y Apellido. Toda columna posterior se toma como materia.
+          </p>
+
+          <input type="file" id="archivoEstudiantes" accept=".xlsx,.xls,.csv">
+
+          <button class="button gold" type="button" onclick="importarArchivoEstudiantes()">
+            Importar datos
+          </button>
+
+          <div id="estadoImportacion" class="result-box"></div>
+        </div>
+
+        <div class="card">
+          <h3>3 · Usar alumnos precargados</h3>
+          <p>
+            Restaura la base original con 31 estudiantes y las seis materias iniciales del sistema.
+          </p>
+
+          <button class="button gold" type="button" onclick="usarBaseInicial()">
+            Cargar alumnos precargados
+          </button>
+
+          <button class="button danger" type="button" onclick="iniciarBaseVacia()">
+            Empezar vacío
+          </button>
+        </div>
+
+        <div class="card">
+          <h3>4 · Exportar resultados</h3>
+          <p>
+            Exporta la base actual, incluyendo las materias activas. El Excel incluye una hoja de diagnóstico.
+          </p>
+
+          <button class="button green" type="button" onclick="exportarExcel()">
+            Exportar Excel
+          </button>
+
+          <button class="button" type="button" onclick="exportarCSV()">
+            Exportar CSV compatible
+          </button>
+        </div>
+      </div>
+
+      <div class="result-box">
+        <h3>Materias activas del sistema</h3>
+        <p class="small">Estas materias se usan actualmente para cálculos, tablas, gráficos y diagnóstico.</p>
+        <div id="materiasActivas"></div>
+      </div>
+    </section>
+
+    <section id="vista-diagnostico" class="vista">
+      <h2>Diagnóstico automático</h2>
       <p>
-        El sistema detecta automáticamente las materias del archivo.
-        Las columnas fijas son: Legajo, Nombre y Apellido. Todo lo demás se interpreta como materia.
+        Lectura rápida para tomar decisiones: materias críticas, estudiantes en riesgo, seguimiento y acciones sugeridas.
       </p>
+      <div id="diagnosticoGeneral"></div>
+    </section>
 
-      <input type="file" id="archivoEstudiantes" accept=".xlsx,.xls,.csv">
+    <section id="vista-dashboard" class="vista">
+      <h2>Dashboard del curso</h2>
+      <div id="dashboardCards" class="grid-3"></div>
+      <div id="insightGeneral" class="result-box"></div>
+    </section>
 
-      <button class="button gold" type="button" onclick="importarArchivoEstudiantes()">
-        Importar datos
-      </button>
-
-      <div id="estadoImportacion" class="result-box"></div>
-    </div>
-
-    <div class="card">
-      <h3>3 · Usar base precargada</h3>
+    <section id="vista-materias" class="vista">
+      <h2>Análisis por materia</h2>
       <p>
-        Carga los estudiantes precargados originales para analizar el sistema sin subir archivos.
+        Comparación del rendimiento por asignatura para detectar fortalezas, materias críticas y áreas donde conviene reforzar.
       </p>
+      <div id="tablaMaterias"></div>
+    </section>
 
-      <button class="button gold" type="button" onclick="usarBaseInicial()">
-        Cargar alumnos precargados
-      </button>
+    <section id="vista-estudiantes" class="vista">
+      <h2>Seguimiento de estudiantes</h2>
 
-      <button class="button danger" type="button" onclick="iniciarBaseVacia()">
-        Empezar vacío
-      </button>
-    </div>
+      <div class="grid">
+        <div class="card">
+          <h3>Buscar por legajo</h3>
+          <div class="form-grid">
+            <label>
+              Legajo
+              <input type="number" id="buscarLegajo" placeholder="Ejemplo: 1">
+            </label>
+            <label>
+              Acción
+              <button class="button gold" type="button" onclick="buscarEstudiante()">Buscar</button>
+            </label>
+          </div>
+          <div id="resultadoBusqueda"></div>
+        </div>
 
-    <div class="card">
-      <h3>4 · Exportar resultados</h3>
-      <p>
-        Exporta la base actual en Excel o CSV compatible con Excel.
-        Para evitar errores de tildes, se recomienda Excel.
-      </p>
+        <div class="card">
+          <h3>Carga manual múltiple</h3>
+          <p>
+            Conserva la lógica del sistema original: indicá cuántos estudiantes querés cargar y el sistema genera los formularios.
+          </p>
+          <div class="form-grid">
+            <label>
+              Cantidad de estudiantes
+              <input type="number" id="cantidadNuevos" min="1" max="20" value="1">
+            </label>
+            <label>
+              Acción
+              <button class="button gold" type="button" onclick="prepararCarga()">Preparar carga</button>
+            </label>
+          </div>
+        </div>
+      </div>
 
-      <button class="button green" type="button" onclick="exportarExcel()">
-        Exportar Excel
-      </button>
+      <div id="formulariosCarga"></div>
 
-      <button class="button" type="button" onclick="exportarCSV()">
-        Exportar CSV compatible
-      </button>
-    </div>
-  </div>
+      <h3>Tabla general de estudiantes</h3>
+      <div id="tablaIndividual"></div>
+    </section>
 
-  <div class="result-box">
-    <h3>Materias activas del sistema</h3>
-    <p class="small">
-      Estas materias se usan actualmente para cálculos, tablas, gráficos y diagnóstico.
-    </p>
-    <div id="materiasActivas"></div>
-  </div>
-</section>
-
-<section id="dashboard">
-  <h2>Dashboard del curso</h2>
-  <div id="dashboardCards" class="grid-3"></div>
-  <div id="insightGeneral" class="result-box"></div>
-</section>
-
-<section id="diagnostico">
-  <h2>Diagnóstico automático</h2>
-  <p>
-    Lectura rápida para tomar decisiones: materias críticas, estudiantes en riesgo,
-    seguimiento y acciones sugeridas.
-  </p>
-  <div id="diagnosticoGeneral"></div>
-</section>
-
-<section id="estudiantes">
-  <h2>Seguimiento de estudiantes</h2>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Buscar por legajo</h3>
+    <section id="vista-detalle" class="vista">
+      <h2>Detalle por materia</h2>
       <div class="form-grid">
         <label>
-          Legajo
-          <input type="number" id="buscarLegajo" placeholder="Ejemplo: 1">
+          Seleccioná una materia
+          <select id="materiaDetalle"></select>
         </label>
         <label>
           Acción
-          <button class="button gold" type="button" onclick="buscarEstudiante()">Buscar</button>
+          <button class="button gold" type="button" onclick="renderDetalleMateria()">Ver detalle</button>
         </label>
       </div>
-      <div id="resultadoBusqueda"></div>
-    </div>
+      <div id="detalleMateria"></div>
+    </section>
 
-    <div class="card">
-      <h3>Agregar estudiante manualmente</h3>
-      <p>
-        Permite cargar un estudiante con las materias activas actuales.
-      </p>
-      <button class="button gold" type="button" onclick="mostrarFormularioManual()">
-        Abrir formulario manual
-      </button>
-    </div>
-  </div>
+    <section id="vista-graficos" class="vista">
+      <h2>Gráficos principales</h2>
 
-  <div id="formularioManual" class="hidden"></div>
+      <div class="grid">
+        <div class="card">
+          <h3>Promedio por materia</h3>
+          <p class="small">Detecta materias con mayor o menor rendimiento promedio.</p>
+          <div id="graficoPromedios" class="chart-wrap"></div>
+        </div>
 
-  <h3>Tabla general de estudiantes</h3>
-  <div id="tablaIndividual"></div>
-</section>
+        <div class="card">
+          <h3>% aprobación por materia</h3>
+          <p class="small">Detecta materias con mayor riesgo académico.</p>
+          <div id="graficoAprobacion" class="chart-wrap"></div>
+        </div>
 
-<section id="materias">
-  <h2>Análisis por materia</h2>
-  <p>
-    Comparación del rendimiento por asignatura para detectar fortalezas,
-    materias críticas y áreas donde conviene reforzar.
-  </p>
-  <div id="tablaMaterias"></div>
-</section>
+        <div class="card">
+          <h3>Distribución académica</h3>
+          <p class="small">Resume estudiantes aprobados, en seguimiento y críticos.</p>
+          <div id="graficoSituacion"></div>
+        </div>
 
-<section id="detalle">
-  <h2>Detalle por materia</h2>
-  <div class="form-grid">
-    <label>
-      Seleccioná una materia
-      <select id="materiaDetalle"></select>
-    </label>
-    <label>
-      Acción
-      <button class="button gold" type="button" onclick="renderDetalleMateria()">Ver detalle</button>
-    </label>
-  </div>
-  <div id="detalleMateria"></div>
-</section>
+        <div class="card">
+          <h3>Ranking de promedios</h3>
+          <p class="small">Ordena estudiantes por rendimiento general.</p>
+          <div id="graficoRanking" class="chart-wrap"></div>
+        </div>
+      </div>
+    </section>
 
-<section id="graficos">
-  <h2>Gráficos principales</h2>
-
-  <div class="grid">
-    <div class="card">
-      <h3>Promedio por materia</h3>
-      <p class="small">
-        Permite ver qué materias concentran mejor o menor rendimiento promedio.
-      </p>
-      <div id="graficoPromedios" class="chart-wrap"></div>
-    </div>
-
-    <div class="card">
-      <h3>% aprobación por materia</h3>
-      <p class="small">
-        Permite detectar materias con mayor riesgo académico.
-      </p>
-      <div id="graficoAprobacion" class="chart-wrap"></div>
-    </div>
-
-    <div class="card">
-      <h3>Distribución académica</h3>
-      <p class="small">
-        Resume estudiantes aprobados, en seguimiento y críticos.
-      </p>
-      <div id="graficoSituacion"></div>
-    </div>
-
-    <div class="card">
-      <h3>Ranking de promedios</h3>
-      <p class="small">
-        Ordena estudiantes por rendimiento general.
-      </p>
-      <div id="graficoRanking" class="chart-wrap"></div>
-    </div>
-  </div>
-</section>
-
-<section id="navegacion">
-  <h2>Navegación</h2>
-  <a class="button" href="../">Volver a Automatización ETL</a>
-  <a class="button" href="../../">Volver a proyectos</a>
-  <a class="button" href="../../../">Volver al portafolio principal</a>
-</section>
-```
-
+    <section id="vista-navegacion" class="vista">
+      <h2>Navegación</h2>
+      <a class="button" href="../">Volver a Automatización ETL</a>
+      <a class="button" href="../../">Volver a proyectos</a>
+      <a class="button" href="../../../">Volver al portafolio principal</a>
+    </section>
   </main>
 
   <footer>
@@ -625,419 +612,59 @@
     ];
 
     const DATA_INICIAL = [
-      {
-        "legajo": 1,
-        "nombre": "Ana",
-        "apellido": "García",
-        "notas": {
-          "Programación": 8.0,
-          "Base de Datos": 7.0,
-          "Análisis Estadístico": 9.0,
-          "Arquitecturas en la Nube": 6.0,
-          "Aprendizaje Automático": 10.0,
-          "Captura de la Información": 4.0
-        }
-      },
-      {
-        "legajo": 2,
-        "nombre": "Carlos",
-        "apellido": "Rodríguez",
-        "notas": {
-          "Programación": 5.0,
-          "Base de Datos": 6.0,
-          "Análisis Estadístico": 7.0,
-          "Arquitecturas en la Nube": 2.0,
-          "Aprendizaje Automático": 2.0,
-          "Captura de la Información": 9.0
-        }
-      },
-      {
-        "legajo": 3,
-        "nombre": "Elena",
-        "apellido": "Martínez",
-        "notas": {
-          "Programación": 9.0,
-          "Base de Datos": 9.0,
-          "Análisis Estadístico": 8.0,
-          "Arquitecturas en la Nube": 2.0,
-          "Aprendizaje Automático": 6.0,
-          "Captura de la Información": 7.0
-        }
-      },
-      {
-        "legajo": 4,
-        "nombre": "Juan",
-        "apellido": "López",
-        "notas": {
-          "Programación": 4.0,
-          "Base de Datos": 3.0,
-          "Análisis Estadístico": 5.0,
-          "Arquitecturas en la Nube": 6.0,
-          "Aprendizaje Automático": 7.0,
-          "Captura de la Información": 8.0
-        }
-      },
-      {
-        "legajo": 5,
-        "nombre": "María",
-        "apellido": "Fernández",
-        "notas": {
-          "Programación": 10.0,
-          "Base de Datos": 9.0,
-          "Análisis Estadístico": 8.0,
-          "Arquitecturas en la Nube": 9.0,
-          "Aprendizaje Automático": 10.0,
-          "Captura de la Información": 9.0
-        }
-      },
-      {
-        "legajo": 6,
-        "nombre": "Pedro",
-        "apellido": "Sánchez",
-        "notas": {
-          "Programación": 3.0,
-          "Base de Datos": 4.0,
-          "Análisis Estadístico": 2.0,
-          "Arquitecturas en la Nube": 5.0,
-          "Aprendizaje Automático": 3.0,
-          "Captura de la Información": 6.0
-        }
-      },
-      {
-        "legajo": 7,
-        "nombre": "Lucía",
-        "apellido": "Díaz",
-        "notas": {
-          "Programación": 7.0,
-          "Base de Datos": 8.0,
-          "Análisis Estadístico": 6.0,
-          "Arquitecturas en la Nube": 7.0,
-          "Aprendizaje Automático": 8.0,
-          "Captura de la Información": 7.0
-        }
-      },
-      {
-        "legajo": 8,
-        "nombre": "Diego",
-        "apellido": "Torres",
-        "notas": {
-          "Programación": 6.0,
-          "Base de Datos": 5.0,
-          "Análisis Estadístico": 7.0,
-          "Arquitecturas en la Nube": 4.0,
-          "Aprendizaje Automático": 6.0,
-          "Captura de la Información": 5.0
-        }
-      },
-      {
-        "legajo": 9,
-        "nombre": "Sofía",
-        "apellido": "Ramírez",
-        "notas": {
-          "Programación": 9.0,
-          "Base de Datos": 10.0,
-          "Análisis Estadístico": 9.0,
-          "Arquitecturas en la Nube": 8.0,
-          "Aprendizaje Automático": 7.0,
-          "Captura de la Información": 8.0
-        }
-      },
-      {
-        "legajo": 10,
-        "nombre": "Martín",
-        "apellido": "Herrera",
-        "notas": {
-          "Programación": 2.0,
-          "Base de Datos": 3.0,
-          "Análisis Estadístico": 4.0,
-          "Arquitecturas en la Nube": 1.0,
-          "Aprendizaje Automático": 5.0,
-          "Captura de la Información": 3.0
-        }
-      },
-      {
-        "legajo": 11,
-        "nombre": "Valentina",
-        "apellido": "Castro",
-        "notas": {
-          "Programación": 8.0,
-          "Base de Datos": 7.0,
-          "Análisis Estadístico": 8.0,
-          "Arquitecturas en la Nube": 9.0,
-          "Aprendizaje Automático": 6.0,
-          "Captura de la Información": 7.0
-        }
-      },
-      {
-        "legajo": 12,
-        "nombre": "Nicolás",
-        "apellido": "Moreno",
-        "notas": {
-          "Programación": 6.0,
-          "Base de Datos": 6.0,
-          "Análisis Estadístico": 5.0,
-          "Arquitecturas en la Nube": 7.0,
-          "Aprendizaje Automático": 4.0,
-          "Captura de la Información": 6.0
-        }
-      },
-      {
-        "legajo": 13,
-        "nombre": "Camila",
-        "apellido": "Ruiz",
-        "notas": {
-          "Programación": 7.0,
-          "Base de Datos": 8.0,
-          "Análisis Estadístico": 9.0,
-          "Arquitecturas en la Nube": 6.0,
-          "Aprendizaje Automático": 8.0,
-          "Captura de la Información": 5.0
-        }
-      },
-      {
-        "legajo": 14,
-        "nombre": "Federico",
-        "apellido": "Álvarez",
-        "notas": {
-          "Programación": 4.0,
-          "Base de Datos": 5.0,
-          "Análisis Estadístico": 3.0,
-          "Arquitecturas en la Nube": 6.0,
-          "Aprendizaje Automático": 2.0,
-          "Captura de la Información": 7.0
-        }
-      },
-      {
-        "legajo": 15,
-        "nombre": "Laura",
-        "apellido": "Méndez",
-        "notas": {
-          "Programación": 10.0,
-          "Base de Datos": 8.0,
-          "Análisis Estadístico": 9.0,
-          "Arquitecturas en la Nube": 7.0,
-          "Aprendizaje Automático": 9.0,
-          "Captura de la Información": 10.0
-        }
-      },
-      {
-        "legajo": 16,
-        "nombre": "Agustín",
-        "apellido": "Romero",
-        "notas": {
-          "Programación": 7.0,
-          "Base de Datos": 6.0,
-          "Análisis Estadístico": 8.0,
-          "Arquitecturas en la Nube": 5.0,
-          "Aprendizaje Automático": 7.0,
-          "Captura de la Información": 6.0
-        }
-      },
-      {
-        "legajo": 17,
-        "nombre": "Florencia",
-        "apellido": "Gómez",
-        "notas": {
-          "Programación": 9.0,
-          "Base de Datos": 8.0,
-          "Análisis Estadístico": 7.0,
-          "Arquitecturas en la Nube": 8.0,
-          "Aprendizaje Automático": 9.0,
-          "Captura de la Información": 8.0
-        }
-      },
-      {
-        "legajo": 18,
-        "nombre": "Ramiro",
-        "apellido": "Acosta",
-        "notas": {
-          "Programación": 3.0,
-          "Base de Datos": 2.0,
-          "Análisis Estadístico": 4.0,
-          "Arquitecturas en la Nube": 3.0,
-          "Aprendizaje Automático": 5.0,
-          "Captura de la Información": 4.0
-        }
-      },
-      {
-        "legajo": 19,
-        "nombre": "Julieta",
-        "apellido": "Peralta",
-        "notas": {
-          "Programación": 8.0,
-          "Base de Datos": 9.0,
-          "Análisis Estadístico": 7.0,
-          "Arquitecturas en la Nube": 6.0,
-          "Aprendizaje Automático": 8.0,
-          "Captura de la Información": 9.0
-        }
-      },
-      {
-        "legajo": 20,
-        "nombre": "Sebastián",
-        "apellido": "Molina",
-        "notas": {
-          "Programación": 5.0,
-          "Base de Datos": 4.0,
-          "Análisis Estadístico": 6.0,
-          "Arquitecturas en la Nube": 7.0,
-          "Aprendizaje Automático": 3.0,
-          "Captura de la Información": 5.0
-        }
-      },
-      {
-        "legajo": 21,
-        "nombre": "Daniela",
-        "apellido": "Ríos",
-        "notas": {
-          "Programación": 10.0,
-          "Base de Datos": 10.0,
-          "Análisis Estadístico": 9.0,
-          "Arquitecturas en la Nube": 8.0,
-          "Aprendizaje Automático": 10.0,
-          "Captura de la Información": 9.0
-        }
-      },
-      {
-        "legajo": 22,
-        "nombre": "Tomás",
-        "apellido": "Vega",
-        "notas": {
-          "Programación": 6.0,
-          "Base de Datos": 7.0,
-          "Análisis Estadístico": 5.0,
-          "Arquitecturas en la Nube": 4.0,
-          "Aprendizaje Automático": 6.0,
-          "Captura de la Información": 7.0
-        }
-      },
-      {
-        "legajo": 23,
-        "nombre": "Milagros",
-        "apellido": "Silva",
-        "notas": {
-          "Programación": 7.0,
-          "Base de Datos": 6.0,
-          "Análisis Estadístico": 8.0,
-          "Arquitecturas en la Nube": 7.0,
-          "Aprendizaje Automático": 5.0,
-          "Captura de la Información": 6.0
-        }
-      },
-      {
-        "legajo": 24,
-        "nombre": "Emilio",
-        "apellido": "Paz",
-        "notas": {
-          "Programación": 4.0,
-          "Base de Datos": 5.0,
-          "Análisis Estadístico": 3.0,
-          "Arquitecturas en la Nube": 2.0,
-          "Aprendizaje Automático": 4.0,
-          "Captura de la Información": 6.0
-        }
-      },
-      {
-        "legajo": 25,
-        "nombre": "Rocío",
-        "apellido": "Luna",
-        "notas": {
-          "Programación": 8.0,
-          "Base de Datos": 9.0,
-          "Análisis Estadístico": 8.0,
-          "Arquitecturas en la Nube": 7.0,
-          "Aprendizaje Automático": 7.0,
-          "Captura de la Información": 8.0
-        }
-      },
-      {
-        "legajo": 26,
-        "nombre": "Ignacio",
-        "apellido": "Cabrera",
-        "notas": {
-          "Programación": 6.0,
-          "Base de Datos": 5.0,
-          "Análisis Estadístico": 7.0,
-          "Arquitecturas en la Nube": 6.0,
-          "Aprendizaje Automático": 8.0,
-          "Captura de la Información": 5.0
-        }
-      },
-      {
-        "legajo": 27,
-        "nombre": "Abril",
-        "apellido": "Suárez",
-        "notas": {
-          "Programación": 9.0,
-          "Base de Datos": 8.0,
-          "Análisis Estadístico": 10.0,
-          "Arquitecturas en la Nube": 7.0,
-          "Aprendizaje Automático": 9.0,
-          "Captura de la Información": 8.0
-        }
-      },
-      {
-        "legajo": 28,
-        "nombre": "Gonzalo",
-        "apellido": "Medina",
-        "notas": {
-          "Programación": 3.0,
-          "Base de Datos": 4.0,
-          "Análisis Estadístico": 5.0,
-          "Arquitecturas en la Nube": 3.0,
-          "Aprendizaje Automático": 2.0,
-          "Captura de la Información": 4.0
-        }
-      },
-      {
-        "legajo": 29,
-        "nombre": "Carolina",
-        "apellido": "Bustos",
-        "notas": {
-          "Programación": 7.0,
-          "Base de Datos": 7.0,
-          "Análisis Estadístico": 6.0,
-          "Arquitecturas en la Nube": 8.0,
-          "Aprendizaje Automático": 7.0,
-          "Captura de la Información": 6.0
-        }
-      },
-      {
-        "legajo": 30,
-        "nombre": "Leandro",
-        "apellido": "Figueroa",
-        "notas": {
-          "Programación": 5.0,
-          "Base de Datos": 6.0,
-          "Análisis Estadístico": 4.0,
-          "Arquitecturas en la Nube": 5.0,
-          "Aprendizaje Automático": 6.0,
-          "Captura de la Información": 3.0
-        }
-      },
-      {
-        "legajo": 31,
-        "nombre": "Maria",
-        "apellido": "saenz",
-        "notas": {
-          "Programación": 5.0,
-          "Base de Datos": 6.0,
-          "Análisis Estadístico": 5.0,
-          "Arquitecturas en la Nube": 6.0,
-          "Aprendizaje Automático": 7.0,
-          "Captura de la Información": 7.0
-        }
-      }
+      { legajo: 1, nombre: "Ana", apellido: "García", notas: { "Programación": 8.0, "Base de Datos": 7.0, "Análisis Estadístico": 9.0, "Arquitecturas en la Nube": 6.0, "Aprendizaje Automático": 10.0, "Captura de la Información": 4.0 } },
+      { legajo: 2, nombre: "Carlos", apellido: "Rodríguez", notas: { "Programación": 5.0, "Base de Datos": 6.0, "Análisis Estadístico": 7.0, "Arquitecturas en la Nube": 2.0, "Aprendizaje Automático": 2.0, "Captura de la Información": 9.0 } },
+      { legajo: 3, nombre: "Elena", apellido: "Martínez", notas: { "Programación": 9.0, "Base de Datos": 9.0, "Análisis Estadístico": 8.0, "Arquitecturas en la Nube": 2.0, "Aprendizaje Automático": 6.0, "Captura de la Información": 7.0 } },
+      { legajo: 4, nombre: "Juan", apellido: "López", notas: { "Programación": 4.0, "Base de Datos": 3.0, "Análisis Estadístico": 5.0, "Arquitecturas en la Nube": 6.0, "Aprendizaje Automático": 7.0, "Captura de la Información": 8.0 } },
+      { legajo: 5, nombre: "María", apellido: "Fernández", notas: { "Programación": 10.0, "Base de Datos": 9.0, "Análisis Estadístico": 8.0, "Arquitecturas en la Nube": 9.0, "Aprendizaje Automático": 10.0, "Captura de la Información": 9.0 } },
+      { legajo: 6, nombre: "Pedro", apellido: "Sánchez", notas: { "Programación": 3.0, "Base de Datos": 4.0, "Análisis Estadístico": 2.0, "Arquitecturas en la Nube": 5.0, "Aprendizaje Automático": 3.0, "Captura de la Información": 6.0 } },
+      { legajo: 7, nombre: "Lucía", apellido: "Díaz", notas: { "Programación": 7.0, "Base de Datos": 8.0, "Análisis Estadístico": 6.0, "Arquitecturas en la Nube": 7.0, "Aprendizaje Automático": 8.0, "Captura de la Información": 7.0 } },
+      { legajo: 8, nombre: "Diego", apellido: "Torres", notas: { "Programación": 6.0, "Base de Datos": 5.0, "Análisis Estadístico": 7.0, "Arquitecturas en la Nube": 4.0, "Aprendizaje Automático": 6.0, "Captura de la Información": 5.0 } },
+      { legajo: 9, nombre: "Sofía", apellido: "Ramírez", notas: { "Programación": 9.0, "Base de Datos": 10.0, "Análisis Estadístico": 9.0, "Arquitecturas en la Nube": 8.0, "Aprendizaje Automático": 7.0, "Captura de la Información": 8.0 } },
+      { legajo: 10, nombre: "Martín", apellido: "Herrera", notas: { "Programación": 2.0, "Base de Datos": 3.0, "Análisis Estadístico": 4.0, "Arquitecturas en la Nube": 1.0, "Aprendizaje Automático": 5.0, "Captura de la Información": 3.0 } },
+      { legajo: 11, nombre: "Valentina", apellido: "Castro", notas: { "Programación": 8.0, "Base de Datos": 7.0, "Análisis Estadístico": 8.0, "Arquitecturas en la Nube": 9.0, "Aprendizaje Automático": 6.0, "Captura de la Información": 7.0 } },
+      { legajo: 12, nombre: "Nicolás", apellido: "Moreno", notas: { "Programación": 6.0, "Base de Datos": 6.0, "Análisis Estadístico": 5.0, "Arquitecturas en la Nube": 7.0, "Aprendizaje Automático": 4.0, "Captura de la Información": 6.0 } },
+      { legajo: 13, nombre: "Camila", apellido: "Ruiz", notas: { "Programación": 7.0, "Base de Datos": 8.0, "Análisis Estadístico": 9.0, "Arquitecturas en la Nube": 6.0, "Aprendizaje Automático": 8.0, "Captura de la Información": 5.0 } },
+      { legajo: 14, nombre: "Federico", apellido: "Álvarez", notas: { "Programación": 4.0, "Base de Datos": 5.0, "Análisis Estadístico": 3.0, "Arquitecturas en la Nube": 6.0, "Aprendizaje Automático": 2.0, "Captura de la Información": 7.0 } },
+      { legajo: 15, nombre: "Laura", apellido: "Méndez", notas: { "Programación": 10.0, "Base de Datos": 8.0, "Análisis Estadístico": 9.0, "Arquitecturas en la Nube": 7.0, "Aprendizaje Automático": 9.0, "Captura de la Información": 10.0 } },
+      { legajo: 16, nombre: "Agustín", apellido: "Romero", notas: { "Programación": 7.0, "Base de Datos": 6.0, "Análisis Estadístico": 8.0, "Arquitecturas en la Nube": 5.0, "Aprendizaje Automático": 7.0, "Captura de la Información": 6.0 } },
+      { legajo: 17, nombre: "Florencia", apellido: "Gómez", notas: { "Programación": 9.0, "Base de Datos": 8.0, "Análisis Estadístico": 7.0, "Arquitecturas en la Nube": 8.0, "Aprendizaje Automático": 9.0, "Captura de la Información": 8.0 } },
+      { legajo: 18, nombre: "Ramiro", apellido: "Acosta", notas: { "Programación": 3.0, "Base de Datos": 2.0, "Análisis Estadístico": 4.0, "Arquitecturas en la Nube": 3.0, "Aprendizaje Automático": 5.0, "Captura de la Información": 4.0 } },
+      { legajo: 19, nombre: "Julieta", apellido: "Peralta", notas: { "Programación": 8.0, "Base de Datos": 9.0, "Análisis Estadístico": 7.0, "Arquitecturas en la Nube": 6.0, "Aprendizaje Automático": 8.0, "Captura de la Información": 9.0 } },
+      { legajo: 20, nombre: "Sebastián", apellido: "Molina", notas: { "Programación": 5.0, "Base de Datos": 4.0, "Análisis Estadístico": 6.0, "Arquitecturas en la Nube": 7.0, "Aprendizaje Automático": 3.0, "Captura de la Información": 5.0 } },
+      { legajo: 21, nombre: "Daniela", apellido: "Ríos", notas: { "Programación": 10.0, "Base de Datos": 10.0, "Análisis Estadístico": 9.0, "Arquitecturas en la Nube": 8.0, "Aprendizaje Automático": 10.0, "Captura de la Información": 9.0 } },
+      { legajo: 22, nombre: "Tomás", apellido: "Vega", notas: { "Programación": 6.0, "Base de Datos": 7.0, "Análisis Estadístico": 5.0, "Arquitecturas en la Nube": 4.0, "Aprendizaje Automático": 6.0, "Captura de la Información": 7.0 } },
+      { legajo: 23, nombre: "Milagros", apellido: "Silva", notas: { "Programación": 7.0, "Base de Datos": 6.0, "Análisis Estadístico": 8.0, "Arquitecturas en la Nube": 7.0, "Aprendizaje Automático": 5.0, "Captura de la Información": 6.0 } },
+      { legajo: 24, nombre: "Emilio", apellido: "Paz", notas: { "Programación": 4.0, "Base de Datos": 5.0, "Análisis Estadístico": 3.0, "Arquitecturas en la Nube": 2.0, "Aprendizaje Automático": 4.0, "Captura de la Información": 6.0 } },
+      { legajo: 25, nombre: "Rocío", apellido: "Luna", notas: { "Programación": 8.0, "Base de Datos": 9.0, "Análisis Estadístico": 8.0, "Arquitecturas en la Nube": 7.0, "Aprendizaje Automático": 7.0, "Captura de la Información": 8.0 } },
+      { legajo: 26, nombre: "Ignacio", apellido: "Cabrera", notas: { "Programación": 6.0, "Base de Datos": 5.0, "Análisis Estadístico": 7.0, "Arquitecturas en la Nube": 6.0, "Aprendizaje Automático": 8.0, "Captura de la Información": 5.0 } },
+      { legajo: 27, nombre: "Abril", apellido: "Suárez", notas: { "Programación": 9.0, "Base de Datos": 8.0, "Análisis Estadístico": 10.0, "Arquitecturas en la Nube": 7.0, "Aprendizaje Automático": 9.0, "Captura de la Información": 8.0 } },
+      { legajo: 28, nombre: "Gonzalo", apellido: "Medina", notas: { "Programación": 3.0, "Base de Datos": 4.0, "Análisis Estadístico": 5.0, "Arquitecturas en la Nube": 3.0, "Aprendizaje Automático": 2.0, "Captura de la Información": 4.0 } },
+      { legajo: 29, nombre: "Carolina", apellido: "Bustos", notas: { "Programación": 7.0, "Base de Datos": 7.0, "Análisis Estadístico": 6.0, "Arquitecturas en la Nube": 8.0, "Aprendizaje Automático": 7.0, "Captura de la Información": 6.0 } },
+      { legajo: 30, nombre: "Leandro", apellido: "Figueroa", notas: { "Programación": 5.0, "Base de Datos": 6.0, "Análisis Estadístico": 4.0, "Arquitecturas en la Nube": 5.0, "Aprendizaje Automático": 6.0, "Captura de la Información": 3.0 } },
+      { legajo: 31, nombre: "Maria", apellido: "saenz", notas: { "Programación": 5.0, "Base de Datos": 6.0, "Análisis Estadístico": 5.0, "Arquitecturas en la Nube": 6.0, "Aprendizaje Automático": 7.0, "Captura de la Información": 7.0 } }
     ];
 
-    const STORAGE_KEY_ESTUDIANTES = "wds_sia_estudiantes_v3";
-    const STORAGE_KEY_MATERIAS = "wds_sia_materias_v3";
+    const STORAGE_KEY_ESTUDIANTES = "wds_sia_estudiantes_panel_v1";
+    const STORAGE_KEY_MATERIAS = "wds_sia_materias_panel_v1";
 
     let materias = cargarMaterias();
     let estudiantes = cargarDatos();
 
     function copiaProfunda(obj) {
       return JSON.parse(JSON.stringify(obj));
+    }
+
+    function mostrarVista(nombre) {
+      document.querySelectorAll(".vista").forEach(vista => vista.classList.remove("vista-activa"));
+      const vista = document.getElementById(`vista-${nombre}`);
+      if (vista) vista.classList.add("vista-activa");
+
+      document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
+      const boton = document.querySelector(`[data-vista="${nombre}"]`);
+      if (boton) boton.classList.add("active");
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function cargarMaterias() {
@@ -1082,11 +709,7 @@
 
     function obtenerMateriasDesdeTextarea() {
       const texto = document.getElementById("materiasTemplate").value || "";
-      const lista = texto
-        .split(/\r?\n/)
-        .map(m => limpiarTexto(m))
-        .filter(m => m !== "");
-
+      const lista = texto.split(/\r?\n/).map(m => limpiarTexto(m)).filter(m => m !== "");
       const unicas = [];
       const vistas = new Set();
 
@@ -1156,9 +779,9 @@
     }
 
     function clasificarSituacion(est) {
-      const s = situacion(est);
-      if (s === "Aprobado") return '<span class="pill pill-ok">Aprobado</span>';
-      return '<span class="pill pill-bad">Reprobado</span>';
+      return situacion(est) === "Aprobado"
+        ? '<span class="pill pill-ok">Aprobado</span>'
+        : '<span class="pill pill-bad">Reprobado</span>';
     }
 
     function clasificarRiesgo(est) {
@@ -1168,22 +791,43 @@
       return '<span class="pill pill-bad">Crítico</span>';
     }
 
-    function promedioMateria(materia) {
-      if (estudiantes.length === 0) return 0;
-      const valores = estudiantes
-        .map(est => Number(est.notas[materia]))
-        .filter(n => Number.isFinite(n));
+    function valoresMateria(materia) {
+      return estudiantes.map(est => Number(est.notas[materia])).filter(n => Number.isFinite(n));
+    }
 
+    function promedioMateria(materia) {
+      const valores = valoresMateria(materia);
       if (valores.length === 0) return 0;
       return valores.reduce((a, b) => a + b, 0) / valores.length;
     }
 
-    function aprobacionMateria(materia) {
-      if (estudiantes.length === 0) return 0;
-      const valores = estudiantes
-        .map(est => Number(est.notas[materia]))
-        .filter(n => Number.isFinite(n));
+    function medianaMateria(materia) {
+      const valores = valoresMateria(materia).sort((a,b) => a-b);
+      if (valores.length === 0) return 0;
+      const mitad = Math.floor(valores.length / 2);
+      return valores.length % 2 ? valores[mitad] : (valores[mitad - 1] + valores[mitad]) / 2;
+    }
 
+    function desviacionMateria(materia) {
+      const valores = valoresMateria(materia);
+      if (valores.length <= 1) return 0;
+      const prom = promedioMateria(materia);
+      const varianza = valores.reduce((acc, n) => acc + Math.pow(n - prom, 2), 0) / (valores.length - 1);
+      return Math.sqrt(varianza);
+    }
+
+    function minMateria(materia) {
+      const valores = valoresMateria(materia);
+      return valores.length ? Math.min(...valores) : 0;
+    }
+
+    function maxMateria(materia) {
+      const valores = valoresMateria(materia);
+      return valores.length ? Math.max(...valores) : 0;
+    }
+
+    function aprobacionMateria(materia) {
+      const valores = valoresMateria(materia);
       if (valores.length === 0) return 0;
       const aprob = valores.filter(n => n >= 6).length;
       return (aprob / valores.length) * 100;
@@ -1239,67 +883,24 @@
       const peorMateria = materiaMenorRendimiento();
 
       document.getElementById("dashboardCards").innerHTML = `
-        <div class="card">
-          <div class="metric">${total}</div>
-          <h3>Estudiantes cargados</h3>
-          <p>Total de alumnos disponibles para análisis.</p>
-        </div>
-
-        <div class="card">
-          <div class="metric">${materias.length}</div>
-          <h3>Materias activas</h3>
-          <p>Cantidad de materias detectadas en el sistema.</p>
-        </div>
-
-        <div class="card">
-          <div class="metric">${promedioGeneralCurso().toFixed(2)}</div>
-          <h3>Promedio general</h3>
-          <p>Rendimiento promedio del curso completo.</p>
-        </div>
-
-        <div class="card">
-          <div class="metric">${porcentajeAprobacionGeneral().toFixed(1)}%</div>
-          <h3>Aprobación total</h3>
-          <p>Estudiantes que aprobaron todas las materias.</p>
-        </div>
-
-        <div class="card">
-          <div class="metric">${aprobados} / ${reprobados}</div>
-          <h3>Aprobados / Reprobados</h3>
-          <p>Distribución general de situación académica.</p>
-        </div>
-
-        <div class="card">
-          <div class="metric">${seguimiento} / ${criticos}</div>
-          <h3>Seguimiento / Críticos</h3>
-          <p>Prioridad de acompañamiento académico.</p>
-        </div>
-
-        <div class="card">
-          <div class="metric">${mejor ? promedio(mejor).toFixed(2) : "-"}</div>
-          <h3>Mejor promedio</h3>
-          <p>${mejor ? mejor.nombre + " " + mejor.apellido : "Sin datos"}</p>
-        </div>
-
-        <div class="card">
-          <div class="metric">${peorMateria !== "-" ? promedioMateria(peorMateria).toFixed(2) : "-"}</div>
-          <h3>Materia a reforzar</h3>
-          <p>${peorMateria}</p>
-        </div>
-
-        <div class="card">
-          <div class="metric">${mejorMateria !== "-" ? promedioMateria(mejorMateria).toFixed(2) : "-"}</div>
-          <h3>Materia fuerte</h3>
-          <p>${mejorMateria}</p>
-        </div>
+        <div class="card"><div class="metric">${total}</div><h3>Estudiantes</h3><p>Total cargado para análisis.</p></div>
+        <div class="card"><div class="metric">${materias.length}</div><h3>Materias</h3><p>Materias activas detectadas.</p></div>
+        <div class="card"><div class="metric">${promedioGeneralCurso().toFixed(2)}</div><h3>Promedio general</h3><p>Rendimiento promedio del curso.</p></div>
+        <div class="card"><div class="metric">${porcentajeAprobacionGeneral().toFixed(1)}%</div><h3>Aprobación total</h3><p>Estudiantes que aprobaron todas las materias.</p></div>
+        <div class="card"><div class="metric">${aprobados} / ${reprobados}</div><h3>Aprobados / Reprobados</h3><p>Distribución de situación académica.</p></div>
+        <div class="card"><div class="metric">${seguimiento} / ${criticos}</div><h3>Seguimiento / Críticos</h3><p>Prioridad de acompañamiento.</p></div>
+        <div class="card"><div class="metric">${mejor ? promedio(mejor).toFixed(2) : "-"}</div><h3>Mejor promedio</h3><p>${mejor ? mejor.nombre + " " + mejor.apellido : "Sin datos"}</p></div>
+        <div class="card"><div class="metric">${peorMateria !== "-" ? promedioMateria(peorMateria).toFixed(2) : "-"}</div><h3>Materia a reforzar</h3><p>${peorMateria}</p></div>
+        <div class="card"><div class="metric">${mejorMateria !== "-" ? promedioMateria(mejorMateria).toFixed(2) : "-"}</div><h3>Materia fuerte</h3><p>${mejorMateria}</p></div>
       `;
 
       document.getElementById("insightGeneral").innerHTML = `
         <h3>Lectura ejecutiva</h3>
         <p>
           La materia con mejor rendimiento promedio es <strong>${mejorMateria}</strong>
-          (${mejorMateria !== "-" ? promedioMateria(mejorMateria).toFixed(2) : "-"}), mientras que la materia que requiere mayor seguimiento es
-          <strong>${peorMateria}</strong> (${peorMateria !== "-" ? promedioMateria(peorMateria).toFixed(2) : "-"}).
+          (${mejorMateria !== "-" ? promedioMateria(mejorMateria).toFixed(2) : "-"}).
+          La materia que requiere mayor seguimiento es <strong>${peorMateria}</strong>
+          (${peorMateria !== "-" ? promedioMateria(peorMateria).toFixed(2) : "-"}).
           Hay <strong>${criticos}</strong> estudiante(s) en situación crítica.
         </p>
       `;
@@ -1307,14 +908,8 @@
 
     function renderDiagnostico() {
       const contenedor = document.getElementById("diagnosticoGeneral");
-
       if (estudiantes.length === 0 || materias.length === 0) {
-        contenedor.innerHTML = `
-          <div class="result-box diagnostico-warn">
-            <h3>Sin datos suficientes</h3>
-            <p>Importá un archivo, cargá alumnos precargados o agregá estudiantes manualmente.</p>
-          </div>
-        `;
+        contenedor.innerHTML = `<div class="result-box diagnostico-warn"><h3>Sin datos suficientes</h3><p>Importá un archivo, cargá alumnos precargados o agregá estudiantes manualmente.</p></div>`;
         return;
       }
 
@@ -1338,147 +933,108 @@
         decision = "Aplicar actividades de refuerzo, recuperación y práctica guiada.";
       }
 
-      const nombresCriticos = criticos
-        .slice(0, 8)
-        .map(e => `${e.nombre} ${e.apellido}`)
-        .join(", ") || "Sin estudiantes críticos";
+      const nombresCriticos = criticos.slice(0, 8).map(e => `${e.nombre} ${e.apellido}`).join(", ") || "Sin estudiantes críticos";
 
       contenedor.innerHTML = `
         <div class="result-box ${clase}">
           <h3>Diagnóstico: ${diagnostico}</h3>
-
-          <p>
-            Promedio general del curso:
-            <strong>${promCurso.toFixed(2)}</strong>.
-          </p>
-
-          <p>
-            Materia prioritaria:
-            <strong>${materiaCritica}</strong>,
-            con promedio de
-            <strong>${promedioMateria(materiaCritica).toFixed(2)}</strong>
-            y aprobación de
-            <strong>${aprobacionCritica.toFixed(1)}%</strong>.
-          </p>
-
-          <p>
-            Estudiantes críticos:
-            <strong>${criticos.length}</strong>.
-            Estudiantes en seguimiento:
-            <strong>${seguimiento.length}</strong>.
-          </p>
-
-          <p>
-            <strong>Decisión sugerida:</strong> ${decision}
-          </p>
-
-          <p>
-            <strong>Priorizar:</strong> ${nombresCriticos}.
-          </p>
+          <p>Promedio general del curso: <strong>${promCurso.toFixed(2)}</strong>.</p>
+          <p>Materia prioritaria: <strong>${materiaCritica}</strong>, con promedio de <strong>${promedioMateria(materiaCritica).toFixed(2)}</strong> y aprobación de <strong>${aprobacionCritica.toFixed(1)}%</strong>.</p>
+          <p>Estudiantes críticos: <strong>${criticos.length}</strong>. Estudiantes en seguimiento: <strong>${seguimiento.length}</strong>.</p>
+          <p><strong>Decisión sugerida:</strong> ${decision}</p>
+          <p><strong>Priorizar:</strong> ${nombresCriticos}.</p>
         </div>
       `;
     }
 
     function renderTablaIndividual() {
       const ordenados = estudiantes.slice().sort((a, b) => promedio(a) - promedio(b));
-
       if (ordenados.length === 0) {
-        document.getElementById("tablaIndividual").innerHTML = `
-          <div class="result-box">No hay estudiantes cargados.</div>
-        `;
+        document.getElementById("tablaIndividual").innerHTML = `<div class="result-box">No hay estudiantes cargados.</div>`;
         return;
       }
 
       document.getElementById("tablaIndividual").innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>Legajo</th>
-              <th>Estudiante</th>
-              <th>Promedio</th>
-              <th>Sin aplazos</th>
-              <th>Aprobadas</th>
-              <th>Desaprobadas</th>
-              <th>Aplazos</th>
-              <th>Situación</th>
-              <th>Riesgo</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${ordenados.map(est => `
+        <div class="table-wrap">
+          <table>
+            <thead>
               <tr>
-                <td>${est.legajo}</td>
-                <td>${est.nombre} ${est.apellido}</td>
-                <td>${promedio(est).toFixed(2)}</td>
-                <td>${promedioSinAplazos(est).toFixed(2)}</td>
-                <td>${aprobadas(est)} / ${materias.length}</td>
-                <td>${desaprobadas(est)}</td>
-                <td>${aplazos(est)}</td>
-                <td>${clasificarSituacion(est)}</td>
-                <td>${clasificarRiesgo(est)}</td>
+                <th>Legajo</th><th>Estudiante</th><th>Promedio</th><th>Sin aplazos</th><th>Aprobadas</th><th>Desaprobadas</th><th>Aplazos</th><th>Situación</th><th>Riesgo</th>
               </tr>
-            `).join("")}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              ${ordenados.map(est => `
+                <tr>
+                  <td>${est.legajo}</td>
+                  <td>${est.nombre} ${est.apellido}</td>
+                  <td>${promedio(est).toFixed(2)}</td>
+                  <td>${promedioSinAplazos(est).toFixed(2)}</td>
+                  <td>${aprobadas(est)} / ${materias.length}</td>
+                  <td>${desaprobadas(est)}</td>
+                  <td>${aplazos(est)}</td>
+                  <td>${clasificarSituacion(est)}</td>
+                  <td>${clasificarRiesgo(est)}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
       `;
     }
 
     function renderTablaMaterias() {
       if (materias.length === 0) {
-        document.getElementById("tablaMaterias").innerHTML = `
-          <div class="result-box">No hay materias activas.</div>
-        `;
+        document.getElementById("tablaMaterias").innerHTML = `<div class="result-box">No hay materias activas.</div>`;
         return;
       }
 
       document.getElementById("tablaMaterias").innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>Materia</th>
-              <th>Promedio</th>
-              <th>% aprobación</th>
-              <th>Aprobados</th>
-              <th>Seguimiento</th>
-              <th>Aplazos</th>
-              <th>Diagnóstico</th>
-              <th>Decisión sugerida</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${materias.map(m => {
-              const prom = promedioMateria(m);
-              const pct = aprobacionMateria(m);
-              const aprob = estudiantes.filter(est => Number(est.notas[m]) >= 6).length;
-              const seg = estudiantes.filter(est => Number(est.notas[m]) >= 4 && Number(est.notas[m]) < 6).length;
-              const apl = estudiantes.filter(est => Number(est.notas[m]) < 4).length;
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Materia</th><th>Promedio</th><th>Mediana</th><th>Desv. est.</th><th>Mín.</th><th>Máx.</th><th>% aprobación</th><th>Aprobados</th><th>Seguimiento</th><th>Aplazos</th><th>Diagnóstico</th><th>Decisión</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${materias.map(m => {
+                const prom = promedioMateria(m);
+                const pct = aprobacionMateria(m);
+                const aprob = estudiantes.filter(est => Number(est.notas[m]) >= 6).length;
+                const seg = estudiantes.filter(est => Number(est.notas[m]) >= 4 && Number(est.notas[m]) < 6).length;
+                const apl = estudiantes.filter(est => Number(est.notas[m]) < 4).length;
 
-              let lectura = "Buen desempeño";
-              let decision = "Mantener estrategia actual.";
+                let lectura = "Buen desempeño";
+                let decision = "Mantener estrategia actual.";
 
-              if (pct < 50 || prom < 5.5) {
-                lectura = "Crítica";
-                decision = "Reforzar contenidos y revisar causas de bajo rendimiento.";
-              } else if (pct < 70 || prom < 6.5) {
-                lectura = "Seguimiento";
-                decision = "Aplicar actividad de recuperación o práctica guiada.";
-              }
+                if (pct < 50 || prom < 5.5) {
+                  lectura = "Crítica";
+                  decision = "Reforzar contenidos y revisar causas de bajo rendimiento.";
+                } else if (pct < 70 || prom < 6.5) {
+                  lectura = "Seguimiento";
+                  decision = "Aplicar actividad de recuperación o práctica guiada.";
+                }
 
-              return `
-                <tr>
-                  <td>${m}</td>
-                  <td>${prom.toFixed(2)}</td>
-                  <td>${pct.toFixed(1)}%</td>
-                  <td>${aprob}</td>
-                  <td>${seg}</td>
-                  <td>${apl}</td>
-                  <td>${lectura}</td>
-                  <td>${decision}</td>
-                </tr>
-              `;
-            }).join("")}
-          </tbody>
-        </table>
+                return `
+                  <tr>
+                    <td>${m}</td>
+                    <td>${prom.toFixed(2)}</td>
+                    <td>${medianaMateria(m).toFixed(2)}</td>
+                    <td>${desviacionMateria(m).toFixed(2)}</td>
+                    <td>${minMateria(m).toFixed(1)}</td>
+                    <td>${maxMateria(m).toFixed(1)}</td>
+                    <td>${pct.toFixed(1)}%</td>
+                    <td>${aprob}</td>
+                    <td>${seg}</td>
+                    <td>${apl}</td>
+                    <td>${lectura}</td>
+                    <td>${decision}</td>
+                  </tr>
+                `;
+              }).join("")}
+            </tbody>
+          </table>
+        </div>
       `;
     }
 
@@ -1489,17 +1045,14 @@
 
     function renderDetalleMateria() {
       const contenedor = document.getElementById("detalleMateria");
-
       if (estudiantes.length === 0 || materias.length === 0) {
-        contenedor.innerHTML = `
-          <div class="result-box">No hay estudiantes o materias cargadas.</div>
-        `;
+        contenedor.innerHTML = `<div class="result-box">No hay estudiantes o materias cargadas.</div>`;
         return;
       }
 
       const materia = document.getElementById("materiaDetalle").value || materias[0];
       const lista = estudiantes.slice().sort((a, b) => Number(a.notas[materia]) - Number(b.notas[materia]));
-      const notas = lista.map(e => Number(e.notas[materia])).filter(n => Number.isFinite(n));
+      const notas = valoresMateria(materia);
       const aprob = notas.filter(n => n >= 6).length;
       const porcentaje = notas.length > 0 ? (aprob / notas.length * 100) : 0;
 
@@ -1508,34 +1061,29 @@
           <h3>${materia}</h3>
           <p>
             Promedio: <strong>${promedioMateria(materia).toFixed(2)}</strong> ·
-            Nota mínima: <strong>${Math.min(...notas).toFixed(1)}</strong> ·
-            Nota máxima: <strong>${Math.max(...notas).toFixed(1)}</strong> ·
+            Mediana: <strong>${medianaMateria(materia).toFixed(2)}</strong> ·
+            Desv. est.: <strong>${desviacionMateria(materia).toFixed(2)}</strong> ·
+            Mínima: <strong>${minMateria(materia).toFixed(1)}</strong> ·
+            Máxima: <strong>${maxMateria(materia).toFixed(1)}</strong> ·
             Aprobación: <strong>${porcentaje.toFixed(1)}%</strong>
           </p>
         </div>
-
-        <table>
-          <thead>
-            <tr>
-              <th>Prioridad</th>
-              <th>Legajo</th>
-              <th>Estudiante</th>
-              <th>Nota</th>
-              <th>Estado</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${lista.map((est, i) => `
-              <tr>
-                <td>${i + 1}</td>
-                <td>${est.legajo}</td>
-                <td>${est.nombre} ${est.apellido}</td>
-                <td>${Number(est.notas[materia]).toFixed(1)}</td>
-                <td>${clasificarNota(est.notas[materia])}</td>
-              </tr>
-            `).join("")}
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Prioridad</th><th>Legajo</th><th>Estudiante</th><th>Nota</th><th>Estado</th></tr></thead>
+            <tbody>
+              ${lista.map((est, i) => `
+                <tr>
+                  <td>${i + 1}</td>
+                  <td>${est.legajo}</td>
+                  <td>${est.nombre} ${est.apellido}</td>
+                  <td>${Number(est.notas[materia]).toFixed(1)}</td>
+                  <td>${clasificarNota(est.notas[materia])}</td>
+                </tr>
+              `).join("")}
+            </tbody>
+          </table>
+        </div>
       `;
     }
 
@@ -1544,9 +1092,7 @@
       const est = estudiantes.find(e => Number(e.legajo) === legajo);
 
       if (!est) {
-        document.getElementById("resultadoBusqueda").innerHTML = `
-          <div class="result-box">No se encontró estudiante con ese legajo.</div>
-        `;
+        document.getElementById("resultadoBusqueda").innerHTML = `<div class="result-box">No se encontró estudiante con ese legajo.</div>`;
         return;
       }
 
@@ -1559,89 +1105,84 @@
             Situación: <strong>${situacion(est)}</strong> ·
             Riesgo: <strong>${nivelRiesgo(est)}</strong>
           </p>
-
-          <table>
-            <thead>
-              <tr>
-                <th>Materia</th>
-                <th>Nota</th>
-                <th>Estado</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${materias.map(m => `
-                <tr>
-                  <td>${m}</td>
-                  <td>${Number(est.notas[m]).toFixed(1)}</td>
-                  <td>${clasificarNota(est.notas[m])}</td>
-                </tr>
-              `).join("")}
-            </tbody>
-          </table>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Materia</th><th>Nota</th><th>Estado</th></tr></thead>
+              <tbody>
+                ${materias.map(m => `
+                  <tr>
+                    <td>${m}</td>
+                    <td>${Number(est.notas[m]).toFixed(1)}</td>
+                    <td>${clasificarNota(est.notas[m])}</td>
+                  </tr>
+                `).join("")}
+              </tbody>
+            </table>
+          </div>
         </div>
       `;
     }
 
-    function mostrarFormularioManual() {
-      const cont = document.getElementById("formularioManual");
-      cont.classList.remove("hidden");
-
-      cont.innerHTML = `
-        <section>
-          <h2>Carga manual</h2>
-          <div class="form-grid">
-            <label>
-              Nombre
-              <input type="text" id="manualNombre" placeholder="Nombre">
-            </label>
-            <label>
-              Apellido
-              <input type="text" id="manualApellido" placeholder="Apellido">
-            </label>
-          </div>
-
-          <div class="form-grid-3">
-            ${materias.map((m, i) => `
-              <label>
-                ${m}
-                <input type="number" id="manualNota_${i}" min="1" max="10" step="0.1" placeholder="1 a 10">
-              </label>
-            `).join("")}
-          </div>
-
-          <button class="button gold" type="button" onclick="guardarManual()">Guardar estudiante</button>
-        </section>
-      `;
-    }
-
-    function guardarManual() {
-      const nombre = limpiarTexto(document.getElementById("manualNombre").value);
-      const apellido = limpiarTexto(document.getElementById("manualApellido").value);
-
-      if (!nombre || !apellido) {
-        alert("Completá nombre y apellido.");
+    function prepararCarga() {
+      const n = Number(document.getElementById("cantidadNuevos").value);
+      if (!Number.isInteger(n) || n < 1 || n > 20) {
+        alert("Ingresá una cantidad entre 1 y 20.");
         return;
       }
 
-      const notas = {};
-      for (let i = 0; i < materias.length; i++) {
-        const val = Number(document.getElementById(`manualNota_${i}`).value);
-        if (!Number.isFinite(val) || val < 1 || val > 10) {
-          alert("Todas las notas deben estar entre 1 y 10.");
-          return;
-        }
-        notas[materias[i]] = val;
+      let html = "";
+      let legajo = proximoLegajo();
+
+      for (let i = 0; i < n; i++) {
+        html += `
+          <div class="card">
+            <h3>Estudiante ${i + 1} · Legajo ${legajo + i}</h3>
+            <div class="form-grid">
+              <label>Nombre<input type="text" id="nombre_${i}" placeholder="Nombre"></label>
+              <label>Apellido<input type="text" id="apellido_${i}" placeholder="Apellido"></label>
+            </div>
+            <div class="form-grid-3">
+              ${materias.map((m, j) => `
+                <label>${m}<input type="number" id="nota_${i}_${j}" min="1" max="10" step="0.1" placeholder="1 a 10"></label>
+              `).join("")}
+            </div>
+          </div>
+        `;
       }
 
-      estudiantes.push({
-        legajo: proximoLegajo(),
-        nombre,
-        apellido,
-        notas
-      });
+      html += `<button class="button gold" type="button" onclick="guardarNuevos(${n})">Guardar estudiantes</button>`;
+      document.getElementById("formulariosCarga").innerHTML = html;
+    }
 
+    function guardarNuevos(n) {
+      let nuevos = [];
+      let legajo = proximoLegajo();
+
+      for (let i = 0; i < n; i++) {
+        const nombre = limpiarTexto(document.getElementById(`nombre_${i}`).value);
+        const apellido = limpiarTexto(document.getElementById(`apellido_${i}`).value);
+
+        if (!nombre || !apellido) {
+          alert("Completá nombre y apellido en todos los formularios.");
+          return;
+        }
+
+        const notas = {};
+        for (let j = 0; j < materias.length; j++) {
+          const val = Number(document.getElementById(`nota_${i}_${j}`).value);
+          if (!Number.isFinite(val) || val < 1 || val > 10) {
+            alert("Todas las notas deben estar entre 1 y 10.");
+            return;
+          }
+          notas[materias[j]] = val;
+        }
+
+        nuevos.push({ legajo: legajo + i, nombre, apellido, notas });
+      }
+
+      estudiantes = estudiantes.concat(nuevos);
       guardarDatos();
-      document.getElementById("formularioManual").classList.add("hidden");
+      document.getElementById("formulariosCarga").innerHTML = `<div class="result-box">Estudiantes guardados correctamente.</div>`;
       renderAll();
     }
 
@@ -1656,38 +1197,51 @@
 
       const filas = [
         headers,
-        [1, "Ana", "García", "", "", "", "", "", "", "", "", "", ""].slice(0, headers.length),
-        [2, "Carlos", "Rodríguez", "", "", "", "", "", "", "", "", "", ""].slice(0, headers.length),
-        [3, "María", "Fernández", "", "", "", "", "", "", "", "", "", ""].slice(0, headers.length),
-        [4, "Sofía", "Ramírez", "", "", "", "", "", "", "", "", "", ""].slice(0, headers.length),
-        [5, "Tomás", "Vega", "", "", "", "", "", "", "", "", "", ""].slice(0, headers.length)
+        [1, "Ana", "García", ...materiasTemplate.map((m, i) => [8,7,9,6,10,4][i] ?? "")],
+        [2, "Carlos", "Rodríguez", ...materiasTemplate.map((m, i) => [5,6,7,2,2,9][i] ?? "")],
+        [3, "María", "Fernández", ...materiasTemplate.map(() => "")],
+        [4, "Sofía", "Ramírez", ...materiasTemplate.map(() => "")],
+        [5, "Tomás", "Vega", ...materiasTemplate.map(() => "")]
       ];
 
       const instrucciones = [
-        ["Instrucciones"],
+        ["GUÍA DE USO DEL TEMPLATE"],
         ["1. No cambies las columnas Legajo, Nombre y Apellido."],
         ["2. Podés cambiar, agregar o quitar columnas de materias después de Apellido."],
         ["3. Las notas deben estar entre 1 y 10."],
-        ["4. Guardá el archivo como .xlsx."],
-        ["5. Luego subilo desde el botón Importar datos."],
-        ["6. Excel .xlsx evita errores con tildes y caracteres especiales."]
+        ["4. Si dejás filas vacías, el sistema las ignorará."],
+        ["5. Guardá el archivo como .xlsx y luego subilo desde Importar datos."],
+        ["6. Este formato evita errores con tildes y caracteres especiales."],
+        ["7. Las primeras dos filas son ejemplos: podés editarlas o borrarlas."]
+      ];
+
+      const diagnosticoModelo = [
+        ["Qué calcula el sistema"],
+        ["Promedio individual"],
+        ["Promedio sin aplazos"],
+        ["Aprobadas, desaprobadas y aplazos"],
+        ["Promedio, mediana, desviación estándar, mínimo y máximo por materia"],
+        ["Porcentaje de aprobación por materia"],
+        ["Materia fuerte y materia a reforzar"],
+        ["Diagnóstico automático y estudiantes críticos"]
       ];
 
       const wb = XLSX.utils.book_new();
       const wsNotas = XLSX.utils.aoa_to_sheet(filas);
-      const wsInfo = XLSX.utils.aoa_to_sheet(instrucciones);
       const wsMaterias = XLSX.utils.aoa_to_sheet([["Materias sugeridas"], ...materiasTemplate.map(m => [m])]);
+      const wsInfo = XLSX.utils.aoa_to_sheet(instrucciones);
+      const wsDiag = XLSX.utils.aoa_to_sheet(diagnosticoModelo);
 
-      wsNotas["!cols"] = [
-        { wch: 10 },
-        { wch: 18 },
-        { wch: 18 },
-        ...materiasTemplate.map(() => ({ wch: 26 }))
-      ];
+      wsNotas["!cols"] = [{ wch: 10 }, { wch: 20 }, { wch: 20 }, ...materiasTemplate.map(() => ({ wch: 26 }))];
+      wsNotas["!autofilter"] = { ref: XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: filas.length - 1, c: headers.length - 1 } }) };
+      wsMaterias["!cols"] = [{ wch: 35 }];
+      wsInfo["!cols"] = [{ wch: 90 }];
+      wsDiag["!cols"] = [{ wch: 70 }];
 
       XLSX.utils.book_append_sheet(wb, wsNotas, "Notas");
       XLSX.utils.book_append_sheet(wb, wsMaterias, "Materias");
       XLSX.utils.book_append_sheet(wb, wsInfo, "Instrucciones");
+      XLSX.utils.book_append_sheet(wb, wsDiag, "Qué calcula");
 
       XLSX.writeFile(wb, "template_sistema_academico_editable.xlsx");
     }
@@ -1699,23 +1253,7 @@
       }
 
       const headers = ["Legajo", "Nombre", "Apellido", ...materias];
-
-      const rows = estudiantes.map(e => [
-        e.legajo,
-        e.nombre,
-        e.apellido,
-        ...materias.map(m => e.notas[m])
-      ]);
-
-      const wb = XLSX.utils.book_new();
-      const ws = XLSX.utils.aoa_to_sheet([headers, ...rows]);
-
-      ws["!cols"] = [
-        { wch: 10 },
-        { wch: 18 },
-        { wch: 18 },
-        ...materias.map(() => ({ wch: 26 }))
-      ];
+      const rows = estudiantes.map(e => [e.legajo, e.nombre, e.apellido, ...materias.map(m => e.notas[m])]);
 
       const diagnostico = [
         ["Indicador", "Valor"],
@@ -1723,49 +1261,46 @@
         ["Materias", materias.length],
         ["Promedio general", promedioGeneralCurso().toFixed(2)],
         ["Aprobación total", porcentajeAprobacionGeneral().toFixed(1) + "%"],
+        ["Materia fuerte", materiaMayorRendimiento()],
         ["Materia a reforzar", materiaMenorRendimiento()],
         ["Estudiantes críticos", estudiantesCriticos().length],
         ["Estudiantes en seguimiento", estudiantesSeguimiento().length]
       ];
 
-      const wsDiag = XLSX.utils.aoa_to_sheet(diagnostico);
+      const porMateria = [
+        ["Materia", "Promedio", "Mediana", "Desv. est.", "Mín.", "Máx.", "% aprobación"],
+        ...materias.map(m => [m, promedioMateria(m).toFixed(2), medianaMateria(m).toFixed(2), desviacionMateria(m).toFixed(2), minMateria(m), maxMateria(m), aprobacionMateria(m).toFixed(1) + "%"])
+      ];
 
-      XLSX.utils.book_append_sheet(wb, ws, "Estudiantes");
+      const wb = XLSX.utils.book_new();
+      const wsEst = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+      const wsDiag = XLSX.utils.aoa_to_sheet(diagnostico);
+      const wsMat = XLSX.utils.aoa_to_sheet(porMateria);
+
+      wsEst["!cols"] = [{ wch: 10 }, { wch: 20 }, { wch: 20 }, ...materias.map(() => ({ wch: 26 }))];
+      wsDiag["!cols"] = [{ wch: 30 }, { wch: 30 }];
+      wsMat["!cols"] = [{ wch: 30 }, { wch: 14 }, { wch: 14 }, { wch: 14 }, { wch: 10 }, { wch: 10 }, { wch: 16 }];
+
+      XLSX.utils.book_append_sheet(wb, wsEst, "Estudiantes");
       XLSX.utils.book_append_sheet(wb, wsDiag, "Diagnóstico");
+      XLSX.utils.book_append_sheet(wb, wsMat, "Estadísticas por materia");
 
       XLSX.writeFile(wb, "estudiantes_actualizado.xlsx");
     }
 
     function exportarCSV() {
       const headers = ["Legajo", "Nombre", "Apellido", ...materias];
-
-      const rows = estudiantes.map(e => [
-        e.legajo,
-        e.nombre,
-        e.apellido,
-        ...materias.map(m => e.notas[m])
-      ]);
-
+      const rows = estudiantes.map(e => [e.legajo, e.nombre, e.apellido, ...materias.map(m => e.notas[m])]);
       const separador = ";";
-
-      const csvEscape = valor => {
-        return `"${String(valor ?? "").replaceAll('"', '""')}"`;
-      };
-
-      const contenido = [headers, ...rows]
-        .map(r => r.map(csvEscape).join(separador))
-        .join("\n");
-
+      const csvEscape = valor => `"${String(valor ?? "").replaceAll('"', '""')}"`;
+      const contenido = [headers, ...rows].map(r => r.map(csvEscape).join(separador)).join("\n");
       const csv = "\uFEFFsep=;\n" + contenido;
-
       const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
       const url = URL.createObjectURL(blob);
-
       const a = document.createElement("a");
       a.href = url;
       a.download = "estudiantes_actualizado_utf8.csv";
       a.click();
-
       URL.revokeObjectURL(url);
     }
 
@@ -1824,13 +1359,10 @@
 
     function detectarColumnas(filas) {
       if (!filas || filas.length === 0) return null;
-
       const columnas = Object.keys(filas[0]);
-
       const aliasLegajo = ["legajo", "id", "numero", "nrolegajo"];
       const aliasNombre = ["nombre", "nombres"];
       const aliasApellido = ["apellido", "apellidos"];
-
       let colLegajo = "";
       let colNombre = "";
       let colApellido = "";
@@ -1842,69 +1374,33 @@
         if (aliasApellido.includes(key)) colApellido = col;
       });
 
-      const columnasBase = new Set([
-        normalizarClave(colLegajo),
-        normalizarClave(colNombre),
-        normalizarClave(colApellido)
-      ]);
+      const columnasBase = new Set([normalizarClave(colLegajo), normalizarClave(colNombre), normalizarClave(colApellido)]);
+      const materiasDetectadas = columnas.filter(col => !columnasBase.has(normalizarClave(col))).map(col => limpiarTexto(col)).filter(col => col !== "");
 
-      const materiasDetectadas = columnas
-        .filter(col => !columnasBase.has(normalizarClave(col)))
-        .map(col => limpiarTexto(col))
-        .filter(col => col !== "");
-
-      return {
-        colLegajo,
-        colNombre,
-        colApellido,
-        materiasDetectadas
-      };
+      return { colLegajo, colNombre, colApellido, materiasDetectadas };
     }
 
     function filasAEstudiantes(filas) {
       const errores = [];
       const convertidos = [];
-
       const columnas = detectarColumnas(filas);
 
-      if (!columnas) {
-        return {
-          convertidos: [],
-          errores: ["El archivo no contiene filas válidas."]
-        };
-      }
-
-      if (!columnas.colNombre || !columnas.colApellido) {
-        return {
-          convertidos: [],
-          errores: ["El archivo debe tener columnas Nombre y Apellido."]
-        };
-      }
-
-      if (!columnas.materiasDetectadas || columnas.materiasDetectadas.length === 0) {
-        return {
-          convertidos: [],
-          errores: ["El archivo debe tener al menos una materia después de Apellido."]
-        };
-      }
+      if (!columnas) return { convertidos: [], errores: ["El archivo no contiene filas válidas."] };
+      if (!columnas.colNombre || !columnas.colApellido) return { convertidos: [], errores: ["El archivo debe tener columnas Nombre y Apellido."] };
+      if (!columnas.materiasDetectadas || columnas.materiasDetectadas.length === 0) return { convertidos: [], errores: ["El archivo debe tener al menos una materia después de Apellido."] };
 
       const nuevasMaterias = columnas.materiasDetectadas;
 
       filas.forEach((fila, idx) => {
-        const filaNumero = idx + 2;
-
-        const nombre = limpiarTexto(fila[columnas.colNombre]);
-        const apellido = limpiarTexto(fila[columnas.colApellido]);
-
         const filaVacia = Object.values(fila).every(v => limpiarTexto(v) === "");
         if (filaVacia) return;
 
+        const filaNumero = idx + 2;
+        const nombre = limpiarTexto(fila[columnas.colNombre]);
+        const apellido = limpiarTexto(fila[columnas.colApellido]);
         let legajo = Number(fila[columnas.colLegajo]);
 
-        if (!Number.isFinite(legajo) || legajo <= 0) {
-          legajo = idx + 1;
-        }
-
+        if (!Number.isFinite(legajo) || legajo <= 0) legajo = idx + 1;
         if (!nombre || !apellido) {
           errores.push(`Fila ${filaNumero}: falta nombre o apellido.`);
           return;
@@ -1915,28 +1411,17 @@
         for (const materia of nuevasMaterias) {
           const valor = fila[materia];
           const nota = Number(String(valor).replace(",", "."));
-
           if (!Number.isFinite(nota) || nota < 1 || nota > 10) {
             errores.push(`Fila ${filaNumero}: nota inválida en ${materia}. Debe estar entre 1 y 10.`);
             return;
           }
-
           notas[materia] = nota;
         }
 
-        convertidos.push({
-          legajo,
-          nombre,
-          apellido,
-          notas
-        });
+        convertidos.push({ legajo, nombre, apellido, notas });
       });
 
-      return {
-        convertidos,
-        errores,
-        nuevasMaterias
-      };
+      return { convertidos, errores, nuevasMaterias };
     }
 
     function importarArchivoEstudiantes() {
@@ -1963,7 +1448,6 @@
               estado.innerHTML = "No se pudo cargar el lector de Excel. Revisá tu conexión.";
               return;
             }
-
             const data = new Uint8Array(e.target.result);
             const workbook = XLSX.read(data, { type: "array" });
             const hoja = workbook.Sheets[workbook.SheetNames[0]];
@@ -1976,11 +1460,7 @@
           const { convertidos, errores, nuevasMaterias } = filasAEstudiantes(filas);
 
           if (errores.length > 0) {
-            estado.innerHTML = `
-              <strong>No se importó el archivo.</strong><br>
-              ${errores.slice(0, 10).join("<br>")}
-              ${errores.length > 10 ? "<br>..." : ""}
-            `;
+            estado.innerHTML = `<strong>No se importó el archivo.</strong><br>${errores.slice(0, 10).join("<br>")}${errores.length > 10 ? "<br>..." : ""}`;
             return;
           }
 
@@ -1991,64 +1471,43 @@
 
           materias = nuevasMaterias;
           estudiantes = convertidos;
-
           guardarDatos();
           inicializarTextareaMaterias();
           renderAll();
 
-          estado.innerHTML = `
-            <strong>Archivo importado correctamente.</strong>
-            Se cargaron ${convertidos.length} estudiantes y ${materias.length} materias.
-          `;
+          estado.innerHTML = `<strong>Archivo importado correctamente.</strong> Se cargaron ${convertidos.length} estudiantes y ${materias.length} materias.`;
         } catch (error) {
           estado.innerHTML = "Error al leer el archivo. Revisá columnas, formato y valores de notas.";
         }
       };
 
-      if (nombre.endsWith(".csv")) {
-        reader.readAsText(archivo, "utf-8");
-      } else {
-        reader.readAsArrayBuffer(archivo);
-      }
+      if (nombre.endsWith(".csv")) reader.readAsText(archivo, "utf-8");
+      else reader.readAsArrayBuffer(archivo);
     }
 
     function usarBaseInicial() {
       if (!confirm("¿Cargar los alumnos precargados? Esto reemplazará los datos actuales guardados.")) return;
-
       materias = copiaProfunda(MATERIAS_INICIALES);
       estudiantes = copiaProfunda(DATA_INICIAL);
-
       guardarDatos();
       inicializarTextareaMaterias();
       renderAll();
-
-      document.getElementById("estadoImportacion").innerHTML =
-        "<strong>Alumnos precargados cargados correctamente.</strong>";
+      document.getElementById("estadoImportacion").innerHTML = "<strong>Alumnos precargados cargados correctamente.</strong>";
     }
 
     function iniciarBaseVacia() {
       if (!confirm("¿Comenzar con una base vacía? Esto borrará los datos actuales guardados.")) return;
-
       materias = obtenerMateriasDesdeTextarea();
       estudiantes = [];
-
       guardarDatos();
       renderAll();
-
-      document.getElementById("estadoImportacion").innerHTML =
-        "<strong>Base vacía creada.</strong> Ahora podés importar un archivo o cargar estudiantes manualmente.";
+      document.getElementById("estadoImportacion").innerHTML = "<strong>Base vacía creada.</strong> Ahora podés importar un archivo o cargar estudiantes manualmente.";
     }
 
     function barChart(labels, values, options = {}) {
-      if (!values || values.length === 0) {
-        return `
-          <div style="color:#07111f; padding:15px;">
-            No hay datos para graficar.
-          </div>
-        `;
-      }
+      if (!values || values.length === 0) return `<div style="color:#07111f; padding:15px;">No hay datos para graficar.</div>`;
 
-      const width = 720;
+      const width = 760;
       const height = 360;
       const pad = 58;
       const maxVal = options.max || Math.max(...values, 10);
@@ -2057,7 +1516,6 @@
       const threshold = options.threshold ?? null;
       const suffix = options.suffix || "";
       const title = options.title || "";
-
       let bars = "";
 
       values.forEach((v, i) => {
@@ -2065,11 +1523,12 @@
         const x = pad + i * gap + (gap - barW) / 2;
         const y = height - pad - h;
         const color = v >= (threshold ?? 0) ? "#38bdf8" : "#c9a24d";
+        const label = String(labels[i]).length > 13 ? String(labels[i]).slice(0, 13) + "." : labels[i];
 
         bars += `
           <rect x="${x}" y="${y}" width="${barW}" height="${h}" rx="7" fill="${color}" opacity="0.9"></rect>
           <text x="${x + barW/2}" y="${y - 8}" text-anchor="middle" fill="#07111f" font-size="13" font-weight="bold">${v.toFixed(1)}${suffix}</text>
-          <text x="${x + barW/2}" y="${height - 25}" text-anchor="end" fill="#07111f" font-size="12" transform="rotate(-25 ${x + barW/2},${height - 25})">${labels[i]}</text>
+          <text x="${x + barW/2}" y="${height - 25}" text-anchor="end" fill="#07111f" font-size="12" transform="rotate(-25 ${x + barW/2},${height - 25})">${label}</text>
         `;
       });
 
@@ -2095,60 +1554,28 @@
     }
 
     function renderGraficos() {
-      const etiquetas = materias.map(m =>
-        m.replace("Análisis ", "An. ")
-         .replace("Arquitecturas en la Nube", "Arq. Nube")
-         .replace("Aprendizaje Automático", "Ap. Auto")
-         .replace("Captura de la Información", "Cap. Info")
-      );
-
+      const etiquetas = materias.map(m => m.replace("Análisis ", "An. ").replace("Arquitecturas en la Nube", "Arq. Nube").replace("Aprendizaje Automático", "Ap. Auto").replace("Captura de la Información", "Cap. Info"));
       const proms = materias.map(m => promedioMateria(m));
       const pcts = materias.map(m => aprobacionMateria(m));
 
-      document.getElementById("graficoPromedios").innerHTML = barChart(etiquetas, proms, {
-        max: 10,
-        threshold: 6,
-        title: "Promedio por materia"
-      });
-
-      document.getElementById("graficoAprobacion").innerHTML = barChart(etiquetas, pcts, {
-        max: 100,
-        threshold: 60,
-        suffix: "%",
-        title: "% de aprobación por materia"
-      });
+      document.getElementById("graficoPromedios").innerHTML = barChart(etiquetas, proms, { max: 10, threshold: 6, title: "Promedio por materia" });
+      document.getElementById("graficoAprobacion").innerHTML = barChart(etiquetas, pcts, { max: 100, threshold: 60, suffix: "%", title: "% de aprobación por materia" });
 
       const aprob = estudiantes.filter(e => situacion(e) === "Aprobado").length;
       const seguimiento = estudiantes.filter(e => nivelRiesgo(e) === "Seguimiento").length;
       const criticos = estudiantes.filter(e => nivelRiesgo(e) === "Crítico").length;
       const total = estudiantes.length || 1;
-
       const pctA = aprob / total * 100;
       const pctS = seguimiento / total * 100;
       const pctC = criticos / total * 100;
 
       document.getElementById("graficoSituacion").innerHTML = `
-        <div class="pie" style="background: conic-gradient(
-          #22c55e 0 ${pctA}%,
-          #f59e0b ${pctA}% ${pctA + pctS}%,
-          #fb7185 ${pctA + pctS}% 100%
-        );"></div>
-        <p style="text-align:center;">
-          <strong>${pctA.toFixed(1)}%</strong> aprobados ·
-          <strong>${pctS.toFixed(1)}%</strong> seguimiento ·
-          <strong>${pctC.toFixed(1)}%</strong> críticos
-        </p>
+        <div class="pie" style="background: conic-gradient(#22c55e 0 ${pctA}%, #f59e0b ${pctA}% ${pctA + pctS}%, #fb7185 ${pctA + pctS}% 100%);"></div>
+        <p style="text-align:center;"><strong>${pctA.toFixed(1)}%</strong> aprobados · <strong>${pctS.toFixed(1)}%</strong> seguimiento · <strong>${pctC.toFixed(1)}%</strong> críticos</p>
       `;
 
-      const top = estudiantes.slice()
-        .sort((a,b) => promedio(b) - promedio(a))
-        .slice(0, 10);
-
-      document.getElementById("graficoRanking").innerHTML = barChart(
-        top.map(e => `${e.nombre} ${e.apellido.charAt(0)}.`),
-        top.map(e => promedio(e)),
-        { max: 10, threshold: 6, title: "Top 10 promedios individuales" }
-      );
+      const top = estudiantes.slice().sort((a,b) => promedio(b) - promedio(a)).slice(0, 10);
+      document.getElementById("graficoRanking").innerHTML = barChart(top.map(e => `${e.nombre} ${e.apellido.charAt(0)}.`), top.map(e => promedio(e)), { max: 10, threshold: 6, title: "Top 10 promedios individuales" });
     }
 
     function renderAll() {
@@ -2165,6 +1592,5 @@
     inicializarTextareaMaterias();
     renderAll();
   </script>
-
 </body>
 </html>
