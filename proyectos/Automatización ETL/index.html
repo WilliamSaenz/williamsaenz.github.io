@@ -1,21 +1,204 @@
 <!DOCTYPE html>
-<html lang="es">
+
+<html lang="es" class="notranslate">
 <head>
   <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Automatización ETL | William Saenz</title>
+  <title>Automatización ETL | William D. Saenz</title>
+
+  <style>
+    :root {
+      --fondo: #07111f;
+      --azul-card: #101d2f;
+      --celeste: #38bdf8;
+      --dorado: #c9a24d;
+      --verde-terminal: #39ff14;
+      --blanco: #f8fafc;
+      --gris: #94a3b8;
+      --borde: rgba(255,255,255,0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 35%),
+        linear-gradient(180deg, #07111f 0%, #0b1f33 100%);
+      color: var(--blanco);
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 60px 20px 35px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .terminal {
+      color: var(--verde-terminal);
+      font-family: "Courier New", monospace;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 42px;
+    }
+
+    .subtitle {
+      color: var(--gris);
+      font-size: 18px;
+      margin-top: 12px;
+    }
+
+    main {
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px 40px;
+    }
+
+    .card {
+      background: rgba(16, 29, 47, 0.92);
+      border: 1px solid var(--borde);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--celeste);
+      box-shadow: 0 12px 30px rgba(56,189,248,0.15);
+    }
+
+    h2 {
+      color: var(--dorado);
+      margin-top: 0;
+      font-size: 24px;
+    }
+
+    p {
+      color: #dbeafe;
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(56,189,248,0.12);
+      color: var(--blanco);
+      border: 1px solid rgba(56,189,248,0.35);
+      padding: 8px 12px;
+      margin: 5px 5px 10px 0;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 14px;
+      margin-right: 8px;
+      padding: 11px 16px;
+      border: 1px solid var(--celeste);
+      border-radius: 10px;
+      color: var(--blanco);
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.25s ease;
+    }
+
+    .button:hover {
+      background: var(--celeste);
+      color: #07111f;
+      transform: translateY(-2px);
+    }
+
+    .gold {
+      border-color: var(--dorado);
+      color: var(--dorado);
+    }
+
+    .gold:hover {
+      background: var(--dorado);
+      color: #07111f;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--gris);
+      padding: 25px;
+      border-top: 1px solid var(--borde);
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      h1 {
+        font-size: 34px;
+      }
+    }
+  </style>
+
 </head>
+
 <body>
-  <h1>Automatización ETL</h1>
 
-  <p>Proyectos relacionados con automatización, carga de datos y análisis académico.</p>
+  <header>
+    <div class="terminal">&gt; cargando automatización ETL...</div>
+    <h1>Automatización ETL</h1>
+    <p class="subtitle">
+      Proyectos orientados a carga de datos, automatización, validación y análisis de información.
+    </p>
+  </header>
 
-  <a href="./01%20-%20Sistema%20de%20Información%20Académica%20(SIA)/">
-    Ver Sistema de Información Académica
+  <main>
+
+```
+<section class="card">
+  <h2>01 · Sistema Académico Interactivo</h2>
+  <p>
+    Prototipo web para cargar estudiantes, importar archivos CSV o Excel,
+    calcular promedios, analizar rendimiento académico y visualizar indicadores del curso.
+  </p>
+
+  <span class="tag">HTML</span>
+  <span class="tag">CSS</span>
+  <span class="tag">JavaScript</span>
+  <span class="tag">CSV / Excel</span>
+  <span class="tag">Dashboard</span>
+  <span class="tag">Gestión académica</span>
+
+  <br>
+
+  <a class="button gold" href="./01%20-%20Sistema%20de%20Informaci%C3%B3n%20Acad%C3%A9mica%20%28SIA%29/">
+    Ver Sistema Académico Interactivo
+  </a>
+</section>
+
+<section class="card">
+  <h2>Navegación</h2>
+
+  <a class="button" href="../">
+    Volver a proyectos
   </a>
 
-  <br><br>
+  <a class="button" href="../../">
+    Volver al portafolio principal
+  </a>
+</section>
+```
 
-  <a href="../">Volver a proyectos</a>
+  </main>
+
+  <footer>
+    © 2026 William D. Saenz | Automatización ETL
+  </footer>
+
 </body>
 </html>
