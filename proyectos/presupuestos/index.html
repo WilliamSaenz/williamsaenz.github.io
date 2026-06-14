@@ -1,49 +1,183 @@
+```html
 <!DOCTYPE html>
 <html lang="es" class="notranslate">
 <head>
   <meta charset="UTF-8">
   <meta name="google" content="notranslate">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proyecto de Presupuestos | William D. Saenz</title>
+  <title>Presupuestos | William D. Saenz</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(180deg, #07111f 0%, #0b1f33 100%);
+      color: #f8fafc;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 55px 20px 30px;
+      border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .terminal {
+      color: #39ff14;
+      font-family: "Courier New", monospace;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 42px;
+    }
+
+    .subtitle {
+      color: #94a3b8;
+      font-size: 18px;
+      margin-top: 12px;
+    }
+
+    main {
+      max-width: 950px;
+      margin: 35px auto;
+      padding: 0 20px 40px;
+    }
+
+    .card {
+      background: rgba(16, 29, 47, 0.92);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 26px;
+      margin-bottom: 24px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #38bdf8;
+      box-shadow: 0 12px 30px rgba(56,189,248,0.15);
+    }
+
+    h2 {
+      color: #c9a24d;
+      margin-top: 0;
+    }
+
+    p {
+      color: #dbeafe;
+      line-height: 1.6;
+    }
+
+    .tag {
+      display: inline-block;
+      background: rgba(56,189,248,0.12);
+      color: #f8fafc;
+      border: 1px solid rgba(56,189,248,0.35);
+      padding: 8px 12px;
+      margin: 5px 5px 10px 0;
+      border-radius: 999px;
+      font-size: 14px;
+    }
+
+    .button {
+      display: inline-block;
+      color: #f8fafc;
+      border: 1px solid #38bdf8;
+      padding: 11px 16px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 7px 7px 7px 0;
+      transition: all 0.25s ease;
+    }
+
+    .button:hover {
+      background: #38bdf8;
+      color: #07111f;
+      transform: translateY(-2px);
+    }
+
+    .gold {
+      border-color: #c9a24d;
+      color: #c9a24d;
+    }
+
+    .gold:hover {
+      background: #c9a24d;
+      color: #07111f;
+    }
+
+    footer {
+      text-align: center;
+      color: #94a3b8;
+      padding: 25px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      font-size: 14px;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Proyecto de Presupuestos</h1>
 
-  <p>
-    Proyecto orientado a la elaboración, organización y análisis de presupuestos
-    técnicos para obras civiles, geotecnia e infraestructura.
-  </p>
+  <header>
+    <div class="terminal">&gt; cargando proyectos de presupuestos...</div>
+    <h1>Proyectos de Presupuestos</h1>
+    <p class="subtitle">
+      Herramientas aplicadas a costos, APU, recursos, ensayos, cotizaciones y gestión económica de obra.
+    </p>
+  </header>
 
-  <h2>Objetivo</h2>
-  <p>
-    Mostrar el manejo de información técnica, cubicaciones, análisis de precios
-    unitarios, costos directos, indirectos y reportabilidad para toma de decisiones.
-  </p>
+  <main>
 
-  <h2>Herramientas aplicadas</h2>
-  <ul>
-    <li>Excel avanzado</li>
-    <li>Power Query</li>
-    <li>Presupuestos</li>
-    <li>Cubicaciones</li>
-    <li>Análisis de precios unitarios</li>
-    <li>Reportabilidad técnica</li>
-  </ul>
+    <div class="card">
+      <h2>01 · Template interactivo de APU y Presupuesto de Obra</h2>
 
-  <h2>Aplicación profesional</h2>
-  <p>
-    Este proyecto refleja habilidades vinculadas con oficina técnica,
-    control de costos, planificación y gestión ejecutiva de información.
-  </p>
+      <p>
+        Herramienta web para estimar costos unitarios de obra civil, integrando
+        mano de obra, materiales, equipos, ensayos de calidad, costos indirectos,
+        utilidad, impuestos y factor de actualización.
+      </p>
 
-  <p>
-    <a href="../">Volver a proyectos</a>
-  </p>
+      <p>
+        Incluye selección de moneda, armado de cotización, cálculo automático y
+        generación de PDF con marca WDS.
+      </p>
 
-  <p>
-    <a href="../../">Volver al portafolio principal</a>
-  </p>
+      <span class="tag">APU</span>
+      <span class="tag">Costos de obra</span>
+      <span class="tag">Ensayos de calidad</span>
+      <span class="tag">Materiales</span>
+      <span class="tag">Equipos</span>
+      <span class="tag">Mano de obra</span>
+      <span class="tag">Cotización PDF</span>
+      <span class="tag">ARS / COP / USD</span>
+
+      <br>
+
+      <a class="button gold" href="01-apu-presupuesto-obra/">
+        Ver template interactivo
+      </a>
+    </div>
+
+    <div>
+      <a class="button" href="../">
+        Volver a proyectos
+      </a>
+
+      <a class="button" href="../../">
+        Volver al portafolio principal
+      </a>
+    </div>
+
+  </main>
+
+  <footer>
+    © 2026 William D. Saenz | Proyectos de Presupuestos
+  </footer>
+
 </body>
 </html>
 ```
-
