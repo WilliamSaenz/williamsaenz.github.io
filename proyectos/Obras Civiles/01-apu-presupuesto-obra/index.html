@@ -1,1 +1,608 @@
+<!DOCTYPE html>
+<html lang="es" class="notranslate">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotizador de Ensayos de Laboratorio | William D. Saenz</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+
+  <style>
+    :root {
+      --fondo: #07111f;
+      --card: #101d2f;
+      --card2: #07111f;
+      --celeste: #38bdf8;
+      --dorado: #c9a24d;
+      --verde: #39ff14;
+      --blanco: #f8fafc;
+      --gris: #94a3b8;
+      --borde: rgba(255,255,255,0.12);
+      --ok: #22c55e;
+      --danger: #f97316;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 35%),
+        linear-gradient(180deg, #07111f 0%, #0b1f33 100%);
+      color: var(--blanco);
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      padding: 48px 20px 30px;
+      border-bottom: 1px solid var(--borde);
+    }
+
+    .terminal {
+      color: var(--verde);
+      font-family: "Courier New", monospace;
+      margin-bottom: 14px;
+    }
+
+    h1 { margin: 0; font-size: 40px; }
+    .subtitle { color: var(--gris); font-size: 18px; margin-top: 12px; }
+
+    main {
+      max-width: 1180px;
+      margin: 32px auto;
+      padding: 0 20px 42px;
+    }
+
+    section, .panel {
+      background: rgba(16, 29, 47, 0.94);
+      border: 1px solid var(--borde);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 22px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    h2 {
+      color: var(--celeste);
+      margin: 0 0 14px;
+      border-bottom: 1px solid var(--borde);
+      padding-bottom: 10px;
+    }
+
+    h3 { color: var(--dorado); margin: 0 0 8px; }
+    p, li { color: #dbeafe; line-height: 1.55; }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    label {
+      display: block;
+      color: #dbeafe;
+      font-size: 14px;
+      margin-bottom: 7px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: rgba(7,17,31,0.85);
+      border: 1px solid rgba(56,189,248,0.28);
+      color: var(--blanco);
+      border-radius: 11px;
+      padding: 11px 12px;
+      outline: none;
+      font-size: 14px;
+    }
+
+    input:focus, select:focus, textarea:focus { border-color: var(--celeste); }
+    textarea { min-height: 70px; resize: vertical; }
+
+    .tag {
+      display: inline-block;
+      background: rgba(56,189,248,0.12);
+      border: 1px solid rgba(56,189,248,0.35);
+      color: var(--blanco);
+      border-radius: 999px;
+      padding: 7px 11px;
+      margin: 4px 4px 8px 0;
+      font-size: 13px;
+    }
+
+    .button {
+      display: inline-block;
+      border: 1px solid var(--celeste);
+      color: var(--blanco);
+      background: transparent;
+      border-radius: 10px;
+      padding: 11px 16px;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+      margin: 7px 7px 7px 0;
+      transition: all .25s ease;
+    }
+
+    .button:hover { background: var(--celeste); color: #07111f; transform: translateY(-2px); }
+    .gold { border-color: var(--dorado); color: var(--dorado); }
+    .gold:hover { background: var(--dorado); color: #07111f; }
+    .danger { border-color: var(--danger); color: #fed7aa; }
+    .danger:hover { background: var(--danger); color: #07111f; }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .metric {
+      background: rgba(7,17,31,0.75);
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .metric span { color: var(--gris); font-size: 13px; }
+    .metric strong { display: block; color: var(--dorado); font-size: 23px; margin-top: 5px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 14px;
+      overflow: hidden;
+      border-radius: 14px;
+      font-size: 14px;
+    }
+
+    th, td {
+      padding: 11px;
+      border-bottom: 1px solid rgba(255,255,255,0.09);
+      text-align: left;
+      color: #dbeafe;
+      vertical-align: middle;
+    }
+
+    th {
+      background: rgba(56,189,248,0.12);
+      color: var(--blanco);
+      font-size: 13px;
+    }
+
+    td input[type="number"] { min-width: 92px; padding: 8px; }
+    td input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--dorado); }
+
+    .money { text-align: right; white-space: nowrap; }
+    .muted { color: var(--gris); font-size: 13px; }
+    .empty { color: var(--gris); text-align: center; padding: 25px; }
+
+    .checkbox-line {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 10px;
+      color: #dbeafe;
+      font-weight: bold;
+    }
+
+    .checkbox-line input { width: 18px; height: 18px; accent-color: var(--dorado); }
+
+    .notice {
+      background: rgba(201,162,77,0.10);
+      border: 1px solid rgba(201,162,77,0.35);
+      padding: 14px;
+      border-radius: 14px;
+      color: #fde68a;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--gris);
+      padding: 25px;
+      border-top: 1px solid var(--borde);
+      font-size: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .grid, .grid-2, .summary { grid-template-columns: 1fr; }
+      h1 { font-size: 31px; }
+      table { font-size: 12px; }
+      th, td { padding: 8px; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="terminal">&gt; cotizador técnico de ensayos de laboratorio...</div>
+    <h1>Cotizador de Ensayos de Laboratorio</h1>
+    <p class="subtitle">
+      Mecánica de suelos · Pavimentos · Hormigón | Precios unitarios, cantidades y cotización PDF en una página.
+    </p>
+  </header>
+
+  <main>
+    <section>
+      <h2>Datos de la cotización</h2>
+      <div class="grid">
+        <div>
+          <label>Cliente / Empresa</label>
+          <input id="cliente" type="text" placeholder="Ej: Constructora / Comitente">
+        </div>
+        <div>
+          <label>Proyecto / Obra</label>
+          <input id="proyecto" type="text" placeholder="Ej: Edificio, pavimento, loteo">
+        </div>
+        <div>
+          <label>Ubicación</label>
+          <input id="ubicacion" type="text" placeholder="Ej: Buenos Aires, Argentina">
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top:16px;">
+        <div>
+          <label>Área de ensayos requerida</label>
+          <select id="area" onchange="cargarEnsayos()">
+            <option value="suelos">Mecánica de suelos</option>
+            <option value="pavimentos">Pavimentos</option>
+            <option value="hormigon">Hormigón</option>
+          </select>
+        </div>
+        <div>
+          <label>Moneda</label>
+          <select id="moneda" onchange="actualizarTodo()">
+            <option value="ARS">ARS · Peso argentino</option>
+            <option value="COP">COP · Peso colombiano</option>
+            <option value="USD">USD · Dólar estadounidense</option>
+          </select>
+        </div>
+        <div>
+          <label>Validez de la cotización</label>
+          <input id="validez" type="text" value="7 días corridos">
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:16px;">
+        <div>
+          <label>Responsable</label>
+          <input id="responsable" type="text" value="William D. Saenz · WDS">
+        </div>
+        <div>
+          <label>Observaciones breves</label>
+          <input id="observaciones" type="text" placeholder="Ej: No incluye viáticos ni extracción de muestras si no se indica.">
+        </div>
+      </div>
+
+      <div class="checkbox-line">
+        <input id="incluyeIva" type="checkbox" checked onchange="actualizarTodo()">
+        <span>Incluir IVA</span>
+        <input id="iva" type="number" value="21" min="0" step="0.1" style="width:90px;" oninput="actualizarTodo()">
+        <span>%</span>
+      </div>
+
+      <div class="notice">
+        Valores de referencia editables. Para cotización real se recomienda actualizar precios unitarios según laboratorio, zona, logística, urgencia, normativa aplicable y alcance del informe.
+      </div>
+    </section>
+
+    <section>
+      <h2>Selección de ensayos</h2>
+      <p class="muted">
+        Marcá solo los ensayos que querés cotizar. El PDF incluirá únicamente los ítems seleccionados.
+      </p>
+
+      <div id="tablaEnsayos"></div>
+
+      <div class="summary">
+        <div class="metric"><span>Ensayos seleccionados</span><strong id="mCantidad">0</strong></div>
+        <div class="metric"><span>Subtotal</span><strong id="mSubtotal">$ 0</strong></div>
+        <div class="metric"><span>IVA</span><strong id="mIva">$ 0</strong></div>
+        <div class="metric"><span>Total cotizado</span><strong id="mTotal">$ 0</strong></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Acciones</h2>
+      <button class="button gold" onclick="generarPDF()">Generar cotización PDF · 1 página</button>
+      <button class="button" onclick="seleccionarTodos()">Seleccionar todos</button>
+      <button class="button danger" onclick="limpiarSeleccion()">Limpiar selección</button>
+      <a class="button" href="../">Volver a presupuestos</a>
+      <a class="button" href="../../">Volver a proyectos</a>
+    </section>
+  </main>
+
+  <footer>
+    © 2026 William D. Saenz | WDS · Cotizador técnico de ensayos de laboratorio
+  </footer>
+
+  <script>
+    const ENSAYOS = {
+      suelos: {
+        titulo: "Mecánica de suelos",
+        informe: { nombre: "Informe técnico general de mecánica de suelos", unidad: "global", precio: 180000 },
+        items: [
+          { nombre: "Contenido de humedad natural", unidad: "muestra", precio: 18000 },
+          { nombre: "Granulometría por tamizado", unidad: "muestra", precio: 45000 },
+          { nombre: "Límites de Atterberg", unidad: "muestra", precio: 52000 },
+          { nombre: "Peso específico de sólidos", unidad: "muestra", precio: 42000 },
+          { nombre: "Proctor estándar / modificado", unidad: "ensayo", precio: 95000 },
+          { nombre: "CBR de laboratorio", unidad: "ensayo", precio: 145000 },
+          { nombre: "Densidad in situ · cono de arena", unidad: "punto", precio: 60000 },
+          { nombre: "Corte directo", unidad: "ensayo", precio: 165000 },
+          { nombre: "Consolidación unidimensional", unidad: "ensayo", precio: 210000 }
+        ]
+      },
+      pavimentos: {
+        titulo: "Pavimentos",
+        informe: { nombre: "Informe técnico general de pavimentos", unidad: "global", precio: 220000 },
+        items: [
+          { nombre: "Extracción de testigo asfáltico", unidad: "testigo", precio: 85000 },
+          { nombre: "Medición de espesor de carpeta asfáltica", unidad: "testigo", precio: 35000 },
+          { nombre: "Contenido de asfalto por extracción", unidad: "muestra", precio: 120000 },
+          { nombre: "Granulometría de mezcla asfáltica", unidad: "muestra", precio: 90000 },
+          { nombre: "Ensayo Marshall · estabilidad y flujo", unidad: "serie", precio: 180000 },
+          { nombre: "Densidad / vacíos de mezcla compactada", unidad: "muestra", precio: 95000 },
+          { nombre: "Densidad de base granular in situ", unidad: "punto", precio: 60000 },
+          { nombre: "Granulometría de agregado para base/subbase", unidad: "muestra", precio: 65000 },
+          { nombre: "Deflexión con viga Benkelman", unidad: "punto", precio: 75000 }
+        ]
+      },
+      hormigon: {
+        titulo: "Hormigón",
+        informe: { nombre: "Informe técnico general de hormigón", unidad: "global", precio: 160000 },
+        items: [
+          { nombre: "Asentamiento · cono de Abrams", unidad: "control", precio: 28000 },
+          { nombre: "Moldeo de probetas cilíndricas", unidad: "probeta", precio: 22000 },
+          { nombre: "Rotura a compresión de probeta", unidad: "probeta", precio: 36000 },
+          { nombre: "Tracción indirecta / compresión diametral", unidad: "probeta", precio: 48000 },
+          { nombre: "Esclerometría en elemento estructural", unidad: "punto", precio: 45000 },
+          { nombre: "Extracción de testigo de hormigón", unidad: "testigo", precio: 95000 },
+          { nombre: "Corte, refrentado y preparación de testigo", unidad: "testigo", precio: 52000 },
+          { nombre: "Determinación de carbonatación", unidad: "punto", precio: 38000 },
+          { nombre: "Control de temperatura del hormigón fresco", unidad: "control", precio: 18000 }
+        ]
+      }
+    };
+
+    let filas = [];
+
+    function simboloMoneda() {
+      const m = document.getElementById('moneda').value;
+      if (m === 'USD') return 'USD';
+      if (m === 'COP') return 'COP';
+      return 'ARS';
+    }
+
+    function formato(n) {
+      const m = document.getElementById('moneda').value;
+      return new Intl.NumberFormat('es-AR', { maximumFractionDigits: m === 'USD' ? 2 : 0 }).format(Number(n || 0));
+    }
+
+    function cargarEnsayos() {
+      const area = document.getElementById('area').value;
+      const data = ENSAYOS[area];
+      filas = [];
+      filas.push({ ...data.informe, cantidad: 1, seleccionado: true, esInforme: true });
+      data.items.forEach(it => filas.push({ ...it, cantidad: 0, seleccionado: false, esInforme: false }));
+      renderTabla();
+      actualizarTodo();
+    }
+
+    function renderTabla() {
+      const cont = document.getElementById('tablaEnsayos');
+      let html = `
+        <table>
+          <thead>
+            <tr>
+              <th>Sel.</th>
+              <th>Ensayo / ítem técnico</th>
+              <th>Unidad</th>
+              <th>Cantidad</th>
+              <th>Precio unitario</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      filas.forEach((f, i) => {
+        html += `
+          <tr>
+            <td><input type="checkbox" ${f.seleccionado ? 'checked' : ''} onchange="toggleFila(${i}, this.checked)"></td>
+            <td>
+              <strong>${f.nombre}</strong>
+              ${f.esInforme ? '<div class="muted">Ítem recomendado por área · incluye revisión y emisión del informe.</div>' : ''}
+            </td>
+            <td>${f.unidad}</td>
+            <td><input type="number" min="0" step="1" value="${f.cantidad}" oninput="cambiarCantidad(${i}, this.value)"></td>
+            <td><input type="number" min="0" step="100" value="${f.precio}" oninput="cambiarPrecio(${i}, this.value)"></td>
+            <td class="money">${simboloMoneda()} ${formato((f.cantidad || 0) * (f.precio || 0))}</td>
+          </tr>
+        `;
+      });
+
+      html += `</tbody></table>`;
+      cont.innerHTML = html;
+    }
+
+    function toggleFila(i, checked) {
+      filas[i].seleccionado = checked;
+      if (checked && Number(filas[i].cantidad) === 0) filas[i].cantidad = 1;
+      renderTabla();
+      actualizarTodo();
+    }
+
+    function cambiarCantidad(i, val) {
+      filas[i].cantidad = Math.max(0, Number(val || 0));
+      if (filas[i].cantidad > 0) filas[i].seleccionado = true;
+      renderTabla();
+      actualizarTodo();
+    }
+
+    function cambiarPrecio(i, val) {
+      filas[i].precio = Math.max(0, Number(val || 0));
+      renderTabla();
+      actualizarTodo();
+    }
+
+    function seleccionadas() {
+      return filas.filter(f => f.seleccionado && Number(f.cantidad) > 0);
+    }
+
+    function totales() {
+      const sel = seleccionadas();
+      const subtotal = sel.reduce((a, f) => a + Number(f.cantidad || 0) * Number(f.precio || 0), 0);
+      const incluye = document.getElementById('incluyeIva').checked;
+      const tasa = Number(document.getElementById('iva').value || 0) / 100;
+      const iva = incluye ? subtotal * tasa : 0;
+      return { cantidad: sel.length, subtotal, iva, total: subtotal + iva };
+    }
+
+    function actualizarTodo() {
+      const t = totales();
+      document.getElementById('mCantidad').textContent = t.cantidad;
+      document.getElementById('mSubtotal').textContent = `${simboloMoneda()} ${formato(t.subtotal)}`;
+      document.getElementById('mIva').textContent = `${simboloMoneda()} ${formato(t.iva)}`;
+      document.getElementById('mTotal').textContent = `${simboloMoneda()} ${formato(t.total)}`;
+      if (document.getElementById('tablaEnsayos').innerHTML.trim() !== '') renderTabla();
+    }
+
+    function seleccionarTodos() {
+      filas.forEach(f => { f.seleccionado = true; if (Number(f.cantidad) === 0) f.cantidad = 1; });
+      renderTabla();
+      actualizarTodo();
+    }
+
+    function limpiarSeleccion() {
+      filas.forEach(f => { f.seleccionado = false; f.cantidad = f.esInforme ? 1 : 0; });
+      renderTabla();
+      actualizarTodo();
+    }
+
+    function generarPDF() {
+      const sel = seleccionadas();
+      if (sel.length === 0) {
+        alert('Seleccioná al menos un ensayo para generar la cotización.');
+        return;
+      }
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+      const areaText = ENSAYOS[document.getElementById('area').value].titulo;
+      const moneda = simboloMoneda();
+      const t = totales();
+      const fecha = new Date().toLocaleDateString('es-AR');
+
+      // Marca de agua WDS
+      doc.setTextColor(235, 235, 235);
+      doc.setFontSize(58);
+      doc.setFont('helvetica', 'bold');
+      doc.text('WDS', 105, 145, { align: 'center', angle: 35 });
+
+      // Encabezado
+      doc.setFillColor(7, 17, 31);
+      doc.rect(0, 0, 210, 28, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Cotización de Ensayos de Laboratorio', 14, 12);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Área: ${areaText}  |  Moneda: ${moneda}  |  Fecha: ${fecha}`, 14, 20);
+      doc.setTextColor(201, 162, 77);
+      doc.setFontSize(12);
+      doc.setFont('helvetica', 'bold');
+      doc.text('WDS', 193, 12, { align: 'right' });
+
+      doc.setTextColor(30, 41, 59);
+      doc.setFontSize(8.4);
+      doc.setFont('helvetica', 'normal');
+      const cliente = document.getElementById('cliente').value || 'No especificado';
+      const proyecto = document.getElementById('proyecto').value || 'No especificado';
+      const ubicacion = document.getElementById('ubicacion').value || 'No especificada';
+      const validez = document.getElementById('validez').value || '7 días corridos';
+      const responsable = document.getElementById('responsable').value || 'William D. Saenz · WDS';
+      const obs = document.getElementById('observaciones').value || 'Valores referenciales sujetos a alcance, disponibilidad, logística y confirmación técnica.';
+
+      doc.text(`Cliente: ${cliente}`, 14, 36);
+      doc.text(`Proyecto: ${proyecto}`, 14, 41);
+      doc.text(`Ubicación: ${ubicacion}`, 14, 46);
+      doc.text(`Responsable: ${responsable}`, 110, 36);
+      doc.text(`Validez: ${validez}`, 110, 41);
+      doc.text(`IVA: ${document.getElementById('incluyeIva').checked ? 'Incluido' : 'No incluido'} (${document.getElementById('iva').value || 0}%)`, 110, 46);
+
+      const body = sel.map((f, idx) => [
+        idx + 1,
+        f.nombre,
+        f.unidad,
+        formato(f.cantidad),
+        `${moneda} ${formato(f.precio)}`,
+        `${moneda} ${formato(Number(f.cantidad) * Number(f.precio))}`
+      ]);
+
+      doc.autoTable({
+        startY: 54,
+        head: [['#', 'Ensayo / ítem', 'Unidad', 'Cant.', 'P. unitario', 'Total']],
+        body,
+        theme: 'grid',
+        styles: { fontSize: 7.4, cellPadding: 1.8, overflow: 'linebreak' },
+        headStyles: { fillColor: [16, 29, 47], textColor: [255,255,255], fontStyle: 'bold' },
+        columnStyles: {
+          0: { cellWidth: 8, halign: 'center' },
+          1: { cellWidth: 74 },
+          2: { cellWidth: 20 },
+          3: { cellWidth: 16, halign: 'right' },
+          4: { cellWidth: 31, halign: 'right' },
+          5: { cellWidth: 31, halign: 'right' }
+        },
+        margin: { left: 14, right: 14 },
+        pageBreak: 'avoid'
+      });
+
+      let y = doc.lastAutoTable.finalY + 7;
+      if (y > 238) y = 238;
+
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Resumen económico', 126, y);
+      doc.setFont('helvetica', 'normal');
+      doc.text(`Subtotal: ${moneda} ${formato(t.subtotal)}`, 126, y + 6);
+      doc.text(`IVA: ${moneda} ${formato(t.iva)}`, 126, y + 12);
+      doc.setFont('helvetica', 'bold');
+      doc.text(`TOTAL: ${moneda} ${formato(t.total)}`, 126, y + 19);
+
+      doc.setFontSize(7.3);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(80, 80, 80);
+      const obsLines = doc.splitTextToSize(`Observaciones: ${obs}`, 106);
+      doc.text(obsLines.slice(0, 3), 14, y);
+
+      doc.setDrawColor(201, 162, 77);
+      doc.line(14, 282, 196, 282);
+      doc.setTextColor(90, 90, 90);
+      doc.setFontSize(7.2);
+      doc.text('WDS · William D. Saenz | Cotización referencial de ensayos de laboratorio | Documento generado automáticamente', 105, 287, { align: 'center' });
+
+      doc.save(`cotizacion_ensayos_${areaText.toLowerCase().replaceAll(' ', '_')}_WDS.pdf`);
+    }
+
+    cargarEnsayos();
+  </script>
+</body>
+</html>
+
 
