@@ -1,5 +1,7 @@
-<!DOCTYPE html>
+from pathlib import Path
+import zipfile
 
+html = """<!DOCTYPE html>
 <html lang="es" class="notranslate">
 <head>
   <meta charset="UTF-8">
@@ -43,6 +45,7 @@
       color: var(--verde-terminal);
       font-family: "Courier New", monospace;
       margin-bottom: 15px;
+      font-weight: bold;
     }
 
     h1 {
@@ -142,9 +145,16 @@
       h1 {
         font-size: 34px;
       }
+
+      .subtitle {
+        font-size: 16px;
+      }
+
+      .card {
+        padding: 22px;
+      }
     }
   </style>
-
 </head>
 
 <body>
@@ -153,66 +163,107 @@
     <div class="terminal">&gt; cargando obras civiles...</div>
     <h1>Obras Civiles</h1>
     <p class="subtitle">
-      Proyectos técnicos aplicados a presupuestos, costos, APUs, materiales y gestión de obra.
+      Proyectos técnicos aplicados a presupuestos, APUs, materiales, geotecnia,
+      pavimentos, hormigón, estructuras y gestión de obra.
     </p>
   </header>
 
   <main>
 
-```
-<section class="card">
-  <h2>01 · APU y Presupuesto de Obra</h2>
-  <p>
-    Template interactivo para analizar precios unitarios, recursos, materiales,
-    mano de obra, equipos, costos indirectos, utilidad e impuestos.
-  </p>
+    <section class="card">
+      <h2>01 · APU y Presupuesto de Obra</h2>
+      <p>
+        Template interactivo para analizar precios unitarios, recursos, materiales,
+        mano de obra, equipos, costos indirectos, utilidad e impuestos.
+      </p>
 
-  <span class="tag">APU</span>
-  <span class="tag">Costos</span>
-  <span class="tag">Presupuesto</span>
-  <span class="tag">Obra civil</span>
-  <span class="tag">Cotización</span>
+      <span class="tag">APU</span>
+      <span class="tag">Costos</span>
+      <span class="tag">Presupuesto</span>
+      <span class="tag">Obra civil</span>
+      <span class="tag">Cotización</span>
 
-  <br>
+      <br>
 
-  <a class="button gold" href="./01-apu-presupuesto-obra/">
-    Ver APU y Presupuesto de Obra
-  </a>
-</section>
+      <a class="button gold" href="./01-apu-presupuesto-obra/">
+        Ver APU y Presupuesto de Obra
+      </a>
+    </section>
 
-<section class="card">
-  <h2>02 · Presupuesto Casa de Dos Plantas</h2>
-  <p>
-    Modelo aplicado para estimar costos de una vivienda de dos plantas,
-    considerando rubros principales, materiales, mano de obra, equipos
-    y análisis general del presupuesto.
-  </p>
+    <section class="card">
+      <h2>02 · Presupuesto Casa de Dos Plantas</h2>
+      <p>
+        Modelo aplicado para estimar costos de una vivienda de dos plantas,
+        considerando rubros principales, materiales, mano de obra, equipos
+        y análisis general del presupuesto.
+      </p>
 
-  <span class="tag">Vivienda</span>
-  <span class="tag">Materiales</span>
-  <span class="tag">Mano de obra</span>
-  <span class="tag">Equipos</span>
-  <span class="tag">Presupuesto</span>
+      <span class="tag">Vivienda</span>
+      <span class="tag">Materiales</span>
+      <span class="tag">Mano de obra</span>
+      <span class="tag">Equipos</span>
+      <span class="tag">Presupuesto</span>
 
-  <br>
+      <br>
 
-  <a class="button gold" href="./02-presupuesto-casa-dos-plantas/">
-    Ver Presupuesto Casa de Dos Plantas
-  </a>
-</section>
+      <a class="button gold" href="./02-presupuesto-casa-dos-plantas/">
+        Ver Presupuesto Casa de Dos Plantas
+      </a>
+    </section>
 
-<section class="card">
-  <h2>Navegación</h2>
+    <section class="card">
+      <h2>03 · Guía Técnica Civil Pro</h2>
+      <p>
+        Dashboard interactivo de consulta rápida sobre mecánica de suelos,
+        geotecnia, pavimentos, hormigón, ensayos técnicos, parámetros guía
+        y criterios prácticos de obra.
+      </p>
 
-  <a class="button" href="../">
-    Volver a proyectos
-  </a>
+      <span class="tag">Mecánica de suelos</span>
+      <span class="tag">Geotecnia</span>
+      <span class="tag">Pavimentos</span>
+      <span class="tag">Hormigón</span>
+      <span class="tag">Ensayos</span>
 
-  <a class="button" href="../../">
-    Volver al portafolio principal
-  </a>
-</section>
-```
+      <br>
+
+      <a class="button gold" href="./03-guia-tecnica-civil-pro/">
+        Ver Guía Técnica Civil Pro
+      </a>
+    </section>
+
+    <section class="card">
+      <h2>04 · Guía de Estructuras Pro</h2>
+      <p>
+        Guía interactiva para comprender el proceso estructural completo:
+        antecedentes, normativa, prediseño, predimensionamiento, modelado,
+        análisis, diseño y verificación de estructuras de hormigón y acero.
+      </p>
+
+      <span class="tag">Estructuras</span>
+      <span class="tag">Hormigón armado</span>
+      <span class="tag">Acero estructural</span>
+      <span class="tag">Modelado</span>
+      <span class="tag">Cálculo estructural</span>
+
+      <br>
+
+      <a class="button gold" href="./04-guia-estructuras-pro/">
+        Ver Guía de Estructuras Pro
+      </a>
+    </section>
+
+    <section class="card">
+      <h2>Navegación</h2>
+
+      <a class="button" href="../">
+        Volver a proyectos
+      </a>
+
+      <a class="button" href="../../">
+        Volver al portafolio principal
+      </a>
+    </section>
 
   </main>
 
@@ -222,4 +273,16 @@
 
 </body>
 </html>
+"""
 
+out_dir = Path("/mnt/data/obras_civiles_index_corregido")
+out_dir.mkdir(parents=True, exist_ok=True)
+out_file = out_dir / "index.html"
+out_file.write_text(html, encoding="utf-8")
+
+zip_path = Path("/mnt/data/obras_civiles_index_corregido.zip")
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    z.write(out_file, arcname="index.html")
+
+print(f"Archivo creado: {out_file}")
+print(f"ZIP creado: {zip_path}")
