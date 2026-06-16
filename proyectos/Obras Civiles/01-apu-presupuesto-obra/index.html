@@ -184,6 +184,19 @@
     td input[type="number"] { min-width: 92px; padding: 8px; }
     td input[type="checkbox"] { width: 18px; height: 18px; accent-color: var(--dorado); }
 
+    .manual-input {
+      min-width: 110px;
+      font-weight: bold;
+      letter-spacing: .2px;
+    }
+
+    .manual-help {
+      color: #bae6fd;
+      font-size: 13px;
+      margin-top: 8px;
+    }
+
+
     .money { text-align: right; white-space: nowrap; }
     .muted { color: var(--gris); font-size: 13px; }
     .empty { color: var(--gris); text-align: center; padding: 25px; }
@@ -304,6 +317,10 @@
       <p class="muted">
         Marcá solo los ensayos que querés cotizar. El PDF incluirá únicamente los ítems seleccionados.
       </p>
+      <p class="manual-help">
+        Tip práctico: ahora podés escribir cantidades y precios directamente a mano, sin depender de las flechitas del campo numérico.
+        También acepta valores como 180000, 180.000 o 180,000.
+      </p>
 
       <div id="tablaEnsayos"></div>
 
@@ -422,15 +439,35 @@
       filas.forEach((f, i) => {
         html += `
           <tr>
-            <td><input type="checkbox" ${f.seleccionado ? 'checked' : ''} onchange="toggleFila(${i}, this.checked)"></td>
+            <td><input id="sel_${i}" type="checkbox" ${f.seleccionado ? 'checked' : ''} onchange="toggleFila(${i}, this.checked)"></td>
             <td>
               <strong>${f.nombre}</strong>
               ${f.esInforme ? '<div class="muted">Ítem recomendado por área · incluye revisión y emisión del informe.</div>' : ''}
             </td>
             <td>${f.unidad}</td>
-            <td><input type="number" min="0" step="1" value="${f.cantidad}" oninput="cambiarCantidad(${i}, this.value)"></td>
-            <td><input type="number" min="0" step="100" value="${f.precio}" oninput="cambiarPrecio(${i}, this.value)"></td>
-            <td class="money">${simboloMoneda()} ${formato((f.cantidad || 0) * (f.precio || 0))}</td>
+            <td>
+              <input
+                id="cant_${i}"
+                class="manual-input"
+                type="text"
+                inputmode="numeric"
+                value="${formatoInput(f.cantidad)}"
+                oninput="cambiarCantidad(${i}, this.value)"
+                onblur="normalizarCantidad(${i})"
+              >
+            </td>
+            <td>
+              <input
+                id="precio_${i}"
+                class="manual-input"
+                type="text"
+                inputmode="numeric"
+                value="${formatoInput(f.precio)}"
+                oninput="cambiarPrecio(${i}, this.value)"
+                onblur="normalizarPrecio(${i})"
+              >
+            </td>
+            <td class="money" id="totalFila_${i}">${simboloMoneda()} ${formato((f.cantidad || 0) * (f.precio || 0))}</td>
           </tr>
         `;
       });
@@ -439,23 +476,107 @@
       cont.innerHTML = html;
     }
 
+    function numeroManual(valor) {
+      if (valor === null || valor === undefined) return 0;
+
+      let limpio = String(valor).trim();
+      if (limpio === '') return 0;
+
+      // Permite escribir: 180000, 180.000, 180,000, $180000.
+      limpio = limpio
+        .replace(/\s/g, '')
+        .replace(/\$/g, '')
+        .replace(/[A-Za-z]/g, '');
+
+      const tieneComa = limpio.includes(',');
+      const tienePunto = limpio.includes('.');
+
+      if (tieneComa && tienePunto) {
+        // Si la coma está al final, la tratamos como decimal latino; si no, como separador.
+        if (limpio.lastIndexOf(',') > limpio.lastIndexOf('.')) {
+          limpio = limpio.replace(/\./g, '').replace(',', '.');
+        } else {
+          limpio = limpio.replace(/,/g, '');
+        }
+      } else if (tieneComa) {
+        const partes = limpio.split(',');
+        const ult = partes[partes.length - 1];
+        limpio = (partes.length === 2 && ult.length <= 2)
+          ? partes[0] + '.' + ult
+          : limpio.replace(/,/g, '');
+      } else if (tienePunto) {
+        const partes = limpio.split('.');
+        const ult = partes[partes.length - 1];
+        limpio = (partes.length === 2 && ult.length <= 2)
+          ? limpio
+          : limpio.replace(/\./g, '');
+      }
+
+      const n = Number(limpio.replace(/[^\d.-]/g, ''));
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function formatoInput(n) {
+      return String(Number(n || 0));
+    }
+
+    function actualizarTotalFila(i) {
+      const celda = document.getElementById(`totalFila_${i}`);
+      if (!celda || !filas[i]) return;
+      celda.textContent = `${simboloMoneda()} ${formato(Number(filas[i].cantidad || 0) * Number(filas[i].precio || 0))}`;
+    }
+
+    function actualizarTotalesFilas() {
+      filas.forEach((_, i) => actualizarTotalFila(i));
+    }
+
+    function normalizarCantidad(i) {
+      const input = document.getElementById(`cant_${i}`);
+      if (!input) return;
+      filas[i].cantidad = Math.max(0, Math.round(numeroManual(input.value)));
+      input.value = formatoInput(filas[i].cantidad);
+      actualizarTotalFila(i);
+      actualizarTodo();
+    }
+
+    function normalizarPrecio(i) {
+      const input = document.getElementById(`precio_${i}`);
+      if (!input) return;
+      filas[i].precio = Math.max(0, numeroManual(input.value));
+      input.value = formatoInput(filas[i].precio);
+      actualizarTotalFila(i);
+      actualizarTodo();
+    }
+
     function toggleFila(i, checked) {
       filas[i].seleccionado = checked;
-      if (checked && Number(filas[i].cantidad) === 0) filas[i].cantidad = 1;
-      renderTabla();
+
+      if (checked && Number(filas[i].cantidad) === 0) {
+        filas[i].cantidad = 1;
+        const inputCantidad = document.getElementById(`cant_${i}`);
+        if (inputCantidad) inputCantidad.value = formatoInput(filas[i].cantidad);
+      }
+
+      actualizarTotalFila(i);
       actualizarTodo();
     }
 
     function cambiarCantidad(i, val) {
-      filas[i].cantidad = Math.max(0, Number(val || 0));
-      if (filas[i].cantidad > 0) filas[i].seleccionado = true;
-      renderTabla();
+      filas[i].cantidad = Math.max(0, Math.round(numeroManual(val)));
+
+      if (filas[i].cantidad > 0) {
+        filas[i].seleccionado = true;
+        const check = document.getElementById(`sel_${i}`);
+        if (check) check.checked = true;
+      }
+
+      actualizarTotalFila(i);
       actualizarTodo();
     }
 
     function cambiarPrecio(i, val) {
-      filas[i].precio = Math.max(0, Number(val || 0));
-      renderTabla();
+      filas[i].precio = Math.max(0, numeroManual(val));
+      actualizarTotalFila(i);
       actualizarTodo();
     }
 
@@ -478,7 +599,7 @@
       document.getElementById('mSubtotal').textContent = `${simboloMoneda()} ${formato(t.subtotal)}`;
       document.getElementById('mIva').textContent = `${simboloMoneda()} ${formato(t.iva)}`;
       document.getElementById('mTotal').textContent = `${simboloMoneda()} ${formato(t.total)}`;
-      if (document.getElementById('tablaEnsayos').innerHTML.trim() !== '') renderTabla();
+      actualizarTotalesFilas();
     }
 
     function seleccionarTodos() {
