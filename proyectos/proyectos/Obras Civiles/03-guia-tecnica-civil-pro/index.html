@@ -1,1 +1,1789 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CivilScope Pro | Guía Técnica Civil</title>
+  <style>
+    :root{
+      --bg:#eef3f7;
+      --panel:#ffffff;
+      --panel-2:#f7fafc;
+      --ink:#17212b;
+      --muted:#657384;
+      --brand:#0f4c81;
+      --brand-2:#17324d;
+      --soil:#8a5a2b;
+      --geo:#1f6f78;
+      --pave:#2f3742;
+      --concrete:#6f7885;
+      --good:#0f766e;
+      --warn:#b45309;
+      --bad:#b91c1c;
+      --line:#d8e1ea;
+      --shadow: 0 14px 35px rgba(15, 36, 55, .12);
+      --radius:18px;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, Segoe UI, Roboto, Arial, sans-serif;
+      background:linear-gradient(135deg,#e9f0f6,#f8fafc);
+      color:var(--ink);
+      line-height:1.55;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(12,28,44,.96);
+      backdrop-filter:blur(12px);
+      color:#fff;
+      border-bottom:1px solid rgba(255,255,255,.12);
+      box-shadow:0 8px 24px rgba(0,0,0,.18);
+    }
+
+    .brand-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:16px 26px 8px;
+    }
+
+    .brand h1{
+      margin:0;
+      font-size:1.35rem;
+      letter-spacing:.3px;
+    }
+
+    .brand p{
+      margin:2px 0 0;
+      color:#c9d6e3;
+      font-size:.88rem;
+    }
+
+    .badge{
+      border:1px solid rgba(255,255,255,.2);
+      color:#dbeafe;
+      border-radius:999px;
+      padding:7px 12px;
+      font-size:.78rem;
+      white-space:nowrap;
+    }
+
+    .nav{
+      display:flex;
+      gap:7px;
+      overflow-x:auto;
+      padding:0 26px 14px;
+      scrollbar-width:thin;
+    }
+
+    .nav button{
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:#f8fafc;
+      padding:9px 13px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:650;
+      font-size:.88rem;
+      white-space:nowrap;
+      transition:.2s ease;
+    }
+
+    .nav button:hover{background:rgba(255,255,255,.14)}
+    .nav button.active{
+      background:#ffffff;
+      color:var(--brand-2);
+      border-color:#ffffff;
+    }
+
+    .shell{
+      display:grid;
+      grid-template-columns:300px minmax(0,1fr);
+      gap:22px;
+      width:min(1440px, calc(100% - 36px));
+      margin:24px auto;
+      align-items:start;
+    }
+
+    .sidebar{
+      position:sticky;
+      top:122px;
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+      max-height:calc(100vh - 145px);
+      overflow:auto;
+    }
+
+    .sidebar-title{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      margin-bottom:14px;
+      padding-bottom:12px;
+      border-bottom:1px solid var(--line);
+    }
+
+    .dot{
+      width:12px;
+      height:12px;
+      border-radius:50%;
+      background:var(--brand);
+      box-shadow:0 0 0 5px rgba(15,76,129,.12);
+      flex:0 0 auto;
+    }
+
+    .sidebar-title h2{
+      margin:0;
+      font-size:1rem;
+    }
+
+    .sidebar-title span{
+      display:block;
+      color:var(--muted);
+      font-size:.78rem;
+      margin-top:2px;
+    }
+
+    .side-menu{
+      display:grid;
+      gap:7px;
+    }
+
+    .side-menu button{
+      width:100%;
+      text-align:left;
+      border:1px solid transparent;
+      background:var(--panel-2);
+      color:#243447;
+      padding:10px 11px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:650;
+      font-size:.9rem;
+      transition:.18s ease;
+    }
+
+    .side-menu button:hover{
+      border-color:#cbd5e1;
+      background:#fff;
+    }
+
+    .side-menu button.active{
+      background:#e8f1fb;
+      color:var(--brand);
+      border-color:#9cc3e6;
+      box-shadow:inset 4px 0 0 var(--brand);
+    }
+
+    .content{
+      min-width:0;
+    }
+
+    .hero{
+      background:
+        radial-gradient(circle at top right, rgba(15,76,129,.16), transparent 34%),
+        linear-gradient(135deg,#ffffff,#f7fafc);
+      border:1px solid var(--line);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:26px;
+      margin-bottom:20px;
+    }
+
+    .hero h2{
+      margin:0 0 8px;
+      font-size:2rem;
+      line-height:1.12;
+      color:#102033;
+    }
+
+    .hero p{
+      margin:0;
+      color:#506173;
+      max-width:930px;
+    }
+
+    .searchbar{
+      display:flex;
+      gap:10px;
+      margin-top:20px;
+      flex-wrap:wrap;
+    }
+
+    .searchbar input{
+      flex:1;
+      min-width:250px;
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:13px 14px;
+      font-size:.95rem;
+      outline:none;
+      background:#fff;
+    }
+
+    .searchbar button{
+      border:none;
+      background:var(--brand);
+      color:#fff;
+      border-radius:14px;
+      padding:12px 16px;
+      cursor:pointer;
+      font-weight:700;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:15px;
+      margin-top:18px;
+    }
+
+    .card{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 10px 24px rgba(15,36,55,.06);
+    }
+
+    .card h3{
+      margin:0 0 8px;
+      font-size:1.05rem;
+      color:#13283f;
+    }
+
+    .card p{margin:0;color:#5d6a78;font-size:.93rem}
+
+    .pill-row{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:13px;
+    }
+
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      background:#eef6ff;
+      color:#164e7a;
+      border:1px solid #c7def3;
+      padding:6px 9px;
+      border-radius:999px;
+      font-size:.78rem;
+      font-weight:700;
+    }
+
+    .section{
+      background:var(--panel);
+      border:1px solid var(--line);
+      border-radius:24px;
+      box-shadow:var(--shadow);
+      padding:24px;
+      margin-bottom:18px;
+    }
+
+    .section h2{
+      margin:0 0 8px;
+      font-size:1.55rem;
+      color:#102033;
+    }
+
+    .section h3{
+      margin:18px 0 8px;
+      color:#102033;
+    }
+
+    .lead{
+      color:#586879;
+      margin-top:0;
+    }
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+      align-items:start;
+    }
+
+    .info-box{
+      border-left:5px solid var(--brand);
+      background:#f2f7fc;
+      border-radius:14px;
+      padding:14px 16px;
+      margin:14px 0;
+    }
+
+    .info-box strong{color:#17324d}
+
+    .warn-box{
+      border-left:5px solid var(--warn);
+      background:#fff7ed;
+      border-radius:14px;
+      padding:14px 16px;
+      margin:14px 0;
+    }
+
+    .senior-box{
+      border:1px solid #c7d2fe;
+      background:linear-gradient(135deg,#eef2ff,#f8fafc);
+      border-radius:18px;
+      padding:16px;
+      margin:16px 0;
+    }
+
+    .senior-box h3{
+      margin:0 0 8px;
+      color:#243b73;
+    }
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      overflow:hidden;
+      border:1px solid var(--line);
+      border-radius:15px;
+      margin:14px 0;
+      background:#fff;
+      font-size:.92rem;
+    }
+
+    th,td{
+      padding:12px 13px;
+      border-bottom:1px solid var(--line);
+      vertical-align:top;
+    }
+
+    th{
+      text-align:left;
+      background:#eef3f8;
+      color:#1d334b;
+      font-size:.84rem;
+      text-transform:uppercase;
+      letter-spacing:.03em;
+    }
+
+    tr:last-child td{border-bottom:none}
+    td.value{font-weight:800;color:#0f4c81;white-space:nowrap}
+    .tag-good{color:var(--good);font-weight:800}
+    .tag-warn{color:var(--warn);font-weight:800}
+    .tag-bad{color:var(--bad);font-weight:800}
+
+    details{
+      border:1px solid var(--line);
+      border-radius:15px;
+      background:#fff;
+      margin:10px 0;
+      overflow:hidden;
+    }
+
+    summary{
+      cursor:pointer;
+      padding:14px 16px;
+      font-weight:800;
+      color:#17324d;
+      background:#f8fafc;
+    }
+
+    details[open] summary{
+      border-bottom:1px solid var(--line);
+      background:#eef6ff;
+    }
+
+    .details-body{padding:15px 16px}
+
+    .mini-list{
+      display:grid;
+      gap:8px;
+      padding-left:0;
+      list-style:none;
+    }
+
+    .mini-list li{
+      background:#f8fafc;
+      border:1px solid #e2e8f0;
+      border-radius:12px;
+      padding:10px 12px;
+    }
+
+    .result-empty{
+      padding:18px;
+      background:#fff7ed;
+      border:1px solid #fed7aa;
+      border-radius:16px;
+      color:#7c2d12;
+      margin-top:16px;
+      display:none;
+    }
+
+    .footnote{
+      color:#6b7280;
+      font-size:.86rem;
+      margin-top:14px;
+    }
+
+    .source-list a{
+      color:#0f4c81;
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    .source-list a:hover{text-decoration:underline}
+
+    @media(max-width:980px){
+      .shell{
+        grid-template-columns:1fr;
+        width:min(100% - 22px, 860px);
+      }
+      .sidebar{
+        position:relative;
+        top:auto;
+        max-height:none;
+      }
+      .side-menu{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+      .grid{grid-template-columns:1fr}
+      .two-col{grid-template-columns:1fr}
+      .brand-row{
+        flex-direction:column;
+        align-items:flex-start;
+        gap:8px;
+      }
+    }
+
+    @media(max-width:620px){
+      .hero h2{font-size:1.55rem}
+      .section{padding:18px}
+      .side-menu{grid-template-columns:1fr}
+      th,td{padding:10px;font-size:.86rem}
+      .nav{padding-left:14px;padding-right:14px}
+      .brand-row{padding-left:14px;padding-right:14px}
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-row">
+      <div class="brand">
+        <h1>CivilScope Pro</h1>
+        <p>Guía interactiva de Mecánica de Suelos, Geotecnia, Pavimentos y Hormigón</p>
+      </div>
+      <div class="badge">Consulta técnica orientativa · Obra · Laboratorio · Diseño preliminar</div>
+    </div>
+    <nav class="nav" id="topNav"></nav>
+  </header>
+
+  <main class="shell">
+    <aside class="sidebar">
+      <div class="sidebar-title">
+        <div class="dot" id="moduleDot"></div>
+        <div>
+          <h2 id="sideTitle">Inicio</h2>
+          <span id="sideSubtitle">Mapa de consulta</span>
+        </div>
+      </div>
+      <div class="side-menu" id="sideMenu"></div>
+    </aside>
+
+    <section class="content">
+      <div class="hero" id="hero"></div>
+      <div id="mainContent"></div>
+      <div class="result-empty" id="emptyResult">No encontré resultados para esa búsqueda. Probá con términos como CBR, Proctor, slump, SPT, permeabilidad, consolidación o Vs.</div>
+    </section>
+  </main>
+
+<script>
+const modules = {
+  inicio: {
+    label: "Inicio",
+    color: "#0f4c81",
+    subtitle: "Cómo usar el dashboard",
+    heroTitle: "Guía técnica civil para moverse rápido y entender mejor",
+    heroText: "Este dashboard organiza conceptos, ensayos, parámetros y rangos orientativos de suelos, geotecnia, pavimentos y hormigón. La barra superior elige el área grande; el panel izquierdo guía la consulta; la pantalla central desarrolla el tema sin repetir menús.",
+    menu: [
+      {id:"vision", label:"Visión general"},
+      {id:"uso", label:"Cómo navegar"},
+      {id:"criterio", label:"Criterio profesional"},
+      {id:"rutas", label:"Rutas rápidas de consulta"}
+    ],
+    sections: {
+      vision: `
+        <div class="section">
+          <h2>Visión general</h2>
+          <p class="lead">La idea es que una persona que no conoce el tema pueda ubicarse, pero que un profesional también encuentre una lectura rápida y útil.</p>
+          <div class="grid">
+            <div class="card"><h3>Mecánica de Suelos</h3><p>Clasificación, granulometría, plasticidad, compactación, resistencia, deformabilidad y permeabilidad.</p><div class="pill-row"><span class="pill">Proctor</span><span class="pill">Atterberg</span><span class="pill">CBR</span></div></div>
+            <div class="card"><h3>Geotecnia</h3><p>Informe geotécnico, perfil estratigráfico, nivel freático, capacidad portante, asentamientos y exploración in situ.</p><div class="pill-row"><span class="pill">SPT</span><span class="pill">CPTu</span><span class="pill">Vs30</span></div></div>
+            <div class="card"><h3>Pavimentos</h3><p>Subrasante, subbase, base, carpeta, drenaje, control de compactación, fallas típicas y ensayos viales.</p><div class="pill-row"><span class="pill">CBR</span><span class="pill">DCP</span><span class="pill">Los Ángeles</span></div></div>
+            <div class="card"><h3>Hormigón</h3><p>Componentes, relación agua/cemento, slump, curado, resistencia, durabilidad, recubrimiento y fisuración.</p><div class="pill-row"><span class="pill">Slump</span><span class="pill">MPa</span><span class="pill">Curado</span></div></div>
+            <div class="card"><h3>Ensayos</h3><p>Catálogo maestro para ubicar qué mide cada ensayo, qué resultado entrega y qué decisión técnica ayuda a tomar.</p></div>
+            <div class="card"><h3>Parámetros Guía</h3><p>Tablas empíricas orientativas para lectura rápida. Sirven para orientarse, no para reemplazar normas ni proyecto.</p></div>
+          </div>
+        </div>
+      `,
+      uso: `
+        <div class="section">
+          <h2>Cómo navegar sin perderse</h2>
+          <table>
+            <thead><tr><th>Elemento</th><th>Función</th><th>Ejemplo</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Barra superior</td><td>Selecciona el área técnica principal.</td><td>Mecánica de Suelos, Geotecnia, Pavimentos, Hormigón.</td></tr>
+              <tr><td class="value">Panel izquierdo</td><td>Muestra rutas de consulta dentro del área elegida.</td><td>Dentro de Geotecnia: informe, SPT, CPT, Vs, capacidad portante.</td></tr>
+              <tr><td class="value">Pantalla central</td><td>Desarrolla el tema elegido con tablas, criterios y alertas.</td><td>Interpretación de CBR, slump, consolidación o permeabilidad.</td></tr>
+              <tr><td class="value">Buscador</td><td>Busca palabras clave en todo el dashboard.</td><td>CBR, Proctor, SPT, slump, asentamiento, Los Ángeles.</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box"><strong>Diseño sin redundancia:</strong> arriba elegís el área; a la izquierda elegís la necesidad; al centro se abre la explicación.</div>
+        </div>
+      `,
+      criterio: `
+        <div class="section">
+          <h2>Criterio profesional de uso</h2>
+          <p class="lead">Los valores y rangos son de orientación técnica. En obra real se decide con proyecto, norma vigente, laboratorio, inspección, experiencia y responsabilidad profesional.</p>
+          <div class="senior-box">
+            <h3>Mirada senior</h3>
+            <p>No alcanza con mirar un número aislado. Un CBR bajo, por ejemplo, se interpreta junto con humedad, plasticidad, compactación, drenaje, tránsito, estratigrafía y condición de obra. La ingeniería empieza cuando conectás los datos, no cuando llenás una tabla.</p>
+          </div>
+          <div class="warn-box"><strong>Alerta:</strong> este dashboard no reemplaza un informe geotécnico, especificación vial, reglamento estructural ni ensayo normalizado.</div>
+        </div>
+      `,
+      rutas: `
+        <div class="section">
+          <h2>Rutas rápidas de consulta</h2>
+          <table>
+            <thead><tr><th>Pregunta práctica</th><th>Ruta recomendada</th></tr></thead>
+            <tbody>
+              <tr><td>¿El suelo sirve como apoyo o subrasante?</td><td>Mecánica de Suelos → CBR / Compactación / Plasticidad. Luego Pavimentos → Subrasante.</td></tr>
+              <tr><td>¿Qué debería traer un informe de suelos?</td><td>Geotecnia → Informe geotécnico.</td></tr>
+              <tr><td>¿Hay riesgo de asentamientos lentos?</td><td>Mecánica de Suelos → Consolidación. Luego Geotecnia → Asentamientos.</td></tr>
+              <tr><td>¿Cómo controlo la compactación en obra?</td><td>Mecánica de Suelos → Compactación. Luego Ensayos → Cono de arena / Densidad in situ.</td></tr>
+              <tr><td>¿El hormigón está muy fluido?</td><td>Hormigón → Slump / Relación agua-cemento / Segregación.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `
+    }
+  },
+
+  suelos: {
+    label: "Mecánica de Suelos",
+    color: "#8a5a2b",
+    subtitle: "Comportamiento del suelo como material",
+    heroTitle: "Mecánica de Suelos: clasificar, compactar, resistir y deformar",
+    heroText: "Este módulo explica el suelo como material de ingeniería: cómo se clasifica, cómo cambia con el agua, cómo se compacta, cómo resiste cargas y cómo puede deformarse o permitir el paso del agua.",
+    menu: [
+      {id:"identificacion", label:"Identificación del suelo"},
+      {id:"granulometria", label:"Granulometría"},
+      {id:"plasticidad", label:"Plasticidad"},
+      {id:"humedad", label:"Humedad y pesos unitarios"},
+      {id:"compactacion", label:"Compactación y Proctor"},
+      {id:"resistencia", label:"Resistencia al corte"},
+      {id:"consolidacion", label:"Consolidación"},
+      {id:"permeabilidad", label:"Permeabilidad"},
+      {id:"rangos_suelos", label:"Rangos orientativos"},
+      {id:"errores_suelos", label:"Errores comunes"}
+    ],
+    sections: {
+      identificacion: `
+        <div class="section">
+          <h2>Identificación del suelo</h2>
+          <p class="lead">Identificar el suelo es el primer filtro técnico. Antes de calcular, conviene saber si estamos frente a una grava, arena, limo, arcilla, relleno o material orgánico.</p>
+          <table>
+            <thead><tr><th>Tipo de suelo</th><th>Comportamiento práctico</th><th>Riesgo típico</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Grava</td><td>Buen drenaje, buena capacidad si está bien compactada.</td><td>Segregación o mala graduación.</td></tr>
+              <tr><td class="value">Arena</td><td>Resistencia por fricción; sensible a densidad y saturación.</td><td>Licuefacción en arenas saturadas sueltas.</td></tr>
+              <tr><td class="value">Limo</td><td>Puede perder resistencia con agua; comportamiento engañoso.</td><td>Bombeo, erosión interna, baja estabilidad.</td></tr>
+              <tr><td class="value">Arcilla</td><td>Alta influencia del agua; puede ser compresible o expansiva.</td><td>Asentamientos, expansión, retracción.</td></tr>
+              <tr><td class="value">Orgánico / relleno</td><td>Muy variable; requiere verificación cuidadosa.</td><td>Asentamientos diferenciales y baja confiabilidad.</td></tr>
+            </tbody>
+          </table>
+          <div class="senior-box"><h3>Criterio senior</h3><p>Un suelo “parecido” no necesariamente se comporta igual. En obra se mira textura, humedad, olor, color, consistencia, estratos, compactación, drenaje y antecedentes del sitio.</p></div>
+        </div>
+      `,
+      granulometria: `
+        <div class="section">
+          <h2>Granulometría</h2>
+          <p class="lead">Mide la distribución de tamaños de partículas. Es clave para clasificar suelos, evaluar drenaje, compactación y aptitud como material granular.</p>
+          <table>
+            <thead><tr><th>Resultado</th><th>Qué indica</th><th>Lectura práctica</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Curva bien graduada</td><td>Varios tamaños combinados.</td><td>Suele compactar mejor y tener buena estabilidad.</td></tr>
+              <tr><td class="value">Curva uniforme</td><td>Predomina un solo tamaño.</td><td>Puede drenar bien, pero compactar peor.</td></tr>
+              <tr><td class="value">% finos alto</td><td>Presencia importante de limo/arcilla.</td><td>Mayor sensibilidad al agua y posible pérdida de soporte.</td></tr>
+            </tbody>
+          </table>
+          <details open><summary>Ensayos relacionados</summary><div class="details-body">Tamizado para fracciones gruesas y sedimentación/hidrómetro para fracciones finas. En agregados viales, la curva debe compararse con la especificación del proyecto.</div></details>
+        </div>
+      `,
+      plasticidad: `
+        <div class="section">
+          <h2>Plasticidad: LL, LP e IP</h2>
+          <p class="lead">La plasticidad muestra cómo cambia un suelo fino cuando gana o pierde agua. Es central en arcillas, limos arcillosos y suelos expansivos.</p>
+          <table>
+            <thead><tr><th>Parámetro</th><th>Qué significa</th><th>Interpretación</th></tr></thead>
+            <tbody>
+              <tr><td class="value">LL</td><td>Límite líquido.</td><td>Humedad a partir de la cual el suelo se comporta más fluido.</td></tr>
+              <tr><td class="value">LP</td><td>Límite plástico.</td><td>Humedad mínima para moldearse sin romperse.</td></tr>
+              <tr><td class="value">IP = LL - LP</td><td>Índice de plasticidad.</td><td>Rango de humedad donde el suelo conserva comportamiento plástico.</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead><tr><th>IP orientativo</th><th>Lectura rápida</th><th>Precaución</th></tr></thead>
+            <tbody>
+              <tr><td class="value">&lt; 7</td><td>Baja plasticidad.</td><td>Generalmente menor sensibilidad al agua.</td></tr>
+              <tr><td class="value">7 - 17</td><td>Plasticidad media.</td><td>Revisar humedad y compactación.</td></tr>
+              <tr><td class="value">&gt; 17 - 20</td><td>Alta plasticidad.</td><td>Puede tener problemas de expansión, retracción o baja estabilidad.</td></tr>
+            </tbody>
+          </table>
+          <div class="warn-box"><strong>Alerta de obra:</strong> un suelo plástico mojado puede parecer “trabajable”, pero perder capacidad de soporte. No se arregla con fe: se controla con humedad, compactación y drenaje.</div>
+        </div>
+      `,
+      humedad: `
+        <div class="section">
+          <h2>Humedad natural y pesos unitarios</h2>
+          <p class="lead">La humedad controla gran parte del comportamiento del suelo: compactación, resistencia, deformabilidad y estabilidad. Los pesos unitarios ayudan a cuantificar el estado del material.</p>
+          <table>
+            <thead><tr><th>Dato</th><th>Uso práctico</th><th>Dónde aparece</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Humedad natural</td><td>Comparar estado real contra humedad óptima o condición esperada.</td><td>Informe de laboratorio / campo.</td></tr>
+              <tr><td class="value">Peso unitario húmedo</td><td>Cargas del terreno y estimaciones de campo.</td><td>Perfiles, estabilidad, empujes.</td></tr>
+              <tr><td class="value">Peso unitario seco</td><td>Control de compactación.</td><td>Proctor y densidad in situ.</td></tr>
+              <tr><td class="value">Peso unitario saturado</td><td>Análisis bajo napa o suelo saturado.</td><td>Capacidad, asentamientos, estabilidad.</td></tr>
+            </tbody>
+          </table>
+          <div class="senior-box"><h3>Criterio senior</h3><p>La humedad “cerca” de la óptima puede servir; muy seca o muy húmeda suele complicar la compactación. El suelo no negocia: o está en ventana de trabajo o te cobra con deformaciones.</p></div>
+        </div>
+      `,
+      compactacion: `
+        <div class="section">
+          <h2>Compactación y Proctor</h2>
+          <p class="lead">Compactar es reducir vacíos para mejorar densidad, soporte y estabilidad. El Proctor define la humedad óptima y la densidad seca máxima de referencia.</p>
+          <table>
+            <thead><tr><th>Concepto</th><th>Qué entrega</th><th>Uso en obra</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Proctor estándar / modificado</td><td>Humedad óptima y densidad seca máxima.</td><td>Referencia para controlar terraplenes, subrasantes y bases.</td></tr>
+              <tr><td class="value">Cono de arena</td><td>Densidad in situ.</td><td>Verifica si la compactación real cumple el porcentaje exigido.</td></tr>
+              <tr><td class="value">Densímetro nuclear</td><td>Densidad y humedad de campo.</td><td>Control rápido, requiere calibración y protocolo.</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead><tr><th>% compactación</th><th>Lectura orientativa</th><th>Comentario</th></tr></thead>
+            <tbody>
+              <tr><td class="value">&lt; 90%</td><td class="tag-bad">Deficiente</td><td>Riesgo de deformación y pérdida de soporte.</td></tr>
+              <tr><td class="value">90 - 95%</td><td class="tag-warn">Intermedio</td><td>Puede ser aceptable según capa y especificación.</td></tr>
+              <tr><td class="value">&gt; 95%</td><td class="tag-good">Control usual exigente</td><td>Frecuente en bases, subbases y terraplenes seleccionados.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      resistencia: `
+        <div class="section">
+          <h2>Resistencia al corte</h2>
+          <p class="lead">La resistencia al corte explica cómo el suelo se opone al deslizamiento o falla. Se resume normalmente con cohesión, ángulo de fricción y resistencia no drenada.</p>
+          <table>
+            <thead><tr><th>Parámetro</th><th>Uso</th><th>Interpretación</th></tr></thead>
+            <tbody>
+              <tr><td class="value">c'</td><td>Resistencia efectiva asociada a cohesión.</td><td>Importante en análisis drenados.</td></tr>
+              <tr><td class="value">φ'</td><td>Ángulo de fricción efectivo.</td><td>Clave en arenas, gravas y suelos granulares.</td></tr>
+              <tr><td class="value">Su / Cu</td><td>Resistencia no drenada.</td><td>Usual para arcillas saturadas a corto plazo.</td></tr>
+            </tbody>
+          </table>
+          <details open><summary>Ensayos relacionados</summary><div class="details-body">Corte directo, triaxial UU/CU/CD, compresión simple en arcillas, veleta de campo y correlaciones con SPT/CPT cuando corresponde.</div></details>
+          <div class="warn-box"><strong>Alerta:</strong> no mezclar parámetros drenados y no drenados como si fueran lo mismo. Ese error en geotecnia puede salir caro.</div>
+        </div>
+      `,
+      consolidacion: `
+        <div class="section">
+          <h2>Consolidación y asentamientos</h2>
+          <p class="lead">La consolidación explica asentamientos por expulsión de agua en suelos finos saturados. Es crítica en arcillas blandas, limos compresibles, rellenos y terraplenes.</p>
+          <table>
+            <thead><tr><th>Parámetro</th><th>Qué indica</th><th>Uso práctico</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Cc</td><td>Índice de compresión.</td><td>Asentamiento en carga virgen.</td></tr>
+              <tr><td class="value">Cr / Cs</td><td>Índice de recompresión.</td><td>Respuesta en descarga-recarga.</td></tr>
+              <tr><td class="value">Cv</td><td>Coeficiente de consolidación.</td><td>Velocidad con que ocurre el asentamiento.</td></tr>
+              <tr><td class="value">σ'p</td><td>Presión de preconsolidación.</td><td>Historial de esfuerzos del suelo.</td></tr>
+              <tr><td class="value">OCR</td><td>Relación de sobreconsolidación.</td><td>Define si el suelo es normalmente consolidado o sobreconsolidado.</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead><tr><th>Caso</th><th>Lectura senior</th><th>Decisión posible</th></tr></thead>
+            <tbody>
+              <tr><td>Arcilla blanda saturada</td><td>Riesgo de asentamiento lento.</td><td>Precarga, drenes, pilotes o mejora de suelo.</td></tr>
+              <tr><td>Cc alto</td><td>Alta compresibilidad.</td><td>Revisar deformaciones admisibles.</td></tr>
+              <tr><td>Cv bajo</td><td>Consolidación lenta.</td><td>El problema puede aparecer meses o años después.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      permeabilidad: `
+        <div class="section">
+          <h2>Permeabilidad del suelo</h2>
+          <p class="lead">La permeabilidad mide la facilidad con que el agua atraviesa el suelo. Afecta excavaciones, drenaje, estabilidad, filtraciones, consolidación y desempeño de pavimentos.</p>
+          <table>
+            <thead><tr><th>Ensayo</th><th>Uso típico</th><th>Resultado</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Carga constante</td><td>Arenas y gravas.</td><td>Coeficiente k.</td></tr>
+              <tr><td class="value">Carga variable</td><td>Limos y arcillas.</td><td>Coeficiente k.</td></tr>
+              <tr><td class="value">Lefranc</td><td>Permeabilidad in situ en suelos.</td><td>k de campo.</td></tr>
+              <tr><td class="value">Lugeon</td><td>Roca fracturada.</td><td>Absorción / permeabilidad de macizo rocoso.</td></tr>
+              <tr><td class="value">Bombeo</td><td>Acuíferos y excavaciones.</td><td>Caudal, abatimiento, transmisividad.</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead><tr><th>Material</th><th>Permeabilidad esperada</th><th>Lectura práctica</th></tr></thead>
+            <tbody>
+              <tr><td>Grava limpia</td><td class="value">Alta</td><td>Drena rápido; revisar filtros y erosión interna.</td></tr>
+              <tr><td>Arena limpia</td><td class="value">Media a alta</td><td>Drena, pero puede sufrir licuefacción si está suelta y saturada.</td></tr>
+              <tr><td>Limo</td><td class="value">Baja a media</td><td>Puede generar bombeo y pérdida de soporte.</td></tr>
+              <tr><td>Arcilla</td><td class="value">Muy baja</td><td>El agua sale lento; asentamientos por consolidación pueden demorar.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      rangos_suelos: `
+        <div class="section">
+          <h2>Rangos orientativos en suelos</h2>
+          <p class="lead">Valores para lectura rápida. Siempre se validan con norma, proyecto y laboratorio.</p>
+          <table>
+            <thead><tr><th>Parámetro</th><th>Bajo / crítico</th><th>Medio</th><th>Alto / favorable</th><th>Lectura</th></tr></thead>
+            <tbody>
+              <tr><td>CBR</td><td>&lt; 3 - 5%</td><td>5 - 20%</td><td>&gt; 20%</td><td>Bajo CBR indica subrasante débil.</td></tr>
+              <tr><td>IP</td><td>&lt; 7</td><td>7 - 17</td><td>&gt; 17 - 20</td><td>IP alto implica sensibilidad al agua.</td></tr>
+              <tr><td>Compactación</td><td>&lt; 90%</td><td>90 - 95%</td><td>&gt; 95%</td><td>Comparar con Proctor.</td></tr>
+              <tr><td>Humedad de campo</td><td>Muy seca</td><td>Cerca de óptima</td><td>Muy húmeda</td><td>Fuera de ventana complica compactación.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      errores_suelos: `
+        <div class="section">
+          <h2>Errores comunes en mecánica de suelos</h2>
+          <ul class="mini-list">
+            <li><strong>Usar CBR como único dato:</strong> el soporte también depende de compactación, humedad, plasticidad y drenaje.</li>
+            <li><strong>Confundir suelo seco con suelo resistente:</strong> puede desmoronarse o perder desempeño al humedecerse.</li>
+            <li><strong>Ignorar finos:</strong> pocos finos plásticos pueden cambiar mucho el comportamiento de una base o subrasante.</li>
+            <li><strong>Compactar fuera de humedad óptima:</strong> más pasadas de rodillo no siempre solucionan una humedad mal controlada.</li>
+            <li><strong>No mirar el agua:</strong> en suelos, el agua suele ser el villano con casco blanco.</li>
+          </ul>
+        </div>
+      `
+    }
+  },
+
+  geotecnia: {
+    label: "Geotecnia",
+    color: "#1f6f78",
+    subtitle: "Terreno, fundaciones y comportamiento in situ",
+    heroTitle: "Geotecnia: convertir datos del terreno en decisiones de obra",
+    heroText: "Este módulo mira el terreno desde el punto de vista del diseño y la construcción: exploración, informe geotécnico, capacidad portante, asentamientos, napa, rigidez dinámica y riesgos.",
+    menu: [
+      {id:"informe", label:"Informe geotécnico"},
+      {id:"perfil", label:"Perfil estratigráfico"},
+      {id:"napa", label:"Nivel freático"},
+      {id:"capacidad", label:"Capacidad portante"},
+      {id:"asentamientos", label:"Asentamientos"},
+      {id:"spt", label:"SPT"},
+      {id:"cpt", label:"CPT / CPTu"},
+      {id:"vs", label:"Velocidad de onda de corte"},
+      {id:"placa", label:"Placa de carga"},
+      {id:"otros_geo", label:"Presiómetro, veleta y químicos"},
+      {id:"riesgos", label:"Riesgos geotécnicos"}
+    ],
+    sections: {
+      informe: `
+        <div class="section">
+          <h2>Qué debería contener un informe geotécnico</h2>
+          <p class="lead">Un buen informe no es solo un PDF con perforaciones. Debe transformar datos de campo y laboratorio en recomendaciones claras para proyecto y obra.</p>
+          <table>
+            <thead><tr><th>Contenido mínimo</th><th>Para qué sirve</th><th>Alerta senior</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Ubicación y alcance</td><td>Define límites del estudio.</td><td>No extrapolar fuera del área investigada.</td></tr>
+              <tr><td class="value">Exploración realizada</td><td>Perforaciones, calicatas, ensayos in situ.</td><td>Debe ser compatible con el tipo de obra.</td></tr>
+              <tr><td class="value">Perfil estratigráfico</td><td>Ordena capas, espesores y variabilidad.</td><td>La variabilidad manda más que el promedio bonito.</td></tr>
+              <tr><td class="value">Nivel freático</td><td>Impacta excavación, capacidad y asentamientos.</td><td>Puede variar estacionalmente.</td></tr>
+              <tr><td class="value">Ensayos de laboratorio</td><td>Clasificación, humedad, Atterberg, resistencia, consolidación.</td><td>Revisar representatividad de muestras.</td></tr>
+              <tr><td class="value">Parámetros de diseño</td><td>c, φ, Su, γ, k, Cc, Cv, capacidad admisible.</td><td>Deben indicar criterio y limitaciones.</td></tr>
+              <tr><td class="value">Recomendaciones</td><td>Fundación, excavación, compactación, drenaje, mejoramiento.</td><td>Deben ser constructivas, no solo académicas.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      perfil: `
+        <div class="section">
+          <h2>Perfil estratigráfico</h2>
+          <p class="lead">Es la lectura vertical del terreno: capas, espesores, cambios de material, profundidad de rechazo, napa y resultados in situ.</p>
+          <div class="two-col">
+            <div>
+              <h3>Qué mirar</h3>
+              <ul class="mini-list">
+                <li>Cambios bruscos de material.</li>
+                <li>Capas blandas intermedias.</li>
+                <li>Rellenos no controlados.</li>
+                <li>Nivel freático y variación esperada.</li>
+                <li>Profundidad de estratos competentes.</li>
+              </ul>
+            </div>
+            <div class="senior-box"><h3>Criterio senior</h3><p>El perfil promedio puede engañar. Para fundaciones y pavimentos importan los puntos débiles: una capa blanda delgada puede controlar asentamientos o fallas diferenciales.</p></div>
+          </div>
+        </div>
+      `,
+      napa: `
+        <div class="section">
+          <h2>Nivel freático</h2>
+          <p class="lead">La napa condiciona excavaciones, capacidad efectiva, estabilidad, subpresión, asentamientos, drenaje y agresividad química.</p>
+          <table>
+            <thead><tr><th>Situación</th><th>Impacto</th><th>Medida posible</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Napa superficial</td><td>Excavaciones inestables, bombeo, menor tensión efectiva.</td><td>Drenaje, entibación, bombeo, rediseño.</td></tr>
+              <tr><td class="value">Napa variable</td><td>Riesgo por cambios estacionales.</td><td>Monitoreo o margen conservador.</td></tr>
+              <tr><td class="value">Agua agresiva</td><td>Puede afectar hormigón y acero.</td><td>Ensayos químicos, especificación de durabilidad.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      capacidad: `
+        <div class="section">
+          <h2>Capacidad portante</h2>
+          <p class="lead">Evalúa si el terreno puede soportar cargas sin falla por corte y con deformaciones admisibles.</p>
+          <table>
+            <thead><tr><th>Concepto</th><th>Qué controla</th><th>Datos necesarios</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Capacidad última</td><td>Falla del suelo.</td><td>c, φ, γ, geometría, profundidad, napa.</td></tr>
+              <tr><td class="value">Capacidad admisible</td><td>Valor de trabajo con seguridad.</td><td>Capacidad última / FS y asentamientos.</td></tr>
+              <tr><td class="value">Asentamiento admisible</td><td>Servicio de la estructura.</td><td>Compresibilidad, cargas, estratos.</td></tr>
+            </tbody>
+          </table>
+          <div class="warn-box"><strong>Alerta:</strong> a veces no gobierna la falla por corte sino el asentamiento. El suelo puede “aguantar”, pero deformarse más de lo admisible.</div>
+        </div>
+      `,
+      asentamientos: `
+        <div class="section">
+          <h2>Asentamientos</h2>
+          <p class="lead">Los asentamientos pueden ser inmediatos, por consolidación o secundarios. En estructuras, el diferencial suele ser más dañino que el total uniforme.</p>
+          <table>
+            <thead><tr><th>Tipo</th><th>Cuándo aparece</th><th>Riesgo</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Inmediato</td><td>Durante o poco después de cargar.</td><td>Deformación rápida.</td></tr>
+              <tr><td class="value">Consolidación primaria</td><td>Con el tiempo, en suelos finos saturados.</td><td>Fisuras, desniveles, daños funcionales.</td></tr>
+              <tr><td class="value">Secundario</td><td>Después de consolidación primaria.</td><td>Importante en orgánicos y arcillas especiales.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      spt: `
+        <div class="section">
+          <h2>SPT - Standard Penetration Test</h2>
+          <p class="lead">Ensayo in situ muy usado. Entrega el número de golpes N, útil para estimar compacidad en arenas, consistencia en arcillas y correlaciones geotécnicas.</p>
+          <table>
+            <thead><tr><th>SPT N orientativo</th><th>Arenas</th><th>Arcillas</th></tr></thead>
+            <tbody>
+              <tr><td class="value">0 - 4</td><td>Muy suelta</td><td>Muy blanda</td></tr>
+              <tr><td class="value">4 - 10</td><td>Suelta</td><td>Blanda a media</td></tr>
+              <tr><td class="value">10 - 30</td><td>Media a densa</td><td>Firme</td></tr>
+              <tr><td class="value">&gt; 30</td><td>Densa a muy densa</td><td>Muy firme a dura</td></tr>
+            </tbody>
+          </table>
+          <div class="warn-box"><strong>Alerta:</strong> el N debe corregirse cuando corresponde. No usar correlaciones a ciegas.</div>
+        </div>
+      `,
+      cpt: `
+        <div class="section">
+          <h2>CPT / CPTu</h2>
+          <p class="lead">El cono estático entrega un perfil continuo. El CPTu suma presión de poros, muy útil en suelos finos y análisis de comportamiento.</p>
+          <table>
+            <thead><tr><th>Dato</th><th>Qué mide</th><th>Uso práctico</th></tr></thead>
+            <tbody>
+              <tr><td class="value">qc</td><td>Resistencia de punta.</td><td>Identificación, capacidad, estratigrafía.</td></tr>
+              <tr><td class="value">fs</td><td>Fricción lateral.</td><td>Tipo de suelo y comportamiento.</td></tr>
+              <tr><td class="value">u</td><td>Presión de poros.</td><td>CPTu, respuesta no drenada y consolidación.</td></tr>
+            </tbody>
+          </table>
+          <div class="senior-box"><h3>Criterio senior</h3><p>El CPT brilla donde el SPT queda “a saltos”: entrega continuidad. Ideal para detectar capas blandas delgadas que una perforación puede subestimar.</p></div>
+        </div>
+      `,
+      vs: `
+        <div class="section">
+          <h2>Velocidad de onda de corte - Vs / Vs30</h2>
+          <p class="lead">La velocidad de onda de corte mide rigidez dinámica del terreno. Se usa en clasificación sísmica del sitio, microzonificación, vibraciones y detección de cambios de rigidez con profundidad.</p>
+          <table>
+            <thead><tr><th>Vs30 orientativo</th><th>Lectura práctica</th><th>Comentario</th></tr></thead>
+            <tbody>
+              <tr><td class="value">&lt; 180 m/s</td><td class="tag-bad">Suelo blando</td><td>Mayor amplificación sísmica potencial.</td></tr>
+              <tr><td class="value">180 - 360 m/s</td><td class="tag-warn">Suelo rígido a intermedio</td><td>Revisar deformabilidad y perfil.</td></tr>
+              <tr><td class="value">360 - 760 m/s</td><td class="tag-good">Suelo muy denso / roca blanda</td><td>Mejor rigidez dinámica.</td></tr>
+              <tr><td class="value">&gt; 760 m/s</td><td class="tag-good">Roca competente</td><td>Sitio rígido.</td></tr>
+            </tbody>
+          </table>
+          <details open><summary>Cómo se obtiene</summary><div class="details-body">Métodos como MASW, ReMi, downhole, crosshole o sísmica superficial. El método depende de profundidad, precisión requerida, presupuesto y accesibilidad.</div></details>
+          <div class="warn-box"><strong>Alerta:</strong> Vs no reemplaza ensayos geotécnicos de resistencia o consolidación. Complementa el modelo del terreno.</div>
+        </div>
+      `,
+      placa: `
+        <div class="section">
+          <h2>Placa de carga</h2>
+          <p class="lead">Evalúa deformabilidad superficial mediante carga aplicada sobre una placa. Es útil en bases, subbases, explanadas y control de módulos.</p>
+          <table>
+            <thead><tr><th>Resultado</th><th>Uso</th><th>Lectura</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Módulo de reacción k</td><td>Pavimentos rígidos, losas, apoyo superficial.</td><td>Rigidez de apoyo.</td></tr>
+              <tr><td class="value">Curva carga-asentamiento</td><td>Evaluación de deformabilidad.</td><td>Comportamiento bajo carga.</td></tr>
+              <tr><td class="value">Ev1 / Ev2</td><td>Control vial en algunos criterios.</td><td>Compactación y mejora entre ciclos.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      otros_geo: `
+        <div class="section">
+          <h2>Presiómetro, veleta y ensayos químicos</h2>
+          <table>
+            <thead><tr><th>Ensayo</th><th>Uso</th><th>Cuándo conviene</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Presiómetro</td><td>Deformabilidad y presión límite in situ.</td><td>Fundaciones, excavaciones, suelos difíciles.</td></tr>
+              <tr><td class="value">Veleta de campo</td><td>Resistencia no drenada en arcillas blandas.</td><td>Suelos finos saturados de baja resistencia.</td></tr>
+              <tr><td class="value">Químicos de suelo/agua</td><td>pH, sulfatos, cloruros, agresividad.</td><td>Durabilidad de hormigón, acero y fundaciones.</td></tr>
+              <tr><td class="value">Hinchamiento / expansión</td><td>Potencial expansivo de arcillas.</td><td>Losas, pavimentos y fundaciones superficiales.</td></tr>
+              <tr><td class="value">Colapso</td><td>Asentamiento por humedecimiento.</td><td>Suelos metaestables o rellenos.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      riesgos: `
+        <div class="section">
+          <h2>Riesgos geotécnicos frecuentes</h2>
+          <ul class="mini-list">
+            <li><strong>Rellenos no controlados:</strong> alta incertidumbre y riesgo de asentamientos.</li>
+            <li><strong>Arcillas expansivas:</strong> levantamientos, fisuras y daño en pavimentos o losas.</li>
+            <li><strong>Arenas sueltas saturadas:</strong> riesgo de licuefacción en zonas sísmicas.</li>
+            <li><strong>Napa alta:</strong> inestabilidad de excavación, bombeo y pérdida de capacidad efectiva.</li>
+            <li><strong>Taludes sin drenaje:</strong> el agua suele disparar fallas.</li>
+          </ul>
+        </div>
+      `
+    }
+  },
+
+  pavimentos: {
+    label: "Pavimentos",
+    color: "#2f3742",
+    subtitle: "Capas, soporte, tránsito y control vial",
+    heroTitle: "Pavimentos: soporte, materiales, drenaje y desempeño",
+    heroText: "Este módulo organiza el pavimento como sistema estructural: subrasante, subbase, base, carpeta, tránsito, agua, compactación, ensayos y fallas típicas.",
+    menu: [
+      {id:"estructura", label:"Estructura del pavimento"},
+      {id:"subrasante", label:"Subrasante"},
+      {id:"capas", label:"Subbase y base"},
+      {id:"flexible", label:"Pavimento flexible"},
+      {id:"rigido", label:"Pavimento rígido"},
+      {id:"cbr_pav", label:"CBR en pavimentos"},
+      {id:"compactacion_pav", label:"Compactación vial"},
+      {id:"drenaje_pav", label:"Drenaje"},
+      {id:"agregados_pav", label:"Ensayos de agregados"},
+      {id:"asfalticos", label:"Ensayos asfálticos"},
+      {id:"fallas_pav", label:"Fallas típicas"}
+    ],
+    sections: {
+      estructura: `
+        <div class="section">
+          <h2>Estructura del pavimento</h2>
+          <p class="lead">El pavimento distribuye cargas del tránsito hacia el terreno. Su desempeño depende del paquete estructural, materiales, compactación, drenaje y mantenimiento.</p>
+          <table>
+            <thead><tr><th>Capa</th><th>Función</th><th>Qué controlar</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Carpeta</td><td>Rodamiento, impermeabilidad parcial, confort.</td><td>Espesor, mezcla, compactación, textura.</td></tr>
+              <tr><td class="value">Base</td><td>Principal capa estructural granular o tratada.</td><td>Granulometría, densidad, humedad, resistencia.</td></tr>
+              <tr><td class="value">Subbase</td><td>Transición, drenaje y distribución de cargas.</td><td>Material, compactación y finos.</td></tr>
+              <tr><td class="value">Subrasante</td><td>Terreno de apoyo.</td><td>CBR, humedad, plasticidad, compactación.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      subrasante: `
+        <div class="section">
+          <h2>Subrasante</h2>
+          <p class="lead">Es el suelo que recibe el paquete de pavimento. Una mala subrasante obliga a mejorar, estabilizar o aumentar estructura.</p>
+          <table>
+            <thead><tr><th>CBR orientativo</th><th>Lectura</th><th>Decisión posible</th></tr></thead>
+            <tbody>
+              <tr><td class="value">&lt; 3%</td><td class="tag-bad">Muy débil</td><td>Mejoramiento, reemplazo, estabilización o mayor espesor.</td></tr>
+              <tr><td class="value">3 - 5%</td><td class="tag-warn">Débil</td><td>Diseño cuidadoso, drenaje y control estricto.</td></tr>
+              <tr><td class="value">5 - 10%</td><td>Regular</td><td>Puede servir con paquete adecuado.</td></tr>
+              <tr><td class="value">&gt; 10 - 20%</td><td class="tag-good">Buena</td><td>Mejor soporte relativo.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      capas: `
+        <div class="section">
+          <h2>Subbase y base granular</h2>
+          <p class="lead">Deben resistir carga, compactarse bien y controlar agua. Los finos plásticos son enemigos silenciosos.</p>
+          <table>
+            <thead><tr><th>Control</th><th>Qué busca</th><th>Riesgo si falla</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Granulometría</td><td>Distribución adecuada de tamaños.</td><td>Inestabilidad, segregación o mala compactación.</td></tr>
+              <tr><td class="value">Plasticidad</td><td>Limitar finos activos.</td><td>Pérdida de soporte con humedad.</td></tr>
+              <tr><td class="value">Los Ángeles</td><td>Resistencia al desgaste del agregado.</td><td>Degradación bajo tránsito.</td></tr>
+              <tr><td class="value">Compactación</td><td>Densidad de campo vs Proctor.</td><td>Ahuellamiento y deformaciones.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      flexible: `
+        <div class="section">
+          <h2>Pavimento flexible</h2>
+          <p class="lead">Trabaja distribuyendo cargas por capas. La carpeta asfáltica aporta rodamiento y parte de la capacidad estructural.</p>
+          <table>
+            <thead><tr><th>Factor</th><th>Por qué importa</th><th>Falla asociada</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Tránsito pesado</td><td>Controla fatiga y deformaciones.</td><td>Piel de cocodrilo, ahuellamiento.</td></tr>
+              <tr><td class="value">Temperatura</td><td>Afecta ligante asfáltico.</td><td>Fisuración o deformación plástica.</td></tr>
+              <tr><td class="value">Drenaje</td><td>Evita pérdida de soporte.</td><td>Baches y bombeo.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      rigido: `
+        <div class="section">
+          <h2>Pavimento rígido</h2>
+          <p class="lead">Usa losas de hormigón que distribuyen cargas por rigidez. Controla juntas, soporte, transferencia de carga y curado.</p>
+          <table>
+            <thead><tr><th>Elemento</th><th>Función</th><th>Alerta</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Juntas</td><td>Controlar retracción y movimiento.</td><td>Mal corte = fisuras aleatorias.</td></tr>
+              <tr><td class="value">Pasadores</td><td>Transferencia de carga.</td><td>Mala alineación = daño en juntas.</td></tr>
+              <tr><td class="value">Base de apoyo</td><td>Uniformidad y drenaje.</td><td>Soporte irregular = fisuración.</td></tr>
+              <tr><td class="value">Curado</td><td>Ganancia de resistencia.</td><td>Sin curado = fisuración temprana.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      cbr_pav: `
+        <div class="section">
+          <h2>CBR en pavimentos</h2>
+          <p class="lead">El CBR compara la resistencia a penetración del suelo/material con un patrón de referencia. Se usa mucho para subrasante y materiales granulares.</p>
+          <div class="info-box"><strong>Relación práctica:</strong> Proctor define cómo compactar; CBR ayuda a estimar soporte. Más compactación suele mejorar desempeño, pero no convierte una arcilla mala en autopista premium.</div>
+          <table>
+            <thead><tr><th>CBR</th><th>Lectura</th><th>Acción típica</th></tr></thead>
+            <tbody>
+              <tr><td class="value">&lt; 3%</td><td>Muy débil.</td><td>Mejoramiento o reemplazo.</td></tr>
+              <tr><td class="value">3 - 8%</td><td>Débil a regular.</td><td>Control de humedad, drenaje, espesor.</td></tr>
+              <tr><td class="value">8 - 20%</td><td>Regular a bueno.</td><td>Diseño estructural normal.</td></tr>
+              <tr><td class="value">&gt; 20%</td><td>Buen soporte relativo.</td><td>Validar con especificación.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      compactacion_pav: `
+        <div class="section">
+          <h2>Compactación vial</h2>
+          <p class="lead">Controla deformaciones permanentes, soporte y vida útil. Se verifica con densidad in situ y comparación contra Proctor.</p>
+          <table>
+            <thead><tr><th>Ensayo</th><th>Uso</th><th>Resultado</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Cono de arena</td><td>Densidad en campo.</td><td>% compactación.</td></tr>
+              <tr><td class="value">Densímetro nuclear</td><td>Control rápido.</td><td>Densidad y humedad.</td></tr>
+              <tr><td class="value">DCP</td><td>Estimación rápida de resistencia.</td><td>Penetración por golpe / correlaciones.</td></tr>
+              <tr><td class="value">Placa de carga</td><td>Rigidez superficial.</td><td>Módulo / asentamiento.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      drenaje_pav: `
+        <div class="section">
+          <h2>Drenaje en pavimentos</h2>
+          <p class="lead">El agua reduce soporte, bombea finos y acelera fallas. Un pavimento con mal drenaje envejece como pan mojado: rápido y mal.</p>
+          <table>
+            <thead><tr><th>Problema</th><th>Se observa como</th><th>Causa probable</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Bombeo</td><td>Salida de agua y finos.</td><td>Agua atrapada + tránsito.</td></tr>
+              <tr><td class="value">Baches</td><td>Pérdida local de material.</td><td>Fisuras + ingreso de agua + tránsito.</td></tr>
+              <tr><td class="value">Ahuellamiento</td><td>Deformación en huellas.</td><td>Base/subrasante débil o mezcla inestable.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      agregados_pav: `
+        <div class="section">
+          <h2>Ensayos de agregados para pavimentos</h2>
+          <table>
+            <thead><tr><th>Ensayo</th><th>Qué evalúa</th><th>Lectura práctica</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Los Ángeles</td><td>Abrasión, impacto y degradación.</td><td>Menor pérdida = agregado más resistente.</td></tr>
+              <tr><td class="value">Equivalente de arena</td><td>Limpieza y finos arcillosos.</td><td>Valores bajos indican exceso de finos perjudiciales.</td></tr>
+              <tr><td class="value">Índice de lajas y alargadas</td><td>Forma del agregado.</td><td>Partículas muy planas/alargadas afectan compactación.</td></tr>
+              <tr><td class="value">Micro-Deval</td><td>Desgaste con agua.</td><td>Útil para durabilidad de agregados.</td></tr>
+              <tr><td class="value">Azul de metileno</td><td>Arcillas activas.</td><td>Importante cuando hay finos sospechosos.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      asfalticos: `
+        <div class="section">
+          <h2>Ensayos asfálticos</h2>
+          <table>
+            <thead><tr><th>Ensayo</th><th>Resultado</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Marshall</td><td>Estabilidad y fluencia.</td><td>Diseño/control de mezclas convencionales.</td></tr>
+              <tr><td class="value">Rice</td><td>Densidad máxima teórica.</td><td>Cálculo de vacíos.</td></tr>
+              <tr><td class="value">Extracción de asfalto</td><td>Contenido de ligante.</td><td>Control de mezcla producida.</td></tr>
+              <tr><td class="value">FWD / Benkelman</td><td>Deflexiones.</td><td>Evaluación estructural del pavimento.</td></tr>
+              <tr><td class="value">IRI</td><td>Regularidad superficial.</td><td>Confort y calidad de rodadura.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      fallas_pav: `
+        <div class="section">
+          <h2>Fallas típicas en pavimentos</h2>
+          <table>
+            <thead><tr><th>Falla</th><th>Qué se ve</th><th>Causa frecuente</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Ahuellamiento</td><td>Canales en huellas.</td><td>Mezcla inestable o capas débiles.</td></tr>
+              <tr><td class="value">Piel de cocodrilo</td><td>Fisuras interconectadas.</td><td>Fatiga estructural.</td></tr>
+              <tr><td class="value">Baches</td><td>Huecos localizados.</td><td>Agua + tránsito + pérdida de material.</td></tr>
+              <tr><td class="value">Exudación</td><td>Ligante en superficie.</td><td>Exceso de asfalto o vacíos insuficientes.</td></tr>
+              <tr><td class="value">Fisuras transversales</td><td>Cortes perpendiculares al tránsito.</td><td>Temperatura, retracción o reflexión.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `
+    }
+  },
+
+  hormigon: {
+    label: "Hormigón",
+    color: "#6f7885",
+    subtitle: "Material, obra, control y durabilidad",
+    heroTitle: "Hormigón: resistencia, trabajabilidad, curado y control",
+    heroText: "Este módulo resume lo que hay que mirar en obra y laboratorio: componentes, dosificación, relación agua/cemento, slump, curado, resistencia, durabilidad, recubrimiento y fisuración.",
+    menu: [
+      {id:"componentes", label:"Componentes"},
+      {id:"ac", label:"Relación agua/cemento"},
+      {id:"slump", label:"Trabajabilidad y slump"},
+      {id:"dosificacion", label:"Dosificación"},
+      {id:"curado", label:"Curado"},
+      {id:"res_comp", label:"Resistencia a compresión"},
+      {id:"durabilidad", label:"Durabilidad"},
+      {id:"recubrimiento", label:"Recubrimiento"},
+      {id:"fisuracion", label:"Fisuración"},
+      {id:"control_h", label:"Ensayos de control"},
+      {id:"rangos_h", label:"Rangos orientativos"}
+    ],
+    sections: {
+      componentes: `
+        <div class="section">
+          <h2>Componentes del hormigón</h2>
+          <table>
+            <thead><tr><th>Componente</th><th>Función</th><th>Control práctico</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Cemento</td><td>Material ligante.</td><td>Tipo, vencimiento, almacenamiento.</td></tr>
+              <tr><td class="value">Agua</td><td>Hidratación y trabajabilidad.</td><td>Calidad y cantidad. No agregar sin control.</td></tr>
+              <tr><td class="value">Arena</td><td>Agregado fino.</td><td>Limpieza, humedad, granulometría.</td></tr>
+              <tr><td class="value">Piedra / grava</td><td>Agregado grueso.</td><td>Tamaño máximo, forma, resistencia.</td></tr>
+              <tr><td class="value">Aditivos</td><td>Modificar comportamiento.</td><td>Dosis, compatibilidad y objetivo.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      ac: `
+        <div class="section">
+          <h2>Relación agua/cemento</h2>
+          <p class="lead">Es uno de los factores más importantes: controla resistencia, porosidad y durabilidad.</p>
+          <table>
+            <thead><tr><th>Relación a/c</th><th>Lectura</th><th>Riesgo / ventaja</th></tr></thead>
+            <tbody>
+              <tr><td class="value">&lt; 0.45</td><td>Más baja.</td><td>Mayor resistencia y durabilidad, menor trabajabilidad si no hay aditivo.</td></tr>
+              <tr><td class="value">0.45 - 0.60</td><td>Rango común orientativo.</td><td>Depende del diseño de mezcla y uso.</td></tr>
+              <tr><td class="value">&gt; 0.60</td><td>Alta.</td><td>Mayor porosidad y menor resistencia potencial.</td></tr>
+            </tbody>
+          </table>
+          <div class="warn-box"><strong>Alerta de obra:</strong> agregar agua “para que corra” puede bajar resistencia y durabilidad. El hormigón no es sopa.</div>
+        </div>
+      `,
+      slump: `
+        <div class="section">
+          <h2>Trabajabilidad y slump</h2>
+          <p class="lead">El slump mide asentamiento del cono y orienta sobre la trabajabilidad. No mide resistencia directamente.</p>
+          <table>
+            <thead><tr><th>Slump orientativo</th><th>Lectura</th><th>Uso típico / precaución</th></tr></thead>
+            <tbody>
+              <tr><td class="value">2 - 5 cm</td><td>Bajo.</td><td>Mezcla seca; requiere buena colocación y compactación.</td></tr>
+              <tr><td class="value">7 - 12 cm</td><td>Medio.</td><td>Común en muchas obras convencionales.</td></tr>
+              <tr><td class="value">&gt; 15 cm</td><td>Alto.</td><td>Revisar diseño, aditivo, segregación o exceso de agua.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      dosificacion: `
+        <div class="section">
+          <h2>Dosificación</h2>
+          <p class="lead">La dosificación define proporciones para cumplir resistencia, trabajabilidad, durabilidad y economía.</p>
+          <table>
+            <thead><tr><th>Control</th><th>Por qué importa</th><th>Error común</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Medir por peso</td><td>Mayor precisión.</td><td>Dosificar “a balde” sin corregir humedad.</td></tr>
+              <tr><td class="value">Humedad de arena</td><td>Aporta agua real a la mezcla.</td><td>No corregir agua de amasado.</td></tr>
+              <tr><td class="value">Tamaño máximo</td><td>Influye en colocación y bombeo.</td><td>Usar agregado incompatible con armadura.</td></tr>
+              <tr><td class="value">Aditivos</td><td>Mejoran trabajabilidad o tiempos.</td><td>Sobredosificar sin ensayo.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      curado: `
+        <div class="section">
+          <h2>Curado</h2>
+          <p class="lead">El curado mantiene humedad y temperatura favorables para que el hormigón desarrolle resistencia y durabilidad.</p>
+          <table>
+            <thead><tr><th>Curado</th><th>Lectura práctica</th><th>Riesgo si falta</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Primeras horas</td><td>Críticas para evitar pérdida rápida de agua.</td><td>Fisuración plástica.</td></tr>
+              <tr><td class="value">7 días</td><td>Referencia mínima frecuente.</td><td>Menor resistencia superficial.</td></tr>
+              <tr><td class="value">Más días</td><td>Mejor en ambientes exigentes o cementos específicos.</td><td>Depende de especificación.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      res_comp: `
+        <div class="section">
+          <h2>Resistencia a compresión</h2>
+          <p class="lead">Se verifica con probetas o testigos. Es el parámetro estructural más conocido, pero no es el único que importa.</p>
+          <table>
+            <thead><tr><th>Dato</th><th>Uso</th><th>Comentario</th></tr></thead>
+            <tbody>
+              <tr><td class="value">f'c / resistencia característica</td><td>Diseño estructural.</td><td>Debe compararse con proyecto y reglamento.</td></tr>
+              <tr><td class="value">7 días</td><td>Control temprano.</td><td>No define por sí solo la aceptación final.</td></tr>
+              <tr><td class="value">28 días</td><td>Control típico de referencia.</td><td>Comparación principal en muchas especificaciones.</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead><tr><th>Resistencia orientativa</th><th>Uso habitual</th></tr></thead>
+            <tbody>
+              <tr><td class="value">15 - 20 MPa</td><td>Hormigones simples o usos no exigentes, según proyecto.</td></tr>
+              <tr><td class="value">20 - 30 MPa</td><td>Obra corriente estructural de baja/media exigencia.</td></tr>
+              <tr><td class="value">&gt; 30 MPa</td><td>Mayores exigencias estructurales o de durabilidad.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      durabilidad: `
+        <div class="section">
+          <h2>Durabilidad</h2>
+          <p class="lead">La durabilidad es la capacidad de resistir ambiente, agentes químicos, humedad, ciclos y corrosión durante la vida útil.</p>
+          <table>
+            <thead><tr><th>Factor</th><th>Impacto</th><th>Control</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Relación a/c</td><td>Porosidad y permeabilidad.</td><td>Limitar a/c según exposición.</td></tr>
+              <tr><td class="value">Recubrimiento</td><td>Protección de armaduras.</td><td>Separadores y control en obra.</td></tr>
+              <tr><td class="value">Curado</td><td>Calidad superficial y resistencia.</td><td>Mantener humedad.</td></tr>
+              <tr><td class="value">Ambiente agresivo</td><td>Sulfatos, cloruros, carbonatación.</td><td>Materiales y especificación adecuada.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      recubrimiento: `
+        <div class="section">
+          <h2>Recubrimiento</h2>
+          <p class="lead">Es la distancia entre la armadura y la superficie del hormigón. Protege contra corrosión y fuego, y asegura adherencia.</p>
+          <div class="warn-box"><strong>Alerta:</strong> el recubrimiento no se “estima a ojo”. Se garantiza con separadores, control antes de hormigonar y revisión de planos.</div>
+        </div>
+      `,
+      fisuracion: `
+        <div class="section">
+          <h2>Fisuración</h2>
+          <table>
+            <thead><tr><th>Tipo</th><th>Momento típico</th><th>Causa probable</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Plástica</td><td>Primeras horas.</td><td>Pérdida rápida de agua, viento, calor.</td></tr>
+              <tr><td class="value">Retracción</td><td>Días/semanas.</td><td>Contracción, curado deficiente, juntas mal planteadas.</td></tr>
+              <tr><td class="value">Estructural</td><td>Bajo carga.</td><td>Diseño, sobrecarga, ejecución o asentamientos.</td></tr>
+              <tr><td class="value">Por corrosión</td><td>Tiempo prolongado.</td><td>Ingreso de cloruros/carbonatación y recubrimiento deficiente.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      control_h: `
+        <div class="section">
+          <h2>Ensayos de control del hormigón</h2>
+          <table>
+            <thead><tr><th>Ensayo</th><th>Qué controla</th><th>Resultado</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Slump</td><td>Trabajabilidad.</td><td>cm de asentamiento.</td></tr>
+              <tr><td class="value">Temperatura</td><td>Condición de colocación.</td><td>°C.</td></tr>
+              <tr><td class="value">Probetas a compresión</td><td>Resistencia.</td><td>MPa.</td></tr>
+              <tr><td class="value">Contenido de aire</td><td>Vacíos intencionales/no intencionales.</td><td>% aire.</td></tr>
+              <tr><td class="value">Testigos</td><td>Verificación in situ.</td><td>Resistencia real en estructura.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      rangos_h: `
+        <div class="section">
+          <h2>Rangos orientativos de hormigón</h2>
+          <table>
+            <thead><tr><th>Parámetro</th><th>Rango orientativo</th><th>Lectura</th></tr></thead>
+            <tbody>
+              <tr><td>Slump bajo</td><td class="value">2 - 5 cm</td><td>Mezcla seca o de baja trabajabilidad.</td></tr>
+              <tr><td>Slump medio</td><td class="value">7 - 12 cm</td><td>Uso común en obra.</td></tr>
+              <tr><td>Slump alto</td><td class="value">&gt; 15 cm</td><td>Controlar segregación o exceso de agua.</td></tr>
+              <tr><td>Relación a/c alta</td><td class="value">&gt; 0.60</td><td>Riesgo de baja durabilidad/resistencia.</td></tr>
+              <tr><td>Curado mínimo práctico</td><td class="value">≈ 7 días</td><td>Depende del cemento, clima y especificación.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `
+    }
+  },
+
+  ensayos: {
+    label: "Ensayos",
+    color: "#0f766e",
+    subtitle: "Catálogo maestro de campo y laboratorio",
+    heroTitle: "Ensayos: qué mide cada uno y qué decisión ayuda a tomar",
+    heroText: "Catálogo transversal de ensayos de suelos, geotecnia, pavimentos, agregados y hormigón. Sirve para ubicar rápido el ensayo, el resultado clave y su interpretación.",
+    menu: [
+      {id:"suelos_lab", label:"Suelos laboratorio"},
+      {id:"suelos_campo", label:"Suelos campo"},
+      {id:"geo_insitu", label:"Geotecnia in situ"},
+      {id:"pav_ens", label:"Pavimentos"},
+      {id:"agg_ens", label:"Agregados"},
+      {id:"horm_ens", label:"Hormigón"},
+      {id:"matriz_ens", label:"Matriz rápida"}
+    ],
+    sections: {
+      suelos_lab: `
+        <div class="section">
+          <h2>Ensayos de suelos en laboratorio</h2>
+          <table>
+            <thead><tr><th>Ensayo</th><th>Resultado clave</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td>Granulometría</td><td>Curva y % finos</td><td>Clasificación, drenaje, material granular.</td></tr>
+              <tr><td>Límites de Atterberg</td><td>LL, LP, IP</td><td>Plasticidad y sensibilidad al agua.</td></tr>
+              <tr><td>Proctor</td><td>Humedad óptima y densidad seca máxima</td><td>Control de compactación.</td></tr>
+              <tr><td>CBR</td><td>% CBR</td><td>Soporte para pavimentos.</td></tr>
+              <tr><td>Consolidación</td><td>Cc, Cv, OCR</td><td>Asentamientos en suelos finos.</td></tr>
+              <tr><td>Permeabilidad</td><td>k</td><td>Drenaje, filtración y consolidación.</td></tr>
+              <tr><td>Corte directo / triaxial</td><td>c, φ, Su</td><td>Resistencia al corte.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      suelos_campo: `
+        <div class="section">
+          <h2>Ensayos de suelos en campo</h2>
+          <table>
+            <thead><tr><th>Ensayo</th><th>Resultado</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td>Cono de arena</td><td>Densidad seca in situ</td><td>Control de compactación.</td></tr>
+              <tr><td>Densímetro nuclear</td><td>Densidad y humedad</td><td>Control rápido de obra.</td></tr>
+              <tr><td>DCP</td><td>Penetración por golpe</td><td>Estimación rápida de resistencia.</td></tr>
+              <tr><td>Placa de carga</td><td>Módulo / asentamiento</td><td>Rigidez de apoyo.</td></tr>
+              <tr><td>Calicata</td><td>Observación directa</td><td>Perfil superficial y muestras alteradas.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      geo_insitu: `
+        <div class="section">
+          <h2>Ensayos geotécnicos in situ</h2>
+          <table>
+            <thead><tr><th>Ensayo</th><th>Resultado</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td>SPT</td><td>N golpes</td><td>Compacidad, consistencia y correlaciones.</td></tr>
+              <tr><td>CPT / CPTu</td><td>qc, fs, u</td><td>Perfil continuo y clasificación.</td></tr>
+              <tr><td>Velocidad de onda de corte</td><td>Vs / Vs30</td><td>Rigidez dinámica y clasificación sísmica.</td></tr>
+              <tr><td>Presiómetro</td><td>Deformabilidad y presión límite</td><td>Fundaciones y excavaciones.</td></tr>
+              <tr><td>Veleta</td><td>Su</td><td>Arcillas blandas.</td></tr>
+              <tr><td>Lefranc / Lugeon</td><td>Permeabilidad in situ</td><td>Suelos y roca fracturada.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      pav_ens: `
+        <div class="section">
+          <h2>Ensayos de pavimentos</h2>
+          <table>
+            <thead><tr><th>Ensayo</th><th>Resultado</th><th>Decisión técnica</th></tr></thead>
+            <tbody>
+              <tr><td>CBR</td><td>% soporte</td><td>Diseño de capas.</td></tr>
+              <tr><td>DCP</td><td>Penetración</td><td>Control rápido de subrasante.</td></tr>
+              <tr><td>FWD / Benkelman</td><td>Deflexión</td><td>Evaluación estructural.</td></tr>
+              <tr><td>IRI</td><td>Regularidad</td><td>Calidad de rodadura.</td></tr>
+              <tr><td>Marshall</td><td>Estabilidad / fluencia</td><td>Control de mezcla asfáltica.</td></tr>
+              <tr><td>Rice</td><td>Densidad máxima teórica</td><td>Vacíos en mezcla asfáltica.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      agg_ens: `
+        <div class="section">
+          <h2>Ensayos de agregados</h2>
+          <table>
+            <thead><tr><th>Ensayo</th><th>Qué evalúa</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td>Los Ángeles</td><td>Abrasión e impacto</td><td>Resistencia del agregado grueso.</td></tr>
+              <tr><td>Granulometría</td><td>Tamaños</td><td>Cumplimiento de curva.</td></tr>
+              <tr><td>Equivalente de arena</td><td>Limpieza</td><td>Finos perjudiciales.</td></tr>
+              <tr><td>Lajas y alargadas</td><td>Forma</td><td>Trabajabilidad y compactación.</td></tr>
+              <tr><td>Absorción</td><td>Porosidad</td><td>Dosificación y durabilidad.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      horm_ens: `
+        <div class="section">
+          <h2>Ensayos de hormigón</h2>
+          <table>
+            <thead><tr><th>Ensayo</th><th>Resultado</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td>Slump</td><td>cm</td><td>Trabajabilidad.</td></tr>
+              <tr><td>Temperatura</td><td>°C</td><td>Control de colocación.</td></tr>
+              <tr><td>Contenido de aire</td><td>%</td><td>Durabilidad y vacíos.</td></tr>
+              <tr><td>Compresión</td><td>MPa</td><td>Resistencia.</td></tr>
+              <tr><td>Testigos</td><td>MPa in situ</td><td>Verificación en estructura.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      matriz_ens: `
+        <div class="section">
+          <h2>Matriz rápida de ensayos</h2>
+          <table>
+            <thead><tr><th>Necesito saber...</th><th>Ensayo recomendado</th><th>Área</th></tr></thead>
+            <tbody>
+              <tr><td>Tipo de suelo</td><td>Granulometría + Atterberg</td><td>Suelos</td></tr>
+              <tr><td>Cómo compactar</td><td>Proctor</td><td>Suelos / pavimentos</td></tr>
+              <tr><td>Si compactó bien</td><td>Cono de arena / nuclear</td><td>Campo</td></tr>
+              <tr><td>Soporte de subrasante</td><td>CBR / DCP</td><td>Pavimentos</td></tr>
+              <tr><td>Asentamientos lentos</td><td>Consolidación</td><td>Geotecnia</td></tr>
+              <tr><td>Rigidez dinámica</td><td>Vs / Vs30</td><td>Geofísica</td></tr>
+              <tr><td>Trabajabilidad del hormigón</td><td>Slump</td><td>Hormigón</td></tr>
+              <tr><td>Resistencia del hormigón</td><td>Probetas a compresión</td><td>Hormigón</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `
+    }
+  },
+
+  parametros: {
+    label: "Parámetros Guía",
+    color: "#b45309",
+    subtitle: "Valores empíricos orientativos",
+    heroTitle: "Parámetros guía empíricos: lectura rápida para no navegar a ciegas",
+    heroText: "Tablas de referencia para interpretar valores usuales. Son rangos orientativos; siempre deben verificarse con norma, proyecto, laboratorio y criterio profesional.",
+    menu: [
+      {id:"suelo_emp", label:"Suelos"},
+      {id:"geo_emp", label:"Geotecnia"},
+      {id:"pav_emp", label:"Pavimentos"},
+      {id:"horm_emp", label:"Hormigón"},
+      {id:"alertas_emp", label:"Alertas cruzadas"}
+    ],
+    sections: {
+      suelo_emp: `
+        <div class="section">
+          <h2>Parámetros guía en suelos</h2>
+          <table>
+            <thead><tr><th>Parámetro</th><th>Rango orientativo</th><th>Interpretación</th><th>Qué revisar</th></tr></thead>
+            <tbody>
+              <tr><td>CBR muy bajo</td><td class="value">&lt; 3%</td><td class="tag-bad">Subrasante muy débil.</td><td>Mejoramiento, estabilización, reemplazo, drenaje.</td></tr>
+              <tr><td>IP alto</td><td class="value">&gt; 20</td><td class="tag-warn">Suelo plástico sensible al agua.</td><td>Hinchamiento, retracción, humedad.</td></tr>
+              <tr><td>Compactación exigente</td><td class="value">&gt; 95% Proctor</td><td class="tag-good">Control usual en capas estructurales.</td><td>Especificación de obra.</td></tr>
+              <tr><td>Humedad fuera de óptima</td><td class="value">± varios puntos</td><td class="tag-warn">Compactación difícil.</td><td>Secado, aireado, riego o estabilización.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      geo_emp: `
+        <div class="section">
+          <h2>Parámetros guía geotécnicos</h2>
+          <table>
+            <thead><tr><th>Parámetro</th><th>Rango orientativo</th><th>Lectura</th></tr></thead>
+            <tbody>
+              <tr><td>SPT N</td><td class="value">0 - 4</td><td class="tag-bad">Muy suelto o muy blando.</td></tr>
+              <tr><td>SPT N</td><td class="value">10 - 30</td><td>Medio a firme/denso.</td></tr>
+              <tr><td>SPT N</td><td class="value">&gt; 30</td><td class="tag-good">Denso, muy firme o duro.</td></tr>
+              <tr><td>Vs30</td><td class="value">&lt; 180 m/s</td><td class="tag-bad">Suelo blando / mayor amplificación potencial.</td></tr>
+              <tr><td>Vs30</td><td class="value">180 - 360 m/s</td><td>Suelo intermedio.</td></tr>
+              <tr><td>Vs30</td><td class="value">&gt; 360 m/s</td><td class="tag-good">Suelo denso o roca blanda/competente según valor.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      pav_emp: `
+        <div class="section">
+          <h2>Parámetros guía en pavimentos</h2>
+          <table>
+            <thead><tr><th>Caso</th><th>Valor orientativo</th><th>Lectura</th><th>Acción</th></tr></thead>
+            <tbody>
+              <tr><td>Subrasante muy débil</td><td class="value">CBR &lt; 3%</td><td class="tag-bad">Alto riesgo de deformación.</td><td>Mejorar o aumentar paquete.</td></tr>
+              <tr><td>Subrasante regular</td><td class="value">CBR 5 - 10%</td><td>Diseño cuidadoso.</td><td>Drenaje + compactación.</td></tr>
+              <tr><td>Base bien compactada</td><td class="value">&gt; 95%</td><td class="tag-good">Control usual.</td><td>Verificar especificación.</td></tr>
+              <tr><td>Agregado débil</td><td class="value">Alta pérdida LA</td><td class="tag-warn">Se degrada con tránsito.</td><td>Revisar fuente de agregado.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      horm_emp: `
+        <div class="section">
+          <h2>Parámetros guía en hormigón</h2>
+          <table>
+            <thead><tr><th>Parámetro</th><th>Valor orientativo</th><th>Lectura</th></tr></thead>
+            <tbody>
+              <tr><td>Slump bajo</td><td class="value">2 - 5 cm</td><td>Mezcla seca, baja trabajabilidad.</td></tr>
+              <tr><td>Slump medio</td><td class="value">7 - 12 cm</td><td>Uso común en obra.</td></tr>
+              <tr><td>Slump alto</td><td class="value">&gt; 15 cm</td><td class="tag-warn">Revisar segregación/exceso de agua.</td></tr>
+              <tr><td>Relación a/c alta</td><td class="value">&gt; 0.60</td><td class="tag-warn">Mayor porosidad y menor durabilidad.</td></tr>
+              <tr><td>Curado base</td><td class="value">≈ 7 días</td><td>Referencia práctica mínima frecuente.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      alertas_emp: `
+        <div class="section">
+          <h2>Alertas cruzadas</h2>
+          <table>
+            <thead><tr><th>Combinación</th><th>Qué puede indicar</th><th>Qué haría un senior</th></tr></thead>
+            <tbody>
+              <tr><td>CBR bajo + IP alto + humedad alta</td><td>Subrasante problemática.</td><td>Revisar drenaje, estabilización, reemplazo o diseño estructural.</td></tr>
+              <tr><td>Napa alta + excavación profunda</td><td>Riesgo de inestabilidad y bombeo.</td><td>Plan de abatimiento, entibación y control.</td></tr>
+              <tr><td>Arcilla blanda + Cc alto</td><td>Asentamientos importantes.</td><td>Consolidación, precarga, pilotes o mejora.</td></tr>
+              <tr><td>Slump alto + baja resistencia</td><td>Posible exceso de agua o mala dosificación.</td><td>Revisar remitos, toma de muestras y trazabilidad.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `
+    }
+  },
+
+  glosario: {
+    label: "Glosario",
+    color: "#4338ca",
+    subtitle: "Definiciones rápidas",
+    heroTitle: "Glosario técnico: términos claros sin dar vueltas",
+    heroText: "Definiciones prácticas de conceptos usados en el dashboard. Pensado para consulta rápida.",
+    menu: [
+      {id:"glosario_all", label:"Listado principal"}
+    ],
+    sections: {
+      glosario_all: `
+        <div class="section">
+          <h2>Glosario principal</h2>
+          <table>
+            <thead><tr><th>Término</th><th>Definición práctica</th></tr></thead>
+            <tbody>
+              <tr><td class="value">CBR</td><td>Ensayo que estima la capacidad soporte de un suelo o material para pavimentos.</td></tr>
+              <tr><td class="value">Proctor</td><td>Ensayo que determina humedad óptima y densidad seca máxima para compactación.</td></tr>
+              <tr><td class="value">SPT</td><td>Ensayo de penetración estándar que entrega el número de golpes N.</td></tr>
+              <tr><td class="value">CPTu</td><td>Ensayo de cono con medición de presión de poros.</td></tr>
+              <tr><td class="value">Vs</td><td>Velocidad de onda de corte; indica rigidez dinámica del terreno.</td></tr>
+              <tr><td class="value">Vs30</td><td>Promedio equivalente de Vs en los primeros 30 m; usado en clasificación sísmica.</td></tr>
+              <tr><td class="value">Slump</td><td>Asentamiento del hormigón fresco; indica trabajabilidad.</td></tr>
+              <tr><td class="value">Relación a/c</td><td>Relación agua/cemento; controla resistencia y durabilidad del hormigón.</td></tr>
+              <tr><td class="value">Subrasante</td><td>Suelo de apoyo del pavimento.</td></tr>
+              <tr><td class="value">Base granular</td><td>Capa estructural del pavimento que distribuye cargas.</td></tr>
+              <tr><td class="value">Consolidación</td><td>Asentamiento de suelos finos saturados por expulsión de agua.</td></tr>
+              <tr><td class="value">Permeabilidad</td><td>Facilidad con que el agua atraviesa el suelo.</td></tr>
+              <tr><td class="value">IP</td><td>Índice de plasticidad; diferencia entre límite líquido y límite plástico.</td></tr>
+              <tr><td class="value">Los Ángeles</td><td>Ensayo que mide desgaste e impacto en agregados gruesos.</td></tr>
+              <tr><td class="value">IRI</td><td>Índice de regularidad internacional; mide calidad de rodadura.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `
+    }
+  },
+
+  bibliografia: {
+    label: "Bibliografía",
+    color: "#111827",
+    subtitle: "Fuentes usadas y recomendadas",
+    heroTitle: "Bibliografía técnica usada como base",
+    heroText: "Las definiciones, criterios y rangos fueron redactados como guía orientativa y parafraseados a partir de bibliografía técnica de referencia, reglamentos y manuales reconocidos. Los valores deben validarse con la norma y especificación aplicable al proyecto.",
+    menu: [
+      {id:"fuentes", label:"Fuentes principales"},
+      {id:"normas", label:"Normas de ensayo"},
+      {id:"advertencia_bib", label:"Nota de uso"}
+    ],
+    sections: {
+      fuentes: `
+        <div class="section source-list">
+          <h2>Fuentes principales</h2>
+          <table>
+            <thead><tr><th>Fuente</th><th>Uso dentro del dashboard</th><th>Enlace</th></tr></thead>
+            <tbody>
+              <tr><td class="value">FHWA - Soils and Foundations Reference Manual</td><td>Suelos, fundaciones, exploración geotécnica y parámetros generales.</td><td><a href="https://www.fhwa.dot.gov/engineering/geotech/pubs/nhi06089.pdf" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+              <tr><td class="value">USACE EM 1110-1-1904 - Settlement Analysis</td><td>Consolidación, asentamientos y análisis de deformaciones verticales.</td><td><a href="https://www.publications.usace.army.mil/Portals/76/Publications/EngineerManuals/EM_1110-1-1904.pdf" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+              <tr><td class="value">CIRSOC 201 - Reglamento Argentino de Estructuras de Hormigón</td><td>Base reglamentaria argentina para estructuras de hormigón.</td><td><a href="https://contenidos.inpres.gob.ar/docs/Reglamentos/CIRSOC-201-Reglamento.pdf" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+              <tr><td class="value">INTI - CIRSOC</td><td>Referencia institucional argentina sobre reglamentos CIRSOC.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+              <tr><td class="value">Dirección Nacional de Vialidad Argentina</td><td>Pliegos y especificaciones técnicas para obras viales, mezclas asfálticas y pavimentos.</td><td><a href="https://www.argentina.gob.ar/transporte/vialidad-nacional/licitaciones/pliegos-de-especificaciones-tecnicas" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      normas: `
+        <div class="section">
+          <h2>Normas y familias de ensayo recomendadas</h2>
+          <p class="lead">Para una versión profesional completa, cada ensayo debería vincularse luego con la norma específica aplicable según país, contrato y laboratorio.</p>
+          <table>
+            <thead><tr><th>Familia</th><th>Ejemplos de aplicación</th></tr></thead>
+            <tbody>
+              <tr><td class="value">ASTM</td><td>Ensayos de suelos, agregados, hormigón, asfaltos y geotecnia.</td></tr>
+              <tr><td class="value">AASHTO</td><td>Ensayos viales, pavimentos, suelos y materiales de carretera.</td></tr>
+              <tr><td class="value">IRAM</td><td>Normativa argentina de materiales y ensayos.</td></tr>
+              <tr><td class="value">CIRSOC</td><td>Reglamentos argentinos de estructuras.</td></tr>
+              <tr><td class="value">DNV Argentina</td><td>Especificaciones técnicas viales.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      advertencia_bib: `
+        <div class="section">
+          <h2>Nota de uso técnico</h2>
+          <div class="warn-box"><strong>Importante:</strong> este dashboard es una guía educativa y orientativa. No reemplaza reglamentos vigentes, especificaciones contractuales, informes firmados por profesionales responsables ni resultados de laboratorio acreditado.</div>
+          <p>Los rangos empíricos fueron redactados para lectura rápida. En una obra real se debe verificar: país, norma aplicable, tipo de estructura, categoría de camino, ambiente de exposición, confiabilidad de ensayos, trazabilidad de muestras y criterios del proyectista.</p>
+        </div>
+      `
+    }
+  }
+};
+
+const topNav = document.getElementById("topNav");
+const sideMenu = document.getElementById("sideMenu");
+const sideTitle = document.getElementById("sideTitle");
+const sideSubtitle = document.getElementById("sideSubtitle");
+const moduleDot = document.getElementById("moduleDot");
+const hero = document.getElementById("hero");
+const mainContent = document.getElementById("mainContent");
+const emptyResult = document.getElementById("emptyResult");
+
+let currentModule = "inicio";
+let currentSection = modules[currentModule].menu[0].id;
+
+function renderTopNav(){
+  topNav.innerHTML = "";
+  Object.entries(modules).forEach(([key, mod])=>{
+    const btn = document.createElement("button");
+    btn.textContent = mod.label;
+    btn.className = key === currentModule ? "active" : "";
+    btn.addEventListener("click",()=>{
+      currentModule = key;
+      currentSection = modules[key].menu[0].id;
+      render();
+    });
+    topNav.appendChild(btn);
+  });
+}
+
+function renderSidebar(){
+  const mod = modules[currentModule];
+  sideTitle.textContent = mod.label;
+  sideSubtitle.textContent = mod.subtitle;
+  moduleDot.style.background = mod.color;
+  moduleDot.style.boxShadow = `0 0 0 5px ${hexToRgba(mod.color,.14)}`;
+  sideMenu.innerHTML = "";
+  mod.menu.forEach(item=>{
+    const btn = document.createElement("button");
+    btn.textContent = item.label;
+    btn.className = item.id === currentSection ? "active" : "";
+    btn.addEventListener("click",()=>{
+      currentSection = item.id;
+      renderContent();
+      document.querySelector(".content").scrollIntoView({behavior:"smooth", block:"start"});
+    });
+    sideMenu.appendChild(btn);
+  });
+}
+
+function renderHero(){
+  const mod = modules[currentModule];
+  hero.innerHTML = `
+    <h2>${mod.heroTitle}</h2>
+    <p>${mod.heroText}</p>
+    <div class="searchbar">
+      <input id="searchInput" type="search" placeholder="Buscar en todo el dashboard: CBR, Proctor, slump, SPT, permeabilidad, consolidación, Vs..." />
+      <button id="searchBtn">Buscar</button>
+    </div>
+  `;
+  document.getElementById("searchBtn").addEventListener("click", handleSearch);
+  document.getElementById("searchInput").addEventListener("keydown", (e)=>{
+    if(e.key === "Enter") handleSearch();
+  });
+}
+
+function renderContent(){
+  const mod = modules[currentModule];
+  mainContent.innerHTML = mod.sections[currentSection] || "<div class='section'><h2>Contenido no disponible</h2></div>";
+  emptyResult.style.display = "none";
+}
+
+function render(){
+  renderTopNav();
+  renderSidebar();
+  renderHero();
+  renderContent();
+}
+
+function handleSearch(){
+  const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  if(!q) return;
+
+  let found = null;
+  for(const [modKey, mod] of Object.entries(modules)){
+    for(const item of mod.menu){
+      const html = mod.sections[item.id] || "";
+      const plain = stripHtml(html).toLowerCase();
+      const label = item.label.toLowerCase();
+      if(plain.includes(q) || label.includes(q)){
+        found = {modKey, sectionId:item.id};
+        break;
+      }
+    }
+    if(found) break;
+  }
+
+  if(found){
+    currentModule = found.modKey;
+    currentSection = found.sectionId;
+    render();
+    setTimeout(()=>{
+      const input = document.getElementById("searchInput");
+      input.value = q;
+    },0);
+  }else{
+    emptyResult.style.display = "block";
+  }
+}
+
+function stripHtml(html){
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  return div.textContent || div.innerText || "";
+}
+
+function hexToRgba(hex, alpha){
+  const clean = hex.replace("#","");
+  const bigint = parseInt(clean,16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+render();
+</script>
+</body>
+</html>
 
