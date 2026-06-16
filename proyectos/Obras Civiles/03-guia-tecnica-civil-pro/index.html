@@ -551,6 +551,114 @@
       color:var(--dorado);
     }
 
+
+    .visual-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
+      margin:18px 0;
+    }
+
+    .visual-grid.three{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .visual-card{
+      background:rgba(7,17,31,0.62);
+      border:1px solid rgba(56,189,248,0.22);
+      border-radius:16px;
+      padding:14px;
+      box-shadow:0 10px 22px rgba(0,0,0,.16);
+      overflow:hidden;
+    }
+
+    .visual-card h3{
+      margin:0 0 8px;
+      color:var(--dorado);
+      font-size:1rem;
+    }
+
+    .visual-card p{
+      font-size:.9rem;
+      color:#cbd5e1;
+      margin:8px 0 0;
+    }
+
+    .tech-svg{
+      width:100%;
+      height:auto;
+      display:block;
+      background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.015));
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+    }
+
+    .caption{
+      color:var(--muted);
+      font-size:.82rem;
+      margin-top:8px;
+    }
+
+    .legend{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin:10px 0 0;
+    }
+
+    .legend span{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      border-radius:999px;
+      padding:5px 8px;
+      font-size:.78rem;
+      color:#dbeafe;
+      font-weight:700;
+    }
+
+    .swatch{
+      width:10px;
+      height:10px;
+      display:inline-block;
+      border-radius:50%;
+    }
+
+    .check-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+      margin:14px 0;
+    }
+
+    .check-item{
+      background:rgba(7,17,31,0.62);
+      border:1px solid var(--borde);
+      border-radius:12px;
+      padding:10px 12px;
+      color:#dbeafe;
+    }
+
+    .formula{
+      font-family:"Courier New", monospace;
+      color:#fde68a;
+      background:rgba(201,162,77,.08);
+      border:1px solid rgba(201,162,77,.24);
+      padding:8px 10px;
+      border-radius:10px;
+      display:inline-block;
+      margin:5px 0;
+    }
+
+    @media(max-width:980px){
+      .visual-grid,.visual-grid.three,.check-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+
     @media(max-width:980px){
       .shell{
         grid-template-columns:1fr;
@@ -625,8 +733,8 @@ const modules = {
     label: "Inicio",
     color: "#0f4c81",
     subtitle: "Cómo usar el dashboard",
-    heroTitle: "Guía técnica civil para moverse rápido y entender mejor",
-    heroText: "Este dashboard organiza conceptos, ensayos, parámetros y rangos orientativos de suelos, geotecnia, pavimentos y hormigón. La barra superior elige el área grande; el panel izquierdo guía la consulta; la pantalla central desarrolla el tema sin repetir menús.",
+    heroTitle: "Guía técnica civil visual para moverse rápido y entender mejor",
+    heroText: "Este dashboard organiza conceptos, ensayos, parámetros, rangos orientativos y gráficos interpretados de suelos, geotecnia, pavimentos y hormigón. La barra superior elige el área grande; el panel izquierdo guía la consulta; la pantalla central desarrolla el tema sin repetir menús.",
     menu: [
       {id:"vision", label:"Visión general"},
       {id:"uso", label:"Cómo navegar"},
@@ -704,6 +812,7 @@ const modules = {
       {id:"plasticidad", label:"Plasticidad"},
       {id:"humedad", label:"Humedad y pesos unitarios"},
       {id:"compactacion", label:"Compactación y Proctor"},
+      {id:"cbr_suelos", label:"CBR en suelos"},
       {id:"resistencia", label:"Resistencia al corte"},
       {id:"consolidacion", label:"Consolidación"},
       {id:"permeabilidad", label:"Permeabilidad"},
@@ -731,7 +840,66 @@ const modules = {
       granulometria: `
         <div class="section">
           <h2>Granulometría</h2>
-          <p class="lead">Mide la distribución de tamaños de partículas. Es clave para clasificar suelos, evaluar drenaje, compactación y aptitud como material granular.</p>
+          <p class="lead">La granulometría muestra qué porcentaje del suelo pasa por cada tamiz. La forma de la curva permite reconocer si el material está bien graduado, uniforme o con exceso de finos.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Curvas granulométricas típicas</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Curvas granulométricas interpretadas">
+                <rect x="0" y="0" width="620" height="360" fill="#07111f"/>
+                <line x1="70" y1="300" x2="570" y2="300" stroke="#94a3b8" stroke-width="2"/>
+                <line x1="70" y1="45" x2="70" y2="300" stroke="#94a3b8" stroke-width="2"/>
+                <text x="250" y="340" fill="#dbeafe" font-size="14">Tamaño de partícula / tamiz</text>
+                <text x="12" y="170" fill="#dbeafe" font-size="14" transform="rotate(-90 12 170)">% que pasa</text>
+                <text x="56" y="305" fill="#94a3b8" font-size="11">0</text>
+                <text x="48" y="55" fill="#94a3b8" font-size="11">100</text>
+                <text x="80" y="320" fill="#94a3b8" font-size="11">fino</text>
+                <text x="525" y="320" fill="#94a3b8" font-size="11">grueso</text>
+                <g stroke="#243447" stroke-width="1">
+                  <line x1="170" y1="45" x2="170" y2="300"/><line x1="270" y1="45" x2="270" y2="300"/>
+                  <line x1="370" y1="45" x2="370" y2="300"/><line x1="470" y1="45" x2="470" y2="300"/>
+                  <line x1="70" y1="235" x2="570" y2="235"/><line x1="70" y1="170" x2="570" y2="170"/><line x1="70" y1="105" x2="570" y2="105"/>
+                </g>
+                <path d="M75 292 C145 275, 190 230, 250 180 C320 120, 420 80, 560 55" fill="none" stroke="#38bdf8" stroke-width="4"/>
+                <path d="M75 292 C200 288, 250 260, 292 170 C330 80, 430 58, 560 50" fill="none" stroke="#c9a24d" stroke-width="4"/>
+                <path d="M75 250 C160 245, 260 238, 360 222 C450 200, 515 160, 560 95" fill="none" stroke="#f97316" stroke-width="4"/>
+                <circle cx="250" cy="180" r="5" fill="#38bdf8"/><circle cx="292" cy="170" r="5" fill="#c9a24d"/><circle cx="360" cy="222" r="5" fill="#f97316"/>
+                <text x="96" y="82" fill="#38bdf8" font-size="13">bien graduada</text>
+                <text x="320" y="77" fill="#c9a24d" font-size="13">uniforme</text>
+                <text x="380" y="218" fill="#f97316" font-size="13">exceso de finos</text>
+              </svg>
+              <div class="legend">
+                <span><i class="swatch" style="background:#38bdf8"></i>Buena distribución</span>
+                <span><i class="swatch" style="background:#c9a24d"></i>Uniforme</span>
+                <span><i class="swatch" style="background:#f97316"></i>Finos altos</span>
+              </div>
+              <p><strong>Interpretación:</strong> una curva suave y extendida suele compactar mejor; una curva casi vertical indica material uniforme; una curva con mucho pasante fino puede ser sensible al agua.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Lectura práctica por zonas</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Zonas de interpretación granulométrica">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="70" y="60" width="150" height="220" fill="rgba(249,115,22,.18)" stroke="#f97316"/>
+                <rect x="220" y="60" width="160" height="220" fill="rgba(56,189,248,.12)" stroke="#38bdf8"/>
+                <rect x="380" y="60" width="170" height="220" fill="rgba(201,162,77,.13)" stroke="#c9a24d"/>
+                <text x="105" y="90" fill="#fdba74" font-size="18" font-weight="700">Finos</text>
+                <text x="260" y="90" fill="#7dd3fc" font-size="18" font-weight="700">Arenas</text>
+                <text x="425" y="90" fill="#fde68a" font-size="18" font-weight="700">Gravas</text>
+                <text x="88" y="135" fill="#dbeafe" font-size="13">Limos / arcillas</text>
+                <text x="88" y="160" fill="#dbeafe" font-size="13">IP y humedad mandan</text>
+                <text x="238" y="135" fill="#dbeafe" font-size="13">Drenan mejor</text>
+                <text x="238" y="160" fill="#dbeafe" font-size="13">Revisar densidad</text>
+                <text x="400" y="135" fill="#dbeafe" font-size="13">Buena capacidad</text>
+                <text x="400" y="160" fill="#dbeafe" font-size="13">si están graduadas</text>
+                <line x1="70" y1="300" x2="550" y2="300" stroke="#94a3b8" stroke-width="2"/>
+                <text x="80" y="325" fill="#94a3b8" font-size="12">menor tamaño</text>
+                <text x="440" y="325" fill="#94a3b8" font-size="12">mayor tamaño</text>
+              </svg>
+              <p><strong>Criterio senior:</strong> la granulometría nunca se mira sola. Cruce mínimo: Atterberg + humedad + Proctor/CBR + drenaje esperado.</p>
+            </div>
+          </div>
+
           <table>
             <thead><tr><th>Resultado</th><th>Qué indica</th><th>Lectura práctica</th></tr></thead>
             <tbody>
@@ -740,8 +908,8 @@ const modules = {
               <tr><td class="value">% finos alto</td><td>Presencia importante de limo/arcilla.</td><td>Mayor sensibilidad al agua y posible pérdida de soporte.</td></tr>
             </tbody>
           </table>
-          <details open><summary>Ensayos relacionados</summary><div class="details-body">Tamizado para fracciones gruesas y sedimentación/hidrómetro para fracciones finas. En agregados viales, la curva debe compararse con la especificación del proyecto.</div></details>
         </div>
+
       `,
       plasticidad: `
         <div class="section">
@@ -785,15 +953,51 @@ const modules = {
       compactacion: `
         <div class="section">
           <h2>Compactación y Proctor</h2>
-          <p class="lead">Compactar es reducir vacíos para mejorar densidad, soporte y estabilidad. El Proctor define la humedad óptima y la densidad seca máxima de referencia.</p>
-          <table>
-            <thead><tr><th>Concepto</th><th>Qué entrega</th><th>Uso en obra</th></tr></thead>
-            <tbody>
-              <tr><td class="value">Proctor estándar / modificado</td><td>Humedad óptima y densidad seca máxima.</td><td>Referencia para controlar terraplenes, subrasantes y bases.</td></tr>
-              <tr><td class="value">Cono de arena</td><td>Densidad in situ.</td><td>Verifica si la compactación real cumple el porcentaje exigido.</td></tr>
-              <tr><td class="value">Densímetro nuclear</td><td>Densidad y humedad de campo.</td><td>Control rápido, requiere calibración y protocolo.</td></tr>
-            </tbody>
-          </table>
+          <p class="lead">El Proctor entrega la humedad óptima y la densidad seca máxima. En obra, la densidad in situ se compara contra esa referencia para aceptar o rechazar una capa compactada.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Curva Proctor interpretada</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Curva Proctor con humedad óptima y densidad seca máxima">
+                <rect width="620" height="360" fill="#07111f"/>
+                <line x1="75" y1="295" x2="555" y2="295" stroke="#94a3b8" stroke-width="2"/>
+                <line x1="75" y1="55" x2="75" y2="295" stroke="#94a3b8" stroke-width="2"/>
+                <text x="230" y="335" fill="#dbeafe" font-size="14">Humedad w (%)</text>
+                <text x="18" y="215" fill="#dbeafe" font-size="14" transform="rotate(-90 18 215)">Densidad seca</text>
+                <path d="M95 265 C170 165, 260 80, 340 95 C430 115, 500 205, 540 270" fill="none" stroke="#38bdf8" stroke-width="5"/>
+                <line x1="305" y1="95" x2="305" y2="295" stroke="#c9a24d" stroke-width="3" stroke-dasharray="8 6"/>
+                <line x1="75" y1="95" x2="305" y2="95" stroke="#c9a24d" stroke-width="3" stroke-dasharray="8 6"/>
+                <circle cx="305" cy="95" r="8" fill="#c9a24d"/>
+                <text x="316" y="92" fill="#fde68a" font-size="13">γd máx</text>
+                <text x="270" y="316" fill="#fde68a" font-size="13">w óptima</text>
+                <text x="105" y="243" fill="#fca5a5" font-size="13">muy seco</text>
+                <text x="450" y="245" fill="#fca5a5" font-size="13">muy húmedo</text>
+                <text x="215" y="145" fill="#86efac" font-size="13">ventana de trabajo</text>
+              </svg>
+              <p><strong>Interpretación:</strong> antes de la humedad óptima falta lubricación entre partículas; después sobra agua y cae la densidad seca. La compactación útil vive cerca del pico.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Cono de arena: control de densidad in situ</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Procedimiento del cono de arena">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="70" y="245" width="480" height="40" fill="#8a5a2b" opacity=".75"/>
+                <line x1="70" y1="245" x2="550" y2="245" stroke="#c9a24d" stroke-width="2"/>
+                <circle cx="205" cy="245" r="42" fill="#0b1f33" stroke="#38bdf8" stroke-width="2"/>
+                <path d="M180 245 C190 290, 220 290, 230 245 Z" fill="#07111f" stroke="#38bdf8" stroke-width="2"/>
+                <rect x="150" y="140" width="110" height="30" fill="#c9a24d" stroke="#fde68a"/>
+                <path d="M165 140 L205 82 L245 140 Z" fill="#c9a24d" stroke="#fde68a" stroke-width="2"/>
+                <rect x="180" y="55" width="50" height="35" rx="6" fill="#dbeafe" stroke="#38bdf8"/>
+                <line x1="205" y1="170" x2="205" y2="238" stroke="#fde68a" stroke-width="4" stroke-dasharray="6 5"/>
+                <text x="320" y="95" fill="#38bdf8" font-size="17" font-weight="700">1. Se excava el hueco</text>
+                <text x="320" y="130" fill="#38bdf8" font-size="17" font-weight="700">2. Se llena con arena calibrada</text>
+                <text x="320" y="165" fill="#38bdf8" font-size="17" font-weight="700">3. Se calcula volumen y γd campo</text>
+                <text x="320" y="215" fill="#dbeafe" font-size="14">Resultado: % compactación = γd campo / γd Proctor</text>
+              </svg>
+              <p><strong>Uso práctico:</strong> confirma si la capa realmente alcanzó la densidad exigida. Buen laboratorio + mala compactación = mal pavimento igual.</p>
+            </div>
+          </div>
+
           <table>
             <thead><tr><th>% compactación</th><th>Lectura orientativa</th><th>Comentario</th></tr></thead>
             <tbody>
@@ -803,11 +1007,110 @@ const modules = {
             </tbody>
           </table>
         </div>
+
+      `,
+      cbr_suelos: `
+        <div class="section">
+          <h2>CBR en mecánica de suelos</h2>
+          <p class="lead">El CBR estima la capacidad soporte relativa de un suelo compactado frente a la penetración de un pistón normalizado. En suelos sirve para leer si el material puede funcionar como subrasante o si necesita mejoramiento.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Ensayo CBR de laboratorio</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Esquema de ensayo CBR de laboratorio">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="180" y="120" width="180" height="130" rx="8" fill="#8a5a2b" opacity=".85" stroke="#c9a24d" stroke-width="2"/>
+                <rect x="165" y="105" width="210" height="20" rx="4" fill="#dbeafe" opacity=".85"/>
+                <rect x="165" y="247" width="210" height="20" rx="4" fill="#dbeafe" opacity=".85"/>
+                <rect x="255" y="45" width="40" height="105" fill="#38bdf8" opacity=".85"/>
+                <polygon points="255,150 295,150 282,182 268,182" fill="#38bdf8"/>
+                <line x1="275" y1="25" x2="275" y2="45" stroke="#fde68a" stroke-width="4"/>
+                <text x="325" y="75" fill="#fde68a" font-size="15">Pistón</text>
+                <text x="390" y="145" fill="#dbeafe" font-size="14">Muestra compactada</text>
+                <text x="390" y="177" fill="#dbeafe" font-size="14">con humedad controlada</text>
+                <text x="130" y="310" fill="#38bdf8" font-size="16" font-weight="700">Carga / penetración → % CBR</text>
+                <path d="M435 235 C480 205, 510 150, 535 92" fill="none" stroke="#c9a24d" stroke-width="4"/>
+                <line x1="430" y1="250" x2="555" y2="250" stroke="#94a3b8"/>
+                <line x1="430" y1="250" x2="430" y2="75" stroke="#94a3b8"/>
+              </svg>
+              <p><strong>Interpretación:</strong> bajo CBR no significa solo baja resistencia; suele asociarse a mala compactación, humedad alta, plasticidad o drenaje deficiente.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Lectura rápida del CBR</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Escala de interpretación del CBR">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="80" y="140" width="110" height="58" fill="#ef4444" opacity=".75"/>
+                <rect x="190" y="140" width="120" height="58" fill="#f97316" opacity=".75"/>
+                <rect x="310" y="140" width="130" height="58" fill="#c9a24d" opacity=".85"/>
+                <rect x="440" y="140" width="100" height="58" fill="#22c55e" opacity=".75"/>
+                <text x="100" y="175" fill="#fff" font-size="18" font-weight="700">&lt; 3%</text>
+                <text x="212" y="175" fill="#fff" font-size="18" font-weight="700">3 - 8%</text>
+                <text x="330" y="175" fill="#07111f" font-size="18" font-weight="700">8 - 20%</text>
+                <text x="457" y="175" fill="#fff" font-size="18" font-weight="700">&gt;20%</text>
+                <text x="82" y="220" fill="#fca5a5" font-size="13">muy débil</text>
+                <text x="202" y="220" fill="#fdba74" font-size="13">débil</text>
+                <text x="322" y="220" fill="#fde68a" font-size="13">regular/bueno</text>
+                <text x="448" y="220" fill="#86efac" font-size="13">mejor soporte</text>
+                <line x1="80" y1="125" x2="540" y2="125" stroke="#94a3b8" stroke-width="2"/>
+                <polygon points="540,125 525,118 525,132" fill="#94a3b8"/>
+                <text x="208" y="105" fill="#dbeafe" font-size="15">Aumenta capacidad soporte relativa</text>
+              </svg>
+              <p><strong>Decisión:</strong> con CBR muy bajo se analiza estabilización, reemplazo, geosintéticos, drenaje o aumento del paquete estructural.</p>
+            </div>
+          </div>
+        </div>
       `,
       resistencia: `
         <div class="section">
           <h2>Resistencia al corte</h2>
-          <p class="lead">La resistencia al corte explica cómo el suelo se opone al deslizamiento o falla. Se resume normalmente con cohesión, ángulo de fricción y resistencia no drenada.</p>
+          <p class="lead">La resistencia al corte explica cómo el suelo se opone al deslizamiento. En términos prácticos se interpreta con cohesión, fricción y condición drenada o no drenada.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Envolvente de Mohr-Coulomb</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Envolvente Mohr-Coulomb">
+                <rect width="620" height="360" fill="#07111f"/>
+                <line x1="85" y1="285" x2="555" y2="285" stroke="#94a3b8" stroke-width="2"/>
+                <line x1="85" y1="60" x2="85" y2="285" stroke="#94a3b8" stroke-width="2"/>
+                <text x="260" y="330" fill="#dbeafe" font-size="14">Esfuerzo normal efectivo sigma'</text>
+                <text x="20" y="210" fill="#dbeafe" font-size="14" transform="rotate(-90 20 210)">Resistencia al corte tau</text>
+                <path d="M85 245 L535 75" stroke="#38bdf8" stroke-width="4" fill="none"/>
+                <line x1="85" y1="245" x2="130" y2="245" stroke="#c9a24d" stroke-width="4"/>
+                <text x="98" y="235" fill="#fde68a" font-size="13">c'</text>
+                <path d="M145 222 A65 65 0 0 1 205 198" fill="none" stroke="#f97316" stroke-width="3"/>
+                <text x="190" y="212" fill="#fdba74" font-size="13">phi'</text>
+                <circle cx="215" cy="195" r="42" fill="none" stroke="#c9a24d" stroke-width="2"/>
+                <circle cx="345" cy="145" r="60" fill="none" stroke="#c9a24d" stroke-width="2"/>
+                <circle cx="455" cy="105" r="72" fill="none" stroke="#c9a24d" stroke-width="2"/>
+                <text x="350" y="70" fill="#38bdf8" font-size="13">línea de falla</text>
+              </svg>
+              <p><strong>Lectura:</strong> mayor c' desplaza la línea hacia arriba; mayor phi' aumenta la pendiente. Arenas dependen mucho de phi'; arcillas saturadas pueden requerir análisis no drenado.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Ensayos relacionados</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Esquemas de corte directo y triaxial">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="70" y="120" width="185" height="70" fill="#8a5a2b" stroke="#c9a24d"/>
+                <line x1="70" y1="155" x2="255" y2="155" stroke="#38bdf8" stroke-width="3"/>
+                <line x1="120" y1="92" x2="120" y2="120" stroke="#f97316" stroke-width="4"/>
+                <polygon points="120,120 112,105 128,105" fill="#f97316"/>
+                <line x1="255" y1="155" x2="315" y2="155" stroke="#38bdf8" stroke-width="4"/>
+                <polygon points="315,155 300,147 300,163" fill="#38bdf8"/>
+                <text x="92" y="225" fill="#dbeafe" font-size="15">Corte directo</text>
+                <ellipse cx="445" cy="180" rx="62" ry="94" fill="#0b1f33" stroke="#38bdf8" stroke-width="3"/>
+                <rect x="398" y="120" width="94" height="120" rx="12" fill="#8a5a2b" opacity=".85"/>
+                <line x1="445" y1="70" x2="445" y2="120" stroke="#f97316" stroke-width="4"/>
+                <polygon points="445,120 437,105 453,105" fill="#f97316"/>
+                <line x1="372" y1="180" x2="398" y2="180" stroke="#c9a24d" stroke-width="3"/>
+                <line x1="518" y1="180" x2="492" y2="180" stroke="#c9a24d" stroke-width="3"/>
+                <text x="402" y="295" fill="#dbeafe" font-size="15">Triaxial</text>
+              </svg>
+              <p><strong>Criterio:</strong> corte directo es simple y útil para planos de falla; triaxial permite controlar drenaje y confinamiento con mayor detalle.</p>
+            </div>
+          </div>
+
           <table>
             <thead><tr><th>Parámetro</th><th>Uso</th><th>Interpretación</th></tr></thead>
             <tbody>
@@ -816,48 +1119,109 @@ const modules = {
               <tr><td class="value">Su / Cu</td><td>Resistencia no drenada.</td><td>Usual para arcillas saturadas a corto plazo.</td></tr>
             </tbody>
           </table>
-          <details open><summary>Ensayos relacionados</summary><div class="details-body">Corte directo, triaxial UU/CU/CD, compresión simple en arcillas, veleta de campo y correlaciones con SPT/CPT cuando corresponde.</div></details>
-          <div class="warn-box"><strong>Alerta:</strong> no mezclar parámetros drenados y no drenados como si fueran lo mismo. Ese error en geotecnia puede salir caro.</div>
         </div>
+
       `,
       consolidacion: `
         <div class="section">
           <h2>Consolidación y asentamientos</h2>
-          <p class="lead">La consolidación explica asentamientos por expulsión de agua en suelos finos saturados. Es crítica en arcillas blandas, limos compresibles, rellenos y terraplenes.</p>
+          <p class="lead">La consolidación explica asentamientos en suelos finos saturados por salida gradual del agua de poros. Es crítica en arcillas blandas, limos compresibles, rellenos y terraplenes.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Curva e - log sigma'</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Curva edométrica de consolidación">
+                <rect width="620" height="360" fill="#07111f"/>
+                <line x1="80" y1="290" x2="555" y2="290" stroke="#94a3b8" stroke-width="2"/>
+                <line x1="80" y1="60" x2="80" y2="290" stroke="#94a3b8" stroke-width="2"/>
+                <text x="235" y="330" fill="#dbeafe" font-size="14">log esfuerzo efectivo sigma'</text>
+                <text x="18" y="180" fill="#dbeafe" font-size="14" transform="rotate(-90 18 180)">relación de vacíos e</text>
+                <path d="M95 95 C180 118, 245 145, 302 190 C378 250, 455 275, 535 288" fill="none" stroke="#38bdf8" stroke-width="4"/>
+                <line x1="295" y1="60" x2="295" y2="290" stroke="#c9a24d" stroke-dasharray="8 6" stroke-width="3"/>
+                <text x="305" y="85" fill="#fde68a" font-size="13">sigma'p</text>
+                <text x="145" y="130" fill="#86efac" font-size="13">recompresión</text>
+                <text x="365" y="240" fill="#fca5a5" font-size="13">compresión virgen</text>
+              </svg>
+              <p><strong>Interpretación:</strong> antes de sigma'p el suelo recompone; después entra en carga virgen y el asentamiento crece más rápido.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Asentamiento en el tiempo</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Curva de asentamiento contra tiempo">
+                <rect width="620" height="360" fill="#07111f"/>
+                <line x1="80" y1="80" x2="80" y2="295" stroke="#94a3b8" stroke-width="2"/>
+                <line x1="80" y1="295" x2="555" y2="295" stroke="#94a3b8" stroke-width="2"/>
+                <text x="270" y="330" fill="#dbeafe" font-size="14">tiempo</text>
+                <text x="20" y="220" fill="#dbeafe" font-size="14" transform="rotate(-90 20 220)">asentamiento</text>
+                <path d="M90 95 C130 150, 190 210, 300 250 C400 285, 490 292, 540 294" fill="none" stroke="#c9a24d" stroke-width="4"/>
+                <line x1="80" y1="250" x2="540" y2="250" stroke="#38bdf8" stroke-dasharray="8 6"/>
+                <text x="420" y="245" fill="#38bdf8" font-size="13">U ≈ 90%</text>
+                <text x="115" y="130" fill="#fde68a" font-size="13">rápido al inicio</text>
+                <text x="382" y="280" fill="#fde68a" font-size="13">lento al final</text>
+              </svg>
+              <p><strong>Lectura senior:</strong> un suelo puede parecer estable al terminar la obra y seguir asentándose meses o años. Ahí se hacen visibles los problemas.</p>
+            </div>
+          </div>
+
           <table>
             <thead><tr><th>Parámetro</th><th>Qué indica</th><th>Uso práctico</th></tr></thead>
             <tbody>
               <tr><td class="value">Cc</td><td>Índice de compresión.</td><td>Asentamiento en carga virgen.</td></tr>
               <tr><td class="value">Cr / Cs</td><td>Índice de recompresión.</td><td>Respuesta en descarga-recarga.</td></tr>
               <tr><td class="value">Cv</td><td>Coeficiente de consolidación.</td><td>Velocidad con que ocurre el asentamiento.</td></tr>
-              <tr><td class="value">σ'p</td><td>Presión de preconsolidación.</td><td>Historial de esfuerzos del suelo.</td></tr>
+              <tr><td class="value">sigma'p</td><td>Presión de preconsolidación.</td><td>Historial de esfuerzos del suelo.</td></tr>
               <tr><td class="value">OCR</td><td>Relación de sobreconsolidación.</td><td>Define si el suelo es normalmente consolidado o sobreconsolidado.</td></tr>
             </tbody>
           </table>
-          <table>
-            <thead><tr><th>Caso</th><th>Lectura senior</th><th>Decisión posible</th></tr></thead>
-            <tbody>
-              <tr><td>Arcilla blanda saturada</td><td>Riesgo de asentamiento lento.</td><td>Precarga, drenes, pilotes o mejora de suelo.</td></tr>
-              <tr><td>Cc alto</td><td>Alta compresibilidad.</td><td>Revisar deformaciones admisibles.</td></tr>
-              <tr><td>Cv bajo</td><td>Consolidación lenta.</td><td>El problema puede aparecer meses o años después.</td></tr>
-            </tbody>
-          </table>
         </div>
+
       `,
       permeabilidad: `
         <div class="section">
           <h2>Permeabilidad del suelo</h2>
-          <p class="lead">La permeabilidad mide la facilidad con que el agua atraviesa el suelo. Afecta excavaciones, drenaje, estabilidad, filtraciones, consolidación y desempeño de pavimentos.</p>
-          <table>
-            <thead><tr><th>Ensayo</th><th>Uso típico</th><th>Resultado</th></tr></thead>
-            <tbody>
-              <tr><td class="value">Carga constante</td><td>Arenas y gravas.</td><td>Coeficiente k.</td></tr>
-              <tr><td class="value">Carga variable</td><td>Limos y arcillas.</td><td>Coeficiente k.</td></tr>
-              <tr><td class="value">Lefranc</td><td>Permeabilidad in situ en suelos.</td><td>k de campo.</td></tr>
-              <tr><td class="value">Lugeon</td><td>Roca fracturada.</td><td>Absorción / permeabilidad de macizo rocoso.</td></tr>
-              <tr><td class="value">Bombeo</td><td>Acuíferos y excavaciones.</td><td>Caudal, abatimiento, transmisividad.</td></tr>
-            </tbody>
-          </table>
+          <p class="lead">La permeabilidad mide la facilidad con que el agua atraviesa el suelo. Afecta excavaciones, drenaje, filtraciones, estabilidad, consolidación y desempeño de pavimentos.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Idea base: Ley de Darcy</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Flujo de agua en suelo con ley de Darcy">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="170" y="105" width="280" height="150" fill="#8a5a2b" opacity=".72" stroke="#c9a24d" stroke-width="2"/>
+                <g stroke="#38bdf8" stroke-width="4">
+                  <line x1="95" y1="150" x2="160" y2="150"/><polygon points="160,150 145,142 145,158" fill="#38bdf8"/>
+                  <line x1="95" y1="205" x2="160" y2="205"/><polygon points="160,205 145,197 145,213" fill="#38bdf8"/>
+                  <line x1="455" y1="175" x2="525" y2="175"/><polygon points="525,175 510,167 510,183" fill="#38bdf8"/>
+                </g>
+                <circle cx="220" cy="145" r="7" fill="#0b1f33"/><circle cx="285" cy="180" r="8" fill="#0b1f33"/><circle cx="345" cy="138" r="6" fill="#0b1f33"/><circle cx="390" cy="210" r="7" fill="#0b1f33"/>
+                <text x="190" y="285" fill="#fde68a" font-size="16">Q = k · i · A</text>
+                <text x="95" y="85" fill="#dbeafe" font-size="13">carga hidráulica alta</text>
+                <text x="420" y="85" fill="#dbeafe" font-size="13">carga baja</text>
+                <line x1="125" y1="100" x2="125" y2="240" stroke="#38bdf8" stroke-dasharray="7 6"/>
+                <line x1="495" y1="130" x2="495" y2="240" stroke="#38bdf8" stroke-dasharray="7 6"/>
+              </svg>
+              <p><strong>Interpretación:</strong> gravas y arenas limpias drenan más rápido; arcillas drenan muy lento y por eso consolidan despacio.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Carga constante vs carga variable</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Permeámetros de carga constante y variable">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="95" y="85" width="110" height="190" rx="10" fill="#0b1f33" stroke="#38bdf8" stroke-width="3"/>
+                <rect x="105" y="145" width="90" height="90" fill="#8a5a2b" opacity=".8"/>
+                <line x1="205" y1="110" x2="275" y2="110" stroke="#38bdf8" stroke-width="3"/>
+                <text x="80" y="315" fill="#dbeafe" font-size="14">carga constante</text>
+                <rect x="390" y="85" width="70" height="190" rx="10" fill="#0b1f33" stroke="#c9a24d" stroke-width="3"/>
+                <rect x="400" y="175" width="50" height="60" fill="#8a5a2b" opacity=".8"/>
+                <line x1="425" y1="65" x2="425" y2="170" stroke="#c9a24d" stroke-width="4"/>
+                <line x1="470" y1="235" x2="530" y2="235" stroke="#c9a24d" stroke-width="3"/>
+                <text x="370" y="315" fill="#dbeafe" font-size="14">carga variable</text>
+                <text x="92" y="50" fill="#38bdf8" font-size="13">arenas / gravas</text>
+                <text x="375" y="50" fill="#fde68a" font-size="13">limos / arcillas</text>
+              </svg>
+              <p><strong>Uso:</strong> carga constante para materiales permeables; carga variable para suelos de baja permeabilidad.</p>
+            </div>
+          </div>
+
           <table>
             <thead><tr><th>Material</th><th>Permeabilidad esperada</th><th>Lectura práctica</th></tr></thead>
             <tbody>
@@ -868,6 +1232,7 @@ const modules = {
             </tbody>
           </table>
         </div>
+
       `,
       rangos_suelos: `
         <div class="section">
@@ -940,35 +1305,98 @@ const modules = {
       perfil: `
         <div class="section">
           <h2>Perfil estratigráfico</h2>
-          <p class="lead">Es la lectura vertical del terreno: capas, espesores, cambios de material, profundidad de rechazo, napa y resultados in situ.</p>
-          <div class="two-col">
-            <div>
-              <h3>Qué mirar</h3>
-              <ul class="mini-list">
-                <li>Cambios bruscos de material.</li>
-                <li>Capas blandas intermedias.</li>
-                <li>Rellenos no controlados.</li>
-                <li>Nivel freático y variación esperada.</li>
-                <li>Profundidad de estratos competentes.</li>
-              </ul>
+          <p class="lead">El perfil estratigráfico organiza capas, espesores, nivel freático, resultados de campo y variabilidad. Es la radiografía vertical del terreno.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Perfil típico con estratos y SPT</h3>
+              <svg class="tech-svg" viewBox="0 0 620 420" role="img" aria-label="Perfil estratigráfico esquemático">
+                <rect width="620" height="420" fill="#07111f"/>
+                <rect x="95" y="45" width="245" height="60" fill="#a16207" opacity=".85"/><text x="115" y="82" fill="#fff" font-size="14">Relleno / suelo superficial</text>
+                <rect x="95" y="105" width="245" height="90" fill="#c9a24d" opacity=".72"/><text x="115" y="155" fill="#07111f" font-size="14" font-weight="700">Arena limosa</text>
+                <rect x="95" y="195" width="245" height="110" fill="#7c2d12" opacity=".82"/><text x="115" y="255" fill="#fff" font-size="14">Arcilla blanda</text>
+                <rect x="95" y="305" width="245" height="70" fill="#64748b" opacity=".85"/><text x="115" y="348" fill="#fff" font-size="14">Arena densa / grava</text>
+                <line x1="80" y1="45" x2="80" y2="375" stroke="#94a3b8" stroke-width="2"/>
+                <text x="38" y="50" fill="#dbeafe" font-size="12">0 m</text><text x="34" y="200" fill="#dbeafe" font-size="12">-4 m</text><text x="30" y="376" fill="#dbeafe" font-size="12">-9 m</text>
+                <line x1="95" y1="170" x2="340" y2="170" stroke="#38bdf8" stroke-width="4" stroke-dasharray="9 6"/>
+                <text x="360" y="175" fill="#7dd3fc" font-size="14">nivel freático</text>
+                <polyline points="430,55 460,65 490,70 520,90" fill="none" stroke="#38bdf8" stroke-width="3"/>
+                <polyline points="430,130 460,135 490,160 520,180" fill="none" stroke="#c9a24d" stroke-width="3"/>
+                <polyline points="430,220 460,245 490,260 520,300" fill="none" stroke="#f97316" stroke-width="3"/>
+                <text x="430" y="340" fill="#dbeafe" font-size="13">N-SPT aumenta con profundidad</text>
+                <text x="430" y="70" fill="#38bdf8" font-size="12">N bajo</text><text x="500" y="300" fill="#f97316" font-size="12">N alto</text>
+              </svg>
+              <p><strong>Interpretación:</strong> no importa solo el estrato competente; también importan capas blandas intermedias, rellenos y napa.</p>
             </div>
-            <div class="senior-box"><h3>Criterio senior</h3><p>El perfil promedio puede engañar. Para fundaciones y pavimentos importan los puntos débiles: una capa blanda delgada puede controlar asentamientos o fallas diferenciales.</p></div>
+
+            <div class="visual-card">
+              <h3>Qué se marca en un perfil serio</h3>
+              <ul class="mini-list">
+                <li>Profundidad y espesor de cada capa.</li>
+                <li>Clasificación visual y SUCS/AASHTO si aplica.</li>
+                <li>Resultados SPT/CPT, muestras y ensayos.</li>
+                <li>Nivel freático medido y fecha de medición.</li>
+                <li>Capas blandas, rellenos, rechazo o roca.</li>
+              </ul>
+              <div class="senior-box"><h3>Criterio senior</h3><p>El promedio engaña. La capa débil suele gobernar asentamientos, bombeo o fallas diferenciales.</p></div>
+            </div>
           </div>
         </div>
+
       `,
       napa: `
         <div class="section">
-          <h2>Nivel freático</h2>
-          <p class="lead">La napa condiciona excavaciones, capacidad efectiva, estabilidad, subpresión, asentamientos, drenaje y agresividad química.</p>
+          <h2>Nivel freático y arcillas expansivas</h2>
+          <p class="lead">La napa cambia tensiones efectivas, estabilidad de excavaciones, asentamientos y comportamiento de suelos expansivos. En arcillas, el problema no es solo el agua presente: también los ciclos de secado y humedecimiento.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Napa superficial vs profunda</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Nivel freático y tensiones efectivas">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="70" y="80" width="210" height="210" fill="#8a5a2b" opacity=".78" stroke="#c9a24d"/>
+                <rect x="340" y="80" width="210" height="210" fill="#8a5a2b" opacity=".78" stroke="#c9a24d"/>
+                <line x1="70" y1="145" x2="280" y2="145" stroke="#38bdf8" stroke-width="5" stroke-dasharray="10 7"/>
+                <line x1="340" y1="250" x2="550" y2="250" stroke="#38bdf8" stroke-width="5" stroke-dasharray="10 7"/>
+                <text x="90" y="125" fill="#7dd3fc" font-size="14">napa alta</text>
+                <text x="360" y="235" fill="#7dd3fc" font-size="14">napa profunda</text>
+                <rect x="130" y="55" width="90" height="40" fill="#0b1f33" stroke="#dbeafe"/>
+                <rect x="400" y="55" width="90" height="40" fill="#0b1f33" stroke="#dbeafe"/>
+                <text x="82" y="318" fill="#fca5a5" font-size="13">menor tensión efectiva, bombeo, excavación difícil</text>
+                <text x="355" y="318" fill="#86efac" font-size="13">mejor condición, pero revisar variación estacional</text>
+              </svg>
+              <p><strong>Lectura:</strong> con napa alta baja la tensión efectiva y pueden aparecer excavaciones inestables, subpresión y mayor riesgo de asentamientos.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Arcilla expansiva: ciclos de humedad</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Arcilla expansiva con ciclos de humedad">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="95" y="225" width="170" height="55" fill="#7c2d12" opacity=".9"/>
+                <rect x="355" y="205" width="170" height="75" fill="#7c2d12" opacity=".9"/>
+                <rect x="120" y="170" width="120" height="55" fill="#0b1f33" stroke="#dbeafe"/>
+                <rect x="380" y="145" width="120" height="55" fill="#0b1f33" stroke="#dbeafe"/>
+                <path d="M100 215 C125 205,150 225,175 210 C205 195,230 220,260 208" stroke="#f97316" fill="none" stroke-width="4"/>
+                <path d="M355 198 C385 175,410 205,440 175 C470 145,495 175,525 155" stroke="#38bdf8" fill="none" stroke-width="4"/>
+                <line x1="440" y1="110" x2="440" y2="140" stroke="#38bdf8" stroke-width="4"/><polygon points="440,140 432,125 448,125" fill="#38bdf8"/>
+                <line x1="180" y1="135" x2="180" y2="165" stroke="#f97316" stroke-width="4"/><polygon points="180,135 172,150 188,150" fill="#f97316"/>
+                <text x="107" y="315" fill="#fdba74" font-size="13">seca: retracción, grietas, pérdida de volumen</text>
+                <text x="350" y="315" fill="#7dd3fc" font-size="13">húmeda: expansión, levantamiento, empujes</text>
+              </svg>
+              <p><strong>Interpretación senior:</strong> si la arcilla expansiva entra y sale de la zona activa de humedad, puede levantar losas o pavimentos aunque el CBR parezca aceptable.</p>
+            </div>
+          </div>
+
           <table>
             <thead><tr><th>Situación</th><th>Impacto</th><th>Medida posible</th></tr></thead>
             <tbody>
               <tr><td class="value">Napa superficial</td><td>Excavaciones inestables, bombeo, menor tensión efectiva.</td><td>Drenaje, entibación, bombeo, rediseño.</td></tr>
               <tr><td class="value">Napa variable</td><td>Riesgo por cambios estacionales.</td><td>Monitoreo o margen conservador.</td></tr>
-              <tr><td class="value">Agua agresiva</td><td>Puede afectar hormigón y acero.</td><td>Ensayos químicos, especificación de durabilidad.</td></tr>
+              <tr><td class="value">Arcilla expansiva</td><td>Levantamientos por humedecimiento y retracción por secado.</td><td>Control de humedad, drenaje perimetral, reemplazo o estabilización.</td></tr>
             </tbody>
           </table>
         </div>
+
       `,
       capacidad: `
         <div class="section">
@@ -1002,50 +1430,142 @@ const modules = {
       spt: `
         <div class="section">
           <h2>SPT - Standard Penetration Test</h2>
-          <p class="lead">Ensayo in situ muy usado. Entrega el número de golpes N, útil para estimar compacidad en arenas, consistencia en arcillas y correlaciones geotécnicas.</p>
-          <table>
-            <thead><tr><th>SPT N orientativo</th><th>Arenas</th><th>Arcillas</th></tr></thead>
-            <tbody>
-              <tr><td class="value">0 - 4</td><td>Muy suelta</td><td>Muy blanda</td></tr>
-              <tr><td class="value">4 - 10</td><td>Suelta</td><td>Blanda a media</td></tr>
-              <tr><td class="value">10 - 30</td><td>Media a densa</td><td>Firme</td></tr>
-              <tr><td class="value">&gt; 30</td><td>Densa a muy densa</td><td>Muy firme a dura</td></tr>
-            </tbody>
-          </table>
-          <div class="warn-box"><strong>Alerta:</strong> el N debe corregirse cuando corresponde. No usar correlaciones a ciegas.</div>
+          <p class="lead">El SPT entrega el número de golpes N para penetrar el muestreador. Es simple, muy usado y útil para correlaciones, pero debe interpretarse con correcciones y criterio.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Procedimiento esquemático</h3>
+              <svg class="tech-svg" viewBox="0 0 620 390" role="img" aria-label="Procedimiento SPT">
+                <rect width="620" height="390" fill="#07111f"/>
+                <rect x="70" y="80" width="180" height="250" fill="#8a5a2b" opacity=".75" stroke="#c9a24d"/>
+                <line x1="160" y1="40" x2="160" y2="320" stroke="#dbeafe" stroke-width="5"/>
+                <rect x="135" y="55" width="50" height="40" fill="#64748b" stroke="#dbeafe"/>
+                <line x1="110" y1="95" x2="210" y2="95" stroke="#38bdf8" stroke-width="4"/>
+                <polygon points="160,150 145,185 175,185" fill="#38bdf8"/>
+                <rect x="150" y="185" width="20" height="90" fill="#38bdf8"/>
+                <text x="295" y="100" fill="#38bdf8" font-size="17" font-weight="700">1. Perforación hasta la cota</text>
+                <text x="295" y="145" fill="#38bdf8" font-size="17" font-weight="700">2. Se coloca muestreador partido</text>
+                <text x="295" y="190" fill="#38bdf8" font-size="17" font-weight="700">3. Martillo normalizado golpea</text>
+                <text x="295" y="235" fill="#38bdf8" font-size="17" font-weight="700">4. Se registra N = golpes</text>
+                <text x="295" y="285" fill="#dbeafe" font-size="14">N se interpreta según suelo, energía, profundidad y napa.</text>
+              </svg>
+              <p><strong>Lectura:</strong> N bajo puede indicar suelo suelto/blando; N alto puede indicar material denso/duro, pero también gravas, bolones o rechazo local.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Rangos orientativos</h3>
+              <table>
+                <thead><tr><th>N-SPT</th><th>Arenas</th><th>Arcillas</th></tr></thead>
+                <tbody>
+                  <tr><td class="value">0 - 4</td><td>Muy suelta</td><td>Muy blanda</td></tr>
+                  <tr><td class="value">4 - 10</td><td>Suelta</td><td>Blanda a media</td></tr>
+                  <tr><td class="value">10 - 30</td><td>Media a densa</td><td>Firme</td></tr>
+                  <tr><td class="value">&gt; 30</td><td>Densa a muy densa</td><td>Muy firme a dura</td></tr>
+                </tbody>
+              </table>
+              <div class="warn-box"><strong>Alerta:</strong> no usar N crudo como si fuera verdad absoluta. Revisar energía, diámetro, profundidad, nivel freático, tipo de suelo y correlación usada.</div>
+            </div>
+          </div>
         </div>
+
       `,
       cpt: `
         <div class="section">
           <h2>CPT / CPTu</h2>
-          <p class="lead">El cono estático entrega un perfil continuo. El CPTu suma presión de poros, muy útil en suelos finos y análisis de comportamiento.</p>
-          <table>
-            <thead><tr><th>Dato</th><th>Qué mide</th><th>Uso práctico</th></tr></thead>
-            <tbody>
-              <tr><td class="value">qc</td><td>Resistencia de punta.</td><td>Identificación, capacidad, estratigrafía.</td></tr>
-              <tr><td class="value">fs</td><td>Fricción lateral.</td><td>Tipo de suelo y comportamiento.</td></tr>
-              <tr><td class="value">u</td><td>Presión de poros.</td><td>CPTu, respuesta no drenada y consolidación.</td></tr>
-            </tbody>
-          </table>
-          <div class="senior-box"><h3>Criterio senior</h3><p>El CPT brilla donde el SPT queda “a saltos”: entrega continuidad. Ideal para detectar capas blandas delgadas que una perforación puede subestimar.</p></div>
+          <p class="lead">El CPT entrega un perfil continuo de resistencia de punta, fricción lateral y, en CPTu, presión de poros. Es excelente para detectar capas delgadas que el SPT puede saltarse.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Cono y variables medidas</h3>
+              <svg class="tech-svg" viewBox="0 0 620 380" role="img" aria-label="CPT cone penetration test">
+                <rect width="620" height="380" fill="#07111f"/>
+                <rect x="100" y="70" width="150" height="250" fill="#8a5a2b" opacity=".74" stroke="#c9a24d"/>
+                <line x1="175" y1="35" x2="175" y2="260" stroke="#dbeafe" stroke-width="5"/>
+                <polygon points="145,260 205,260 175,315" fill="#38bdf8" stroke="#dbeafe"/>
+                <text x="280" y="90" fill="#38bdf8" font-size="16" font-weight="700">qc: resistencia de punta</text>
+                <text x="280" y="135" fill="#c9a24d" font-size="16" font-weight="700">fs: fricción lateral</text>
+                <text x="280" y="180" fill="#f97316" font-size="16" font-weight="700">u: presión de poros (CPTu)</text>
+                <line x1="205" y1="285" x2="275" y2="92" stroke="#38bdf8" stroke-width="2"/>
+                <line x1="180" y1="240" x2="275" y2="137" stroke="#c9a24d" stroke-width="2"/>
+                <line x1="150" y1="270" x2="275" y2="182" stroke="#f97316" stroke-width="2"/>
+              </svg>
+              <p><strong>Uso:</strong> clasificación continua, estratigrafía, identificación de capas blandas, correlaciones de resistencia y comportamiento drenado/no drenado.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Perfil continuo de resultados</h3>
+              <svg class="tech-svg" viewBox="0 0 620 380" role="img" aria-label="Perfil CPT con qc fs y u">
+                <rect width="620" height="380" fill="#07111f"/>
+                <line x1="90" y1="45" x2="90" y2="325" stroke="#94a3b8" stroke-width="2"/>
+                <line x1="90" y1="45" x2="545" y2="45" stroke="#94a3b8" stroke-width="2"/>
+                <text x="45" y="60" fill="#dbeafe" font-size="12">0 m</text><text x="35" y="320" fill="#dbeafe" font-size="12">prof.</text>
+                <path d="M145 50 C170 95, 125 130, 210 168 C260 205, 180 250, 330 318" fill="none" stroke="#38bdf8" stroke-width="4"/>
+                <path d="M310 50 C305 105, 345 150, 325 200 C300 245, 365 285, 350 318" fill="none" stroke="#c9a24d" stroke-width="4"/>
+                <path d="M455 50 C430 100, 500 145, 465 195 C430 235, 520 280, 495 318" fill="none" stroke="#f97316" stroke-width="4"/>
+                <text x="130" y="35" fill="#38bdf8" font-size="13">qc</text>
+                <text x="302" y="35" fill="#c9a24d" font-size="13">fs</text>
+                <text x="450" y="35" fill="#f97316" font-size="13">u</text>
+                <rect x="95" y="130" width="450" height="35" fill="rgba(239,68,68,.13)" stroke="#ef4444"/>
+                <text x="382" y="155" fill="#fca5a5" font-size="13">capa blanda detectada</text>
+              </svg>
+              <p><strong>Lectura:</strong> cambios bruscos en qc, fs o u suelen marcar estratos, lentes blandas, arenas densas o arcillas sensibles.</p>
+            </div>
+          </div>
         </div>
+
       `,
       vs: `
         <div class="section">
           <h2>Velocidad de onda de corte - Vs / Vs30</h2>
-          <p class="lead">La velocidad de onda de corte mide rigidez dinámica del terreno. Se usa en clasificación sísmica del sitio, microzonificación, vibraciones y detección de cambios de rigidez con profundidad.</p>
-          <table>
-            <thead><tr><th>Vs30 orientativo</th><th>Lectura práctica</th><th>Comentario</th></tr></thead>
-            <tbody>
-              <tr><td class="value">&lt; 180 m/s</td><td class="tag-bad">Suelo blando</td><td>Mayor amplificación sísmica potencial.</td></tr>
-              <tr><td class="value">180 - 360 m/s</td><td class="tag-warn">Suelo rígido a intermedio</td><td>Revisar deformabilidad y perfil.</td></tr>
-              <tr><td class="value">360 - 760 m/s</td><td class="tag-good">Suelo muy denso / roca blanda</td><td>Mejor rigidez dinámica.</td></tr>
-              <tr><td class="value">&gt; 760 m/s</td><td class="tag-good">Roca competente</td><td>Sitio rígido.</td></tr>
-            </tbody>
-          </table>
-          <details open><summary>Cómo se obtiene</summary><div class="details-body">Métodos como MASW, ReMi, downhole, crosshole o sísmica superficial. El método depende de profundidad, precisión requerida, presupuesto y accesibilidad.</div></details>
-          <div class="warn-box"><strong>Alerta:</strong> Vs no reemplaza ensayos geotécnicos de resistencia o consolidación. Complementa el modelo del terreno.</div>
+          <p class="lead">La Vs mide rigidez dinámica del terreno. Se usa para clasificación sísmica, microzonificación, vibraciones y cambios de rigidez con profundidad.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Ensayo geofísico y propagación de ondas</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Ensayo de ondas de corte MASW">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="60" y="230" width="500" height="55" fill="#8a5a2b" opacity=".8"/>
+                <line x1="60" y1="230" x2="560" y2="230" stroke="#c9a24d" stroke-width="2"/>
+                <circle cx="110" cy="220" r="16" fill="#f97316"/><text x="80" y="200" fill="#fdba74" font-size="13">fuente</text>
+                <g fill="#38bdf8">
+                  <rect x="180" y="208" width="14" height="22"/><rect x="240" y="208" width="14" height="22"/><rect x="300" y="208" width="14" height="22"/><rect x="360" y="208" width="14" height="22"/><rect x="420" y="208" width="14" height="22"/>
+                </g>
+                <text x="205" y="195" fill="#7dd3fc" font-size="13">geófonos</text>
+                <path d="M110 230 C165 150, 270 150, 325 230" fill="none" stroke="#38bdf8" stroke-width="3"/>
+                <path d="M110 230 C205 120, 390 120, 500 230" fill="none" stroke="#38bdf8" stroke-width="2" opacity=".65"/>
+                <text x="190" y="85" fill="#dbeafe" font-size="15">ondas superficiales → perfil Vs</text>
+              </svg>
+              <p><strong>Uso:</strong> estima rigidez por profundidad. Buen complemento del SPT/CPT, no reemplazo.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Perfil Vs con profundidad</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Perfil de velocidad de onda de corte">
+                <rect width="620" height="360" fill="#07111f"/>
+                <line x1="120" y1="55" x2="120" y2="300" stroke="#94a3b8" stroke-width="2"/>
+                <line x1="120" y1="55" x2="530" y2="55" stroke="#94a3b8" stroke-width="2"/>
+                <text x="250" y="35" fill="#dbeafe" font-size="13">Vs (m/s)</text>
+                <text x="60" y="300" fill="#dbeafe" font-size="13">prof.</text>
+                <path d="M160 65 L190 115 L250 160 L340 215 L470 295" fill="none" stroke="#38bdf8" stroke-width="5"/>
+                <line x1="205" y1="55" x2="205" y2="300" stroke="#ef4444" stroke-dasharray="8 6"/>
+                <line x1="315" y1="55" x2="315" y2="300" stroke="#f97316" stroke-dasharray="8 6"/>
+                <line x1="445" y1="55" x2="445" y2="300" stroke="#22c55e" stroke-dasharray="8 6"/>
+                <text x="165" y="325" fill="#fca5a5" font-size="12">&lt;180</text>
+                <text x="270" y="325" fill="#fdba74" font-size="12">360</text>
+                <text x="415" y="325" fill="#86efac" font-size="12">760</text>
+              </svg>
+              <table>
+                <tbody>
+                  <tr><td class="value">&lt;180 m/s</td><td>Suelo blando, mayor amplificación potencial.</td></tr>
+                  <tr><td class="value">180-360 m/s</td><td>Suelo intermedio.</td></tr>
+                  <tr><td class="value">360-760 m/s</td><td>Suelo denso o roca blanda.</td></tr>
+                  <tr><td class="value">&gt;760 m/s</td><td>Roca competente.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
+
       `,
       placa: `
         <div class="section">
@@ -1114,17 +1634,42 @@ const modules = {
       estructura: `
         <div class="section">
           <h2>Estructura del pavimento</h2>
-          <p class="lead">El pavimento distribuye cargas del tránsito hacia el terreno. Su desempeño depende del paquete estructural, materiales, compactación, drenaje y mantenimiento.</p>
-          <table>
-            <thead><tr><th>Capa</th><th>Función</th><th>Qué controlar</th></tr></thead>
-            <tbody>
-              <tr><td class="value">Carpeta</td><td>Rodamiento, impermeabilidad parcial, confort.</td><td>Espesor, mezcla, compactación, textura.</td></tr>
-              <tr><td class="value">Base</td><td>Principal capa estructural granular o tratada.</td><td>Granulometría, densidad, humedad, resistencia.</td></tr>
-              <tr><td class="value">Subbase</td><td>Transición, drenaje y distribución de cargas.</td><td>Material, compactación y finos.</td></tr>
-              <tr><td class="value">Subrasante</td><td>Terreno de apoyo.</td><td>CBR, humedad, plasticidad, compactación.</td></tr>
-            </tbody>
-          </table>
+          <p class="lead">El pavimento funciona como un sistema de capas que reparte cargas hacia la subrasante. La falla suele aparecer cuando una capa pierde soporte, se compacta mal o entra agua.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Capas típicas de un pavimento flexible</h3>
+              <svg class="tech-svg" viewBox="0 0 620 380" role="img" aria-label="Estructura de pavimento flexible">
+                <rect width="620" height="380" fill="#07111f"/>
+                <rect x="90" y="70" width="440" height="45" fill="#1f2937" stroke="#dbeafe"/>
+                <rect x="90" y="115" width="440" height="60" fill="#334155" stroke="#38bdf8"/>
+                <rect x="90" y="175" width="440" height="70" fill="#64748b" stroke="#c9a24d"/>
+                <rect x="90" y="245" width="440" height="80" fill="#8a5a2b" stroke="#f97316"/>
+                <text x="110" y="98" fill="#f8fafc" font-size="15" font-weight="700">Carpeta asfáltica: rodamiento, textura, impermeabilidad parcial</text>
+                <text x="110" y="150" fill="#dbeafe" font-size="15" font-weight="700">Base granular/tratada: principal capacidad estructural</text>
+                <text x="110" y="213" fill="#fde68a" font-size="15" font-weight="700">Subbase: transición, drenaje y distribución de carga</text>
+                <text x="110" y="288" fill="#fed7aa" font-size="15" font-weight="700">Subrasante: suelo de apoyo, CBR, humedad y compactación</text>
+                <line x1="310" y1="30" x2="310" y2="68" stroke="#38bdf8" stroke-width="4"/><polygon points="310,68 300,53 320,53" fill="#38bdf8"/>
+                <text x="250" y="25" fill="#7dd3fc" font-size="14">carga vehicular</text>
+              </svg>
+              <p><strong>Interpretación:</strong> cada capa debe cumplir granulometría, compactación, espesor y drenaje. Si la subrasante es mala, todo el paquete trabaja exigido.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Qué debe cumplir cada capa</h3>
+              <table>
+                <thead><tr><th>Capa</th><th>Control mínimo</th><th>Falla si se descuida</th></tr></thead>
+                <tbody>
+                  <tr><td class="value">Carpeta</td><td>Espesor, vacíos, ligante, compactación.</td><td>Fisuras, desprendimiento, exudación.</td></tr>
+                  <tr><td class="value">Base</td><td>Granulometría, LA, CBR, densidad.</td><td>Ahuellamiento y fatiga.</td></tr>
+                  <tr><td class="value">Subbase</td><td>Drenaje, finos, compactación.</td><td>Bombeo, pérdida de soporte.</td></tr>
+                  <tr><td class="value">Subrasante</td><td>CBR, IP, humedad, Proctor.</td><td>Hundimientos y baches.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
+
       `,
       subrasante: `
         <div class="section">
@@ -1188,18 +1733,43 @@ const modules = {
       cbr_pav: `
         <div class="section">
           <h2>CBR en pavimentos</h2>
-          <p class="lead">El CBR compara la resistencia a penetración del suelo/material con un patrón de referencia. Se usa mucho para subrasante y materiales granulares.</p>
-          <div class="info-box"><strong>Relación práctica:</strong> Proctor define cómo compactar; CBR ayuda a estimar soporte. Más compactación suele mejorar desempeño, pero no convierte una arcilla mala en autopista premium.</div>
-          <table>
-            <thead><tr><th>CBR</th><th>Lectura</th><th>Acción típica</th></tr></thead>
-            <tbody>
-              <tr><td class="value">&lt; 3%</td><td>Muy débil.</td><td>Mejoramiento o reemplazo.</td></tr>
-              <tr><td class="value">3 - 8%</td><td>Débil a regular.</td><td>Control de humedad, drenaje, espesor.</td></tr>
-              <tr><td class="value">8 - 20%</td><td>Regular a bueno.</td><td>Diseño estructural normal.</td></tr>
-              <tr><td class="value">&gt; 20%</td><td>Buen soporte relativo.</td><td>Validar con especificación.</td></tr>
-            </tbody>
-          </table>
+          <p class="lead">El CBR permite estimar la capacidad soporte de la subrasante y de materiales granulares. Es un dato típico para decidir espesor de capas o necesidad de mejoramiento.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>CBR: carga vs penetración</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Curvas CBR de carga contra penetración">
+                <rect width="620" height="360" fill="#07111f"/>
+                <line x1="80" y1="290" x2="550" y2="290" stroke="#94a3b8" stroke-width="2"/>
+                <line x1="80" y1="60" x2="80" y2="290" stroke="#94a3b8" stroke-width="2"/>
+                <text x="250" y="330" fill="#dbeafe" font-size="14">Penetración</text>
+                <text x="18" y="215" fill="#dbeafe" font-size="14" transform="rotate(-90 18 215)">Carga</text>
+                <path d="M85 285 C160 245, 240 205, 350 160 C430 125, 500 100, 540 84" fill="none" stroke="#22c55e" stroke-width="4"/>
+                <path d="M85 288 C170 270, 255 250, 340 225 C420 200, 490 180, 540 165" fill="none" stroke="#c9a24d" stroke-width="4"/>
+                <path d="M85 290 C180 283, 270 278, 360 270 C445 260, 500 250, 540 242" fill="none" stroke="#ef4444" stroke-width="4"/>
+                <text x="420" y="95" fill="#86efac" font-size="13">CBR alto</text>
+                <text x="430" y="170" fill="#fde68a" font-size="13">CBR medio</text>
+                <text x="430" y="245" fill="#fca5a5" font-size="13">CBR bajo</text>
+              </svg>
+              <p><strong>Lectura:</strong> una curva que sube poco indica material blando frente a penetración. En obra se traduce en mayor espesor, mejora o rechazo.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Decisión por rango</h3>
+              <table>
+                <thead><tr><th>CBR</th><th>Lectura</th><th>Acción típica</th></tr></thead>
+                <tbody>
+                  <tr><td class="value">&lt; 3%</td><td>Muy débil.</td><td>Mejoramiento o reemplazo.</td></tr>
+                  <tr><td class="value">3 - 8%</td><td>Débil a regular.</td><td>Control de humedad, drenaje, espesor.</td></tr>
+                  <tr><td class="value">8 - 20%</td><td>Regular a bueno.</td><td>Diseño estructural normal.</td></tr>
+                  <tr><td class="value">&gt; 20%</td><td>Buen soporte relativo.</td><td>Validar con especificación.</td></tr>
+                </tbody>
+              </table>
+              <div class="info-box"><strong>Relación práctica:</strong> Proctor define cómo compactar; CBR ayuda a estimar soporte. Se leen juntos, nunca divorciados.</div>
+            </div>
+          </div>
         </div>
+
       `,
       compactacion_pav: `
         <div class="section">
@@ -1263,17 +1833,42 @@ const modules = {
       fallas_pav: `
         <div class="section">
           <h2>Fallas típicas en pavimentos</h2>
-          <table>
-            <thead><tr><th>Falla</th><th>Qué se ve</th><th>Causa frecuente</th></tr></thead>
-            <tbody>
-              <tr><td class="value">Ahuellamiento</td><td>Canales en huellas.</td><td>Mezcla inestable o capas débiles.</td></tr>
-              <tr><td class="value">Piel de cocodrilo</td><td>Fisuras interconectadas.</td><td>Fatiga estructural.</td></tr>
-              <tr><td class="value">Baches</td><td>Huecos localizados.</td><td>Agua + tránsito + pérdida de material.</td></tr>
-              <tr><td class="value">Exudación</td><td>Ligante en superficie.</td><td>Exceso de asfalto o vacíos insuficientes.</td></tr>
-              <tr><td class="value">Fisuras transversales</td><td>Cortes perpendiculares al tránsito.</td><td>Temperatura, retracción o reflexión.</td></tr>
-            </tbody>
-          </table>
+          <p class="lead">Las fallas se interpretan mirando forma, ubicación, severidad, drenaje, tránsito y edad del pavimento. La patología es el idioma del pavimento: hay que leerlo.</p>
+
+          <div class="visual-grid three">
+            <div class="visual-card">
+              <h3>Ahuellamiento</h3>
+              <svg class="tech-svg" viewBox="0 0 360 240"><rect width="360" height="240" fill="#07111f"/><rect x="45" y="95" width="270" height="80" rx="10" fill="#1f2937"/><path d="M75 115 C100 160, 130 160, 155 115" fill="none" stroke="#f97316" stroke-width="8"/><path d="M205 115 C230 160, 260 160, 285 115" fill="none" stroke="#f97316" stroke-width="8"/><text x="72" y="205" fill="#dbeafe" font-size="14">deformación en huellas</text></svg>
+              <p>Asociado a mezcla inestable, base débil o subrasante con baja capacidad.</p>
+            </div>
+            <div class="visual-card">
+              <h3>Piel de cocodrilo</h3>
+              <svg class="tech-svg" viewBox="0 0 360 240"><rect width="360" height="240" fill="#07111f"/><rect x="45" y="70" width="270" height="120" rx="10" fill="#1f2937"/><g stroke="#38bdf8" stroke-width="3" fill="none"><path d="M70 95 C100 115,95 145,125 165"/><path d="M125 85 C150 120,145 150,180 178"/><path d="M190 82 C215 115,210 155,245 180"/><path d="M78 160 C120 130,160 135,210 100"/><path d="M115 185 C155 150,210 150,282 115"/></g><text x="75" y="218" fill="#dbeafe" font-size="14">fisuración por fatiga</text></svg>
+              <p>Indica daño estructural repetido por tránsito; no se arregla solo con maquillaje superficial.</p>
+            </div>
+            <div class="visual-card">
+              <h3>Bache</h3>
+              <svg class="tech-svg" viewBox="0 0 360 240"><rect width="360" height="240" fill="#07111f"/><rect x="45" y="75" width="270" height="115" rx="10" fill="#1f2937"/><ellipse cx="185" cy="135" rx="72" ry="38" fill="#0b1f33" stroke="#f97316" stroke-width="5"/><ellipse cx="185" cy="135" rx="42" ry="19" fill="#000" opacity=".55"/><text x="80" y="218" fill="#dbeafe" font-size="14">pérdida localizada</text></svg>
+              <p>Generalmente mezcla de agua, fisuras, tránsito y pérdida de material.</p>
+            </div>
+            <div class="visual-card">
+              <h3>Desprendimiento / raveling</h3>
+              <svg class="tech-svg" viewBox="0 0 360 240"><rect width="360" height="240" fill="#07111f"/><rect x="45" y="75" width="270" height="115" rx="10" fill="#1f2937"/><g fill="#c9a24d"><circle cx="90" cy="110" r="5"/><circle cx="125" cy="150" r="4"/><circle cx="165" cy="118" r="5"/><circle cx="220" cy="155" r="4"/><circle cx="260" cy="115" r="6"/><circle cx="290" cy="165" r="4"/></g><text x="70" y="218" fill="#dbeafe" font-size="14">pérdida de agregado</text></svg>
+              <p>Puede venir de mala adhesión, envejecimiento, segregación o compactación deficiente.</p>
+            </div>
+            <div class="visual-card">
+              <h3>Fisura longitudinal</h3>
+              <svg class="tech-svg" viewBox="0 0 360 240"><rect width="360" height="240" fill="#07111f"/><rect x="45" y="75" width="270" height="115" rx="10" fill="#1f2937"/><path d="M180 80 C165 110,200 125,180 150 C165 175,185 180,175 190" fill="none" stroke="#38bdf8" stroke-width="5"/><text x="75" y="218" fill="#dbeafe" font-size="14">junta, reflexión o borde</text></svg>
+              <p>Revisar juntas, borde, asentamiento diferencial y reflexión de fisuras.</p>
+            </div>
+            <div class="visual-card">
+              <h3>Exudación</h3>
+              <svg class="tech-svg" viewBox="0 0 360 240"><rect width="360" height="240" fill="#07111f"/><rect x="45" y="75" width="270" height="115" rx="10" fill="#1f2937"/><path d="M55 145 C95 110,125 175,170 130 C220 85,245 160,305 115" fill="none" stroke="#38bdf8" stroke-width="12" opacity=".65"/><text x="95" y="218" fill="#dbeafe" font-size="14">ligante en superficie</text></svg>
+              <p>Puede indicar exceso de asfalto, baja textura o vacíos insuficientes.</p>
+            </div>
+          </div>
         </div>
+
       `
     }
   },
@@ -1301,17 +1896,38 @@ const modules = {
       componentes: `
         <div class="section">
           <h2>Componentes del hormigón</h2>
-          <table>
-            <thead><tr><th>Componente</th><th>Función</th><th>Control práctico</th></tr></thead>
-            <tbody>
-              <tr><td class="value">Cemento</td><td>Material ligante.</td><td>Tipo, vencimiento, almacenamiento.</td></tr>
-              <tr><td class="value">Agua</td><td>Hidratación y trabajabilidad.</td><td>Calidad y cantidad. No agregar sin control.</td></tr>
-              <tr><td class="value">Arena</td><td>Agregado fino.</td><td>Limpieza, humedad, granulometría.</td></tr>
-              <tr><td class="value">Piedra / grava</td><td>Agregado grueso.</td><td>Tamaño máximo, forma, resistencia.</td></tr>
-              <tr><td class="value">Aditivos</td><td>Modificar comportamiento.</td><td>Dosis, compatibilidad y objetivo.</td></tr>
-            </tbody>
-          </table>
+          <p class="lead">El hormigón no es solo “cemento con piedras”: cada componente modifica resistencia, trabajabilidad, durabilidad y control de obra.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Componentes y función</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Componentes del hormigón">
+                <rect width="620" height="360" fill="#07111f"/>
+                <circle cx="150" cy="105" r="45" fill="#94a3b8" opacity=".85"/><text x="115" y="112" fill="#07111f" font-size="14" font-weight="700">cemento</text>
+                <path d="M280 60 C260 100,310 105,292 145 C275 180,330 185,310 225" stroke="#38bdf8" stroke-width="8" fill="none"/><text x="260" y="250" fill="#7dd3fc" font-size="14">agua</text>
+                <circle cx="455" cy="105" r="18" fill="#c9a24d"/><circle cx="500" cy="135" r="26" fill="#c9a24d"/><circle cx="430" cy="160" r="22" fill="#c9a24d"/><text x="425" y="205" fill="#fde68a" font-size="14">agregados</text>
+                <rect x="210" y="270" width="200" height="45" rx="12" fill="#8a5a2b" stroke="#fde68a"/><text x="260" y="298" fill="#fff" font-size="15">mezcla final</text>
+                <line x1="150" y1="150" x2="250" y2="270" stroke="#dbeafe"/><line x1="290" y1="230" x2="310" y2="270" stroke="#dbeafe"/><line x1="455" y1="205" x2="360" y2="270" stroke="#dbeafe"/>
+              </svg>
+              <p><strong>Clave:</strong> la calidad no depende solo de f'c. También importan a/c, compactación, curado, agregados, temperatura y durabilidad.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Controles básicos</h3>
+              <table>
+                <thead><tr><th>Componente</th><th>Control práctico</th></tr></thead>
+                <tbody>
+                  <tr><td class="value">Cemento</td><td>Tipo, almacenamiento y compatibilidad.</td></tr>
+                  <tr><td class="value">Agua</td><td>Calidad y cantidad efectiva.</td></tr>
+                  <tr><td class="value">Arena</td><td>Humedad, finos y granulometría.</td></tr>
+                  <tr><td class="value">Piedra</td><td>Tamaño máximo, forma y limpieza.</td></tr>
+                  <tr><td class="value">Aditivo</td><td>Dosis, función y compatibilidad.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
+
       `,
       ac: `
         <div class="section">
@@ -1331,45 +1947,118 @@ const modules = {
       slump: `
         <div class="section">
           <h2>Trabajabilidad y slump</h2>
-          <p class="lead">El slump mide asentamiento del cono y orienta sobre la trabajabilidad. No mide resistencia directamente.</p>
-          <table>
-            <thead><tr><th>Slump orientativo</th><th>Lectura</th><th>Uso típico / precaución</th></tr></thead>
-            <tbody>
-              <tr><td class="value">2 - 5 cm</td><td>Bajo.</td><td>Mezcla seca; requiere buena colocación y compactación.</td></tr>
-              <tr><td class="value">7 - 12 cm</td><td>Medio.</td><td>Común en muchas obras convencionales.</td></tr>
-              <tr><td class="value">&gt; 15 cm</td><td>Alto.</td><td>Revisar diseño, aditivo, segregación o exceso de agua.</td></tr>
-            </tbody>
-          </table>
+          <p class="lead">El slump mide el asentamiento del hormigón fresco. Sirve para controlar trabajabilidad, pero no mide resistencia directamente.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Cono de Abrams</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Ensayo de slump con cono de Abrams">
+                <rect width="620" height="360" fill="#07111f"/>
+                <line x1="80" y1="290" x2="540" y2="290" stroke="#94a3b8" stroke-width="2"/>
+                <path d="M140 120 L230 120 L210 265 L160 265 Z" fill="#64748b" stroke="#dbeafe" stroke-width="3"/>
+                <path d="M360 160 C390 130, 440 140, 465 172 C500 220, 455 275, 390 270 C330 265, 310 205, 360 160" fill="#8a5a2b" stroke="#c9a24d" stroke-width="3"/>
+                <line x1="510" y1="120" x2="510" y2="270" stroke="#38bdf8" stroke-width="3"/>
+                <line x1="470" y1="120" x2="510" y2="120" stroke="#38bdf8" stroke-width="3"/>
+                <line x1="470" y1="270" x2="510" y2="270" stroke="#38bdf8" stroke-width="3"/>
+                <text x="520" y="200" fill="#7dd3fc" font-size="15">slump</text>
+                <text x="115" y="320" fill="#dbeafe" font-size="13">cono lleno</text>
+                <text x="348" y="320" fill="#dbeafe" font-size="13">asentamiento medido</text>
+              </svg>
+              <p><strong>Interpretación:</strong> slump bajo puede dificultar colocación; slump alto exige revisar si se logró con aditivo o con agua de más.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Rangos orientativos</h3>
+              <table>
+                <thead><tr><th>Slump</th><th>Lectura</th><th>Precaución</th></tr></thead>
+                <tbody>
+                  <tr><td class="value">2 - 5 cm</td><td>Bajo.</td><td>Mezcla seca; requiere buena vibración.</td></tr>
+                  <tr><td class="value">7 - 12 cm</td><td>Medio.</td><td>Común en obra convencional.</td></tr>
+                  <tr><td class="value">&gt; 15 cm</td><td>Alto.</td><td>Revisar segregación o exceso de agua.</td></tr>
+                </tbody>
+              </table>
+              <div class="warn-box"><strong>Alerta:</strong> agregar agua en obra para “mejorar” el slump puede bajar resistencia y durabilidad. El hormigón no es sopa técnica.</div>
+            </div>
+          </div>
         </div>
+
       `,
       dosificacion: `
         <div class="section">
           <h2>Dosificación</h2>
-          <p class="lead">La dosificación define proporciones para cumplir resistencia, trabajabilidad, durabilidad y economía.</p>
-          <table>
-            <thead><tr><th>Control</th><th>Por qué importa</th><th>Error común</th></tr></thead>
-            <tbody>
-              <tr><td class="value">Medir por peso</td><td>Mayor precisión.</td><td>Dosificar “a balde” sin corregir humedad.</td></tr>
-              <tr><td class="value">Humedad de arena</td><td>Aporta agua real a la mezcla.</td><td>No corregir agua de amasado.</td></tr>
-              <tr><td class="value">Tamaño máximo</td><td>Influye en colocación y bombeo.</td><td>Usar agregado incompatible con armadura.</td></tr>
-              <tr><td class="value">Aditivos</td><td>Mejoran trabajabilidad o tiempos.</td><td>Sobredosificar sin ensayo.</td></tr>
-            </tbody>
-          </table>
+          <p class="lead">La dosificación define proporciones para cumplir resistencia, trabajabilidad, durabilidad y economía. En obra seria se controla por peso y se corrige humedad de agregados.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Proceso de dosificación</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Proceso de dosificación de hormigón">
+                <rect width="620" height="360" fill="#07111f"/>
+                <g font-size="13" fill="#dbeafe" text-anchor="middle">
+                  <rect x="55" y="115" width="105" height="82" rx="12" fill="#0b1f33" stroke="#c9a24d"/><text x="108" y="150">Cemento</text><text x="108" y="172">kg</text>
+                  <rect x="185" y="115" width="105" height="82" rx="12" fill="#0b1f33" stroke="#38bdf8"/><text x="238" y="150">Agua</text><text x="238" y="172">litros</text>
+                  <rect x="315" y="115" width="105" height="82" rx="12" fill="#0b1f33" stroke="#c9a24d"/><text x="368" y="150">Agregados</text><text x="368" y="172">kg</text>
+                  <rect x="445" y="115" width="105" height="82" rx="12" fill="#0b1f33" stroke="#38bdf8"/><text x="498" y="150">Aditivos</text><text x="498" y="172">dosis</text>
+                </g>
+                <line x1="107" y1="200" x2="280" y2="255" stroke="#dbeafe" stroke-width="3"/><line x1="237" y1="200" x2="300" y2="255" stroke="#dbeafe" stroke-width="3"/><line x1="367" y1="200" x2="320" y2="255" stroke="#dbeafe" stroke-width="3"/><line x1="497" y1="200" x2="340" y2="255" stroke="#dbeafe" stroke-width="3"/>
+                <rect x="245" y="255" width="150" height="55" rx="14" fill="#8a5a2b" stroke="#fde68a" stroke-width="2"/>
+                <text x="320" y="288" fill="#fff" font-size="15" font-weight="700" text-anchor="middle">Mezcla diseñada</text>
+                <text x="160" y="70" fill="#fde68a" font-size="15">Resistencia + trabajabilidad + durabilidad + costo</text>
+              </svg>
+              <p><strong>Clave:</strong> el agua total incluye agua agregada y humedad de arena/piedra. Si no se corrige, se altera la relación a/c.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Relación agua/cemento</h3>
+              <table>
+                <thead><tr><th>a/c</th><th>Lectura</th><th>Impacto</th></tr></thead>
+                <tbody>
+                  <tr><td class="value">&lt; 0.45</td><td>Baja.</td><td>Mayor durabilidad, menor trabajabilidad si no hay aditivo.</td></tr>
+                  <tr><td class="value">0.45 - 0.60</td><td>Rango usual orientativo.</td><td>Depende del diseño y exposición.</td></tr>
+                  <tr><td class="value">&gt; 0.60</td><td>Alta.</td><td>Más porosidad, menor resistencia potencial.</td></tr>
+                </tbody>
+              </table>
+              <div class="formula">a/c = agua efectiva / cemento</div>
+            </div>
+          </div>
         </div>
+
       `,
       curado: `
         <div class="section">
           <h2>Curado</h2>
-          <p class="lead">El curado mantiene humedad y temperatura favorables para que el hormigón desarrolle resistencia y durabilidad.</p>
-          <table>
-            <thead><tr><th>Curado</th><th>Lectura práctica</th><th>Riesgo si falta</th></tr></thead>
-            <tbody>
-              <tr><td class="value">Primeras horas</td><td>Críticas para evitar pérdida rápida de agua.</td><td>Fisuración plástica.</td></tr>
-              <tr><td class="value">7 días</td><td>Referencia mínima frecuente.</td><td>Menor resistencia superficial.</td></tr>
-              <tr><td class="value">Más días</td><td>Mejor en ambientes exigentes o cementos específicos.</td><td>Depende de especificación.</td></tr>
-            </tbody>
-          </table>
+          <p class="lead">El curado mantiene humedad y temperatura favorables para la hidratación del cemento. Sin curado, el hormigón pierde resistencia superficial y durabilidad.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Curado correcto</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Curado de hormigón">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="100" y="220" width="420" height="60" fill="#64748b" stroke="#dbeafe" stroke-width="2"/>
+                <path d="M135 105 C120 140,165 140,150 175" stroke="#38bdf8" stroke-width="4" fill="none"/>
+                <path d="M230 90 C215 130,260 130,245 175" stroke="#38bdf8" stroke-width="4" fill="none"/>
+                <path d="M335 110 C320 150,365 150,350 188" stroke="#38bdf8" stroke-width="4" fill="none"/>
+                <path d="M440 95 C425 140,470 140,455 185" stroke="#38bdf8" stroke-width="4" fill="none"/>
+                <line x1="100" y1="218" x2="520" y2="218" stroke="#38bdf8" stroke-width="5" stroke-dasharray="10 7"/>
+                <text x="180" y="315" fill="#dbeafe" font-size="14">mantener humedad + proteger de sol/viento</text>
+              </svg>
+              <p><strong>Interpretación:</strong> las primeras horas son críticas. Viento, calor y baja humedad aceleran evaporación y fisuración plástica.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Problema típico sin curado</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Fisuras por falta de curado">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="90" y="180" width="440" height="90" fill="#64748b" stroke="#dbeafe" stroke-width="2"/>
+                <circle cx="260" cy="75" r="34" fill="#f97316" opacity=".9"/>
+                <g stroke="#f97316" stroke-width="3"><line x1="260" y1="115" x2="260" y2="150"/><line x1="215" y1="120" x2="230" y2="150"/><line x1="305" y1="120" x2="290" y2="150"/></g>
+                <g stroke="#ef4444" stroke-width="4" fill="none"><path d="M150 185 C170 205,155 220,185 240"/><path d="M280 185 C300 210,280 230,320 258"/><path d="M415 185 C440 205,415 232,455 260"/></g>
+                <text x="190" y="315" fill="#fca5a5" font-size="14">pérdida rápida de agua → fisuración</text>
+              </svg>
+              <p><strong>Control:</strong> membrana de curado, riego, mantas húmedas o protección, según clima y especificación.</p>
+            </div>
+          </div>
         </div>
+
       `,
       res_comp: `
         <div class="section">
@@ -1411,13 +2100,62 @@ const modules = {
       recubrimiento: `
         <div class="section">
           <h2>Recubrimiento</h2>
-          <p class="lead">Es la distancia entre la armadura y la superficie del hormigón. Protege contra corrosión y fuego, y asegura adherencia.</p>
-          <div class="warn-box"><strong>Alerta:</strong> el recubrimiento no se “estima a ojo”. Se garantiza con separadores, control antes de hormigonar y revisión de planos.</div>
+          <p class="lead">El recubrimiento protege las armaduras contra corrosión, fuego y ambiente. También ayuda a garantizar adherencia y durabilidad.</p>
+
+          <div class="visual-grid">
+            <div class="visual-card">
+              <h3>Recubrimiento en sección</h3>
+              <svg class="tech-svg" viewBox="0 0 620 360" role="img" aria-label="Recubrimiento de armadura en hormigón">
+                <rect width="620" height="360" fill="#07111f"/>
+                <rect x="160" y="70" width="300" height="210" fill="#64748b" stroke="#dbeafe" stroke-width="3"/>
+                <circle cx="235" cy="135" r="18" fill="#0b1f33" stroke="#c9a24d" stroke-width="4"/>
+                <circle cx="385" cy="135" r="18" fill="#0b1f33" stroke="#c9a24d" stroke-width="4"/>
+                <circle cx="235" cy="220" r="18" fill="#0b1f33" stroke="#c9a24d" stroke-width="4"/>
+                <circle cx="385" cy="220" r="18" fill="#0b1f33" stroke="#c9a24d" stroke-width="4"/>
+                <line x1="160" y1="135" x2="217" y2="135" stroke="#38bdf8" stroke-width="4"/>
+                <polygon points="217,135 202,127 202,143" fill="#38bdf8"/>
+                <text x="180" y="120" fill="#7dd3fc" font-size="13">cmin</text>
+                <text x="182" y="315" fill="#dbeafe" font-size="14">se controla con separadores, no con “a ojo”</text>
+              </svg>
+              <p><strong>Alerta:</strong> bajo recubrimiento acelera corrosión; exceso puede aumentar fisuración superficial si no se detalla bien.</p>
+            </div>
+
+            <div class="visual-card">
+              <h3>Qué revisar antes de hormigonar</h3>
+              <ul class="mini-list">
+                <li>Separadores suficientes y bien ubicados.</li>
+                <li>Armadura no apoyada directamente en el encofrado.</li>
+                <li>Compatibilidad con ambiente de exposición.</li>
+                <li>Distancia para vibrado y paso del agregado.</li>
+              </ul>
+            </div>
+          </div>
         </div>
+
       `,
       fisuracion: `
         <div class="section">
           <h2>Fisuración</h2>
+          <p class="lead">La fisura puede ser síntoma de retracción, temperatura, mala ejecución, asentamiento, corrosión o demanda estructural. La forma y el momento de aparición ayudan a diagnosticar.</p>
+
+          <div class="visual-grid three">
+            <div class="visual-card">
+              <h3>Fisura plástica</h3>
+              <svg class="tech-svg" viewBox="0 0 360 220"><rect width="360" height="220" fill="#07111f"/><rect x="45" y="120" width="270" height="55" fill="#64748b"/><g stroke="#ef4444" stroke-width="4" fill="none"><path d="M90 122 C115 135,95 150,125 168"/><path d="M190 122 C210 140,190 155,220 172"/></g><circle cx="270" cy="55" r="25" fill="#f97316"/></svg>
+              <p>Primeras horas; viento, calor y evaporación alta.</p>
+            </div>
+            <div class="visual-card">
+              <h3>Retracción</h3>
+              <svg class="tech-svg" viewBox="0 0 360 220"><rect width="360" height="220" fill="#07111f"/><rect x="45" y="95" width="270" height="80" fill="#64748b"/><g stroke="#38bdf8" stroke-width="4" fill="none"><path d="M80 100 L115 175"/><path d="M165 98 L200 175"/><path d="M250 100 L285 175"/></g><text x="85" y="205" fill="#dbeafe" font-size="13">juntas ayudan a controlar</text></svg>
+              <p>Días/semanas; falta de juntas, curado o restricción.</p>
+            </div>
+            <div class="visual-card">
+              <h3>Corrosión</h3>
+              <svg class="tech-svg" viewBox="0 0 360 220"><rect width="360" height="220" fill="#07111f"/><rect x="45" y="90" width="270" height="90" fill="#64748b"/><line x1="75" y1="140" x2="285" y2="140" stroke="#c9a24d" stroke-width="9"/><path d="M95 90 C130 110,120 130,155 150 C185 170,210 145,245 180" stroke="#ef4444" stroke-width="4" fill="none"/></svg>
+              <p>Tiempo prolongado; cloruros, carbonatación o recubrimiento bajo.</p>
+            </div>
+          </div>
+
           <table>
             <thead><tr><th>Tipo</th><th>Momento típico</th><th>Causa probable</th></tr></thead>
             <tbody>
@@ -1428,6 +2166,7 @@ const modules = {
             </tbody>
           </table>
         </div>
+
       `,
       control_h: `
         <div class="section">
@@ -1481,54 +2220,64 @@ const modules = {
       suelos_lab: `
         <div class="section">
           <h2>Ensayos de suelos en laboratorio</h2>
+          <p class="lead">Ensayos que transforman una muestra en parámetros interpretables: clasificación, compactación, soporte, resistencia, deformabilidad y flujo.</p>
+
+          <div class="visual-grid three">
+            <div class="visual-card"><h3>Granulometría</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><line x1="40" y1="160" x2="280" y2="160" stroke="#94a3b8"/><line x1="40" y1="35" x2="40" y2="160" stroke="#94a3b8"/><path d="M45 155 C90 130,130 95,180 70 C220 50,250 42,275 38" fill="none" stroke="#38bdf8" stroke-width="4"/><text x="72" y="185" fill="#dbeafe" font-size="12">curva de tamaños</text></svg><p>Clasifica y anticipa drenaje, compactación y sensibilidad a finos.</p></div>
+            <div class="visual-card"><h3>Atterberg</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><rect x="50" y="80" width="220" height="42" fill="#8a5a2b" stroke="#c9a24d"/><line x1="120" y1="65" x2="120" y2="140" stroke="#38bdf8" stroke-width="3"/><line x1="205" y1="65" x2="205" y2="140" stroke="#f97316" stroke-width="3"/><text x="105" y="55" fill="#38bdf8" font-size="13">LP</text><text x="190" y="55" fill="#f97316" font-size="13">LL</text><text x="138" y="160" fill="#fde68a" font-size="13">IP = LL - LP</text></svg><p>Define plasticidad y comportamiento frente al agua.</p></div>
+            <div class="visual-card"><h3>Proctor</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><line x1="45" y1="160" x2="280" y2="160" stroke="#94a3b8"/><line x1="45" y1="35" x2="45" y2="160" stroke="#94a3b8"/><path d="M55 150 C95 70,165 35,210 75 C245 105,263 135,275 155" fill="none" stroke="#38bdf8" stroke-width="4"/><line x1="170" y1="55" x2="170" y2="160" stroke="#c9a24d" stroke-dasharray="6 5"/><text x="182" y="62" fill="#fde68a" font-size="12">γd máx</text></svg><p>Entrega humedad óptima y densidad seca máxima.</p></div>
+            <div class="visual-card"><h3>CBR</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><rect x="115" y="80" width="90" height="70" fill="#8a5a2b" stroke="#c9a24d"/><rect x="150" y="35" width="20" height="80" fill="#38bdf8"/><polygon points="150,115 170,115 160,140" fill="#38bdf8"/><text x="92" y="180" fill="#dbeafe" font-size="12">penetración → soporte</text></svg><p>Evalúa capacidad soporte relativa del suelo.</p></div>
+            <div class="visual-card"><h3>Corte directo / triaxial</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><rect x="45" y="90" width="90" height="45" fill="#8a5a2b" stroke="#c9a24d"/><line x1="135" y1="112" x2="185" y2="112" stroke="#38bdf8" stroke-width="4"/><ellipse cx="245" cy="110" rx="34" ry="58" fill="#0b1f33" stroke="#38bdf8"/><text x="55" y="170" fill="#dbeafe" font-size="12">c, φ, Su</text></svg><p>Obtiene parámetros resistentes.</p></div>
+            <div class="visual-card"><h3>Consolidación</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><line x1="45" y1="155" x2="280" y2="155" stroke="#94a3b8"/><line x1="45" y1="35" x2="45" y2="155" stroke="#94a3b8"/><path d="M55 55 C105 80,165 118,270 150" fill="none" stroke="#c9a24d" stroke-width="4"/><text x="120" y="180" fill="#dbeafe" font-size="12">Cc, Cv, OCR</text></svg><p>Estima asentamiento y tiempo de consolidación.</p></div>
+          </div>
+
           <table>
-            <thead><tr><th>Ensayo</th><th>Resultado clave</th><th>Uso</th></tr></thead>
+            <thead><tr><th>Ensayo</th><th>Resultado clave</th><th>Decisión técnica</th></tr></thead>
             <tbody>
-              <tr><td>Granulometría</td><td>Curva y % finos</td><td>Clasificación, drenaje, material granular.</td></tr>
-              <tr><td>Límites de Atterberg</td><td>LL, LP, IP</td><td>Plasticidad y sensibilidad al agua.</td></tr>
-              <tr><td>Proctor</td><td>Humedad óptima y densidad seca máxima</td><td>Control de compactación.</td></tr>
-              <tr><td>CBR</td><td>% CBR</td><td>Soporte para pavimentos.</td></tr>
-              <tr><td>Consolidación</td><td>Cc, Cv, OCR</td><td>Asentamientos en suelos finos.</td></tr>
+              <tr><td>Granulometría</td><td>Curva y % finos</td><td>Clasificación, drenaje y aptitud granular.</td></tr>
+              <tr><td>Atterberg</td><td>LL, LP, IP</td><td>Plasticidad, expansión y sensibilidad al agua.</td></tr>
+              <tr><td>Proctor</td><td>w óptima y γd máx</td><td>Compactación de referencia.</td></tr>
+              <tr><td>CBR</td><td>% CBR</td><td>Soporte para subrasante y pavimentos.</td></tr>
+              <tr><td>Consolidación</td><td>Cc, Cv, OCR</td><td>Asentamientos y tiempos.</td></tr>
               <tr><td>Permeabilidad</td><td>k</td><td>Drenaje, filtración y consolidación.</td></tr>
-              <tr><td>Corte directo / triaxial</td><td>c, φ, Su</td><td>Resistencia al corte.</td></tr>
             </tbody>
           </table>
         </div>
+
       `,
       suelos_campo: `
         <div class="section">
           <h2>Ensayos de suelos en campo</h2>
-          <table>
-            <thead><tr><th>Ensayo</th><th>Resultado</th><th>Uso</th></tr></thead>
-            <tbody>
-              <tr><td>Cono de arena</td><td>Densidad seca in situ</td><td>Control de compactación.</td></tr>
-              <tr><td>Densímetro nuclear</td><td>Densidad y humedad</td><td>Control rápido de obra.</td></tr>
-              <tr><td>DCP</td><td>Penetración por golpe</td><td>Estimación rápida de resistencia.</td></tr>
-              <tr><td>Placa de carga</td><td>Módulo / asentamiento</td><td>Rigidez de apoyo.</td></tr>
-              <tr><td>Calicata</td><td>Observación directa</td><td>Perfil superficial y muestras alteradas.</td></tr>
-            </tbody>
-          </table>
+          <p class="lead">Controlan lo que realmente se ejecutó en obra: densidad, humedad, rigidez o resistencia de campo.</p>
+          <div class="visual-grid three">
+            <div class="visual-card"><h3>Cono de arena</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><rect x="55" y="145" width="210" height="25" fill="#8a5a2b"/><path d="M125 70 L160 115 L195 70 Z" fill="#c9a24d"/><rect x="110" y="115" width="100" height="20" fill="#c9a24d"/><line x1="160" y1="135" x2="160" y2="160" stroke="#fde68a" stroke-width="4"/></svg><p>Densidad in situ y % compactación.</p></div>
+            <div class="visual-card"><h3>DCP</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><line x1="160" y1="35" x2="160" y2="160" stroke="#dbeafe" stroke-width="5"/><polygon points="145,160 175,160 160,185" fill="#38bdf8"/><rect x="125" y="55" width="70" height="18" fill="#c9a24d"/><text x="80" y="190" fill="#dbeafe" font-size="12">penetración por golpe</text></svg><p>Estimación rápida de resistencia de capas.</p></div>
+            <div class="visual-card"><h3>Placa de carga</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><rect x="95" y="130" width="130" height="20" fill="#64748b"/><rect x="125" y="70" width="70" height="60" fill="#0b1f33" stroke="#38bdf8"/><line x1="160" y1="45" x2="160" y2="70" stroke="#f97316" stroke-width="5"/><text x="100" y="180" fill="#dbeafe" font-size="12">carga-asentamiento</text></svg><p>Rigidez superficial y deformabilidad.</p></div>
+          </div>
         </div>
+
       `,
       geo_insitu: `
         <div class="section">
           <h2>Ensayos geotécnicos in situ</h2>
-          <table>
-            <thead><tr><th>Ensayo</th><th>Resultado</th><th>Uso</th></tr></thead>
-            <tbody>
-              <tr><td>SPT</td><td>N golpes</td><td>Compacidad, consistencia y correlaciones.</td></tr>
-              <tr><td>CPT / CPTu</td><td>qc, fs, u</td><td>Perfil continuo y clasificación.</td></tr>
-              <tr><td>Velocidad de onda de corte</td><td>Vs / Vs30</td><td>Rigidez dinámica y clasificación sísmica.</td></tr>
-              <tr><td>Presiómetro</td><td>Deformabilidad y presión límite</td><td>Fundaciones y excavaciones.</td></tr>
-              <tr><td>Veleta</td><td>Su</td><td>Arcillas blandas.</td></tr>
-              <tr><td>Lefranc / Lugeon</td><td>Permeabilidad in situ</td><td>Suelos y roca fracturada.</td></tr>
-            </tbody>
-          </table>
+          <p class="lead">Permiten leer el terreno sin depender solo de muestras alteradas. Son clave para perfiles, rigidez, resistencia y continuidad estratigráfica.</p>
+          <div class="visual-grid three">
+            <div class="visual-card"><h3>SPT</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><rect x="85" y="55" width="95" height="125" fill="#8a5a2b"/><line x1="132" y1="25" x2="132" y2="170" stroke="#dbeafe" stroke-width="5"/><rect x="112" y="45" width="40" height="25" fill="#64748b"/></svg><p>N golpes para compacidad o consistencia.</p></div>
+            <div class="visual-card"><h3>CPT/CPTu</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><line x1="100" y1="20" x2="100" y2="155" stroke="#dbeafe" stroke-width="5"/><polygon points="80,155 120,155 100,190" fill="#38bdf8"/><path d="M180 30 C220 80,170 105,250 170" stroke="#c9a24d" stroke-width="4" fill="none"/></svg><p>Perfil continuo qc, fs y presión de poros.</p></div>
+            <div class="visual-card"><h3>Vs / geofísica</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><rect x="40" y="135" width="240" height="35" fill="#8a5a2b"/><circle cx="70" cy="125" r="10" fill="#f97316"/><g fill="#38bdf8"><rect x="125" y="115" width="10" height="20"/><rect x="165" y="115" width="10" height="20"/><rect x="205" y="115" width="10" height="20"/></g><path d="M70 135 C120 70,200 70,250 135" stroke="#38bdf8" fill="none" stroke-width="3"/></svg><p>Rigidez dinámica y clasificación sísmica.</p></div>
+          </div>
         </div>
+
       `,
       pav_ens: `
         <div class="section">
           <h2>Ensayos de pavimentos</h2>
+          <p class="lead">Combinan ensayos de soporte, mezcla, deflexión y regularidad para entender si el pavimento resiste, rueda bien y dura.</p>
+          <div class="visual-grid three">
+            <div class="visual-card"><h3>CBR / DCP</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><line x1="75" y1="155" x2="260" y2="155" stroke="#94a3b8"/><path d="M80 150 C140 120,200 85,250 50" stroke="#38bdf8" fill="none" stroke-width="4"/><line x1="160" y1="40" x2="160" y2="150" stroke="#c9a24d" stroke-dasharray="6 5"/></svg><p>Soporte de subrasante y capas granulares.</p></div>
+            <div class="visual-card"><h3>Marshall / Rice</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><rect x="75" y="95" width="80" height="55" rx="10" fill="#1f2937" stroke="#c9a24d"/><line x1="115" y1="40" x2="115" y2="95" stroke="#38bdf8" stroke-width="5"/><circle cx="220" cy="120" r="38" fill="#0b1f33" stroke="#38bdf8"/><path d="M220 120 L220 82 A38 38 0 0 1 253 139 Z" fill="#c9a24d"/></svg><p>Estabilidad, flujo, densidad y vacíos de mezcla.</p></div>
+            <div class="visual-card"><h3>FWD / IRI</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><rect x="45" y="135" width="230" height="28" fill="#1f2937"/><path d="M75 135 C100 160,130 160,155 135 C185 105,220 170,260 135" stroke="#38bdf8" fill="none" stroke-width="4"/><line x1="160" y1="55" x2="160" y2="130" stroke="#f97316" stroke-width="5"/></svg><p>Deflexión estructural y regularidad superficial.</p></div>
+          </div>
           <table>
             <thead><tr><th>Ensayo</th><th>Resultado</th><th>Decisión técnica</th></tr></thead>
             <tbody>
@@ -1541,10 +2290,17 @@ const modules = {
             </tbody>
           </table>
         </div>
+
       `,
       agg_ens: `
         <div class="section">
           <h2>Ensayos de agregados</h2>
+          <p class="lead">Los agregados controlan estabilidad, desgaste, compactación y durabilidad. Un buen pavimento empieza en una buena cantera.</p>
+          <div class="visual-grid three">
+            <div class="visual-card"><h3>Los Ángeles</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><circle cx="155" cy="100" r="62" fill="#0b1f33" stroke="#38bdf8" stroke-width="4"/><g fill="#c9a24d"><circle cx="130" cy="85" r="8"/><circle cx="175" cy="85" r="10"/><circle cx="150" cy="125" r="9"/></g><path d="M185 45 A65 65 0 0 1 220 100" stroke="#f97316" fill="none" stroke-width="4"/></svg><p>Desgaste e impacto del agregado grueso.</p></div>
+            <div class="visual-card"><h3>Equivalente de arena</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><rect x="135" y="40" width="50" height="130" rx="8" fill="#0b1f33" stroke="#dbeafe"/><rect x="140" y="125" width="40" height="40" fill="#c9a24d"/><rect x="140" y="75" width="40" height="50" fill="#38bdf8" opacity=".6"/></svg><p>Limpieza de finos y presencia de arcillas.</p></div>
+            <div class="visual-card"><h3>Lajas y alargadas</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><ellipse cx="95" cy="110" rx="55" ry="14" fill="#c9a24d"/><ellipse cx="220" cy="105" rx="18" ry="52" fill="#38bdf8"/><text x="72" y="170" fill="#dbeafe" font-size="12">laja</text><text x="195" y="170" fill="#dbeafe" font-size="12">alargada</text></svg><p>Forma del agregado y trabajabilidad.</p></div>
+          </div>
           <table>
             <thead><tr><th>Ensayo</th><th>Qué evalúa</th><th>Uso</th></tr></thead>
             <tbody>
@@ -1556,10 +2312,17 @@ const modules = {
             </tbody>
           </table>
         </div>
+
       `,
       horm_ens: `
         <div class="section">
           <h2>Ensayos de hormigón</h2>
+          <p class="lead">Controlan hormigón fresco, resistencia, durabilidad y condición de elementos existentes.</p>
+          <div class="visual-grid three">
+            <div class="visual-card"><h3>Slump</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><path d="M70 40 L130 40 L118 145 L82 145 Z" fill="#64748b" stroke="#dbeafe"/><path d="M200 75 C250 70,270 145,205 145 C160 145,170 95,200 75" fill="#8a5a2b" stroke="#c9a24d"/></svg><p>Trabajabilidad en fresco.</p></div>
+            <div class="visual-card"><h3>Probetas</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><ellipse cx="120" cy="60" rx="35" ry="12" fill="#94a3b8"/><rect x="85" y="60" width="70" height="90" fill="#64748b"/><ellipse cx="120" cy="150" rx="35" ry="12" fill="#475569"/><line x1="220" y1="30" x2="220" y2="160" stroke="#f97316" stroke-width="6"/></svg><p>Resistencia a compresión en MPa.</p></div>
+            <div class="visual-card"><h3>Testigos</h3><svg class="tech-svg" viewBox="0 0 320 200"><rect width="320" height="200" fill="#07111f"/><rect x="55" y="95" width="210" height="60" fill="#64748b"/><circle cx="150" cy="125" r="28" fill="#07111f" stroke="#38bdf8" stroke-width="4"/><rect x="200" y="70" width="35" height="85" fill="#0b1f33" stroke="#c9a24d"/></svg><p>Verificación real en estructura existente.</p></div>
+          </div>
           <table>
             <thead><tr><th>Ensayo</th><th>Resultado</th><th>Uso</th></tr></thead>
             <tbody>
@@ -1571,24 +2334,28 @@ const modules = {
             </tbody>
           </table>
         </div>
+
       `,
       matriz_ens: `
         <div class="section">
-          <h2>Matriz rápida de ensayos</h2>
+          <h2>Matriz visual rápida de ensayos</h2>
+          <p class="lead">Usá esta matriz como mapa: primero definí qué necesitás saber, luego elegí el ensayo que entrega ese parámetro.</p>
           <table>
-            <thead><tr><th>Necesito saber...</th><th>Ensayo recomendado</th><th>Área</th></tr></thead>
+            <thead><tr><th>Necesito saber...</th><th>Ensayo recomendado</th><th>Resultado clave</th><th>Decisión técnica</th></tr></thead>
             <tbody>
-              <tr><td>Tipo de suelo</td><td>Granulometría + Atterberg</td><td>Suelos</td></tr>
-              <tr><td>Cómo compactar</td><td>Proctor</td><td>Suelos / pavimentos</td></tr>
-              <tr><td>Si compactó bien</td><td>Cono de arena / nuclear</td><td>Campo</td></tr>
-              <tr><td>Soporte de subrasante</td><td>CBR / DCP</td><td>Pavimentos</td></tr>
-              <tr><td>Asentamientos lentos</td><td>Consolidación</td><td>Geotecnia</td></tr>
-              <tr><td>Rigidez dinámica</td><td>Vs / Vs30</td><td>Geofísica</td></tr>
-              <tr><td>Trabajabilidad del hormigón</td><td>Slump</td><td>Hormigón</td></tr>
-              <tr><td>Resistencia del hormigón</td><td>Probetas a compresión</td><td>Hormigón</td></tr>
+              <tr><td>Tipo de suelo</td><td>Granulometría + Atterberg</td><td>Curva, LL, LP, IP</td><td>Clasificación y sensibilidad al agua.</td></tr>
+              <tr><td>Cómo compactar</td><td>Proctor</td><td>w óptima, γd máx</td><td>Parámetro de aceptación en campo.</td></tr>
+              <tr><td>Si compactó bien</td><td>Cono de arena / nuclear</td><td>% compactación</td><td>Aceptar o rehacer capa.</td></tr>
+              <tr><td>Soporte de subrasante</td><td>CBR / DCP</td><td>% CBR, penetración</td><td>Mejoramiento o espesor de pavimento.</td></tr>
+              <tr><td>Asentamientos lentos</td><td>Consolidación</td><td>Cc, Cv, OCR</td><td>Precarga, pilotes o mejora.</td></tr>
+              <tr><td>Rigidez dinámica</td><td>Vs / Vs30</td><td>m/s</td><td>Clasificación sísmica y rigidez.</td></tr>
+              <tr><td>Trabajabilidad</td><td>Slump</td><td>cm</td><td>Aceptar mezcla fresca.</td></tr>
+              <tr><td>Resistencia del hormigón</td><td>Probetas/testigos</td><td>MPa</td><td>Control estructural.</td></tr>
             </tbody>
           </table>
+          <div class="senior-box"><h3>Criterio senior</h3><p>Un ensayo responde una pregunta concreta. No pidas un Proctor para resolver una duda de consolidación, ni un CBR para decidir por sí solo una fundación.</p></div>
         </div>
+
       `
     }
   },
@@ -1695,28 +2462,110 @@ const modules = {
     sections: {
       glosario_all: `
         <div class="section">
-          <h2>Glosario principal</h2>
-          <table>
-            <thead><tr><th>Término</th><th>Definición práctica</th></tr></thead>
-            <tbody>
-              <tr><td class="value">CBR</td><td>Ensayo que estima la capacidad soporte de un suelo o material para pavimentos.</td></tr>
-              <tr><td class="value">Proctor</td><td>Ensayo que determina humedad óptima y densidad seca máxima para compactación.</td></tr>
-              <tr><td class="value">SPT</td><td>Ensayo de penetración estándar que entrega el número de golpes N.</td></tr>
-              <tr><td class="value">CPTu</td><td>Ensayo de cono con medición de presión de poros.</td></tr>
-              <tr><td class="value">Vs</td><td>Velocidad de onda de corte; indica rigidez dinámica del terreno.</td></tr>
-              <tr><td class="value">Vs30</td><td>Promedio equivalente de Vs en los primeros 30 m; usado en clasificación sísmica.</td></tr>
-              <tr><td class="value">Slump</td><td>Asentamiento del hormigón fresco; indica trabajabilidad.</td></tr>
-              <tr><td class="value">Relación a/c</td><td>Relación agua/cemento; controla resistencia y durabilidad del hormigón.</td></tr>
-              <tr><td class="value">Subrasante</td><td>Suelo de apoyo del pavimento.</td></tr>
-              <tr><td class="value">Base granular</td><td>Capa estructural del pavimento que distribuye cargas.</td></tr>
-              <tr><td class="value">Consolidación</td><td>Asentamiento de suelos finos saturados por expulsión de agua.</td></tr>
-              <tr><td class="value">Permeabilidad</td><td>Facilidad con que el agua atraviesa el suelo.</td></tr>
-              <tr><td class="value">IP</td><td>Índice de plasticidad; diferencia entre límite líquido y límite plástico.</td></tr>
-              <tr><td class="value">Los Ángeles</td><td>Ensayo que mide desgaste e impacto en agregados gruesos.</td></tr>
-              <tr><td class="value">IRI</td><td>Índice de regularidad internacional; mide calidad de rodadura.</td></tr>
-            </tbody>
-          </table>
+          <h2>Glosario técnico ampliado</h2>
+          <p class="lead">Glosario práctico para leer informes, ensayos y especificaciones con más criterio. Incluye términos de geotecnia, pavimentos, hormigón y control de obra.</p>
+
+          <details open>
+            <summary>Mecánica de suelos y geotecnia</summary>
+            <div class="details-body">
+              <table>
+                <thead><tr><th>Término</th><th>Definición práctica</th><th>Uso / interpretación</th></tr></thead>
+                <tbody>
+                  <tr><td class="value">SUCS</td><td>Sistema Unificado de Clasificación de Suelos.</td><td>Clasifica por granulometría y plasticidad.</td></tr>
+                  <tr><td class="value">AASHTO</td><td>Clasificación vial de suelos.</td><td>Muy usada en caminos y subrasantes.</td></tr>
+                  <tr><td class="value">LL</td><td>Límite líquido.</td><td>Humedad donde el suelo fino se vuelve muy deformable.</td></tr>
+                  <tr><td class="value">LP</td><td>Límite plástico.</td><td>Humedad mínima donde el suelo se deja moldear.</td></tr>
+                  <tr><td class="value">IP</td><td>Índice de plasticidad.</td><td>IP alto = mayor sensibilidad al agua.</td></tr>
+                  <tr><td class="value">Humedad óptima</td><td>Humedad que permite alcanzar máxima densidad seca en Proctor.</td><td>Meta de compactación.</td></tr>
+                  <tr><td class="value">γd máx</td><td>Densidad seca máxima.</td><td>Referencia para % de compactación.</td></tr>
+                  <tr><td class="value">CBR</td><td>Capacidad soporte relativa por penetración.</td><td>Base para evaluar subrasantes y materiales granulares.</td></tr>
+                  <tr><td class="value">SPT N</td><td>Número de golpes del SPT.</td><td>Correlaciona compacidad o consistencia.</td></tr>
+                  <tr><td class="value">CPT / CPTu</td><td>Ensayo de cono estático, con presión de poros en CPTu.</td><td>Perfil continuo de comportamiento del terreno.</td></tr>
+                  <tr><td class="value">Vs</td><td>Velocidad de onda de corte.</td><td>Rigidez dinámica del terreno.</td></tr>
+                  <tr><td class="value">Vs30</td><td>Promedio equivalente de Vs en los primeros 30 m.</td><td>Clasificación sísmica del sitio.</td></tr>
+                  <tr><td class="value">c'</td><td>Cohesión efectiva.</td><td>Parámetro de resistencia drenada.</td></tr>
+                  <tr><td class="value">φ'</td><td>Ángulo de fricción efectivo.</td><td>Clave en suelos granulares.</td></tr>
+                  <tr><td class="value">Su / Cu</td><td>Resistencia no drenada.</td><td>Usual en arcillas saturadas a corto plazo.</td></tr>
+                  <tr><td class="value">OCR</td><td>Relación de sobreconsolidación.</td><td>Indica historial de carga del suelo.</td></tr>
+                  <tr><td class="value">Cc</td><td>Índice de compresión.</td><td>Asentamiento por consolidación virgen.</td></tr>
+                  <tr><td class="value">Cv</td><td>Coeficiente de consolidación.</td><td>Velocidad de asentamiento.</td></tr>
+                  <tr><td class="value">k</td><td>Coeficiente de permeabilidad.</td><td>Facilidad de flujo de agua en el suelo.</td></tr>
+                  <tr><td class="value">qadm</td><td>Capacidad admisible del terreno.</td><td>Presión de trabajo para fundaciones.</td></tr>
+                  <tr><td class="value">Balasto</td><td>Rigidez equivalente del suelo como resorte.</td><td>Losas de cimentación y pavimentos rígidos.</td></tr>
+                  <tr><td class="value">Arcilla expansiva</td><td>Arcilla que cambia volumen con humedad.</td><td>Puede levantar losas, pavimentos y fundaciones.</td></tr>
+                  <tr><td class="value">Suelo colapsable</td><td>Suelo que asienta al humedecerse.</td><td>Riesgo en rellenos y suelos metaestables.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+
+          <details>
+            <summary>Pavimentos y materiales viales</summary>
+            <div class="details-body">
+              <table>
+                <thead><tr><th>Término</th><th>Definición práctica</th><th>Uso / interpretación</th></tr></thead>
+                <tbody>
+                  <tr><td class="value">Subrasante</td><td>Suelo de apoyo del pavimento.</td><td>Se evalúa con CBR, humedad, IP y compactación.</td></tr>
+                  <tr><td class="value">Subbase</td><td>Capa de transición y drenaje.</td><td>Distribuye carga y mejora apoyo.</td></tr>
+                  <tr><td class="value">Base granular</td><td>Capa estructural principal bajo carpeta.</td><td>Requiere buena granulometría, LA y compactación.</td></tr>
+                  <tr><td class="value">Carpeta asfáltica</td><td>Capa de rodamiento flexible.</td><td>Controla textura, impermeabilidad parcial y confort.</td></tr>
+                  <tr><td class="value">Ahuellamiento</td><td>Deformación longitudinal en huellas.</td><td>Mezcla inestable o capas débiles.</td></tr>
+                  <tr><td class="value">Piel de cocodrilo</td><td>Fisuración interconectada.</td><td>Fatiga estructural.</td></tr>
+                  <tr><td class="value">Exudación</td><td>Ligante visible en superficie.</td><td>Exceso de asfalto o vacíos insuficientes.</td></tr>
+                  <tr><td class="value">Raveling</td><td>Desprendimiento de agregados.</td><td>Adhesión deficiente, envejecimiento o mala compactación.</td></tr>
+                  <tr><td class="value">IRI</td><td>Índice de regularidad internacional.</td><td>Mide calidad de rodadura.</td></tr>
+                  <tr><td class="value">FWD</td><td>Equipo de deflexiones por impacto.</td><td>Evalúa capacidad estructural del pavimento.</td></tr>
+                  <tr><td class="value">Viga Benkelman</td><td>Medición de deflexión recuperable.</td><td>Control estructural de pavimentos flexibles.</td></tr>
+                  <tr><td class="value">Marshall</td><td>Ensayo de estabilidad y fluencia.</td><td>Control/diseño de mezcla asfáltica convencional.</td></tr>
+                  <tr><td class="value">Rice</td><td>Densidad máxima teórica.</td><td>Cálculo de vacíos en mezcla asfáltica.</td></tr>
+                  <tr><td class="value">Los Ángeles</td><td>Desgaste e impacto de agregados.</td><td>Indica resistencia a degradación.</td></tr>
+                  <tr><td class="value">Equivalente de arena</td><td>Limpieza del agregado fino.</td><td>Detecta finos arcillosos perjudiciales.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+
+          <details>
+            <summary>Hormigón y control de calidad</summary>
+            <div class="details-body">
+              <table>
+                <thead><tr><th>Término</th><th>Definición práctica</th><th>Uso / interpretación</th></tr></thead>
+                <tbody>
+                  <tr><td class="value">f'c</td><td>Resistencia especificada a compresión.</td><td>Parámetro base de diseño estructural.</td></tr>
+                  <tr><td class="value">Slump</td><td>Asentamiento del hormigón fresco.</td><td>Control de trabajabilidad.</td></tr>
+                  <tr><td class="value">Relación a/c</td><td>Agua efectiva sobre cemento.</td><td>Controla resistencia, porosidad y durabilidad.</td></tr>
+                  <tr><td class="value">Curado</td><td>Mantenimiento de humedad y temperatura.</td><td>Permite hidratación y resistencia superficial.</td></tr>
+                  <tr><td class="value">Exudación</td><td>Subida de agua a superficie del hormigón fresco.</td><td>Puede generar capas débiles si es excesiva.</td></tr>
+                  <tr><td class="value">Segregación</td><td>Separación de pasta y agregados.</td><td>Indica mala mezcla, exceso de agua o mala colocación.</td></tr>
+                  <tr><td class="value">Recubrimiento</td><td>Distancia entre acero y superficie del hormigón.</td><td>Protección contra corrosión y fuego.</td></tr>
+                  <tr><td class="value">Carbonatación</td><td>Reducción de alcalinidad del hormigón.</td><td>Puede desproteger armaduras.</td></tr>
+                  <tr><td class="value">Cloruros</td><td>Iones agresivos para el acero.</td><td>Riesgo de corrosión en ambientes marinos o sales.</td></tr>
+                  <tr><td class="value">Fisura plástica</td><td>Fisura temprana por evaporación rápida.</td><td>Control con curado y protección climática.</td></tr>
+                  <tr><td class="value">Punzonamiento</td><td>Corte local alrededor de columnas.</td><td>Crítico en losas planas y zapatas.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
+
+          <details>
+            <summary>Gestión técnica de obra</summary>
+            <div class="details-body">
+              <table>
+                <thead><tr><th>Término</th><th>Definición práctica</th><th>Uso / interpretación</th></tr></thead>
+                <tbody>
+                  <tr><td class="value">Trazabilidad</td><td>Capacidad de seguir muestra, ensayo, lote o resultado.</td><td>Clave para defender decisiones técnicas.</td></tr>
+                  <tr><td class="value">Lote</td><td>Conjunto de material o producción evaluada.</td><td>Define aceptación/rechazo.</td></tr>
+                  <tr><td class="value">No conformidad</td><td>Resultado fuera de especificación.</td><td>Requiere acción correctiva documentada.</td></tr>
+                  <tr><td class="value">ITP</td><td>Plan de inspección y ensayos.</td><td>Ordena puntos de control de calidad.</td></tr>
+                  <tr><td class="value">As Built</td><td>Registro de lo realmente ejecutado.</td><td>Base documental final de obra.</td></tr>
+                  <tr><td class="value">Hold Point</td><td>Punto donde no se avanza sin aprobación.</td><td>Muy usado en control de calidad.</td></tr>
+                  <tr><td class="value">Witness Point</td><td>Punto de inspección con aviso previo.</td><td>Permite presencia del cliente/inspección.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </details>
         </div>
+
       `
     }
   },
@@ -1766,10 +2615,12 @@ const modules = {
       `,
       advertencia_bib: `
         <div class="section">
-          <h2>Nota de uso técnico</h2>
+          <h2>Nota de uso técnico y visualizaciones</h2>
           <div class="warn-box"><strong>Importante:</strong> este dashboard es una guía educativa y orientativa. No reemplaza reglamentos vigentes, especificaciones contractuales, informes firmados por profesionales responsables ni resultados de laboratorio acreditado.</div>
+          <p>Las curvas, esquemas y gráficos incluidos son <strong>diagramas técnicos originales en SVG</strong>, diseñados para explicar conceptos y procedimientos sin copiar fotografías o imágenes protegidas. Están basados en criterios usuales de bibliografía técnica, manuales de geotecnia, pavimentos, hormigón y normas de ensayo.</p>
           <p>Los rangos empíricos fueron redactados para lectura rápida. En una obra real se debe verificar: país, norma aplicable, tipo de estructura, categoría de camino, ambiente de exposición, confiabilidad de ensayos, trazabilidad de muestras y criterios del proyectista.</p>
         </div>
+
       `
     }
   }
@@ -1901,4 +2752,3 @@ render();
 </script>
 </body>
 </html>
-
