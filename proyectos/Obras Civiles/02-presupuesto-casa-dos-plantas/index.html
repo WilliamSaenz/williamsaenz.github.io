@@ -34,10 +34,21 @@
     .button:hover{background:var(--sky);color:#07111f;transform:translateY(-2px)}.gold{border-color:var(--gold);color:var(--gold)}.gold:hover{background:var(--gold);color:#07111f}.danger{border-color:var(--danger);color:#fecdd3}.danger:hover{background:var(--danger);color:#07111f}
     .summary{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}.metric{background:rgba(7,17,31,.75);border:1px solid var(--border);border-radius:14px;padding:16px}.metric strong{display:block;color:var(--gold);font-size:22px;margin-bottom:4px}.metric span{color:var(--muted);font-size:13px}
     .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.tab{border:1px solid var(--border);background:rgba(7,17,31,.65);color:#dbeafe;padding:10px 12px;border-radius:999px;cursor:pointer}.tab.active{border-color:var(--gold);color:var(--gold);background:rgba(201,162,77,.10)}
-    table{width:100%;border-collapse:collapse;margin-top:14px;overflow:hidden;border-radius:12px}th,td{border-bottom:1px solid rgba(255,255,255,.10);padding:10px;text-align:left;vertical-align:middle}th{color:var(--gold);background:rgba(7,17,31,.70);font-size:13px}td{color:#dbeafe;font-size:13px}td input{padding:8px;font-size:13px}td select{padding:8px;font-size:13px}.td-center{text-align:center}.row-muted{opacity:.55}.wbs-code{font-family:"Courier New",monospace;color:var(--sky);font-weight:bold}.money{text-align:right;white-space:nowrap}.selected-row{background:rgba(56,189,248,.06)}
+    table{width:100%;border-collapse:collapse;margin-top:14px;overflow:hidden;border-radius:12px}th,td{border-bottom:1px solid rgba(255,255,255,.10);padding:10px;text-align:left;vertical-align:middle}th{color:var(--gold);background:rgba(7,17,31,.70);font-size:13px}td{color:#dbeafe;font-size:13px}td input{padding:8px;font-size:13px}td select{padding:8px;font-size:13px}
+    .manual-input{min-width:105px;font-weight:bold;letter-spacing:.2px}
+    .desc-input{min-width:260px}
+    .unit-input{min-width:70px;text-align:center}
+    .td-center{text-align:center}.row-muted{opacity:.55}.wbs-code{font-family:"Courier New",monospace;color:var(--sky);font-weight:bold}.money{text-align:right;white-space:nowrap}.selected-row{background:rgba(56,189,248,.06)}
+    .quick-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .manual-help{color:#bae6fd;background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.25);border-radius:12px;padding:10px 12px;margin-top:12px;font-size:13px;line-height:1.45}
+    .breakdown{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:14px}
+    .breakdown .mini{background:rgba(7,17,31,.65);border:1px solid var(--border);border-radius:12px;padding:12px}
+    .breakdown .mini strong{display:block;color:var(--gold);font-size:15px;margin-bottom:3px}
+    .breakdown .mini span{display:block;color:var(--muted);font-size:12px}
+
     .notice{border-left:4px solid var(--gold);padding:12px 14px;background:rgba(201,162,77,.08);border-radius:12px;color:#fef3c7}
     footer{text-align:center;color:var(--muted);padding:25px;border-top:1px solid var(--border);font-size:14px}
-    @media(max-width:980px){.grid,.grid2,.grid3,.summary{grid-template-columns:1fr}h1{font-size:30px}table{display:block;overflow-x:auto}.metric strong{font-size:20px}}
+    @media(max-width:980px){.grid,.grid2,.grid3,.summary,.breakdown{grid-template-columns:1fr}h1{font-size:30px}table{display:block;overflow-x:auto}.metric strong{font-size:20px}}
   </style>
 </head>
 <body>
@@ -56,22 +67,26 @@
       <div><label>Fecha</label><input id="fecha" type="date"></div>
     </div>
     <div class="grid" style="margin-top:14px">
-      <div><label>Superficie estimada (m²)</label><input id="areaM2" type="number" min="1" step="1" value="160"></div>
-      <div><label>Plantas</label><input id="plantas" type="number" min="1" step="1" value="2"></div>
+      <div><label>Superficie estimada (m²)</label><input id="areaM2" class="manual-input" type="text" inputmode="decimal" value="160"></div>
+      <div><label>Plantas</label><input id="plantas" class="manual-input" type="text" inputmode="decimal" value="2"></div>
       <div><label>Moneda</label><select id="moneda"><option value="ARS">ARS</option><option value="COP">COP</option><option value="USD">USD</option></select></div>
       <div><label>Validez de oferta</label><input id="validez" value="15 días"></div>
     </div>
     <div class="grid3" style="margin-top:14px">
-      <div><label>% Gastos generales / indirectos</label><input id="indirectos" type="number" step="0.1" value="12"></div>
-      <div><label>% Imprevistos / contingencia</label><input id="imprevistos" type="number" step="0.1" value="5"></div>
-      <div><label>% Utilidad</label><input id="utilidad" type="number" step="0.1" value="10"></div>
+      <div><label>% Gastos generales / indirectos</label><input id="indirectos" class="manual-input" type="text" inputmode="decimal" value="12"></div>
+      <div><label>% Imprevistos / contingencia</label><input id="imprevistos" class="manual-input" type="text" inputmode="decimal" value="5"></div>
+      <div><label>% Utilidad</label><input id="utilidad" class="manual-input" type="text" inputmode="decimal" value="10"></div>
     </div>
     <div class="grid3" style="margin-top:14px">
       <div class="checkline"><input id="incluyeIVA" type="checkbox" checked><label for="incluyeIVA">Incluir IVA</label></div>
-      <div><label>% IVA</label><input id="iva" type="number" step="0.1" value="21"></div>
+      <div><label>% IVA</label><input id="iva" class="manual-input" type="text" inputmode="decimal" value="21"></div>
       <div><label>Responsable</label><input id="responsable" value="WDS · William D. Saenz"></div>
     </div>
     <p class="small">Los valores unitarios son referenciales y editables. La herramienta prioriza estructura profesional de presupuesto: EDT/WBS, cantidades, precios unitarios, costo directo, indirectos, imprevistos, utilidad e impuestos.</p>
+    <p class="manual-help">
+      Modo práctico: podés escribir números directamente en cantidades, precios y porcentajes.
+      Acepta formatos como <strong>180000</strong>, <strong>180.000</strong>, <strong>180,000</strong> o <strong>12,5</strong>.
+    </p>
   </section>
 
   <section>
@@ -83,9 +98,11 @@
   <section>
     <h2 id="chapterTitle">Capítulo</h2>
     <div class="hint" id="chapterHint">Seleccioná un capítulo para ver sus partidas.</div>
-    <div style="margin-top:12px">
+    <div class="quick-actions">
       <button class="button gold" onclick="selectVisible(true)">Seleccionar capítulo visible</button>
       <button class="button" onclick="selectVisible(false)">Quitar selección visible</button>
+      <button class="button" onclick="selectPreset('obra_gruesa')">Demo obra gruesa</button>
+      <button class="button" onclick="selectPreset('llave_en_mano')">Demo llave en mano</button>
       <button class="button" onclick="addCustomItem()">Agregar partida personalizada</button>
     </div>
     <div style="overflow-x:auto">
@@ -108,6 +125,15 @@
       <div class="metric"><strong id="mIndirectos">0</strong><span>Indirectos + imprevistos + utilidad</span></div>
       <div class="metric"><strong id="mIVA">0</strong><span>IVA</span></div>
       <div class="metric"><strong id="mTotal">0</strong><span>Total cotización</span></div>
+    </div>
+
+    <div class="breakdown">
+      <div class="mini"><strong id="bIndirectos">0</strong><span>Gastos generales</span></div>
+      <div class="mini"><strong id="bImprevistos">0</strong><span>Imprevistos</span></div>
+      <div class="mini"><strong id="bUtilidad">0</strong><span>Utilidad</span></div>
+      <div class="mini"><strong id="bBase">0</strong><span>Base antes de IVA</span></div>
+      <div class="mini"><strong id="bM2">0</strong><span>Costo total / m²</span></div>
+      <div class="mini"><strong id="bDirectoM2">0</strong><span>Costo directo / m²</span></div>
     </div>
     <div class="notice" style="margin-top:14px">
       Para una cotización ejecutiva se recomienda revisar cantidades con planos, memoria técnica, estudio de suelos, especificaciones de terminaciones e instalaciones.
@@ -168,27 +194,213 @@ function initData(){data=[]; WBS.forEach(ch=>ch.items.forEach(it=>data.push({cha
 function setDate(){document.getElementById('fecha').value=new Date().toISOString().slice(0,10)}
 function money(v){const cur=document.getElementById('moneda').value; return new Intl.NumberFormat('es-AR',{style:'currency',currency:cur,maximumFractionDigits:0}).format(isFinite(v)?v:0)}
 function renderTabs(){const box=document.getElementById('tabs'); box.innerHTML=''; WBS.forEach((ch,i)=>{const b=document.createElement('button'); b.className='tab '+(i===current?'active':''); b.innerText=ch.id+' · '+ch.name; b.onclick=()=>{current=i;renderAll()}; box.appendChild(b);});}
-function renderTable(){const ch=WBS[current]; document.getElementById('chapterTitle').innerText=ch.id+' · '+ch.name; document.getElementById('chapterHint').innerText=ch.hint; const tbody=document.querySelector('#itemsTable tbody'); tbody.innerHTML=''; data.filter(x=>x.chapter===ch.id).forEach((x)=>{const globalIndex=data.indexOf(x); const tr=document.createElement('tr'); tr.className=x.selected?'selected-row':''; tr.innerHTML=`<td class="td-center"><input type="checkbox" ${x.selected?'checked':''} onchange="data[${globalIndex}].selected=this.checked;renderAll()"></td><td><span class="wbs-code">${x.code}</span></td><td><input value="${x.desc}" onchange="data[${globalIndex}].desc=this.value"></td><td><input value="${x.unit}" onchange="data[${globalIndex}].unit=this.value"></td><td><input type="number" step="0.01" value="${x.qty}" onchange="data[${globalIndex}].qty=parseFloat(this.value)||0;renderAll()"></td><td><input type="number" step="0.01" value="${x.price}" onchange="data[${globalIndex}].price=parseFloat(this.value)||0;renderAll()"></td><td class="money">${money(x.qty*x.price)}</td>`; tbody.appendChild(tr);});}
-function totals(){const selected=data.filter(x=>x.selected); const directo=selected.reduce((a,b)=>a+b.qty*b.price,0); const ind=directo*((parseFloat(document.getElementById('indirectos').value)||0)/100); const imp=directo*((parseFloat(document.getElementById('imprevistos').value)||0)/100); const uti=(directo+ind+imp)*((parseFloat(document.getElementById('utilidad').value)||0)/100); const base=directo+ind+imp+uti; const iva=document.getElementById('incluyeIVA').checked?base*((parseFloat(document.getElementById('iva').value)||0)/100):0; return {selected,directo,ind,imp,uti,base,iva,total:base+iva};}
-function updateSummary(){const t=totals(); document.getElementById('mPartidas').innerText=t.selected.length; document.getElementById('mDirecto').innerText=money(t.directo); document.getElementById('mIndirectos').innerText=money(t.ind+t.imp+t.uti); document.getElementById('mIVA').innerText=money(t.iva); document.getElementById('mTotal').innerText=money(t.total);}
+function renderTable(){
+  const ch=WBS[current];
+  document.getElementById('chapterTitle').innerText=ch.id+' · '+ch.name;
+  document.getElementById('chapterHint').innerText=ch.hint;
+  const tbody=document.querySelector('#itemsTable tbody');
+  tbody.innerHTML='';
+  data.filter(x=>x.chapter===ch.id).forEach((x)=>{
+    const globalIndex=data.indexOf(x);
+    const tr=document.createElement('tr');
+    tr.id='row_'+globalIndex;
+    tr.className=x.selected?'selected-row':'';
+    tr.innerHTML=`
+      <td class="td-center">
+        <input id="sel_${globalIndex}" type="checkbox" ${x.selected?'checked':''} onchange="toggleItem(${globalIndex}, this.checked)">
+      </td>
+      <td><span class="wbs-code">${x.code}</span></td>
+      <td><input class="desc-input" value="${escapeHtml(x.desc)}" onchange="data[${globalIndex}].desc=this.value"></td>
+      <td><input class="unit-input" value="${escapeHtml(x.unit)}" onchange="data[${globalIndex}].unit=this.value"></td>
+      <td>
+        <input id="qty_${globalIndex}" class="manual-input" type="text" inputmode="decimal"
+          value="${formatInput(x.qty)}"
+          oninput="updateQty(${globalIndex}, this.value)"
+          onblur="normalizeQty(${globalIndex})">
+      </td>
+      <td>
+        <input id="price_${globalIndex}" class="manual-input" type="text" inputmode="decimal"
+          value="${formatInput(x.price)}"
+          oninput="updatePrice(${globalIndex}, this.value)"
+          onblur="normalizePrice(${globalIndex})">
+      </td>
+      <td class="money" id="total_${globalIndex}">${money(x.qty*x.price)}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+function totals(){
+  const selected=data.filter(x=>x.selected);
+  const directo=selected.reduce((a,b)=>a+(num(b.qty)*num(b.price)),0);
+  const ind=directo*(num(document.getElementById('indirectos').value)/100);
+  const imp=directo*(num(document.getElementById('imprevistos').value)/100);
+  const uti=(directo+ind+imp)*(num(document.getElementById('utilidad').value)/100);
+  const base=directo+ind+imp+uti;
+  const iva=document.getElementById('incluyeIVA').checked?base*(num(document.getElementById('iva').value)/100):0;
+  return {selected,directo,ind,imp,uti,base,iva,total:base+iva};
+}
+function updateSummary(){
+  const t=totals();
+  const area=Math.max(1,num(document.getElementById('areaM2').value));
+  document.getElementById('mPartidas').innerText=t.selected.length;
+  document.getElementById('mDirecto').innerText=money(t.directo);
+  document.getElementById('mIndirectos').innerText=money(t.ind+t.imp+t.uti);
+  document.getElementById('mIVA').innerText=money(t.iva);
+  document.getElementById('mTotal').innerText=money(t.total);
+
+  document.getElementById('bIndirectos').innerText=money(t.ind);
+  document.getElementById('bImprevistos').innerText=money(t.imp);
+  document.getElementById('bUtilidad').innerText=money(t.uti);
+  document.getElementById('bBase').innerText=money(t.base);
+  document.getElementById('bM2').innerText=money(t.total/area);
+  document.getElementById('bDirectoM2').innerText=money(t.directo/area);
+}
 function renderAll(){renderTabs();renderTable();updateSummary();}
-function selectVisible(val){const ch=WBS[current]; data.filter(x=>x.chapter===ch.id).forEach(x=>x.selected=val); renderAll();}
-function addCustomItem(){const ch=WBS[current]; const count=data.filter(x=>x.chapter===ch.id).length+1; data.push({chapter:ch.id, code:ch.id+'.'+count+'C', desc:'Partida personalizada', unit:'gl', qty:1, price:0, selected:true}); renderAll();}
-['moneda','indirectos','imprevistos','utilidad','iva','incluyeIVA'].forEach(id=>document.addEventListener('change',e=>{if(e.target&&e.target.id===id)renderAll()}));
+
+function num(valor){
+  if(valor===null||valor===undefined) return 0;
+  let limpio=String(valor).trim();
+  if(limpio==='') return 0;
+
+  limpio=limpio.replace(/\s/g,'').replace(/\$/g,'').replace(/[A-Za-z]/g,'');
+
+  const tieneComa=limpio.includes(',');
+  const tienePunto=limpio.includes('.');
+
+  if(tieneComa && tienePunto){
+    if(limpio.lastIndexOf(',') > limpio.lastIndexOf('.')){
+      limpio=limpio.replace(/\./g,'').replace(',','.');
+    }else{
+      limpio=limpio.replace(/,/g,'');
+    }
+  }else if(tieneComa){
+    const partes=limpio.split(',');
+    const ult=partes[partes.length-1];
+    limpio=(partes.length===2 && ult.length<=2) ? partes[0]+'.'+ult : limpio.replace(/,/g,'');
+  }else if(tienePunto){
+    const partes=limpio.split('.');
+    const ult=partes[partes.length-1];
+    limpio=(partes.length===2 && ult.length<=2) ? limpio : limpio.replace(/\./g,'');
+  }
+
+  const n=Number(limpio.replace(/[^\d.-]/g,''));
+  return Number.isFinite(n)?n:0;
+}
+
+function formatInput(v){
+  const n=num(v);
+  return Number.isInteger(n)?String(n):String(n).replace('.',',');
+}
+
+function escapeHtml(str){
+  return String(str).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+}
+
+function updateRowTotal(i){
+  const celda=document.getElementById('total_'+i);
+  if(celda && data[i]) celda.innerText=money(num(data[i].qty)*num(data[i].price));
+}
+
+function toggleItem(i, checked){
+  data[i].selected=checked;
+  const row=document.getElementById('row_'+i);
+  if(row) row.className=checked?'selected-row':'';
+  updateSummary();
+}
+
+function updateQty(i, value){
+  data[i].qty=Math.max(0,num(value));
+  if(data[i].qty>0 && !data[i].selected){
+    data[i].selected=true;
+    const chk=document.getElementById('sel_'+i);
+    const row=document.getElementById('row_'+i);
+    if(chk) chk.checked=true;
+    if(row) row.className='selected-row';
+  }
+  updateRowTotal(i);
+  updateSummary();
+}
+
+function updatePrice(i, value){
+  data[i].price=Math.max(0,num(value));
+  updateRowTotal(i);
+  updateSummary();
+}
+
+function normalizeQty(i){
+  const input=document.getElementById('qty_'+i);
+  if(!input) return;
+  data[i].qty=Math.max(0,num(input.value));
+  input.value=formatInput(data[i].qty);
+  updateRowTotal(i);
+  updateSummary();
+}
+
+function normalizePrice(i){
+  const input=document.getElementById('price_'+i);
+  if(!input) return;
+  data[i].price=Math.max(0,num(input.value));
+  input.value=formatInput(data[i].price);
+  updateRowTotal(i);
+  updateSummary();
+}
+
+function normalizeGeneralNumber(id){
+  const input=document.getElementById(id);
+  if(!input) return;
+  input.value=formatInput(num(input.value));
+  updateSummary();
+}
+
+function selectVisible(val){
+  const ch=WBS[current];
+  data.filter(x=>x.chapter===ch.id).forEach(x=>x.selected=val);
+  renderTable();
+  updateSummary();
+}
+
+function selectPreset(tipo){
+  data.forEach(x=>x.selected=false);
+
+  if(tipo==='obra_gruesa'){
+    // Diseño/gestión base + preliminares + suelos/fundaciones + estructura + envolvente básica.
+    const chapters=['0','1','2','3','4'];
+    data.forEach(x=>{ if(chapters.includes(x.chapter)) x.selected=true; });
+  }
+
+  if(tipo==='llave_en_mano'){
+    data.forEach(x=>x.selected=true);
+  }
+
+  renderAll();
+}
+
+function addCustomItem(){
+  const ch=WBS[current];
+  const count=data.filter(x=>x.chapter===ch.id).length+1;
+  data.push({chapter:ch.id, code:ch.id+'.'+count+'C', desc:'Partida personalizada', unit:'gl', qty:1, price:0, selected:true});
+  renderAll();
+}
+
+['moneda','incluyeIVA'].forEach(id=>document.addEventListener('change',e=>{if(e.target&&e.target.id===id)renderAll()}));
+['indirectos','imprevistos','utilidad','iva','areaM2','plantas'].forEach(id=>{
+  document.addEventListener('input',e=>{if(e.target&&e.target.id===id)updateSummary()});
+  document.addEventListener('blur',e=>{if(e.target&&e.target.id===id)normalizeGeneralNumber(id)},true);
+});
+
 function resetAll(){if(confirm('¿Restaurar valores demo y quitar selecciones?')){initData();renderAll();}}
 function selectedByChapter(){const t=totals().selected; return WBS.map(ch=>({ch,items:t.filter(x=>x.chapter===ch.id)})).filter(g=>g.items.length>0)}
 function generatePDF(){const {jsPDF}=window.jspdf; const doc=new jsPDF('p','mm','a4'); const cur=document.getElementById('moneda').value; const t=totals(); if(t.selected.length===0){alert('Seleccioná al menos una partida para generar el PDF.');return;}
   const pageW=doc.internal.pageSize.getWidth();
   doc.setFillColor(7,17,31); doc.rect(0,0,pageW,28,'F'); doc.setTextColor(248,250,252); doc.setFontSize(15); doc.text('Cotización preliminar · Casa familiar de 2 plantas',14,12); doc.setFontSize(9); doc.text('EDT/WBS · Diseño, ingeniería y ejecución de construcción',14,19); doc.setTextColor(201,162,77); doc.setFontSize(18); doc.text('WDS',184,16);
   doc.setTextColor(0,0,0); doc.setFontSize(9);
-  const meta=[['Cliente',val('cliente'), 'Proyecto',val('proyecto')],['Ubicación',val('ubicacion'),'Fecha',val('fecha')],['Superficie',val('areaM2')+' m²','Moneda',cur],['Validez',val('validez'),'Responsable',val('responsable')]];
+  const meta=[['Cliente',val('cliente'), 'Proyecto',val('proyecto')],['Ubicación',val('ubicacion'),'Fecha',val('fecha')],['Superficie',formatInput(num(val('areaM2')))+' m²','Moneda',cur],['Validez',val('validez'),'Responsable',val('responsable')]];
   doc.autoTable({startY:34,body:meta,theme:'grid',styles:{fontSize:8,cellPadding:1.6},columnStyles:{0:{fontStyle:'bold',fillColor:[235,241,246]},2:{fontStyle:'bold',fillColor:[235,241,246]}}});
   let y=doc.lastAutoTable.finalY+6;
-  const rows=selectedByChapter().map(g=>{const subtotal=g.items.reduce((a,b)=>a+b.qty*b.price,0); return [g.ch.id,g.ch.name,g.items.length,moneyPdf(subtotal,cur)];});
+  const rows=selectedByChapter().map(g=>{const subtotal=g.items.reduce((a,b)=>a+num(b.qty)*num(b.price),0); return [g.ch.id,g.ch.name,g.items.length,moneyPdf(subtotal,cur)];});
   doc.setFontSize(11); doc.setTextColor(7,17,31); doc.text('Resumen por WBS/EDT',14,y); y+=2;
   doc.autoTable({startY:y+2,head:[['WBS','Capítulo','Partidas','Subtotal']],body:rows,theme:'striped',styles:{fontSize:8,cellPadding:1.7},headStyles:{fillColor:[16,29,47],textColor:[248,250,252]},columnStyles:{3:{halign:'right'}}});
   y=doc.lastAutoTable.finalY+5;
-  const top=t.selected.sort((a,b)=>(b.qty*b.price)-(a.qty*a.price)).slice(0,12).map(x=>[x.code,x.desc,x.unit,String(x.qty),moneyPdf(x.price,cur),moneyPdf(x.qty*x.price,cur)]);
+  const top=t.selected.sort((a,b)=>(num(b.qty)*num(b.price))-(num(a.qty)*num(a.price))).slice(0,12).map(x=>[x.code,x.desc,x.unit,String(x.qty),moneyPdf(num(x.price),cur),moneyPdf(num(x.qty)*num(x.price),cur)]);
   doc.setFontSize(11); doc.text('Partidas principales seleccionadas',14,y); y+=2;
   doc.autoTable({startY:y+2,head:[['WBS','Partida','Un.','Cant.','P.Unit.','Total']],body:top,theme:'striped',styles:{fontSize:7.2,cellPadding:1.5},headStyles:{fillColor:[16,29,47]},columnStyles:{3:{halign:'right'},4:{halign:'right'},5:{halign:'right'}}});
   y=doc.lastAutoTable.finalY+4;
@@ -202,7 +414,7 @@ function generatePDF(){const {jsPDF}=window.jspdf; const doc=new jsPDF('p','mm',
 }
 function val(id){return document.getElementById(id).value||''}
 function moneyPdf(v,cur){return new Intl.NumberFormat('es-AR',{style:'currency',currency:cur,maximumFractionDigits:0}).format(isFinite(v)?v:0)}
-function exportCSV(){const rows=[['WBS','Capitulo','Partida','Unidad','Cantidad','Precio unitario','Total']]; data.filter(x=>x.selected).forEach(x=>{const ch=WBS.find(c=>c.id===x.chapter); rows.push([x.code,ch.name,x.desc,x.unit,x.qty,x.price,x.qty*x.price]);}); const csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n'); const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='presupuesto-casa-familiar-wds.csv'; a.click();}
+function exportCSV(){const rows=[['WBS','Capitulo','Partida','Unidad','Cantidad','Precio unitario','Total']]; data.filter(x=>x.selected).forEach(x=>{const ch=WBS.find(c=>c.id===x.chapter); rows.push([x.code,ch.name,x.desc,x.unit,x.qty,x.price,num(x.qty)*num(x.price)]);}); const csv=rows.map(r=>r.map(v=>'"'+String(v).replaceAll('"','""')+'"').join(',')).join('\n'); const blob=new Blob([csv],{type:'text/csv;charset=utf-8;'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='presupuesto-casa-familiar-wds.csv'; a.click();}
 setDate(); initData(); renderAll();
 </script>
 </body>
