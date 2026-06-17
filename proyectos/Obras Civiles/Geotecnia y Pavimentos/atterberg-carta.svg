@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-label="Ensayo de corte directo"><defs><style>.bg{fill:#06172a}.panel{fill:#0b2034;stroke:#38bdf8;stroke-width:2}.line{stroke:#38bdf8;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}.gold{stroke:#f7d154;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.green{stroke:#22c55e;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.red{stroke:#fb7185;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.txt{fill:#f4f7fb;font-family:Arial, sans-serif;font-size:22px;font-weight:700}.small{fill:#c8d7ec;font-family:Arial, sans-serif;font-size:16px}.tiny{fill:#dff4ff;font-family:Arial, sans-serif;font-size:13px;font-weight:700}.yellow{fill:#f7d154}.cyan{fill:#38bdf8}.muted{fill:#9fb4cd}.white{fill:#fff}.grid{stroke:#294258;stroke-width:1}.arrow{marker-end:url(#arr)} </style><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#38bdf8"/></marker></defs><rect class="bg" width="900" height="520" rx="24"/>
+<text x="36" y="40" class="txt">Corte directo: la envolvente τ = c + σ·tanφ</text>
+<text x="36" y="66" class="txt">se mide sobre un plano de falla impuesto</text>
+<rect x="70" y="96" width="620" height="312" rx="16" class="panel"/>
+<rect x="310" y="190" width="140" height="40" fill="#17324a" stroke="#38bdf8" stroke-width="3"/>
+<rect x="310" y="150" width="140" height="40" fill="#142943" stroke="#38bdf8" stroke-width="3"/>
+<line x1="295" y1="190" x2="465" y2="190" stroke="#fb7185" stroke-width="3" stroke-dasharray="6 6"/>
+<line x1="380" y1="110" x2="380" y2="148" class="line arrow"/><text x="388" y="122" class="tiny">N</text>
+<line x1="452" y1="170" x2="508" y2="170" class="line arrow"/><text x="514" y="176" class="tiny">T</text>
+<text x="320" y="252" class="tiny">plano de falla impuesto</text>
+<line x1="170" y1="395" x2="620" y2="395" stroke="#fff" stroke-width="3"/>
+<line x1="170" y1="395" x2="170" y2="275" stroke="#fff" stroke-width="3"/>
+<path d="M180,388 L585,278" class="gold"/>
+<circle cx="235" cy="378" r="6" fill="#38bdf8"/><circle cx="350" cy="340" r="6" fill="#38bdf8"/><circle cx="470" cy="300" r="6" fill="#38bdf8"/>
+<text x="181" y="376" class="tiny">c</text><text x="545" y="266" class="tiny">φ</text>
+<text x="290" y="416" class="small">σ normal efectiva →</text>
+<text x="138" y="350" class="small" transform="rotate(-90 138,350)">τ cortante</text>
+<rect x="710" y="96" width="160" height="280" rx="14" fill="#0b2034" stroke="#294258"/>
+<text x="728" y="130" class="tiny">Aplicación:</text><text x="728" y="156" class="tiny">taludes, muros,</text><text x="728" y="182" class="tiny">cimentaciones,</text><text x="728" y="208" class="tiny">contacto suelo-</text><text x="728" y="234" class="tiny">estructura</text>
+<text x="728" y="272" class="tiny">Alerta:</text><text x="728" y="298" class="tiny">plano impuesto,</text><text x="728" y="324" class="tiny">no siempre es</text><text x="728" y="350" class="tiny">el real</text>
+</svg>
