@@ -4,416 +4,395 @@
   <meta charset="UTF-8" />
   <meta name="google" content="notranslate" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>William D. Saenz | Obras Civiles</title>
+  <title>Obras Civiles | William D. Saenz</title>
 
   <style>
-    :root{
-      --bg:#07111f;
-      --panel:#0d1b2d;
-      --line:rgba(255,255,255,.16);
-      --text:#f8fafc;
-      --muted:#d4e0ee;
-      --blue:#38bdf8;
-      --gold:#d6ad4f;
-      --green:#39ff14;
-      --shadow:0 24px 64px rgba(0,0,0,.38);
-    }
 
-    *{box-sizing:border-box}
+:root{
+  --bg:#07111f;
+  --panel:#0d1b2d;
+  --line:rgba(255,255,255,.16);
+  --text:#f8fafc;
+  --muted:#d4e0ee;
+  --blue:#38bdf8;
+  --gold:#d6ad4f;
+  --green:#39ff14;
+  --shadow:0 24px 64px rgba(0,0,0,.38);
+}
 
-    html, body{
-      margin:0;
-      width:100%;
-      height:100%;
-      font-family:Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at 8% 10%, rgba(56,189,248,.17), transparent 30%),
-        radial-gradient(circle at 82% 18%, rgba(214,173,79,.13), transparent 25%),
-        linear-gradient(135deg, #07111f 0%, #0b1f33 100%);
-      color:var(--text);
-    }
+*{box-sizing:border-box}
 
-    body{
-      overflow:hidden;
-    }
+html, body{
+  margin:0;
+  width:100%;
+  height:100%;
+  font-family:Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at 8% 10%, rgba(56,189,248,.17), transparent 30%),
+    radial-gradient(circle at 82% 18%, rgba(214,173,79,.13), transparent 25%),
+    linear-gradient(135deg, #07111f 0%, #0b1f33 100%);
+  color:var(--text);
+}
 
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
+body{overflow:hidden}
 
-    .page{
-      width:100%;
-      height:100vh;
-      display:grid;
-      grid-template-rows:92px 1fr 30px;
-    }
+a{color:inherit;text-decoration:none}
 
-    header{
-      padding:18px 5vw;
-      border-bottom:1px solid var(--line);
-      background:rgba(7,17,31,.80);
-      backdrop-filter:blur(14px);
-    }
+.page{
+  width:100%;
+  height:100vh;
+  display:grid;
+  grid-template-rows:92px 1fr 30px;
+}
 
-    .topbar{
-      width:100%;
-      max-width:1540px;
-      height:100%;
-      margin:0 auto;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:22px;
-    }
+header{
+  padding:18px 5vw;
+  border-bottom:1px solid var(--line);
+  background:rgba(7,17,31,.80);
+  backdrop-filter:blur(14px);
+}
 
-    .terminal{
-      color:var(--green);
-      font-family:"Courier New", monospace;
-      font-size:17px;
-      font-weight:800;
-      letter-spacing:.2px;
-      white-space:nowrap;
-    }
+.topbar{
+  width:100%;
+  max-width:1540px;
+  height:100%;
+  margin:0 auto;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:22px;
+}
 
-    .top-actions{
-      display:flex;
-      gap:12px;
-      justify-content:flex-end;
-      align-items:center;
-    }
+.terminal{
+  color:var(--green);
+  font-family:"Courier New", monospace;
+  font-size:17px;
+  font-weight:800;
+  letter-spacing:.2px;
+  white-space:nowrap;
+}
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:48px;
-      padding:12px 20px;
-      border-radius:14px;
-      border:2px solid var(--blue);
-      color:var(--text);
-      font-weight:900;
-      font-size:16px;
-      transition:.22s ease;
-      background:rgba(7,17,31,.42);
-    }
+.top-actions{
+  display:flex;
+  gap:12px;
+  justify-content:flex-end;
+  align-items:center;
+}
 
-    .btn:hover{
-      transform:translateY(-2px);
-      background:var(--blue);
-      color:#07111f;
-      box-shadow:0 12px 25px rgba(56,189,248,.18);
-    }
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:12px 20px;
+  border-radius:14px;
+  border:2px solid var(--blue);
+  color:var(--text);
+  font-weight:900;
+  font-size:16px;
+  transition:.22s ease;
+  background:rgba(7,17,31,.42);
+}
 
-    .btn.gold{
-      border-color:var(--gold);
-      color:var(--gold);
-    }
+.btn:hover{
+  transform:translateY(-2px);
+  background:var(--blue);
+  color:#07111f;
+  box-shadow:0 12px 25px rgba(56,189,248,.18);
+}
 
-    .btn.gold:hover{
-      background:var(--gold);
-      color:#07111f;
-      box-shadow:0 12px 25px rgba(214,173,79,.20);
-    }
+.btn.gold{
+  border-color:var(--gold);
+  color:var(--gold);
+}
 
-    main{
-      width:min(1540px, 92vw);
-      margin:0 auto;
-      padding:34px 0;
-      display:grid;
-      grid-template-columns:.9fr 1.38fr;
-      gap:34px;
-      overflow:hidden;
-    }
+.btn.gold:hover{
+  background:var(--gold);
+  color:#07111f;
+  box-shadow:0 12px 25px rgba(214,173,79,.20);
+}
 
-    .intro-card,
-    .modules-card{
-      height:100%;
-      min-height:0;
-      border:1px solid var(--line);
-      background:rgba(13,27,45,.89);
-      border-radius:30px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
+footer{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--muted);
+  border-top:1px solid var(--line);
+  font-size:14px;
+  background:rgba(7,17,31,.52);
+  font-weight:700;
+}
 
-    .intro-card{
-      padding:42px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      gap:26px;
-    }
+.badge{
+  color:var(--green);
+  font-family:"Courier New", monospace;
+  font-size:15px;
+  font-weight:800;
+  margin-bottom:10px;
+}
 
-    .badge{
-      color:var(--green);
-      font-family:"Courier New", monospace;
-      font-size:15px;
-      font-weight:800;
-      margin-bottom:10px;
-    }
+.highlight{
+  color:var(--gold);
+  font-weight:900;
+}
 
-    h1{
-      margin:0;
-      font-size:clamp(66px, 5vw, 96px);
-      line-height:.91;
-      letter-spacing:-3px;
-    }
+@media (max-width:1200px){
+  html, body{
+    height:auto;
+    min-height:100%;
+  }
 
-    .subtitle{
-      margin:26px 0 0;
-      color:var(--muted);
-      font-size:clamp(23px, 1.75vw, 30px);
-      line-height:1.32;
-    }
+  body{overflow:auto}
 
-    .highlight{
-      color:var(--gold);
-      font-weight:900;
-    }
+  .page{
+    height:auto;
+    min-height:100vh;
+    grid-template-rows:auto 1fr auto;
+  }
 
-    .mini-stats{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-      margin-top:30px;
-    }
+  header{padding:18px 24px}
 
-    .mini-stat{
-      padding:18px 16px;
-      border-radius:20px;
-      border:1px solid var(--line);
-      background:rgba(7,17,31,.44);
-    }
+  .topbar{
+    align-items:flex-start;
+    flex-direction:column;
+  }
 
-    .mini-stat strong{
-      display:block;
-      color:var(--blue);
-      font-size:25px;
-      margin-bottom:7px;
-    }
+  .top-actions{
+    flex-wrap:wrap;
+    justify-content:flex-start;
+  }
+}
 
-    .mini-stat span{
-      color:#f2f8ff;
-      font-size:15px;
-      line-height:1.28;
-      font-weight:700;
-    }
+@media (max-width:720px){
+  .btn{
+    width:100%;
+  }
 
-    .summary-box{
-      margin-top:8px;
-      padding:28px 30px;
-      border-radius:26px;
-      border:1px solid rgba(214,173,79,.66);
-      background:
-        linear-gradient(135deg, rgba(214,173,79,.18), rgba(56,189,248,.07)),
-        rgba(7,17,31,.52);
-    }
+  .top-actions{
+    width:100%;
+  }
+}
 
-    .summary-box h2{
-      margin:0 0 14px;
-      color:var(--gold);
-      font-size:35px;
-      line-height:1.1;
-      border:0;
-      padding:0;
-    }
 
-    .summary-box p{
-      margin:0 0 24px;
-      color:#f4f9ff;
-      font-size:18px;
-      line-height:1.52;
-      font-weight:700;
-    }
+main{
+  width:min(1540px, 92vw);
+  margin:0 auto;
+  padding:34px 0;
+  display:grid;
+  grid-template-columns:.9fr 1.38fr;
+  gap:34px;
+  overflow:hidden;
+}
 
-    .modules-card{
-      padding:42px;
-      display:flex;
-      flex-direction:column;
-    }
+.intro-card,
+.modules-card{
+  height:100%;
+  min-height:0;
+  border:1px solid var(--line);
+  background:rgba(13,27,45,.89);
+  border-radius:30px;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
 
-    .section-head{
-      padding-bottom:22px;
-      border-bottom:1px solid var(--line);
-    }
+.intro-card{
+  padding:42px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:26px;
+}
 
-    h2{
-      margin:0;
-      color:var(--blue);
-      font-size:48px;
-      line-height:1.05;
-      letter-spacing:-1px;
-    }
+h1{
+  margin:0;
+  font-size:clamp(66px, 5vw, 96px);
+  line-height:.91;
+  letter-spacing:-3px;
+}
 
-    .section-head p{
-      margin:16px 0 0;
-      color:#f5faff;
-      line-height:1.55;
-      font-size:19px;
-      font-weight:700;
-      max-width:840px;
-    }
+.subtitle{
+  margin:26px 0 0;
+  color:var(--muted);
+  font-size:clamp(23px, 1.75vw, 30px);
+  line-height:1.32;
+}
 
-    .module-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:22px;
-      margin-top:30px;
-    }
+.mini-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:30px;
+}
 
-    .module-card{
-      min-height:380px;
-      padding:28px;
-      border-radius:24px;
-      border:1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(17,34,56,.88), rgba(7,17,31,.68));
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      transition:.24s ease;
-    }
+.mini-stat{
+  padding:18px 16px;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:rgba(7,17,31,.44);
+}
 
-    .module-card:hover{
-      transform:translateY(-5px);
-      border-color:rgba(56,189,248,.50);
-      box-shadow:0 18px 38px rgba(56,189,248,.10);
-    }
+.mini-stat strong{
+  display:block;
+  color:var(--blue);
+  font-size:25px;
+  margin-bottom:7px;
+}
 
-    .number{
-      color:var(--gold);
-      font-size:15px;
-      font-weight:900;
-      letter-spacing:.8px;
-      margin-bottom:16px;
-    }
+.mini-stat span{
+  color:#f2f8ff;
+  font-size:15px;
+  line-height:1.28;
+  font-weight:700;
+}
 
-    .module-card h3{
-      margin:0 0 14px;
-      color:var(--blue);
-      font-size:29px;
-      line-height:1.08;
-    }
+.summary-box{
+  margin-top:8px;
+  padding:28px 30px;
+  border-radius:26px;
+  border:1px solid rgba(214,173,79,.66);
+  background:
+    linear-gradient(135deg, rgba(214,173,79,.18), rgba(56,189,248,.07)),
+    rgba(7,17,31,.52);
+}
 
-    .module-card p{
-      margin:0;
-      color:#f5faff;
-      line-height:1.56;
-      font-size:17px;
-      font-weight:700;
-    }
+.summary-box h2{
+  margin:0 0 14px;
+  color:var(--gold);
+  font-size:35px;
+  line-height:1.1;
+}
 
-    .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:9px;
-      margin:20px 0 24px;
-    }
+.summary-box p{
+  margin:0 0 24px;
+  color:#f4f9ff;
+  font-size:18px;
+  line-height:1.52;
+  font-weight:700;
+}
 
-    .tag{
-      border:1px solid rgba(56,189,248,.42);
-      background:rgba(56,189,248,.13);
-      border-radius:999px;
-      padding:9px 12px;
-      color:var(--text);
-      font-size:14px;
-      font-weight:900;
-    }
+.modules-card{
+  padding:42px;
+  display:flex;
+  flex-direction:column;
+}
 
-    .bottom-actions{
-      margin-top:auto;
-      padding-top:30px;
-      display:flex;
-      justify-content:center;
-      gap:14px;
-      flex-wrap:wrap;
-    }
+.section-head{
+  padding-bottom:22px;
+  border-bottom:1px solid var(--line);
+}
 
-    footer{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      color:var(--muted);
-      border-top:1px solid var(--line);
-      font-size:14px;
-      background:rgba(7,17,31,.52);
-      font-weight:700;
-    }
+h2{
+  margin:0;
+  color:var(--blue);
+  font-size:48px;
+  line-height:1.05;
+  letter-spacing:-1px;
+}
 
-    @media (max-width:1200px){
-      html, body{
-        height:auto;
-        min-height:100%;
-      }
+.section-head p{
+  margin:16px 0 0;
+  color:#f5faff;
+  line-height:1.55;
+  font-size:19px;
+  font-weight:700;
+  max-width:840px;
+}
 
-      body{
-        overflow:auto;
-      }
+.module-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:22px;
+  margin-top:30px;
+}
 
-      .page{
-        height:auto;
-        min-height:100vh;
-        grid-template-rows:auto 1fr auto;
-      }
+.module-card{
+  min-height:380px;
+  padding:28px;
+  border-radius:24px;
+  border:1px solid var(--line);
+  background:
+    linear-gradient(180deg, rgba(17,34,56,.88), rgba(7,17,31,.68));
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:.24s ease;
+}
 
-      header{
-        padding:18px 24px;
-      }
+.module-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(56,189,248,.50);
+  box-shadow:0 18px 38px rgba(56,189,248,.10);
+}
 
-      .topbar{
-        align-items:flex-start;
-        flex-direction:column;
-      }
+.number{
+  color:var(--gold);
+  font-size:15px;
+  font-weight:900;
+  letter-spacing:.8px;
+  margin-bottom:16px;
+}
 
-      .top-actions{
-        flex-wrap:wrap;
-        justify-content:flex-start;
-      }
+.module-card h3{
+  margin:0 0 14px;
+  color:var(--blue);
+  font-size:29px;
+  line-height:1.08;
+}
 
-      main{
-        width:calc(100vw - 48px);
-        grid-template-columns:1fr;
-        overflow:visible;
-      }
+.module-card p{
+  margin:0;
+  color:#f5faff;
+  line-height:1.56;
+  font-size:17px;
+  font-weight:700;
+}
 
-      .intro-card,
-      .modules-card{
-        height:auto;
-      }
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+  margin:20px 0 24px;
+}
 
-      .module-grid{
-        grid-template-columns:1fr;
-      }
-    }
+.tag{
+  border:1px solid rgba(56,189,248,.42);
+  background:rgba(56,189,248,.13);
+  border-radius:999px;
+  padding:9px 12px;
+  color:var(--text);
+  font-size:14px;
+  font-weight:900;
+}
 
-    @media (max-width:720px){
-      .mini-stats{
-        grid-template-columns:1fr;
-      }
+.bottom-actions{
+  margin-top:auto;
+  padding-top:30px;
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+}
 
-      h1{
-        font-size:56px;
-      }
+@media (max-width:1200px){
+  main{
+    width:calc(100vw - 48px);
+    grid-template-columns:1fr;
+    overflow:visible;
+  }
 
-      h2{
-        font-size:36px;
-      }
+  .intro-card,
+  .modules-card{height:auto}
 
-      .intro-card,
-      .modules-card{
-        padding:28px;
-      }
+  .module-grid{grid-template-columns:1fr}
+}
 
-      .btn{
-        width:100%;
-      }
-
-      .top-actions,
-      .bottom-actions{
-        width:100%;
-      }
-    }
+@media (max-width:720px){
+  .mini-stats{grid-template-columns:1fr}
+  h1{font-size:56px}
+  h2{font-size:36px}
+  .intro-card,.modules-card{padding:28px}
+  .bottom-actions{width:100%}
+}
   </style>
 </head>
 
@@ -438,23 +417,14 @@
           <h1>Obras<br>Civiles</h1>
 
           <p class="subtitle">
-            Presupuestos, geotecnia, suelos, pavimentos y análisis estructural con enfoque
+            Presupuestos, geotecnia, pavimentos y análisis estructural con enfoque
             <span class="highlight">técnico y aplicado.</span>
           </p>
 
           <div class="mini-stats">
-            <div class="mini-stat">
-              <strong>APU</strong>
-              <span>Análisis de precios y presupuesto</span>
-            </div>
-            <div class="mini-stat">
-              <strong>Suelos</strong>
-              <span>Geotecnia, ensayos y pavimentos</span>
-            </div>
-            <div class="mini-stat">
-              <strong>Estructuras</strong>
-              <span>Guías y herramientas técnicas</span>
-            </div>
+            <div class="mini-stat"><strong>APU</strong><span>Análisis de precios y presupuesto</span></div>
+            <div class="mini-stat"><strong>Suelos</strong><span>Geotecnia, ensayos y pavimentos</span></div>
+            <div class="mini-stat"><strong>Estructuras</strong><span>Guías y herramientas técnicas</span></div>
           </div>
         </div>
 
@@ -473,8 +443,7 @@
         <div class="section-head">
           <h2>Líneas técnicas disponibles</h2>
           <p>
-            Accesos directos a los módulos de obras civiles. La interfaz queda más amplia,
-            legible y equilibrada para una presentación profesional.
+            Rutas corregidas según tus carpetas reales: Presupuestos, Geotecnia y Pavimentos, y Análisis estructural.
           </p>
         </div>
 
@@ -483,60 +452,36 @@
             <div>
               <div class="number">01</div>
               <h3>Presupuestos</h3>
-              <p>
-                APU, presupuesto de casa de dos plantas, materiales, recursos,
-                costos indirectos y ensayos de laboratorio.
-              </p>
-
+              <p>APU, presupuesto de casa de dos plantas, materiales, recursos, costos indirectos y ensayos de laboratorio.</p>
               <div class="tags">
-                <span class="tag">APU</span>
-                <span class="tag">Costos</span>
-                <span class="tag">Materiales</span>
-                <span class="tag">PDF</span>
+                <span class="tag">APU</span><span class="tag">Costos</span><span class="tag">Materiales</span><span class="tag">PDF</span>
               </div>
             </div>
-
             <a class="btn gold" href="Presupuestos/">Abrir Presupuestos</a>
           </article>
 
           <article class="module-card">
             <div>
               <div class="number">02</div>
-              <h3>Geotecnia, Suelos y Pavimentos</h3>
-              <p>
-                Mecánica de suelos, geotecnia aplicada, cimentaciones,
-                contenciones, taludes, pavimentos y ensayos.
-              </p>
-
+              <h3>Geotecnia y Pavimentos</h3>
+              <p>Mecánica de suelos, geotecnia aplicada, cimentaciones, contenciones, taludes, pavimentos y ensayos.</p>
               <div class="tags">
-                <span class="tag">Geotecnia</span>
-                <span class="tag">Suelos</span>
-                <span class="tag">Pavimentos</span>
-                <span class="tag">Ensayos</span>
+                <span class="tag">Geotecnia</span><span class="tag">Suelos</span><span class="tag">Pavimentos</span><span class="tag">Ensayos</span>
               </div>
             </div>
-
-            <a class="btn gold" href="Geotecnia%20Suelos%20y%20Pavimentos/">Abrir Geotecnia</a>
+            <a class="btn gold" href="Geotecnia%20y%20Pavimentos/">Abrir Geotecnia</a>
           </article>
 
           <article class="module-card">
             <div>
               <div class="number">03</div>
               <h3>Análisis estructural</h3>
-              <p>
-                Guías, criterios y herramientas relacionadas con estructuras,
-                lectura técnica y control de información estructural.
-              </p>
-
+              <p>Guías, criterios y herramientas relacionadas con estructuras, lectura técnica y control de información estructural.</p>
               <div class="tags">
-                <span class="tag">Estructuras</span>
-                <span class="tag">Criterios</span>
-                <span class="tag">Control</span>
-                <span class="tag">Guías</span>
+                <span class="tag">Estructuras</span><span class="tag">Criterios</span><span class="tag">Control</span><span class="tag">Guías</span>
               </div>
             </div>
-
-            <a class="btn gold" href="Analisis%20estructural/">Abrir Estructuras</a>
+            <a class="btn gold" href="An%C3%A1lisis%20estructural/">Abrir Estructuras</a>
           </article>
         </div>
 
@@ -547,9 +492,7 @@
       </section>
     </main>
 
-    <footer>
-      © 2026 William D. Saenz | Obras Civiles
-    </footer>
+    <footer>© 2026 William D. Saenz | Obras Civiles</footer>
   </div>
 
   <script>
