@@ -1,1 +1,309 @@
+from pathlib import Path
+
+html = r'''<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Geotecnia, Suelos y Pavimentos | Obras Civiles</title>
+
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #101d2f;
+      --panel-2: #0b1628;
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --blue: #38bdf8;
+      --gold: #facc15;
+      --green: #22c55e;
+      --orange: #fb923c;
+      --border: rgba(148, 163, 184, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(250, 204, 21, 0.10), transparent 30%),
+        var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      padding: 36px 22px 20px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      margin-bottom: 10px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 4rem);
+      color: var(--blue);
+      line-height: 1.1;
+    }
+
+    .subtitle {
+      max-width: 900px;
+      margin: 18px auto 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.6;
+    }
+
+    main {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+      padding: 20px 0 48px;
+    }
+
+    .hero {
+      background: linear-gradient(145deg, rgba(16, 29, 47, 0.96), rgba(11, 22, 40, 0.96));
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .card {
+      border: 1px solid var(--border);
+      background: rgba(7, 17, 31, 0.65);
+      border-radius: 18px;
+      padding: 22px;
+    }
+
+    .card h2 {
+      margin: 0 0 12px;
+      color: var(--gold);
+      font-size: 1.35rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 22px;
+      padding: 16px 22px;
+      border-radius: 14px;
+      color: #07111f;
+      background: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform 0.2s ease, filter 0.2s ease;
+    }
+
+    .cta:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.08);
+    }
+
+    .back {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      color: var(--gold);
+      border: 1px solid rgba(250, 204, 21, 0.45);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .modules {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .module {
+      border: 1px solid var(--border);
+      background: rgba(7, 17, 31, 0.72);
+      border-radius: 18px;
+      padding: 20px;
+      min-height: 210px;
+    }
+
+    .module span {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.35);
+      color: var(--blue);
+      font-weight: 800;
+      font-size: 0.82rem;
+    }
+
+    .module h3 {
+      margin: 0 0 10px;
+      color: var(--text);
+    }
+
+    .module ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .notice {
+      margin-top: 24px;
+      border-left: 5px solid var(--orange);
+      background: rgba(251, 146, 60, 0.10);
+      border-radius: 14px;
+      padding: 18px 20px;
+      color: #fed7aa;
+      line-height: 1.55;
+    }
+
+    .status {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    code {
+      background: rgba(255,255,255,0.08);
+      padding: 2px 6px;
+      border-radius: 6px;
+      color: #e0f2fe;
+    }
+
+    @media (max-width: 860px) {
+      .hero-grid,
+      .modules {
+        grid-template-columns: 1fr;
+      }
+
+      header {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="eyebrow">Obras Civiles</div>
+    <h1>Geotecnia, Suelos y Pavimentos</h1>
+    <p class="subtitle">
+      Guía técnica interactiva para conectar resultados de laboratorio, investigación del subsuelo,
+      criterios geotécnicos y control de pavimentos con decisiones reales de obra.
+    </p>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-grid">
+        <article class="card">
+          <h2>Acceso a la guía técnica</h2>
+          <p>
+            Este conector abre el demo principal ubicado dentro de la carpeta
+            <code>CivilScope_GeotecniaSuelosPavimentos_v2_Publico</code>.
+            Usalo como entrada limpia desde la sección de Obras Civiles.
+          </p>
+
+          <a class="cta" href="./CivilScope_GeotecniaSuelosPavimentos_v2_Publico/index.html">
+            Abrir guía técnica →
+          </a>
+
+          <br />
+
+          <a class="back" href="../index.html">← Volver a Obras Civiles</a>
+
+          <p class="status">
+            Si el botón no abre, verificá que la carpeta interna tenga exactamente ese nombre
+            y que dentro exista un archivo <code>index.html</code>.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Contenido principal</h2>
+          <p>
+            La guía está separada en tres bloques para evitar saturación visual:
+            primero se interpreta el suelo como material, luego se aplica a problemas
+            geotécnicos y finalmente se conecta con pavimentos y control de capas.
+          </p>
+
+          <div class="notice">
+            No incluye PDFs ni diapositivas privadas. El contenido fue preparado como material público,
+            con gráficos propios, tablas de lectura técnica y criterios orientativos de obra.
+          </div>
+        </article>
+      </div>
+
+      <section class="modules">
+        <article class="module">
+          <span>01</span>
+          <h3>Mecánica de Suelos</h3>
+          <ul>
+            <li>Granulometría y clasificación.</li>
+            <li>Atterberg, permeabilidad y compactación.</li>
+            <li>Consolidación unidimensional.</li>
+            <li>Corte directo, inconfinada y triaxiales.</li>
+          </ul>
+        </article>
+
+        <article class="module">
+          <span>02</span>
+          <h3>Geotecnia Aplicada</h3>
+          <ul>
+            <li>Investigación del subsuelo.</li>
+            <li>SPT, CPT, PMT, DMT, VST y geofísica.</li>
+            <li>Cimentaciones y contenciones.</li>
+            <li>Taludes e instrumentación.</li>
+          </ul>
+        </article>
+
+        <article class="module">
+          <span>03</span>
+          <h3>Pavimentos</h3>
+          <ul>
+            <li>Subrasante, base y subbase.</li>
+            <li>CBR, Proctor, DCP y densidad de campo.</li>
+            <li>Materiales granulares y mezclas asfálticas.</li>
+            <li>Fallas típicas y criterio de aceptación.</li>
+          </ul>
+        </article>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
+'''
+
+path = Path("/mnt/data/index_geotecnia_y_pavimentos.html")
+path.write_text(html, encoding="utf-8")
+path.as_posix()
 
