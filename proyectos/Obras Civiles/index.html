@@ -1,102 +1,571 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="notranslate">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Obras Civiles | Portafolio Técnico</title>
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>William D. Saenz | Obras Civiles</title>
+
   <style>
     :root{
-      --fondo:#07111f;
-      --card:#101d2f;
-      --celeste:#38bdf8;
-      --dorado:#c9a24d;
-      --texto:#dbeafe;
-      --blanco:#f8fafc;
-      --borde:rgba(255,255,255,.14);
+      --bg:#07111f;
+      --panel:#0d1b2d;
+      --line:rgba(255,255,255,.16);
+      --text:#f8fafc;
+      --muted:#d4e0ee;
+      --blue:#38bdf8;
+      --gold:#d6ad4f;
+      --green:#39ff14;
+      --shadow:0 24px 64px rgba(0,0,0,.38);
     }
+
     *{box-sizing:border-box}
-    body{
+
+    html, body{
       margin:0;
-      min-height:100vh;
-      font-family:Arial, sans-serif;
-      background:radial-gradient(circle at top left, rgba(56,189,248,.16), transparent 35%), linear-gradient(180deg, #07111f, #0b1f33);
-      color:var(--blanco);
+      width:100%;
+      height:100%;
+      font-family:Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 8% 10%, rgba(56,189,248,.17), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(214,173,79,.13), transparent 25%),
+        linear-gradient(135deg, #07111f 0%, #0b1f33 100%);
+      color:var(--text);
+    }
+
+    body{
+      overflow:hidden;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .page{
+      width:100%;
+      height:100vh;
+      display:grid;
+      grid-template-rows:92px 1fr 30px;
+    }
+
+    header{
+      padding:18px 5vw;
+      border-bottom:1px solid var(--line);
+      background:rgba(7,17,31,.80);
+      backdrop-filter:blur(14px);
+    }
+
+    .topbar{
+      width:100%;
+      max-width:1540px;
+      height:100%;
+      margin:0 auto;
       display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:22px;
+    }
+
+    .terminal{
+      color:var(--green);
+      font-family:"Courier New", monospace;
+      font-size:17px;
+      font-weight:800;
+      letter-spacing:.2px;
+      white-space:nowrap;
+    }
+
+    .top-actions{
+      display:flex;
+      gap:12px;
+      justify-content:flex-end;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:28px;
+      min-height:48px;
+      padding:12px 20px;
+      border-radius:14px;
+      border:2px solid var(--blue);
+      color:var(--text);
+      font-weight:900;
+      font-size:16px;
+      transition:.22s ease;
+      background:rgba(7,17,31,.42);
     }
-    main{width:min(1100px,100%)}
-    .hero{
-      background:rgba(16,29,47,.95);
-      border:1px solid var(--borde);
-      border-radius:22px;
-      padding:30px;
-      box-shadow:0 14px 34px rgba(0,0,0,.32);
-      margin-bottom:22px;
+
+    .btn:hover{
+      transform:translateY(-2px);
+      background:var(--blue);
+      color:#07111f;
+      box-shadow:0 12px 25px rgba(56,189,248,.18);
     }
-    .hero small{color:#39ff14;font-family:'Courier New', monospace;font-weight:700}
-    h1{margin:10px 0 8px;color:var(--celeste);font-size:clamp(2rem,4vw,3.2rem)}
-    p{color:var(--texto);line-height:1.6;margin:0}
-    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
-    .card{
-      background:rgba(16,29,47,.92);
-      border:1px solid var(--borde);
-      border-radius:18px;
-      padding:22px;
-      text-decoration:none;
-      color:var(--blanco);
-      min-height:210px;
+
+    .btn.gold{
+      border-color:var(--gold);
+      color:var(--gold);
+    }
+
+    .btn.gold:hover{
+      background:var(--gold);
+      color:#07111f;
+      box-shadow:0 12px 25px rgba(214,173,79,.20);
+    }
+
+    main{
+      width:min(1540px, 92vw);
+      margin:0 auto;
+      padding:34px 0;
+      display:grid;
+      grid-template-columns:.9fr 1.38fr;
+      gap:34px;
+      overflow:hidden;
+    }
+
+    .intro-card,
+    .modules-card{
+      height:100%;
+      min-height:0;
+      border:1px solid var(--line);
+      background:rgba(13,27,45,.89);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .intro-card{
+      padding:42px;
       display:flex;
       flex-direction:column;
       justify-content:space-between;
-      transition:.22s ease;
-      box-shadow:0 10px 26px rgba(0,0,0,.22);
+      gap:26px;
     }
-    .card:hover{transform:translateY(-4px);border-color:var(--celeste)}
-    .num{color:var(--dorado);font-weight:900;font-size:.9rem;letter-spacing:.08em}
-    h2{margin:10px 0;color:var(--celeste)}
-    .card p{font-size:.95rem;color:#cbd5e1}
-    .btn{margin-top:18px;color:var(--dorado);font-weight:900}
-    @media(max-width:850px){.grid{grid-template-columns:1fr}.hero{padding:22px}}
+
+    .badge{
+      color:var(--green);
+      font-family:"Courier New", monospace;
+      font-size:15px;
+      font-weight:800;
+      margin-bottom:10px;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(66px, 5vw, 96px);
+      line-height:.91;
+      letter-spacing:-3px;
+    }
+
+    .subtitle{
+      margin:26px 0 0;
+      color:var(--muted);
+      font-size:clamp(23px, 1.75vw, 30px);
+      line-height:1.32;
+    }
+
+    .highlight{
+      color:var(--gold);
+      font-weight:900;
+    }
+
+    .mini-stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:30px;
+    }
+
+    .mini-stat{
+      padding:18px 16px;
+      border-radius:20px;
+      border:1px solid var(--line);
+      background:rgba(7,17,31,.44);
+    }
+
+    .mini-stat strong{
+      display:block;
+      color:var(--blue);
+      font-size:25px;
+      margin-bottom:7px;
+    }
+
+    .mini-stat span{
+      color:#f2f8ff;
+      font-size:15px;
+      line-height:1.28;
+      font-weight:700;
+    }
+
+    .summary-box{
+      margin-top:8px;
+      padding:28px 30px;
+      border-radius:26px;
+      border:1px solid rgba(214,173,79,.66);
+      background:
+        linear-gradient(135deg, rgba(214,173,79,.18), rgba(56,189,248,.07)),
+        rgba(7,17,31,.52);
+    }
+
+    .summary-box h2{
+      margin:0 0 14px;
+      color:var(--gold);
+      font-size:35px;
+      line-height:1.1;
+      border:0;
+      padding:0;
+    }
+
+    .summary-box p{
+      margin:0 0 24px;
+      color:#f4f9ff;
+      font-size:18px;
+      line-height:1.52;
+      font-weight:700;
+    }
+
+    .modules-card{
+      padding:42px;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .section-head{
+      padding-bottom:22px;
+      border-bottom:1px solid var(--line);
+    }
+
+    h2{
+      margin:0;
+      color:var(--blue);
+      font-size:48px;
+      line-height:1.05;
+      letter-spacing:-1px;
+    }
+
+    .section-head p{
+      margin:16px 0 0;
+      color:#f5faff;
+      line-height:1.55;
+      font-size:19px;
+      font-weight:700;
+      max-width:840px;
+    }
+
+    .module-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+      margin-top:30px;
+    }
+
+    .module-card{
+      min-height:380px;
+      padding:28px;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(17,34,56,.88), rgba(7,17,31,.68));
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition:.24s ease;
+    }
+
+    .module-card:hover{
+      transform:translateY(-5px);
+      border-color:rgba(56,189,248,.50);
+      box-shadow:0 18px 38px rgba(56,189,248,.10);
+    }
+
+    .number{
+      color:var(--gold);
+      font-size:15px;
+      font-weight:900;
+      letter-spacing:.8px;
+      margin-bottom:16px;
+    }
+
+    .module-card h3{
+      margin:0 0 14px;
+      color:var(--blue);
+      font-size:29px;
+      line-height:1.08;
+    }
+
+    .module-card p{
+      margin:0;
+      color:#f5faff;
+      line-height:1.56;
+      font-size:17px;
+      font-weight:700;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      margin:20px 0 24px;
+    }
+
+    .tag{
+      border:1px solid rgba(56,189,248,.42);
+      background:rgba(56,189,248,.13);
+      border-radius:999px;
+      padding:9px 12px;
+      color:var(--text);
+      font-size:14px;
+      font-weight:900;
+    }
+
+    .bottom-actions{
+      margin-top:auto;
+      padding-top:30px;
+      display:flex;
+      justify-content:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    footer{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--muted);
+      border-top:1px solid var(--line);
+      font-size:14px;
+      background:rgba(7,17,31,.52);
+      font-weight:700;
+    }
+
+    @media (max-width:1200px){
+      html, body{
+        height:auto;
+        min-height:100%;
+      }
+
+      body{
+        overflow:auto;
+      }
+
+      .page{
+        height:auto;
+        min-height:100vh;
+        grid-template-rows:auto 1fr auto;
+      }
+
+      header{
+        padding:18px 24px;
+      }
+
+      .topbar{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .top-actions{
+        flex-wrap:wrap;
+        justify-content:flex-start;
+      }
+
+      main{
+        width:calc(100vw - 48px);
+        grid-template-columns:1fr;
+        overflow:visible;
+      }
+
+      .intro-card,
+      .modules-card{
+        height:auto;
+      }
+
+      .module-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:720px){
+      .mini-stats{
+        grid-template-columns:1fr;
+      }
+
+      h1{
+        font-size:56px;
+      }
+
+      h2{
+        font-size:36px;
+      }
+
+      .intro-card,
+      .modules-card{
+        padding:28px;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .top-actions,
+      .bottom-actions{
+        width:100%;
+      }
+    }
   </style>
 </head>
+
 <body>
-  <main>
-    <section class="hero">
-      <small>&gt; menú principal listo</small>
-      <h1>Obras Civiles</h1>
-      <p>Seleccioná el módulo técnico que querés consultar. Esta página conecta presupuestos, geotecnia/suelos/pavimentos y análisis estructural.</p>
-    </section>
+  <div class="page">
+    <header>
+      <div class="topbar">
+        <div class="terminal" id="terminal"></div>
 
-    <section class="grid">
-      <a class="card" href="./Presupuestos/">
-        <div>
-          <span class="num">01</span>
-          <h2>Presupuestos</h2>
-          <p>APU, presupuesto de casa de dos plantas y ensayos de laboratorio.</p>
-        </div>
-        <span class="btn">Abrir módulo →</span>
-      </a>
+        <nav class="top-actions" aria-label="Navegación principal">
+          <a class="btn gold" href="../">Volver a Proyectos</a>
+          <a class="btn" href="../../">Inicio</a>
+          <a class="btn" href="../../docs/cv-william-saenz.pdf" target="_blank">Ver CV</a>
+        </nav>
+      </div>
+    </header>
 
-      <a class="card" href="./Geotecnia y Pavimentos/">
+    <main>
+      <section class="intro-card" aria-label="Módulo de obras civiles">
         <div>
-          <span class="num">02</span>
-          <h2>Geotecnia, Suelos y Pavimentos</h2>
-          <p>Mecánica de suelos, geotecnia aplicada, cimentaciones, contenciones, taludes y pavimentos.</p>
-        </div>
-        <span class="btn">Abrir módulo →</span>
-      </a>
+          <div class="badge">> módulo principal listo</div>
+          <h1>Obras<br>Civiles</h1>
 
-      <a class="card" href="./An%C3%A1lisis%20estructural/">
-        <div>
-          <span class="num">03</span>
-          <h2>Análisis estructural</h2>
-          <p>Guía y herramientas relacionadas con estructuras.</p>
+          <p class="subtitle">
+            Presupuestos, geotecnia, suelos, pavimentos y análisis estructural con enfoque
+            <span class="highlight">técnico y aplicado.</span>
+          </p>
+
+          <div class="mini-stats">
+            <div class="mini-stat">
+              <strong>APU</strong>
+              <span>Análisis de precios y presupuesto</span>
+            </div>
+            <div class="mini-stat">
+              <strong>Suelos</strong>
+              <span>Geotecnia, ensayos y pavimentos</span>
+            </div>
+            <div class="mini-stat">
+              <strong>Estructuras</strong>
+              <span>Guías y herramientas técnicas</span>
+            </div>
+          </div>
         </div>
-        <span class="btn">Abrir módulo →</span>
-      </a>
-    </section>
-  </main>
+
+        <div class="summary-box">
+          <div class="badge">> acceso organizado</div>
+          <h2>Seleccione un módulo</h2>
+          <p>
+            Esta sección conecta herramientas y evidencias del portafolio civil:
+            costos, presupuestos, laboratorio, geotecnia y estructuras.
+          </p>
+          <a class="btn gold" href="../">Volver a la sección de proyectos</a>
+        </div>
+      </section>
+
+      <section class="modules-card" aria-label="Listado de módulos">
+        <div class="section-head">
+          <h2>Líneas técnicas disponibles</h2>
+          <p>
+            Accesos directos a los módulos de obras civiles. La interfaz queda más amplia,
+            legible y equilibrada para una presentación profesional.
+          </p>
+        </div>
+
+        <div class="module-grid">
+          <article class="module-card">
+            <div>
+              <div class="number">01</div>
+              <h3>Presupuestos</h3>
+              <p>
+                APU, presupuesto de casa de dos plantas, materiales, recursos,
+                costos indirectos y ensayos de laboratorio.
+              </p>
+
+              <div class="tags">
+                <span class="tag">APU</span>
+                <span class="tag">Costos</span>
+                <span class="tag">Materiales</span>
+                <span class="tag">PDF</span>
+              </div>
+            </div>
+
+            <a class="btn gold" href="Presupuestos/">Abrir Presupuestos</a>
+          </article>
+
+          <article class="module-card">
+            <div>
+              <div class="number">02</div>
+              <h3>Geotecnia, Suelos y Pavimentos</h3>
+              <p>
+                Mecánica de suelos, geotecnia aplicada, cimentaciones,
+                contenciones, taludes, pavimentos y ensayos.
+              </p>
+
+              <div class="tags">
+                <span class="tag">Geotecnia</span>
+                <span class="tag">Suelos</span>
+                <span class="tag">Pavimentos</span>
+                <span class="tag">Ensayos</span>
+              </div>
+            </div>
+
+            <a class="btn gold" href="Geotecnia%20Suelos%20y%20Pavimentos/">Abrir Geotecnia</a>
+          </article>
+
+          <article class="module-card">
+            <div>
+              <div class="number">03</div>
+              <h3>Análisis estructural</h3>
+              <p>
+                Guías, criterios y herramientas relacionadas con estructuras,
+                lectura técnica y control de información estructural.
+              </p>
+
+              <div class="tags">
+                <span class="tag">Estructuras</span>
+                <span class="tag">Criterios</span>
+                <span class="tag">Control</span>
+                <span class="tag">Guías</span>
+              </div>
+            </div>
+
+            <a class="btn gold" href="Analisis%20estructural/">Abrir Estructuras</a>
+          </article>
+        </div>
+
+        <div class="bottom-actions">
+          <a class="btn" href="../">← Volver a Proyectos</a>
+          <a class="btn gold" href="../../">Volver al portafolio principal</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © 2026 William D. Saenz | Obras Civiles
+    </footer>
+  </div>
+
+  <script>
+    const texto = "> cargando obras civiles... sistema listo";
+    const terminal = document.getElementById("terminal");
+    let i = 0;
+
+    function escribir(){
+      if(i < texto.length){
+        terminal.textContent += texto.charAt(i);
+        i++;
+        setTimeout(escribir, 38);
+      }
+    }
+
+    escribir();
+  </script>
 </body>
 </html>
