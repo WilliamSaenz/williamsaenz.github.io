@@ -3,584 +3,799 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="google" content="notranslate" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>StructuralScope Pro | Guía de Estructuras</title>
 
   <style>
-    :root{
-      --fondo:#07111f;
-      --fondo-2:#0b1f33;
-      --card:#101d2f;
-      --card2:#07111f;
-      --celeste:#38bdf8;
-      --dorado:#c9a24d;
-      --verde:#39ff14;
-      --blanco:#f8fafc;
-      --texto:#dbeafe;
-      --muted:#94a3b8;
-      --borde:rgba(255,255,255,0.12);
-      --borde-celeste:rgba(56,189,248,0.28);
-      --ok:#22c55e;
-      --warn:#f97316;
-      --bad:#ef4444;
-      --shadow:0 12px 30px rgba(0,0,0,0.28);
-      --radius:18px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-
-    body{
-      margin:0;
-      font-family:Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 35%),
-        linear-gradient(180deg, var(--fondo) 0%, var(--fondo-2) 100%);
-      color:var(--blanco);
-      min-height:100vh;
-      line-height:1.55;
-    }
-
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background:rgba(7,17,31,.96);
-      backdrop-filter:blur(12px);
-      color:var(--blanco);
-      border-bottom:1px solid var(--borde);
-      box-shadow:0 10px 28px rgba(0,0,0,.32);
-    }
-
-    .brand-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      max-width:1180px;
-      margin:0 auto;
-      padding:20px 20px 10px;
-    }
-
-    .brand::before{
-      content:"> guía 04 estructuras... sistema listo";
-      display:block;
-      color:var(--verde);
-      font-family:"Courier New", monospace;
-      font-size:.84rem;
-      font-weight:700;
-      margin-bottom:6px;
-      letter-spacing:.2px;
-    }
-
-    .brand h1{
-      margin:0;
-      font-size:1.72rem;
-      letter-spacing:.4px;
-      color:var(--blanco);
-      line-height:1.1;
-    }
-
-    .brand p{
-      margin:6px 0 0;
-      color:#bfdbfe;
-      font-size:.92rem;
-    }
-
-    .brand .gold{color:var(--dorado);font-weight:800}
-
-    .badge{
-      border:1px solid rgba(201,162,77,0.55);
-      color:#fde68a;
-      border-radius:999px;
-      padding:8px 12px;
-      font-size:.78rem;
-      white-space:nowrap;
-      background:rgba(201,162,77,0.08);
-      font-weight:700;
-    }
-
-    .nav{
-      display:flex;
-      gap:10px;
-      overflow-x:auto;
-      max-width:1180px;
-      margin:0 auto;
-      padding:0 20px 16px;
-      scrollbar-width:thin;
-    }
-
-    .nav button{
-      border:1px solid var(--celeste);
-      background:transparent;
-      color:var(--blanco);
-      padding:10px 13px;
-      border-radius:10px;
-      cursor:pointer;
-      font-weight:700;
-      font-size:.88rem;
-      white-space:nowrap;
-      transition:all .25s ease;
-    }
-
-    .nav button:hover{
-      background:var(--celeste);
-      color:var(--fondo);
-      transform:translateY(-2px);
-    }
-
-    .nav button.active{
-      border-color:var(--dorado);
-      color:var(--dorado);
-      background:rgba(201,162,77,0.10);
-      box-shadow:0 0 0 1px rgba(201,162,77,.08) inset;
-    }
-
-    .shell{
-      display:grid;
-      grid-template-columns:300px minmax(0,1fr);
-      gap:22px;
-      max-width:1180px;
-      width:calc(100% - 40px);
-      margin:34px auto 42px;
-      align-items:start;
-    }
-
-    .sidebar{
-      position:sticky;
-      top:138px;
-      background:rgba(16,29,47,0.94);
-      border:1px solid var(--borde);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      padding:20px;
-      max-height:calc(100vh - 160px);
-      overflow:auto;
-    }
-
-    .sidebar-title{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      margin-bottom:14px;
-      padding-bottom:13px;
-      border-bottom:1px solid var(--borde);
-    }
-
-    .dot{
-      width:12px;
-      height:12px;
-      border-radius:50%;
-      background:var(--celeste);
-      box-shadow:0 0 0 5px rgba(56,189,248,.13);
-      flex:0 0 auto;
-    }
-
-    .sidebar-title h2{
-      margin:0;
-      font-size:1rem;
-      color:var(--celeste);
-    }
-
-    .sidebar-title span{
-      display:block;
-      color:var(--muted);
-      font-size:.78rem;
-      margin-top:2px;
-    }
-
-    .side-menu{
-      display:grid;
-      gap:8px;
-    }
-
-    .side-menu button{
-      width:100%;
-      text-align:left;
-      border:1px solid rgba(56,189,248,0.18);
-      background:rgba(7,17,31,0.62);
-      color:#dbeafe;
-      padding:10px 11px;
-      border-radius:11px;
-      cursor:pointer;
-      font-weight:700;
-      font-size:.88rem;
-      transition:.22s ease;
-    }
-
-    .side-menu button:hover{
-      border-color:var(--celeste);
-      color:var(--blanco);
-      transform:translateX(2px);
-    }
-
-    .side-menu button.active{
-      background:rgba(56,189,248,0.12);
-      color:var(--dorado);
-      border-color:rgba(201,162,77,0.75);
-      box-shadow:inset 4px 0 0 var(--dorado);
-    }
-
-    .content{min-width:0}
-
-    .hero{
-      background:
-        radial-gradient(circle at top right, rgba(56,189,248,.10), transparent 35%),
-        rgba(16,29,47,0.94);
-      border:1px solid var(--borde);
-      border-radius:22px;
-      box-shadow:var(--shadow);
-      padding:24px;
-      margin-bottom:22px;
-    }
-
-    .hero::before{
-      content:"> módulo seleccionado";
-      display:block;
-      color:var(--verde);
-      font-family:"Courier New", monospace;
-      font-weight:700;
-      font-size:.82rem;
-      margin-bottom:8px;
-    }
-
-    .hero h2{
-      margin:0 0 10px;
-      font-size:1.85rem;
-      line-height:1.15;
-      color:var(--celeste);
-      padding-bottom:12px;
-      border-bottom:1px solid var(--borde);
-    }
-
-    .hero p{
-      margin:0;
-      color:var(--texto);
-      max-width:930px;
-    }
-
-    .searchbar{
-      display:flex;
-      gap:10px;
-      margin-top:18px;
-      flex-wrap:wrap;
-    }
-
-    .searchbar input{
-      flex:1;
-      min-width:250px;
-      border:1px solid var(--borde-celeste);
-      border-radius:11px;
-      padding:12px 13px;
-      font-size:.94rem;
-      outline:none;
-      background:rgba(7,17,31,0.85);
-      color:var(--blanco);
-    }
-
-    .searchbar input::placeholder{color:#7f98b5}
-    .searchbar input:focus{border-color:var(--celeste)}
-
-    .searchbar button{
-      border:1px solid var(--dorado);
-      background:transparent;
-      color:var(--dorado);
-      border-radius:10px;
-      padding:11px 16px;
-      cursor:pointer;
-      font-weight:800;
-      transition:.22s ease;
-    }
-
-    .searchbar button:hover{
-      background:var(--dorado);
-      color:var(--fondo);
-      transform:translateY(-2px);
-    }
-
-    .section{
-      background:rgba(16,29,47,0.94);
-      border:1px solid var(--borde);
-      border-radius:18px;
-      box-shadow:var(--shadow);
-      padding:24px;
-      margin-bottom:22px;
-    }
-
-    .section::before{
-      content:"> consulta estructural";
-      display:block;
-      color:var(--verde);
-      font-family:"Courier New", monospace;
-      font-weight:700;
-      font-size:.82rem;
-      margin-bottom:8px;
-    }
-
-    .section h2{
-      margin:0 0 14px;
-      font-size:1.48rem;
-      color:var(--celeste);
-      border-bottom:1px solid var(--borde);
-      padding-bottom:10px;
-    }
-
-    .section h3{
-      margin:18px 0 8px;
-      color:var(--dorado);
-    }
-
-    .lead{color:var(--texto);margin-top:0}
-    p, li{color:var(--texto)}
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:16px;
-      margin-top:18px;
-    }
-
-    .grid-2{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:16px;
-      margin-top:18px;
-    }
-
-    .card{
-      background:rgba(7,17,31,0.62);
-      border:1px solid var(--borde);
-      border-radius:16px;
-      padding:18px;
-      box-shadow:0 10px 22px rgba(0,0,0,.18);
-    }
-
-    .card h3{
-      margin:0 0 8px;
-      font-size:1.04rem;
-      color:var(--dorado);
-    }
-
-    .card p{
-      margin:0;
-      color:#cbd5e1;
-      font-size:.93rem;
-    }
-
-    .pill-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:13px;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      background:rgba(56,189,248,0.12);
-      color:var(--blanco);
-      border:1px solid rgba(56,189,248,0.35);
-      padding:6px 9px;
-      border-radius:999px;
-      font-size:.78rem;
-      font-weight:800;
-    }
-
-    .info-box{
-      border:1px solid rgba(56,189,248,0.32);
-      border-left:5px solid var(--celeste);
-      background:rgba(56,189,248,0.08);
-      border-radius:14px;
-      padding:14px 16px;
-      margin:14px 0;
-      color:#dbeafe;
-    }
-
-    .info-box strong{color:var(--celeste)}
-
-    .warn-box{
-      border:1px solid rgba(249,115,22,0.35);
-      border-left:5px solid var(--warn);
-      background:rgba(249,115,22,0.08);
-      border-radius:14px;
-      padding:14px 16px;
-      margin:14px 0;
-      color:#fed7aa;
-    }
-
-    .warn-box strong{color:#fdba74}
-
-    .senior-box{
-      border:1px solid rgba(201,162,77,0.38);
-      background:rgba(201,162,77,0.08);
-      border-radius:16px;
-      padding:16px;
-      margin:16px 0;
-    }
-
-    .senior-box h3{
-      margin:0 0 8px;
-      color:var(--dorado);
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      overflow:hidden;
-      border-radius:14px;
-      margin:14px 0;
-      background:rgba(7,17,31,0.60);
-      font-size:.91rem;
-      border:1px solid var(--borde);
-    }
-
-    th,td{
-      padding:11px;
-      border-bottom:1px solid rgba(255,255,255,0.09);
-      text-align:left;
-      color:#dbeafe;
-      vertical-align:top;
-    }
-
-    th{
-      background:rgba(56,189,248,0.12);
-      color:var(--blanco);
-      font-size:.78rem;
-      text-transform:uppercase;
-      letter-spacing:.03em;
-    }
-
-    tr:last-child td{border-bottom:none}
-
-    td.value{
-      font-weight:800;
-      color:var(--dorado);
-      white-space:nowrap;
-    }
-
-    .tag-good{color:#86efac;font-weight:800}
-    .tag-warn{color:#fdba74;font-weight:800}
-    .tag-bad{color:#fca5a5;font-weight:800}
-
-    details{
-      border:1px solid var(--borde);
-      border-radius:14px;
-      background:rgba(7,17,31,0.62);
-      margin:10px 0;
-      overflow:hidden;
-    }
-
-    summary{
-      cursor:pointer;
-      padding:14px 16px;
-      font-weight:800;
-      color:var(--dorado);
-      background:rgba(56,189,248,0.07);
-    }
-
-    details[open] summary{
-      border-bottom:1px solid var(--borde);
-      background:rgba(56,189,248,0.12);
-    }
-
-    .details-body{padding:15px 16px;color:var(--texto)}
-
-    .mini-list{
-      display:grid;
-      gap:8px;
-      padding-left:0;
-      list-style:none;
-    }
-
-    .mini-list li{
-      background:rgba(7,17,31,0.62);
-      border:1px solid var(--borde);
-      border-radius:12px;
-      padding:10px 12px;
-    }
-
-    .flow{
-      display:grid;
-      gap:10px;
-      margin-top:16px;
-    }
-
-    .flow-step{
-      display:grid;
-      grid-template-columns:48px 1fr;
-      gap:12px;
-      align-items:center;
-      background:rgba(7,17,31,0.62);
-      border:1px solid var(--borde);
-      border-radius:14px;
-      padding:12px;
-    }
-
-    .num{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      background:linear-gradient(135deg,#004aad,#0b2b61);
-      color:white;
-      font-weight:900;
-      font-size:1.15rem;
-      border:1px solid rgba(56,189,248,.35);
-    }
-
-    .result-empty{
-      padding:18px;
-      background:rgba(249,115,22,0.08);
-      border:1px solid rgba(249,115,22,0.35);
-      border-radius:16px;
-      color:#fed7aa;
-      margin-top:16px;
-      display:none;
-    }
-
-    .source-list a{
-      color:var(--celeste);
-      font-weight:800;
-      text-decoration:none;
-    }
-
-    .source-list a:hover{
-      text-decoration:underline;
-      color:var(--dorado);
-    }
-
-    @media(max-width:980px){
-      .shell{
-        grid-template-columns:1fr;
-        width:min(100% - 22px, 860px);
-      }
-      .sidebar{
-        position:relative;
-        top:auto;
-        max-height:none;
-      }
-      .side-menu{grid-template-columns:repeat(2,minmax(0,1fr))}
-      .grid,.grid-2{grid-template-columns:1fr}
-      .brand-row{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:8px;
-      }
-      .badge{white-space:normal}
-    }
-
-    @media(max-width:620px){
-      .hero h2{font-size:1.45rem}
-      .section{padding:18px}
-      .side-menu{grid-template-columns:1fr}
-      th,td{padding:9px;font-size:.84rem}
-      .nav{padding-left:14px;padding-right:14px}
-      .brand-row{padding-left:14px;padding-right:14px}
-      .brand h1{font-size:1.42rem}
-      .flow-step{grid-template-columns:1fr}
-    }
+
+:root{
+  --fondo:#07111f;
+  --fondo-2:#0b1f33;
+  --card:#101d2f;
+  --card2:#07111f;
+  --celeste:#38bdf8;
+  --dorado:#d6ad4f;
+  --verde:#39ff14;
+  --blanco:#f8fafc;
+  --texto:#eef6ff;
+  --muted:#c3d0e2;
+  --borde:rgba(255,255,255,0.16);
+  --borde-celeste:rgba(56,189,248,0.36);
+  --ok:#22c55e;
+  --warn:#f97316;
+  --bad:#ef4444;
+  --shadow:0 24px 64px rgba(0,0,0,0.38);
+  --radius:26px;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  font-family:Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at 8% 10%, rgba(56,189,248,0.17), transparent 30%),
+    radial-gradient(circle at 82% 18%, rgba(214,173,79,0.13), transparent 25%),
+    linear-gradient(135deg, var(--fondo) 0%, var(--fondo-2) 100%);
+  color:var(--blanco);
+  min-height:100vh;
+  line-height:1.58;
+  overflow-x:hidden;
+}
+
+a{
+  color:inherit;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  background:rgba(7,17,31,.96);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--borde);
+  box-shadow:0 14px 34px rgba(0,0,0,.30);
+}
+
+.brand-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:22px;
+  width:min(1540px, 92vw);
+  margin:0 auto;
+  padding:22px 0 12px;
+}
+
+.brand::before{
+  content:"> guía 04 estructuras... sistema listo";
+  display:block;
+  color:var(--verde);
+  font-family:"Courier New", monospace;
+  font-size:15px;
+  font-weight:800;
+  margin-bottom:8px;
+  letter-spacing:.2px;
+}
+
+.brand h1{
+  margin:0;
+  font-size:clamp(38px, 3.1vw, 58px);
+  letter-spacing:-1.5px;
+  color:var(--blanco);
+  line-height:1.05;
+}
+
+.brand p{
+  margin:10px 0 0;
+  color:#dbeafe;
+  font-size:18px;
+  font-weight:700;
+}
+
+.brand .gold{
+  color:var(--dorado);
+  font-weight:900;
+}
+
+.badge{
+  border:1px solid rgba(214,173,79,0.60);
+  color:#fde68a;
+  border-radius:999px;
+  padding:10px 14px;
+  font-size:14px;
+  white-space:nowrap;
+  background:rgba(214,173,79,0.09);
+  font-weight:900;
+}
+
+.top-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  align-items:center;
+}
+
+.back-btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:10px 15px;
+  border-radius:13px;
+  border:2px solid var(--dorado);
+  color:var(--dorado);
+  text-decoration:none;
+  font-weight:900;
+  font-size:14px;
+  background:rgba(7,17,31,.35);
+  transition:.22s ease;
+}
+
+.back-btn.secondary{
+  border-color:var(--celeste);
+  color:var(--blanco);
+}
+
+.back-btn:hover{
+  transform:translateY(-2px);
+  background:var(--dorado);
+  color:var(--fondo);
+  box-shadow:0 12px 25px rgba(214,173,79,.20);
+}
+
+.back-btn.secondary:hover{
+  background:var(--celeste);
+  color:var(--fondo);
+  box-shadow:0 12px 25px rgba(56,189,248,.18);
+}
+
+.nav{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  width:min(1540px, 92vw);
+  margin:0 auto;
+  padding:0 0 18px;
+  scrollbar-width:thin;
+}
+
+.nav button{
+  border:2px solid var(--celeste);
+  background:rgba(7,17,31,.38);
+  color:var(--blanco);
+  padding:12px 16px;
+  min-height:46px;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:900;
+  font-size:15px;
+  white-space:nowrap;
+  transition:all .22s ease;
+}
+
+.nav button:hover{
+  background:var(--celeste);
+  color:var(--fondo);
+  transform:translateY(-2px);
+  box-shadow:0 12px 24px rgba(56,189,248,.18);
+}
+
+.nav button.active{
+  border-color:var(--dorado);
+  color:var(--fondo);
+  background:var(--dorado);
+  box-shadow:0 12px 24px rgba(214,173,79,.18);
+}
+
+.shell{
+  display:grid;
+  grid-template-columns:340px minmax(0,1fr);
+  gap:34px;
+  width:min(1540px, 92vw);
+  margin:34px auto 52px;
+  align-items:start;
+}
+
+.sidebar{
+  position:sticky;
+  top:170px;
+  background:rgba(16,29,47,0.94);
+  border:1px solid var(--borde);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:26px;
+  max-height:calc(100vh - 190px);
+  overflow:auto;
+}
+
+.sidebar-title{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:18px;
+  padding-bottom:17px;
+  border-bottom:1px solid var(--borde);
+}
+
+.dot{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:var(--celeste);
+  box-shadow:0 0 0 6px rgba(56,189,248,.13);
+  flex:0 0 auto;
+}
+
+.sidebar-title h2{
+  margin:0;
+  font-size:20px;
+  color:var(--celeste);
+}
+
+.sidebar-title span{
+  display:block;
+  color:var(--muted);
+  font-size:14px;
+  margin-top:4px;
+  font-weight:700;
+}
+
+.side-menu{
+  display:grid;
+  gap:10px;
+}
+
+.side-menu button{
+  width:100%;
+  text-align:left;
+  border:1px solid rgba(56,189,248,0.24);
+  background:rgba(7,17,31,0.62);
+  color:#dbeafe;
+  padding:13px 14px;
+  border-radius:14px;
+  cursor:pointer;
+  font-weight:900;
+  font-size:15px;
+  transition:.22s ease;
+}
+
+.side-menu button:hover{
+  border-color:var(--celeste);
+  color:var(--blanco);
+  transform:translateX(3px);
+}
+
+.side-menu button.active{
+  background:rgba(56,189,248,0.12);
+  color:var(--dorado);
+  border-color:rgba(214,173,79,0.75);
+  box-shadow:inset 5px 0 0 var(--dorado);
+}
+
+.content{
+  min-width:0;
+}
+
+.hero{
+  background:
+    radial-gradient(circle at top right, rgba(56,189,248,.12), transparent 36%),
+    rgba(16,29,47,0.94);
+  border:1px solid var(--borde);
+  border-radius:28px;
+  box-shadow:var(--shadow);
+  padding:34px;
+  margin-bottom:28px;
+}
+
+.hero::before{
+  content:"> módulo seleccionado";
+  display:block;
+  color:var(--verde);
+  font-family:"Courier New", monospace;
+  font-weight:800;
+  font-size:15px;
+  margin-bottom:10px;
+}
+
+.hero h2{
+  margin:0 0 14px;
+  font-size:clamp(34px, 2.8vw, 54px);
+  line-height:1.08;
+  color:var(--celeste);
+  padding-bottom:18px;
+  border-bottom:1px solid var(--borde);
+  letter-spacing:-1px;
+}
+
+.hero p{
+  margin:0;
+  color:var(--texto);
+  max-width:1160px;
+  font-size:19px;
+  font-weight:700;
+}
+
+.searchbar{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  margin-top:24px;
+}
+
+.searchbar input{
+  width:100%;
+  border:1px solid var(--borde-celeste);
+  border-radius:15px;
+  padding:15px 16px;
+  min-height:50px;
+  font-size:16px;
+  outline:none;
+  background:rgba(7,17,31,0.85);
+  color:var(--blanco);
+  font-weight:700;
+}
+
+.searchbar input::placeholder{
+  color:#9eb5cf;
+}
+
+.searchbar input:focus{
+  border-color:var(--celeste);
+  box-shadow:0 0 0 4px rgba(56,189,248,.13);
+}
+
+.searchbar button{
+  border:2px solid var(--dorado);
+  background:transparent;
+  color:var(--dorado);
+  border-radius:14px;
+  padding:12px 20px;
+  min-height:50px;
+  cursor:pointer;
+  font-weight:900;
+  font-size:15px;
+  transition:.22s ease;
+}
+
+.searchbar button:hover{
+  background:var(--dorado);
+  color:var(--fondo);
+  transform:translateY(-2px);
+}
+
+.quick-tools{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+  padding-top:20px;
+  border-top:1px solid var(--borde);
+}
+
+.quick-tools button{
+  border:1px solid rgba(56,189,248,.42);
+  background:rgba(56,189,248,.10);
+  color:var(--blanco);
+  border-radius:999px;
+  padding:10px 13px;
+  font-size:14px;
+  font-weight:900;
+  cursor:pointer;
+  transition:.22s ease;
+}
+
+.quick-tools button:hover{
+  background:var(--celeste);
+  color:var(--fondo);
+  transform:translateY(-2px);
+}
+
+.section{
+  background:rgba(16,29,47,0.94);
+  border:1px solid var(--borde);
+  border-radius:26px;
+  box-shadow:var(--shadow);
+  padding:34px;
+  margin-bottom:28px;
+}
+
+.section::before{
+  content:"> consulta estructural";
+  display:block;
+  color:var(--verde);
+  font-family:"Courier New", monospace;
+  font-weight:800;
+  font-size:15px;
+  margin-bottom:10px;
+}
+
+.section h2{
+  margin:0 0 18px;
+  font-size:clamp(30px, 2.2vw, 44px);
+  color:var(--celeste);
+  border-bottom:1px solid var(--borde);
+  padding-bottom:16px;
+  line-height:1.1;
+  letter-spacing:-.6px;
+}
+
+.section h3{
+  margin:20px 0 10px;
+  color:var(--dorado);
+  font-size:23px;
+  line-height:1.15;
+}
+
+.lead{
+  color:var(--texto);
+  margin-top:0;
+  font-size:19px;
+  font-weight:700;
+}
+
+p, li{
+  color:var(--texto);
+  font-size:17px;
+  font-weight:700;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:20px;
+  margin-top:22px;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px;
+  margin-top:22px;
+}
+
+.card{
+  background:rgba(7,17,31,0.62);
+  border:1px solid var(--borde);
+  border-radius:20px;
+  padding:24px;
+  box-shadow:0 10px 22px rgba(0,0,0,.18);
+  transition:.22s ease;
+}
+
+.card:hover{
+  border-color:rgba(56,189,248,.50);
+  transform:translateY(-4px);
+  box-shadow:0 18px 38px rgba(56,189,248,.10);
+}
+
+.card h3{
+  margin:0 0 10px;
+  font-size:21px;
+  color:var(--dorado);
+}
+
+.card p{
+  margin:0;
+  color:#dbeafe;
+  font-size:16px;
+  line-height:1.55;
+}
+
+.pill-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:15px;
+}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:rgba(56,189,248,0.13);
+  color:var(--blanco);
+  border:1px solid rgba(56,189,248,0.42);
+  padding:8px 11px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:900;
+}
+
+.info-box,
+.warn-box,
+.senior-box{
+  border-radius:18px;
+  padding:18px 20px;
+  margin:18px 0;
+  font-size:17px;
+  font-weight:700;
+}
+
+.info-box{
+  border:1px solid rgba(56,189,248,0.34);
+  border-left:6px solid var(--celeste);
+  background:rgba(56,189,248,0.09);
+  color:#dbeafe;
+}
+
+.info-box strong{
+  color:var(--celeste);
+}
+
+.warn-box{
+  border:1px solid rgba(249,115,22,0.38);
+  border-left:6px solid var(--warn);
+  background:rgba(249,115,22,0.09);
+  color:#fed7aa;
+}
+
+.warn-box strong{
+  color:#fdba74;
+}
+
+.senior-box{
+  border:1px solid rgba(214,173,79,0.42);
+  background:rgba(214,173,79,0.09);
+}
+
+.senior-box h3{
+  margin:0 0 10px;
+  color:var(--dorado);
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  overflow:hidden;
+  border-radius:18px;
+  margin:18px 0;
+  background:rgba(7,17,31,0.62);
+  font-size:15px;
+  border:1px solid var(--borde);
+}
+
+th,td{
+  padding:15px;
+  border-bottom:1px solid rgba(255,255,255,0.09);
+  text-align:left;
+  color:#dbeafe;
+  vertical-align:top;
+  font-weight:700;
+}
+
+th{
+  background:rgba(56,189,248,0.13);
+  color:var(--blanco);
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+tr:last-child td{
+  border-bottom:none;
+}
+
+td.value{
+  font-weight:900;
+  color:var(--dorado);
+  white-space:nowrap;
+}
+
+.tag-good{color:#86efac;font-weight:900}
+.tag-warn{color:#fdba74;font-weight:900}
+.tag-bad{color:#fca5a5;font-weight:900}
+
+details{
+  border:1px solid var(--borde);
+  border-radius:18px;
+  background:rgba(7,17,31,0.62);
+  margin:12px 0;
+  overflow:hidden;
+}
+
+summary{
+  cursor:pointer;
+  padding:16px 18px;
+  font-weight:900;
+  color:var(--dorado);
+  background:rgba(56,189,248,0.08);
+  font-size:16px;
+}
+
+details[open] summary{
+  border-bottom:1px solid var(--borde);
+  background:rgba(56,189,248,0.13);
+}
+
+.details-body{
+  padding:18px;
+  color:var(--texto);
+}
+
+.mini-list{
+  display:grid;
+  gap:10px;
+  padding-left:0;
+  list-style:none;
+}
+
+.mini-list li{
+  background:rgba(7,17,31,0.62);
+  border:1px solid var(--borde);
+  border-radius:16px;
+  padding:14px 16px;
+}
+
+.flow{
+  display:grid;
+  gap:12px;
+  margin-top:18px;
+}
+
+.flow-step{
+  display:grid;
+  grid-template-columns:56px 1fr;
+  gap:16px;
+  align-items:center;
+  background:rgba(7,17,31,0.62);
+  border:1px solid var(--borde);
+  border-radius:18px;
+  padding:16px;
+}
+
+.num{
+  width:48px;
+  height:48px;
+  border-radius:15px;
+  display:grid;
+  place-items:center;
+  background:linear-gradient(135deg,#004aad,#0b2b61);
+  color:white;
+  font-weight:900;
+  font-size:20px;
+  border:1px solid rgba(56,189,248,.35);
+}
+
+.result-empty{
+  padding:20px;
+  background:rgba(249,115,22,0.09);
+  border:1px solid rgba(249,115,22,0.40);
+  border-radius:18px;
+  color:#fed7aa;
+  margin-top:18px;
+  display:none;
+  font-weight:800;
+}
+
+.source-list a{
+  color:var(--celeste);
+  font-weight:900;
+  text-decoration:none;
+}
+
+.source-list a:hover{
+  text-decoration:underline;
+  color:var(--dorado);
+}
+
+.tool-cards{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;
+  margin-top:22px;
+}
+
+.tool-card{
+  border:1px solid rgba(56,189,248,.30);
+  background:rgba(7,17,31,.50);
+  border-radius:18px;
+  padding:16px;
+}
+
+.tool-card strong{
+  display:block;
+  color:var(--celeste);
+  font-size:20px;
+  margin-bottom:6px;
+}
+
+.tool-card span{
+  color:var(--texto);
+  font-weight:700;
+  font-size:14px;
+}
+
+@media(max-width:1180px){
+  .brand-row{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .top-actions{
+    justify-content:flex-start;
+  }
+
+  .shell{
+    grid-template-columns:1fr;
+    width:min(100% - 32px, 1000px);
+  }
+
+  .sidebar{
+    position:relative;
+    top:auto;
+    max-height:none;
+  }
+
+  .side-menu{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .grid,
+  .grid-2,
+  .tool-cards{
+    grid-template-columns:1fr;
+  }
+
+  .searchbar{
+    grid-template-columns:1fr;
+  }
+
+  .nav{
+    width:min(100% - 32px, 1000px);
+  }
+}
+
+@media(max-width:680px){
+  .brand h1{
+    font-size:32px;
+  }
+
+  .brand p{
+    font-size:16px;
+  }
+
+  .hero,
+  .section,
+  .sidebar{
+    padding:22px;
+    border-radius:22px;
+  }
+
+  .side-menu{
+    grid-template-columns:1fr;
+  }
+
+  .hero h2{
+    font-size:30px;
+  }
+
+  .section h2{
+    font-size:28px;
+  }
+
+  th,td{
+    padding:10px;
+    font-size:13px;
+  }
+
+  .flow-step{
+    grid-template-columns:1fr;
+  }
+
+  .nav button,
+  .back-btn{
+    font-size:13px;
+  }
+}
+
   </style>
 </head>
 
@@ -591,7 +806,11 @@
         <h1>StructuralScope Pro</h1>
         <p>Guía interactiva de <span class="gold">Estructuras de Hormigón y Acero</span></p>
       </div>
-      <div class="badge">Proceso estructural · Parámetros · Obra · Modelado · Diseño</div>
+      <div class="top-actions">
+        <a class="back-btn" href="../">← Volver a Obras Civiles</a>
+        <a class="back-btn secondary" href="../../">Proyectos</a>
+        <span class="badge">Proceso estructural · Parámetros · Obra · Modelado · Diseño</span>
+      </div>
     </div>
     <nav class="nav" id="topNav"></nav>
   </header>
@@ -1669,15 +1888,133 @@ const modules = {
     }
   },
 
+
+  vocabulario: {
+    label: "Vocabulario técnico",
+    color: "#38bdf8",
+    subtitle: "Diccionario práctico de obra y cálculo",
+    heroTitle: "Vocabulario estructural para leer memorias, planos y modelos",
+    heroText: "Diccionario rápido para conectar palabras de obra, modelado y normativa. Pensado para interpretar planos, memorias de cálculo, informes geotécnicos y resultados de software sin perderse en el idioma técnico.",
+    menu: [
+      {id:"voc_hormigon", label:"Hormigón armado"},
+      {id:"voc_acero", label:"Acero estructural"},
+      {id:"voc_modelado", label:"Modelado y análisis"},
+      {id:"voc_servicio", label:"Servicio y desempeño"},
+      {id:"voc_obra", label:"Obra e inspección"},
+      {id:"voc_col_arg", label:"Colombia / Argentina"}
+    ],
+    sections: {
+      voc_hormigon: `
+        <div class="section">
+          <h2>Vocabulario de hormigón armado</h2>
+          <table>
+            <thead><tr><th>Término</th><th>Qué significa</th><th>Uso práctico</th></tr></thead>
+            <tbody>
+              <tr><td class="value">f'c</td><td>Resistencia especificada a compresión del hormigón.</td><td>Base para diseño de columnas, vigas, losas, muros y fundaciones.</td></tr>
+              <tr><td class="value">fy</td><td>Resistencia de fluencia del acero de refuerzo.</td><td>Controla capacidad de flexión, corte y cuantías.</td></tr>
+              <tr><td class="value">Recubrimiento</td><td>Distancia entre superficie del hormigón y barra de acero.</td><td>Protege contra corrosión, fuego y pérdida de adherencia.</td></tr>
+              <tr><td class="value">Cuantía</td><td>Relación entre área de acero y sección de hormigón.</td><td>Permite revisar si el elemento está razonablemente armado.</td></tr>
+              <tr><td class="value">Punzonamiento</td><td>Falla local por corte alrededor de columnas o cargas concentradas.</td><td>Crítico en losas planas y zapatas.</td></tr>
+              <tr><td class="value">Confinamiento</td><td>Estribos o refuerzo transversal que mejora ductilidad.</td><td>Clave en columnas, zonas sísmicas y extremos de elementos.</td></tr>
+              <tr><td class="value">Longitud de desarrollo</td><td>Longitud necesaria para que una barra transfiera fuerza al hormigón.</td><td>Define anclajes, empalmes y detalles de armado.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      voc_acero: `
+        <div class="section">
+          <h2>Vocabulario de acero estructural</h2>
+          <table>
+            <thead><tr><th>Término</th><th>Qué significa</th><th>Uso práctico</th></tr></thead>
+            <tbody>
+              <tr><td class="value">A36 / Gr.50</td><td>Calidades comunes de acero estructural.</td><td>Definen fy, fu y capacidad resistente.</td></tr>
+              <tr><td class="value">Pandeo</td><td>Inestabilidad de un elemento comprimido.</td><td>Controla columnas, diagonales y barras de cercha.</td></tr>
+              <tr><td class="value">Pandeo lateral torsional</td><td>Inestabilidad de vigas por flexión y torsión.</td><td>Requiere arriostramiento lateral adecuado.</td></tr>
+              <tr><td class="value">Conexión</td><td>Unión entre elementos mediante pernos, soldadura o placas.</td><td>Puede gobernar diseño, costo y montaje.</td></tr>
+              <tr><td class="value">Placa base</td><td>Elemento que transfiere carga de columna metálica a fundación.</td><td>Revisa presión, pernos de anclaje y rigidizadores.</td></tr>
+              <tr><td class="value">Arriostramiento</td><td>Sistema que estabiliza la estructura frente a cargas laterales o pandeo.</td><td>Esencial en naves, pórticos y cubiertas.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      voc_modelado: `
+        <div class="section">
+          <h2>Vocabulario de modelado y análisis</h2>
+          <table>
+            <thead><tr><th>Término</th><th>Qué significa</th><th>Uso práctico</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Diafragma</td><td>Elemento que distribuye acciones laterales hacia muros, pórticos o arriostres.</td><td>Puede ser rígido, semirrígido o flexible.</td></tr>
+              <tr><td class="value">Masa sísmica</td><td>Masa que participa en la respuesta dinámica.</td><td>Incluye peso propio y parte de cargas variables según norma.</td></tr>
+              <tr><td class="value">Modo de vibración</td><td>Forma característica de movimiento de la estructura.</td><td>Ayuda a entender traslación, torsión y participación modal.</td></tr>
+              <tr><td class="value">Deriva</td><td>Desplazamiento relativo entre pisos.</td><td>Controla daño no estructural y desempeño sísmico/viento.</td></tr>
+              <tr><td class="value">P-Delta</td><td>Efecto de segundo orden por cargas axiales y desplazamientos laterales.</td><td>Importante en estructuras altas o flexibles.</td></tr>
+              <tr><td class="value">Shell / Frame</td><td>Tipos de elementos finitos para placas/muros y barras.</td><td>Losas y muros suelen ir como shell; vigas/columnas como frame.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      voc_servicio: `
+        <div class="section">
+          <h2>Vocabulario de servicio y desempeño</h2>
+          <table>
+            <thead><tr><th>Término</th><th>Qué significa</th><th>Revisión típica</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Flecha</td><td>Deformación vertical de vigas o losas.</td><td>Control de fisuras, terminaciones y confort.</td></tr>
+              <tr><td class="value">Fisuración</td><td>Aparición de grietas en el hormigón.</td><td>Normal en hormigón armado, pero debe controlarse.</td></tr>
+              <tr><td class="value">Vibración</td><td>Respuesta dinámica perceptible.</td><td>Importante en entrepisos livianos, pasarelas y grandes luces.</td></tr>
+              <tr><td class="value">Durabilidad</td><td>Capacidad de mantener desempeño con el tiempo.</td><td>Depende de ambiente, recubrimiento, materiales y mantenimiento.</td></tr>
+              <tr><td class="value">Estado límite</td><td>Condición más allá de la cual no se cumple seguridad o servicio.</td><td>Resistencia, servicio, estabilidad, fatiga, durabilidad.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      voc_obra: `
+        <div class="section">
+          <h2>Vocabulario de obra e inspección</h2>
+          <table>
+            <thead><tr><th>Término</th><th>Qué mirar en obra</th><th>Alerta</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Formaleta / encofrado</td><td>Alineación, apuntalamiento, estanqueidad y limpieza.</td><td>Un mal encofrado genera geometría mala y riesgos.</td></tr>
+              <tr><td class="value">Apuntalamiento</td><td>Soporte temporal de losas y vigas.</td><td>Retiro temprano puede causar fisuras o falla.</td></tr>
+              <tr><td class="value">Vibrado</td><td>Compactación del hormigón fresco.</td><td>Falta de vibrado produce hormigueros; exceso puede segregar.</td></tr>
+              <tr><td class="value">Curado</td><td>Mantener humedad/temperatura para ganar resistencia.</td><td>Sin curado, baja durabilidad y aumenta fisuración.</td></tr>
+              <tr><td class="value">Soldadura</td><td>Procedimiento, cordón, inspección y compatibilidad.</td><td>No todo cordón bonito es estructuralmente correcto.</td></tr>
+              <tr><td class="value">Pernos</td><td>Diámetro, grado, torque, arandela y perforación.</td><td>Una conexión mal ejecutada puede gobernar la estructura.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      voc_col_arg: `
+        <div class="section">
+          <h2>Términos usuales Colombia / Argentina</h2>
+          <table>
+            <thead><tr><th>Colombia</th><th>Argentina</th><th>Significado</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Concreto</td><td>Hormigón</td><td>Material compuesto de cemento, agua, agregados y aditivos.</td></tr>
+              <tr><td class="value">Formaleta</td><td>Encofrado</td><td>Molde temporal para dar forma al hormigón/concreto.</td></tr>
+              <tr><td class="value">Acero de refuerzo</td><td>Armadura / hierro</td><td>Barras corrugadas embebidas en hormigón.</td></tr>
+              <tr><td class="value">Placa</td><td>Losa</td><td>Elemento horizontal de entrepiso o cubierta.</td></tr>
+              <tr><td class="value">Viga de amarre</td><td>Viga de encadenado / fundación</td><td>Elemento que vincula apoyos o muros.</td></tr>
+              <tr><td class="value">Cimentación</td><td>Fundación</td><td>Sistema que transmite cargas al suelo.</td></tr>
+              <tr><td class="value">Mampostería</td><td>Mampostería</td><td>Muros de bloques, ladrillos o unidades similares.</td></tr>
+            </tbody>
+          </table>
+          <div class="info-box"><strong>Tip:</strong> en CV, LinkedIn y portafolio conviene usar ambos términos cuando el público puede ser colombiano y argentino: “concreto/hormigón”, “cimentaciones/fundaciones”, “formaleta/encofrado”.</div>
+        </div>
+      `
+    }
+  },
+
   bibliografia: {
     label: "Bibliografía",
     color: "#94a3b8",
-    subtitle: "Fuentes usadas y recomendadas",
-    heroTitle: "Bibliografía técnica y normativa de apoyo",
-    heroText: "Fuentes de referencia para normativa, diseño de hormigón, acero, cargas y criterios estructurales. Los contenidos fueron parafraseados y simplificados para consulta rápida.",
+    subtitle: "Fuentes normativas y libros base",
+    heroTitle: "Bibliografía técnica Colombia + Argentina + referencias internacionales",
+    heroText: "Fuentes de consulta para cargas, sismo, hormigón/concreto, acero, geotecnia, modelado y criterios de diseño. Usar siempre la versión vigente y el marco legal del proyecto.",
     menu: [
       {id:"norm_col_arg", label:"Colombia y Argentina"},
       {id:"internacional", label:"Referencias internacionales"},
+      {id:"libros", label:"Libros recomendados"},
       {id:"nota_bib", label:"Nota de uso"}
     ],
     sections: {
@@ -1687,10 +2024,11 @@ const modules = {
           <table>
             <thead><tr><th>Fuente</th><th>Uso dentro de la guía</th><th>Enlace</th></tr></thead>
             <tbody>
-              <tr><td class="value">Ministerio de Vivienda Colombia · Decreto 0926 de 2010</td><td>Referencia oficial de la NSR-10 para construcciones sismo resistentes.</td><td><a href="https://minvivienda.gov.co/normativa/decreto-0926-2010" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
-              <tr><td class="value">Gestor Normativo Colombia · Decreto 926 de 2010</td><td>Adopción del Reglamento Colombiano de Construcción Sismorresistente NSR-10.</td><td><a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=39255" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
-              <tr><td class="value">INTI · CIRSOC</td><td>Reglamentos nacionales argentinos de seguridad estructural para obras civiles.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
-              <tr><td class="value">INTI · Reglamentos CIRSOC e INPRES-CIRSOC</td><td>Consulta de reglamentos argentinos disponibles.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+              <tr><td class="value">NSR-10 · Reglamento Colombiano de Construcción Sismo Resistente</td><td>Base colombiana para requisitos generales, cargas, concreto estructural, estructuras metálicas, geotecnia y supervisión técnica.</td><td><a href="https://www.idrd.gov.co/construcciones/lineamientos-y-especificaciones-tecnicas-idrd" target="_blank" rel="noopener">Consultar títulos NSR-10</a></td></tr>
+              <tr><td class="value">Decreto 1401 de 2023 · Colombia</td><td>Modificación parcial del Reglamento Colombiano de Construcción Sismo Resistente NSR-10.</td><td><a href="https://www.alcaldiabogota.gov.co/sisjur/normas/Norma1.jsp?i=145699" target="_blank" rel="noopener">Abrir decreto</a></td></tr>
+              <tr><td class="value">INTI · CIRSOC Argentina</td><td>Organismo de referencia para reglamentos argentinos de seguridad estructural en obras civiles.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc" target="_blank" rel="noopener">Abrir CIRSOC</a></td></tr>
+              <tr><td class="value">Reglamentos CIRSOC e INPRES-CIRSOC</td><td>Cargas, viento, sismo, hormigón, acero, mampostería y madera según reglamentos argentinos.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">Consultar reglamentos</a></td></tr>
+              <tr><td class="value">CIRSOC 201 · Estructuras de hormigón</td><td>Referencia argentina para diseño de estructuras de hormigón.</td><td><a href="https://contenidos.inpres.gob.ar/docs/Reglamentos/CIRSOC-201-Reglamento.pdf" target="_blank" rel="noopener">Abrir PDF</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -1701,10 +2039,26 @@ const modules = {
           <table>
             <thead><tr><th>Fuente</th><th>Uso dentro de la guía</th><th>Enlace</th></tr></thead>
             <tbody>
-              <tr><td class="value">ACI 318</td><td>Hormigón estructural: resistencia, servicio, detalle, durabilidad y requisitos de diseño.</td><td><a href="https://www.concrete.org/store/productdetail.aspx?ItemID=318U19" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
-              <tr><td class="value">AISC 360</td><td>Diseño y construcción de estructuras de acero.</td><td><a href="https://www.aisc.org/aisc/explore-aisc/aisc-360/" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
-              <tr><td class="value">AISC Current Standards</td><td>Estándares vigentes y recursos técnicos de acero estructural.</td><td><a href="https://www.aisc.org/aisc/publications/current-standards/" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
-              <tr><td class="value">ASCE 7</td><td>Cargas mínimas de diseño, viento, sismo y combinaciones.</td><td><a href="https://www.asce.org/publications-and-news/asce-7" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+              <tr><td class="value">ACI 318</td><td>Hormigón/concreto estructural: resistencia, servicio, detalle, durabilidad y requisitos de diseño.</td><td><a href="https://www.concrete.org/store/productdetail.aspx?ItemID=318U19" target="_blank" rel="noopener">Abrir ACI</a></td></tr>
+              <tr><td class="value">AISC 360</td><td>Diseño y construcción de estructuras de acero.</td><td><a href="https://www.aisc.org/aisc/explore-aisc/aisc-360/" target="_blank" rel="noopener">Abrir AISC 360</a></td></tr>
+              <tr><td class="value">AISC Current Standards</td><td>Estándares vigentes y recursos técnicos de acero estructural.</td><td><a href="https://www.aisc.org/aisc/publications/current-standards/" target="_blank" rel="noopener">Abrir estándares</a></td></tr>
+              <tr><td class="value">ASCE 7</td><td>Cargas mínimas de diseño, viento, sismo y combinaciones.</td><td><a href="https://www.asce.org/publications-and-news/asce-7" target="_blank" rel="noopener">Abrir ASCE 7</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      `,
+      libros: `
+        <div class="section">
+          <h2>Libros recomendados para criterio estructural</h2>
+          <table>
+            <thead><tr><th>Referencia</th><th>Tema</th><th>Uso práctico</th></tr></thead>
+            <tbody>
+              <tr><td class="value">Nilson, Darwin & Dolan</td><td>Diseño de estructuras de concreto.</td><td>Base conceptual para flexión, corte, servicio y detalle.</td></tr>
+              <tr><td class="value">McCormac & Brown</td><td>Diseño de hormigón armado.</td><td>Lectura práctica para predimensionamiento y diseño.</td></tr>
+              <tr><td class="value">Salmon, Johnson & Malhas</td><td>Steel Structures.</td><td>Diseño de acero, miembros y conexiones.</td></tr>
+              <tr><td class="value">Segui</td><td>Steel Design.</td><td>Acero estructural con enfoque didáctico.</td></tr>
+              <tr><td class="value">Chopra</td><td>Dynamics of Structures.</td><td>Dinámica estructural, sismo, modos y espectros.</td></tr>
+              <tr><td class="value">Bowles</td><td>Foundation Analysis and Design.</td><td>Cimentaciones/fundaciones e interacción con suelo.</td></tr>
             </tbody>
           </table>
         </div>
@@ -1712,7 +2066,8 @@ const modules = {
       nota_bib: `
         <div class="section">
           <h2>Nota de uso</h2>
-          <div class="warn-box"><strong>Importante:</strong> esta guía no reproduce normas completas ni reemplaza documentos oficiales. Usa conceptos parafraseados y rangos orientativos. Cada proyecto debe verificarse con la norma vigente, el contrato, la autoridad local y el profesional responsable.</div>
+          <div class="warn-box"><strong>Importante:</strong> esta guía no reproduce normas completas ni reemplaza documentos oficiales. Usa conceptos parafraseados y rangos orientativos. Cada proyecto debe verificarse con norma vigente, contrato, autoridad local, estudio geotécnico y profesional responsable.</div>
+          <div class="senior-box"><h3>Criterio de 20+ años</h3><p>La bibliografía sirve para construir criterio, no para copiar fórmulas a ciegas. El proyecto manda: uso, suelo, cargas, sistema resistente, constructibilidad, detalle y control de calidad.</p></div>
         </div>
       `
     }
@@ -1775,10 +2130,27 @@ function renderHero(){
       <input id="searchInput" type="search" placeholder="Buscar: hormigón, acero, pórtico, muro, losa, viga, columna, deriva, flecha, pandeo, punzonamiento..." />
       <button id="searchBtn">Buscar</button>
     </div>
+    <div class="quick-tools" aria-label="Accesos rápidos">
+      <button type="button" data-module="normativa">Normativa Colombia / Argentina</button>
+      <button type="button" data-module="predim">Predimensionamiento</button>
+      <button type="button" data-module="modelado">Validar modelo</button>
+      <button type="button" data-module="vocabulario">Vocabulario técnico</button>
+      <button type="button" data-module="bibliografia">Bibliografía</button>
+    </div>
   `;
   document.getElementById("searchBtn").addEventListener("click", handleSearch);
   document.getElementById("searchInput").addEventListener("keydown", (e)=>{
     if(e.key === "Enter") handleSearch();
+  });
+  document.querySelectorAll(".quick-tools button").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      const key = btn.dataset.module;
+      if(modules[key]){
+        currentModule = key;
+        currentSection = modules[key].menu[0].id;
+        render();
+      }
+    });
   });
 }
 
