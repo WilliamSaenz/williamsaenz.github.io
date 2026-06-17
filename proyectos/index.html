@@ -1,248 +1,566 @@
 <!DOCTYPE html>
-
 <html lang="es" class="notranslate">
 <head>
-  <meta charset="UTF-8">
-  <meta name="google" content="notranslate">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Proyectos | William D. Saenz</title>
+  <meta charset="UTF-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>William D. Saenz | Proyectos Técnicos</title>
 
   <style>
-    :root {
-      --fondo: #07111f;
-      --azul-card: #101d2f;
-      --celeste: #38bdf8;
-      --dorado: #c9a24d;
-      --verde-terminal: #39ff14;
-      --blanco: #f8fafc;
-      --gris: #94a3b8;
-      --borde: rgba(255,255,255,0.12);
+    :root{
+      --bg:#07111f;
+      --panel:#0d1b2d;
+      --panel2:#112238;
+      --line:rgba(255,255,255,.16);
+      --text:#f8fafc;
+      --muted:#d4e0ee;
+      --blue:#38bdf8;
+      --gold:#d6ad4f;
+      --green:#39ff14;
+      --shadow:0 24px 64px rgba(0,0,0,.38);
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    *{box-sizing:border-box}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
+    html, body{
+      margin:0;
+      width:100%;
+      height:100%;
+      font-family:Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(56,189,248,0.12), transparent 35%),
-        linear-gradient(180deg, #07111f 0%, #0b1f33 100%);
-      color: var(--blanco);
-      min-height: 100vh;
+        radial-gradient(circle at 8% 10%, rgba(56,189,248,.17), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(214,173,79,.13), transparent 25%),
+        linear-gradient(135deg, #07111f 0%, #0b1f33 100%);
+      color:var(--text);
     }
 
-    header {
-      text-align: center;
-      padding: 55px 20px 30px;
-      border-bottom: 1px solid var(--borde);
+    body{
+      overflow:hidden;
     }
 
-    .terminal {
-      color: var(--verde-terminal);
-      font-family: "Courier New", monospace;
-      margin-bottom: 15px;
+    a{
+      color:inherit;
+      text-decoration:none;
     }
 
-    h1 {
-      margin: 0;
-      font-size: 42px;
+    .page{
+      width:100%;
+      height:100vh;
+      display:grid;
+      grid-template-rows:92px 1fr 30px;
     }
 
-    .subtitle {
-      color: var(--gris);
-      font-size: 18px;
-      margin-top: 12px;
+    header{
+      padding:18px 5vw;
+      border-bottom:1px solid var(--line);
+      background:rgba(7,17,31,.80);
+      backdrop-filter:blur(14px);
     }
 
-    main {
-      max-width: 1050px;
-      margin: 35px auto;
-      padding: 0 20px 40px;
+    .topbar{
+      width:100%;
+      max-width:1540px;
+      height:100%;
+      margin:0 auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:22px;
     }
 
-    .project-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-      margin-top: 25px;
+    .terminal{
+      color:var(--green);
+      font-family:"Courier New", monospace;
+      font-size:17px;
+      font-weight:800;
+      letter-spacing:.2px;
+      white-space:nowrap;
     }
 
-    .project-card {
-      background: rgba(16, 29, 47, 0.92);
-      border: 1px solid var(--borde);
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
-      transition: all 0.25s ease;
+    .top-actions{
+      display:flex;
+      gap:12px;
+      justify-content:flex-end;
+      align-items:center;
     }
 
-    .project-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--celeste);
-      box-shadow: 0 12px 30px rgba(56,189,248,0.15);
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:48px;
+      padding:12px 20px;
+      border-radius:14px;
+      border:2px solid var(--blue);
+      color:var(--text);
+      font-weight:900;
+      font-size:16px;
+      transition:.22s ease;
+      background:rgba(7,17,31,.42);
     }
 
-    .project-card h2 {
-      color: var(--dorado);
-      margin-top: 0;
-      font-size: 22px;
+    .btn:hover{
+      transform:translateY(-2px);
+      background:var(--blue);
+      color:#07111f;
+      box-shadow:0 12px 25px rgba(56,189,248,.18);
     }
 
-    .project-card p {
-      color: #dbeafe;
-      line-height: 1.6;
-      font-size: 15px;
+    .btn.gold{
+      border-color:var(--gold);
+      color:var(--gold);
     }
 
-    .tag {
-      display: inline-block;
-      background: rgba(56,189,248,0.12);
-      color: var(--blanco);
-      border: 1px solid rgba(56,189,248,0.35);
-      padding: 7px 11px;
-      margin: 4px 4px 10px 0;
-      border-radius: 999px;
-      font-size: 13px;
+    .btn.gold:hover{
+      background:var(--gold);
+      color:#07111f;
+      box-shadow:0 12px 25px rgba(214,173,79,.20);
     }
 
-    .button {
-      display: inline-block;
-      margin-top: 12px;
-      padding: 10px 15px;
-      border: 1px solid var(--celeste);
-      border-radius: 10px;
-      color: var(--blanco);
-      text-decoration: none;
-      font-weight: bold;
-      transition: all 0.25s ease;
+    main{
+      width:min(1540px, 92vw);
+      margin:0 auto;
+      padding:34px 0;
+      display:grid;
+      grid-template-columns:.84fr 1.46fr;
+      gap:34px;
+      overflow:hidden;
     }
 
-    .button:hover {
-      background: var(--celeste);
-      color: #07111f;
+    .intro-card,
+    .projects-card{
+      height:100%;
+      min-height:0;
+      border:1px solid var(--line);
+      background:rgba(13,27,45,.89);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
     }
 
-    .gold {
-      border-color: var(--dorado);
-      color: var(--dorado);
+    .intro-card{
+      padding:42px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      gap:26px;
     }
 
-    .gold:hover {
-      background: var(--dorado);
-      color: #07111f;
+    .badge{
+      color:var(--green);
+      font-family:"Courier New", monospace;
+      font-size:15px;
+      font-weight:800;
+      margin-bottom:10px;
     }
 
-    .back {
-      text-align: center;
-      margin-top: 35px;
+    h1{
+      margin:0;
+      font-size:clamp(66px, 5vw, 96px);
+      line-height:.91;
+      letter-spacing:-3px;
     }
 
-    footer {
-      text-align: center;
-      color: var(--gris);
-      padding: 25px;
-      border-top: 1px solid var(--borde);
-      font-size: 14px;
+    .subtitle{
+      margin:26px 0 0;
+      color:var(--muted);
+      font-size:clamp(23px, 1.75vw, 30px);
+      line-height:1.32;
     }
 
-    @media (max-width: 900px) {
-      .project-grid {
-        grid-template-columns: 1fr;
+    .highlight{
+      color:var(--gold);
+      font-weight:900;
+    }
+
+    .summary-box{
+      margin-top:34px;
+      padding:28px 30px;
+      border-radius:26px;
+      border:1px solid rgba(214,173,79,.66);
+      background:
+        linear-gradient(135deg, rgba(214,173,79,.18), rgba(56,189,248,.07)),
+        rgba(7,17,31,.52);
+    }
+
+    .summary-box h2{
+      margin:0 0 14px;
+      color:var(--gold);
+      font-size:35px;
+      line-height:1.1;
+      border:0;
+      padding:0;
+    }
+
+    .summary-box p{
+      margin:0;
+      color:#f4f9ff;
+      font-size:18px;
+      line-height:1.52;
+      font-weight:700;
+    }
+
+    .mini-stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:26px;
+    }
+
+    .mini-stat{
+      padding:18px 16px;
+      border-radius:20px;
+      border:1px solid var(--line);
+      background:rgba(7,17,31,.44);
+    }
+
+    .mini-stat strong{
+      display:block;
+      color:var(--blue);
+      font-size:25px;
+      margin-bottom:7px;
+    }
+
+    .mini-stat span{
+      color:#f2f8ff;
+      font-size:15px;
+      line-height:1.28;
+      font-weight:700;
+    }
+
+    .projects-card{
+      padding:42px;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:24px;
+      padding-bottom:22px;
+      border-bottom:1px solid var(--line);
+    }
+
+    h2{
+      margin:0;
+      color:var(--blue);
+      font-size:48px;
+      line-height:1.05;
+      letter-spacing:-1px;
+    }
+
+    .section-head p{
+      margin:16px 0 0;
+      color:#f5faff;
+      line-height:1.55;
+      font-size:19px;
+      font-weight:700;
+      max-width:760px;
+    }
+
+    .project-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:22px;
+      margin-top:30px;
+    }
+
+    .project-card{
+      min-height:360px;
+      padding:28px;
+      border-radius:24px;
+      border:1px solid var(--line);
+      background:
+        linear-gradient(180deg, rgba(17,34,56,.88), rgba(7,17,31,.68));
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      transition:.24s ease;
+    }
+
+    .project-card:hover{
+      transform:translateY(-5px);
+      border-color:rgba(56,189,248,.50);
+      box-shadow:0 18px 38px rgba(56,189,248,.10);
+    }
+
+    .project-card h3{
+      margin:0 0 14px;
+      color:var(--gold);
+      font-size:27px;
+      line-height:1.12;
+    }
+
+    .project-card p{
+      margin:0;
+      color:#f5faff;
+      line-height:1.56;
+      font-size:17px;
+      font-weight:700;
+    }
+
+    .tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:9px;
+      margin:20px 0 24px;
+    }
+
+    .tag{
+      border:1px solid rgba(56,189,248,.42);
+      background:rgba(56,189,248,.13);
+      border-radius:999px;
+      padding:9px 12px;
+      color:var(--text);
+      font-size:14px;
+      font-weight:900;
+    }
+
+    .back-area{
+      margin-top:auto;
+      padding-top:30px;
+      display:flex;
+      justify-content:center;
+    }
+
+    footer{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--muted);
+      border-top:1px solid var(--line);
+      font-size:14px;
+      background:rgba(7,17,31,.52);
+      font-weight:700;
+    }
+
+    @media (max-width:1200px){
+      html, body{
+        height:auto;
+        min-height:100%;
       }
 
-      h1 {
-        font-size: 34px;
+      body{
+        overflow:auto;
+      }
+
+      .page{
+        height:auto;
+        min-height:100vh;
+        grid-template-rows:auto 1fr auto;
+      }
+
+      header{
+        padding:18px 24px;
+      }
+
+      .topbar{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .top-actions{
+        flex-wrap:wrap;
+        justify-content:flex-start;
+      }
+
+      main{
+        width:calc(100vw - 48px);
+        grid-template-columns:1fr;
+        overflow:visible;
+      }
+
+      .intro-card,
+      .projects-card{
+        height:auto;
+      }
+
+      .project-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width:720px){
+      .mini-stats{
+        grid-template-columns:1fr;
+      }
+
+      .section-head{
+        flex-direction:column;
+      }
+
+      h1{
+        font-size:56px;
+      }
+
+      h2{
+        font-size:36px;
+      }
+
+      .intro-card,
+      .projects-card{
+        padding:28px;
+      }
+
+      .btn{
+        width:100%;
+      }
+
+      .top-actions{
+        width:100%;
       }
     }
   </style>
-
 </head>
 
 <body>
+  <div class="page">
+    <header>
+      <div class="topbar">
+        <div class="terminal" id="terminal"></div>
 
-  <header>
-    <div class="terminal">&gt; cargando proyectos técnicos...</div>
-    <h1>Proyectos</h1>
-    <p class="subtitle">
-      Muestras seleccionadas de programación, presupuestos, estadística, ingeniería civil y análisis de datos.
-    </p>
-  </header>
+        <nav class="top-actions" aria-label="Navegación principal">
+          <a class="btn gold" href="../">Inicio</a>
+          <a class="btn" href="../docs/cv-william-saenz.pdf" target="_blank">Ver CV</a>
+          <a class="btn" href="https://www.linkedin.com/in/william-saenz-s" target="_blank">LinkedIn</a>
+        </nav>
+      </div>
+    </header>
 
-  <main>
+    <main>
+      <section class="intro-card" aria-label="Presentación de proyectos">
+        <div>
+          <div class="badge">> módulo de proyectos activo</div>
+          <h1>Proyectos<br>Técnicos</h1>
 
-```
-<div class="project-grid">
+          <p class="subtitle">
+            Muestras seleccionadas de
+            <span class="highlight">programación, presupuestos, gestión, ingeniería civil y análisis de datos.</span>
+          </p>
 
-  <div class="project-card">
-    <h2>Automatización ETL</h2>
-    <p>
-      Sistema académico interactivo para cargar estudiantes, importar archivos,
-      calcular promedios, revisar rendimiento por materia y visualizar indicadores.
-    </p>
+          <div class="mini-stats">
+            <div class="mini-stat">
+              <strong>ETL</strong>
+              <span>Automatización y procesamiento</span>
+            </div>
+            <div class="mini-stat">
+              <strong>Civil</strong>
+              <span>APU, costos, obra y presupuesto</span>
+            </div>
+            <div class="mini-stat">
+              <strong>Data</strong>
+              <span>Análisis, visualización y decisión</span>
+            </div>
+          </div>
+        </div>
 
-    <span class="tag">Python</span>
-    <span class="tag">JavaScript</span>
-    <span class="tag">CSV / Excel</span>
-    <span class="tag">Dashboard</span>
+        <div class="summary-box">
+          <div class="badge">> acceso organizado</div>
+          <h2>Portafolio por áreas</h2>
+          <p>
+            Cada bloque reúne proyectos con evidencia técnica, herramientas aplicadas
+            y resultados orientados a resolver problemas reales de ingeniería y gestión.
+          </p>
+        </div>
+      </section>
 
-    <br>
-    <a class="button gold" href="./Automatizaci%C3%B3n%20ETL/">
-      Ver sección de Automatización ETL
-    </a>
+      <section class="projects-card" aria-label="Listado de proyectos">
+        <div class="section-head">
+          <div>
+            <h2>Selecciona una línea de trabajo</h2>
+            <p>
+              Accesos directos a secciones del portafolio. La navegación queda más grande,
+              equilibrada y visible desde el primer ingreso.
+            </p>
+          </div>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div>
+              <h3>Automatización ETL</h3>
+              <p>
+                Sistema académico interactivo para cargar estudiantes, importar archivos,
+                calcular promedios, revisar rendimiento por materia y visualizar indicadores.
+              </p>
+
+              <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">JavaScript</span>
+                <span class="tag">CSV / Excel</span>
+                <span class="tag">Dashboard</span>
+              </div>
+            </div>
+
+            <a class="btn gold" href="automatizacion-etl/">Ver Automatización ETL</a>
+          </article>
+
+          <article class="project-card">
+            <div>
+              <h3>Obras Civiles</h3>
+              <p>
+                Template interactivo de APU y presupuesto de obra para estimar costos,
+                recursos, ensayos, materiales, equipos, indirectos, utilidad e impuestos.
+              </p>
+
+              <div class="tags">
+                <span class="tag">APU</span>
+                <span class="tag">Costos</span>
+                <span class="tag">Cotización PDF</span>
+                <span class="tag">Obras Civiles</span>
+              </div>
+            </div>
+
+            <a class="btn gold" href="obras-civiles/">Ver Obras Civiles</a>
+          </article>
+
+          <article class="project-card">
+            <div>
+              <h3>Gestión</h3>
+              <p>
+                Caso de análisis meteorológico aplicado, con gráficos principales,
+                parámetros clave y conclusiones prácticas para toma de decisiones.
+              </p>
+
+              <div class="tags">
+                <span class="tag">Gestión</span>
+                <span class="tag">Python</span>
+                <span class="tag">Visualización</span>
+                <span class="tag">Data aplicada</span>
+              </div>
+            </div>
+
+            <a class="btn gold" href="gestion/">Ver Gestión</a>
+          </article>
+        </div>
+
+        <div class="back-area">
+          <a class="btn" href="../">Volver al portafolio principal</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      © 2026 William D. Saenz | Proyectos técnicos
+    </footer>
   </div>
 
-  <div class="project-card">
-    <h2>Obras Civiles</h2>
-    <p>
-      Template interactivo de APU y presupuesto de obra para estimar costos,
-      recursos, ensayos, materiales, equipos, indirectos, utilidad e impuestos.
-    </p>
+  <script>
+    const texto = "> cargando proyectos técnicos... sistema listo";
+    const terminal = document.getElementById("terminal");
+    let i = 0;
 
-    <span class="tag">APU</span>
-    <span class="tag">Costos</span>
-    <span class="tag">Cotización PDF</span>
-    <span class="tag">Obras Civiles</span>
+    function escribir(){
+      if(i < texto.length){
+        terminal.textContent += texto.charAt(i);
+        i++;
+        setTimeout(escribir, 38);
+      }
+    }
 
-    <br>
-    <a class="button gold" href="./Obras%20Civiles/">
-      Ver sección de Obras Civiles
-    </a>
-  </div>
-
-  <div class="project-card">
-    <h2>Gestión</h2>
-    <p>
-      Caso de análisis meteorológico aplicado, con gráficos principales,
-      parámetros clave y conclusiones prácticas para toma de decisiones.
-    </p>
-
-    <span class="tag">Gestión</span>
-    <span class="tag">Python</span>
-    <span class="tag">Visualización</span>
-    <span class="tag">Data aplicada</span>
-
-    <br>
-    <a class="button gold" href="./Gesti%C3%B3n/">
-      Ver sección de Gestión
-    </a>
-  </div>
-
-</div>
-
-<div class="back">
-  <a class="button" href="../">
-    Volver al portafolio principal
-  </a>
-</div>
-```
-
-  </main>
-
-  <footer>
-    © 2026 William D. Saenz | Proyectos técnicos
-  </footer>
-
+    escribir();
+  </script>
 </body>
 </html>
