@@ -1,68 +1,108 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Geotecnia Aplicada | Guía Técnica</title><link rel="stylesheet" href="../assets/css/styles.css"></head><body>
-<header class="topbar"><div class="container nav"><a class="brand" href="../index.html">Guía Técnica <span>Geotecnia</span></a><nav class="navlinks"><a href="../mecanica-suelos/">Mecánica</a><a class="active" href="./">Geotecnia</a><a href="../pavimentos/">Pavimentos</a><a href="../glosario/">Glosario</a><a href="../bibliografia/">Bibliografía</a><a href="../../index.html">Obras Civiles</a></nav></div></header>
-<main>
-<section class="hero"><div class="container"><div class="breadcrumb"><a href="../index.html">Inicio</a> / Geotecnia Aplicada</div><span class="eyebrow">Modelo · diseño · secuencia · monitoreo</span><h1>Geotecnia Aplicada</h1><p class="lead">Este módulo separa con claridad investigación del subsuelo, cimentaciones, contenciones, taludes e instrumentación. Las ramas se conectan por parámetros, pero no se mezclan como si fueran el mismo problema.</p></div></section>
+# Guía Técnica de Geotecnia, Suelos y Pavimentos
 
-<section><div class="container">
-<div class="tabs" data-tabs="geo"><button class="tab-btn active" data-target="panel-investigacion" data-group="geo">Investigación del subsuelo</button><button class="tab-btn" data-target="panel-perforacion" data-group="geo">Perforación e in situ</button><button class="tab-btn" data-target="panel-esfuerzos" data-group="geo">Esfuerzos efectivos</button><button class="tab-btn" data-target="panel-cimentaciones" data-group="geo">Cimentaciones</button><button class="tab-btn" data-target="panel-contenciones" data-group="geo">Contenciones</button><button class="tab-btn" data-target="panel-taludes" data-group="geo">Estabilidad de taludes</button><button class="tab-btn" data-target="panel-instrumentacion" data-group="geo">Instrumentación</button></div>
-<div class="tab-panel active" data-group="geo" id="panel-investigacion"><div class="section-head"><div><h2>Investigación del subsuelo</h2><p>El objetivo es construir un modelo geotécnico suficiente para el riesgo del proyecto.</p></div><span class="tag">modelo geotécnico</span></div><div class="two-col"><div class="diagram"><img src="../assets/img/flujo-estudio-geotecnico.svg" alt="Flujo de estudio geotécnico"><p class="caption"><strong>Cómo leer:</strong> la campaña debe cerrar incertidumbres relevantes: estratigrafía, agua, resistencia, deformabilidad, agresividad y riesgos.</p></div><div class="card"><h3>Fases y decisiones</h3><div class="table-wrap"><table><thead><tr><th>Fase</th><th>Qué se busca</th><th>Salida útil</th></tr></thead><tbody>
-<tr><td><strong>Factibilidad</strong></td><td>Riesgos mayores, viabilidad, restricciones.</td><td>Mapa de amenazas y necesidad de investigación.</td></tr>
-<tr><td><strong>Anteproyecto</strong></td><td>Comparar alternativas.</td><td>Parámetros preliminares y solución probable.</td></tr>
-<tr><td><strong>Proyecto</strong></td><td>Diseñar con parámetros representativos.</td><td>Perfil, NF, parámetros, recomendaciones y límites.</td></tr>
-<tr><td><strong>Construcción</strong></td><td>Verificar hipótesis.</td><td>Control geotécnico, instrumentación y cambios.</td></tr>
-<tr><td><strong>Operación</strong></td><td>Seguimiento de comportamiento.</td><td>Auscultación, mantenimiento y gestión de riesgos.</td></tr>
-</tbody></table></div><p class="note"><strong>Norma:</strong> CIRSOC 401 y NSR-10 Título H definen el alcance mínimo del estudio según la categoría de riesgo de la obra (número y profundidad de sondeos, ensayos exigidos). <strong>Criterio de obra:</strong> subinvestigar para ahorrar en la etapa de estudios casi siempre cuesta más en imprevistos durante la construcción; el ahorro real está en investigar bien antes de cotizar.</p></div></div></div>
-<div class="tab-panel" data-group="geo" id="panel-perforacion"><div class="section-head"><div><h2>Sistemas de perforación y ensayos in situ</h2><p>La perforación obtiene acceso y muestras; los ensayos in situ miden respuesta del terreno.</p></div><span class="tag">no mezclar</span></div><div class="two-col"><div class="diagram"><img src="../assets/img/perforacion-ensayos.svg" alt="Perforación y ensayos in situ"><p class="caption"><strong>Corrección clave:</strong> SPT no es sistema de perforación; es un ensayo dentro de una perforación. Diamantina sí es método de testificación/perforación, especialmente en roca.</p></div><div class="card"><h3>Lectura técnica</h3><div class="table-wrap"><table><thead><tr><th>Método</th><th>Entrega</th><th>Uso / cuidado</th></tr></thead><tbody>
-<tr><td><strong>Auger / helicoidal</strong></td><td>Avance rápido, muestra alterada.</td><td>Útil en suelos sobre NF; pobre para muestras inalteradas.</td></tr>
-<tr><td><strong>Lavado</strong></td><td>Avance con fluido.</td><td>Puede alterar finos y lectura estratigráfica.</td></tr>
-<tr><td><strong>Rotativa</strong></td><td>Avance en suelos duros/roca blanda.</td><td>Seleccionar herramienta y fluido según material.</td></tr>
-<tr><td><strong>Diamantina</strong></td><td>Testigo de roca/material cementado.</td><td>Permite RQD, recuperación y descripción estructural.</td></tr>
-<tr><td><strong>SPT</strong></td><td>N, muestra alterada.</td><td>Corregir energía, profundidad, diámetro, varillaje y nivel freático según uso.</td></tr>
-<tr><td><strong>CPTu</strong></td><td>qc, fs, u2 continuo.</td><td>Excelente para estratigrafía y correlaciones; necesita calibración local.</td></tr>
-</tbody></table></div><p class="note"><strong>Norma:</strong> SPT según ASTM D1586; CPT/CPTu según ASTM D5778; diamantina según ASTM D2113 (recuperación de testigo) con RQD calculado según ASTM D6032 (índice introducido por D.U. Deere en los años 60). <strong>Criterio de obra:</strong> combinar resultados de varios métodos sin corregir energía o calibración entre ellos genera perfiles "ruidosos" que parecen variabilidad del terreno y en realidad son variabilidad del ensayo.</p></div></div></div>
-<div class="tab-panel" data-group="geo" id="panel-esfuerzos"><div class="section-head"><div><h2>Esfuerzos efectivos</h2><p>Toda decisión de resistencia y deformabilidad depende de σ’, no sólo de carga total.</p></div><span class="tag">σ · u · σ’</span></div><div class="grid grid-2"><div class="card"><h3>Lectura práctica</h3><div class="table-wrap"><table><thead><tr><th>Concepto</th><th>Qué controla</th><th>Riesgo si se ignora</th></tr></thead><tbody>
-<tr><td><strong>σ total</strong></td><td>Peso propio + cargas.</td><td>Sobrestimar resistencia si hay presión de poros alta.</td></tr>
-<tr><td><strong>u presión de poros</strong></td><td>Reduce esfuerzo efectivo.</td><td>Inestabilidad, levantamiento de fondo, falla rápida.</td></tr>
-<tr><td><strong>σ’ efectivo</strong></td><td>Resistencia friccional y deformación.</td><td>Diseño inconsistente de taludes, cimentaciones y muros.</td></tr>
-<tr><td><strong>Δσ por cargas</strong></td><td>Asentamientos y consolidación.</td><td>No detectar estratos compresibles profundos.</td></tr>
-</tbody></table></div><p class="note"><strong>Marco conceptual:</strong> el principio de esfuerzos efectivos lo formuló Terzaghi en la década de 1920 y sigue siendo la base de casi todo el cálculo geotécnico moderno. <strong>Criterio de obra:</strong> es común calcular con el NF de la campaña de estudios y no con el NF real al momento de la excavación; en obras con bombeo activo, u cambia rápido y σ’ queda desactualizado si no se revisa.</p></div><div class="calculator"><h3>Calculadora σ, u, σ’</h3><div class="calc-grid"><div class="field"><label>Profundidad z (m)</label><input id="z_eff" type="number" value="6" step="0.1"></div><div class="field"><label>γ suelo (kN/m³)</label><input id="gamma_eff" type="number" value="18" step="0.1"></div><div class="field"><label>Nivel freático desde superficie (m)</label><input id="zw_eff" type="number" value="2" step="0.1"></div><div class="field"><label>γw (kN/m³)</label><input id="gw_eff" type="number" value="9.81" step="0.01"></div></div><button class="btn" data-calc="calcEffective">Calcular</button><div id="res_eff" class="result">Resultado...</div></div></div></div>
-<div class="tab-panel" data-group="geo" id="panel-cimentaciones"><div class="section-head"><div><h2>Cimentaciones</h2><p>Elegir cimentación es balancear carga, suelo, asentamiento, agua y constructibilidad.</p></div><span class="tag">superficiales / profundas</span></div><div class="card"><div class="table-wrap"><table><thead><tr><th>Solución</th><th>Cuándo suele convenir</th><th>Parámetros críticos</th><th>Alertas</th></tr></thead><tbody>
-<tr><td><strong>Zapatas</strong></td><td>Cargas moderadas y estrato competente somero.</td><td>q<sub>adm</sub>, asentamiento total (δ) / diferencial (Δδ), D<sub>f</sub>, NF.</td><td>Rellenos, suelos colapsables, arcillas blandas o expansivas.</td></tr>
-<tr><td><strong>Plateas</strong> <em>(= losas de fundación)</em></td><td>Cargas repartidas, control de diferenciales, suelos heterogéneos moderados.</td><td>Módulo de balasto (k<sub>s</sub>) / deformabilidad (E<sub>s</sub>), rigidez estructural.</td><td>No “borra” asentamientos; los redistribuye.</td></tr>
-<tr><td><strong>Pilotes excavados</strong></td><td>Estrato competente profundo o cargas altas.</td><td>Fuste (Q<sub>s</sub>), punta (Q<sub>p</sub>), integridad, lodos, limpieza de fondo.</td><td>NF alto, colapso de perforación, estrato blando intermedio.</td></tr>
-<tr><td><strong>Pilotes hincados</strong></td><td>Control por rechazo/energía, producción repetitiva.</td><td>Capacidad axial (Q<sub>u</sub>), vibración, ruido, set-up.</td><td>Daño a vecinos, rechazo falso, licuación local.</td></tr>
-<tr><td><strong>Micropilotes</strong></td><td>Recalce, espacios reducidos, refuerzos.</td><td>Inyección, adherencia (τ<sub>s</sub>), control de ejecución.</td><td>Costos, inclinación, control de lechada.</td></tr>
-<tr><td><strong>Mejoramiento</strong></td><td>Cuando se puede tratar el terreno y evitar cimentación profunda.</td><td>Objetivo: densificar, drenar, cementar o reemplazar.</td><td>Necesita control de calidad y verificación posterior.</td></tr>
-</tbody></table></div><div class="table-wrap" style="margin-top:14px"><h3>Valores orientativos para los parámetros cuantificables</h3><table><thead><tr><th>Parámetro</th><th>Favorable</th><th>Revisar</th><th>Crítico</th></tr></thead><tbody>
-<tr><td>q<sub>adm</sub> (zapata en suelo común)</td><td>&gt;300 kPa (suelo denso/roca blanda)</td><td>100-300 kPa (rango habitual, verificar con asentamiento)</td><td>&lt;100 kPa (replantear tipo o profundidad de cimentación)</td></tr>
-<tr><td>Asentamiento total δ</td><td>&lt;15 mm en estructura convencional</td><td>15-25 mm, según sensibilidad de la estructura</td><td>&gt;25 mm sin verificación específica</td></tr>
-<tr><td>Módulo de balasto k<sub>s</sub> (platea)</td><td>&gt;30.000 kN/m³ (suelo denso)</td><td>10.000-30.000 kN/m³</td><td>&lt;10.000 kN/m³ (revisar espesor o apoyo en pilotes)</td></tr>
-<tr><td>FS de capacidad axial en pilotes</td><td>≥3 sobre carga de servicio</td><td>2-3, según método de verificación</td><td>&lt;2 o sin prueba de carga en proyecto crítico</td></tr>
-</tbody></table><p class="note" style="margin-top:10px"><strong>Criterio de obra:</strong> estos son rangos orientativos de referencia, no valores de diseño; el proyecto, el pliego y el estudio geotécnico específico siempre mandan sobre cualquier rango genérico. Sirven para detectar rápidamente si un resultado de cálculo está dentro de lo esperable o si amerita una segunda mirada.</p></div><p class="note"><strong>Norma:</strong> en pilotes, la carga estática axial se verifica según ASTM D1143 (referencia más confiable), la dinámica de alta deformación según ASTM D4945 (más rápida, requiere correlación) y la integridad de baja deformación según ASTM D5882. <strong>Criterio de obra:</strong> la prueba dinámica es un complemento económico para control de producción, no un sustituto de la estática cuando el proyecto es crítico, el suelo es atípico o hay antecedentes de capacidad dudosa.</p></div></div>
-<div class="tab-panel" data-group="geo" id="panel-contenciones"><div class="section-head"><div><h2>Sistemas de contención y entibación</h2><p>En excavaciones urbanas, la deformación admisible puede controlar más que la falla global.</p></div><span class="tag">muros · anclajes · puntales</span></div><div class="two-col"><div class="diagram"><img src="../assets/img/contenciones.svg" alt="Sistemas de contención"><p class="caption"><strong>Cómo elegir:</strong> profundidad, agua, proximidad de estructuras, rigidez requerida, espacio para anclajes, secuencia y monitoreo. CIRSOC 401 y NSR-10 Título H exigen sustentar la elección en el modelo geotécnico, no solo en costo.</p></div><div class="card"><h3>Criterios de selección</h3><div class="table-wrap"><table><thead><tr><th>Sistema</th><th>Ventaja</th><th>Cuidado principal</th><th>Caso típico en obra</th></tr></thead><tbody>
-<tr><td><strong>Muro pantalla</strong></td><td>Rígido, apto con agua y excavaciones profundas.</td><td>Juntas, verticalidad, lodos, costo y logística.</td><td>Sótanos de varios niveles con NF alto y medianeras inmediatas: permite excavar bajo agua sin abatimiento masivo.</td></tr>
-<tr><td><strong>Berlinés</strong></td><td>Flexible, modular, económico en ciertos suelos.</td><td>Deformaciones, agua, pérdida de suelo entre perfiles.</td><td>Excavación de 4–6 m en suelo cohesivo sin agua relevante, con tablones colocados por etapas a medida que avanza la excavación.</td></tr>
-<tr><td><strong>Secantes/tangentes</strong></td><td>Buen control de ingreso de agua y suelo.</td><td>Desviaciones y continuidad entre pilotes.</td><td>Excavaciones profundas en suelo granular con agua donde un muro pantalla encarece la obra pero la impermeabilidad sigue siendo crítica.</td></tr>
-<tr><td><strong>Anclajes activos</strong></td><td>Reduce desplazamientos y momentos mediante tesado controlado.</td><td>Longitud libre/bulbo, propiedad vecina, pruebas de carga.</td><td>Muro pantalla de sótanos profundos donde no se puede apuntalar el vano completo; el anclaje tesado reemplaza al puntal y libera el espacio de excavación.</td></tr>
-<tr><td><strong>Anclajes pasivos</strong></td><td>No requiere tesado ni control de carga inicial; instalación y verificación más simples.</td><td>Necesitan que el terreno se deforme para movilizar resistencia; mal indicador en suelos blandos con baja deformación admisible.</td><td>Talud rocoso con cuña inestable identificada: los pasadores cruzan el plano de discontinuidad y solo trabajan si el bloque intenta deslizar.</td></tr>
-<tr><td><strong>Puntales</strong> <em>(no confundir con pilotes)</em></td><td>No invaden predios vecinos.</td><td>Interferencia constructiva, precarga, pandeo y secuencia.</td><td>Excavación angosta entre medianeras en zona urbana densa, sin predio vecino disponible para anclar.</td></tr>
-<tr><td><strong>Soil nailing</strong></td><td>Bueno para cortes por etapas.</td><td>Necesita deformación para movilizar; drenaje superficial esencial.</td><td>Corte vial en ladera de suelo residual competente, ejecutado en bancos descendentes de 1.5–2 m con shotcrete inmediato; no sirve si el corte se satura o pierde cohesión rápido.</td></tr>
-</tbody></table></div><p class="note"><strong>Ojo con el término:</strong> los <em>puntales</em> de esta tabla son elementos de compresión horizontal o inclinada que arriostran una excavación entre sus propios muros (estructura temporal de apuntalamiento). No tienen relación con los <em>pilotes</em> de la tabla de Cimentaciones, que son elementos verticales de fundación profunda que transmiten carga al suelo. Son dos sistemas distintos que solo comparten que ambos son elementos esbeltos de hormigón o acero.</p></div></div>
-<div class="calculator"><h3>Empuje activo Rankine preliminar</h3><div class="calc-grid"><div class="field"><label>φ’ (°)</label><input id="phi_rank" type="number" value="30" step="1"></div><div class="field"><label>H (m)</label><input id="H_rank" type="number" value="5" step="0.1"></div><div class="field"><label>γ (kN/m³)</label><input id="gamma_rank" type="number" value="18" step="0.1"></div><div class="field"><label>q sobrecarga (kPa)</label><input id="q_rank" type="number" value="10" step="1"></div></div><button class="btn" data-calc="calcRankine">Calcular</button><div id="res_rank" class="result">Resultado...</div></div>
-</div>
-<div class="tab-panel" data-group="geo" id="panel-taludes"><div class="section-head"><div><h2>Estabilidad de taludes</h2><p>Separada de contenciones: aquí el problema principal es la masa inclinada y su mecanismo de falla.</p></div><span class="tag">FS · agua · geometría</span></div><div class="two-col"><div class="diagram"><img src="../assets/img/taludes.svg" alt="Estabilidad de taludes"><p class="caption"><strong>Cómo leer:</strong> geometría, presión de poros, resistencia al corte y erosión del pie gobiernan el FS. El drenaje suele ser la medida más eficiente.</p></div><div class="card"><h3>Señales y acciones</h3><div class="table-wrap"><table><thead><tr><th>Señal</th><th>Lectura probable</th><th>Acción</th></tr></thead><tbody>
-<tr><td><strong>Grieta en corona</strong></td><td>Inicio de movimiento o tracción.</td><td>Restringir carga, sellar infiltración, monitorear apertura.</td></tr>
-<tr><td><strong>Surgencia de agua</strong></td><td>Presión de poros alta o flujo preferencial.</td><td>Drenaje superficial/profundo, alivio de presión.</td></tr>
-<tr><td><strong>Pie erosionado</strong></td><td>Pérdida de confinamiento.</td><td>Protección de pie, berma, muro de pie o enrocado.</td></tr>
-<tr><td><strong>Deformación progresiva</strong></td><td>Falla en desarrollo.</td><td>Instrumentación, reducción de carga, estabilización por etapas.</td></tr>
-<tr><td><strong>FS bajo</strong></td><td>Margen insuficiente.</td><td>Reperfilado, drenaje, refuerzo, bermas o contención local.</td></tr>
-</tbody></table></div><p class="note"><strong>Norma:</strong> no existe un ensayo único normalizado para taludes; el análisis combina parámetros de resistencia obtenidos en laboratorio (corte directo ASTM D3080, triaxial CD ASTM D7181) con métodos de equilibrio límite (Bishop, Janbu, Spencer) o numéricos. <strong>Criterio de obra:</strong> un FS "aprobado" calculado con parámetros pico en una arcilla sensible puede no sobrevivir la primera lluvia fuerte; conviene revisar también la condición residual y el caso saturado.</p></div></div></div>
-<div class="tab-panel" data-group="geo" id="panel-instrumentacion"><div class="section-head"><div><h2>Instrumentación y semáforo geotécnico</h2><p>Instrumentar no es poner sensores: es definir umbrales, frecuencia, responsables y respuesta.</p></div><span class="tag">monitoreo</span></div><div class="card"><div class="table-wrap"><table><thead><tr><th>Instrumento</th><th>Mide</th><th>Uso típico</th><th>Alerta técnica</th></tr></thead><tbody>
-<tr><td><strong>Piezómetro</strong></td><td>Presión de poros / NF.</td><td>Taludes, excavaciones, consolidación.</td><td>Subida rápida de u reduce σ’ y FS.</td></tr>
-<tr><td><strong>Inclinómetro</strong></td><td>Desplazamiento lateral en profundidad.</td><td>Contenciones, taludes, pantallas.</td><td>Identifica plano de movimiento y velocidad.</td></tr>
-<tr><td><strong>Prismas topográficos</strong></td><td>Movimientos superficiales.</td><td>Medianeras, coronas, estructuras vecinas.</td><td>Velocidad creciente pesa más que valor aislado.</td></tr>
-<tr><td><strong>Placas de asentamiento</strong></td><td>Asentamiento vertical.</td><td>Rellenos, terraplenes, precargas.</td><td>Comparar con consolidación estimada y tasa.</td></tr>
-<tr><td><strong>Celdas de carga</strong></td><td>Carga en anclajes/puntales.</td><td>Excavaciones profundas.</td><td>Pérdida o aumento anómalo exige revisión.</td></tr>
-</tbody></table></div><p class="note"><strong>Norma:</strong> cada instrumento sigue su propia práctica de instalación y calibración (por ejemplo, ASTM D7764 para la verificación de piezómetros de cuerda vibrante antes de instalarlos); no hay un único ensayo que cubra todo el plan de monitoreo. <strong>Criterio de obra:</strong> un instrumento sin lectura de base confiable previa a la excavación no sirve para detectar cambio, por más preciso que sea. Semáforo recomendado: verde = comportamiento dentro de predicción; amarillo = tendencia o valor cercano al umbral; rojo = superar umbral o acelerar velocidad de movimiento. El plan debe existir antes de excavar.</p></div></div>
-</div></section>
-</main><footer class="footer"><div class="container">Geotecnia Aplicada · Basado en criterio técnico general y referencias normativas; validar para cada jurisdicción y proyecto.</div></footer><script src="../assets/js/app.js"></script></body></html>
+Paquete público para GitHub Pages organizado en cinco módulos:
+
+1. Mecánica de Suelos
+2. Geotecnia Aplicada
+3. Pavimentos
+4. Glosario técnico interactivo
+5. Bibliografía y fuentes técnicas
+
+No incluye PDFs ni diapositivas privadas. Los gráficos, tablas y textos fueron preparados como material de consulta pública.
+
+## Estructura
+
+```text
+Geotecnia y Pavimentos/
+├── index.html
+├── mecanica-suelos/
+├── geotecnia-aplicada/
+├── pavimentos/
+├── glosario/
+├── bibliografia/
+├── assets/
+│   ├── css/
+│   ├── js/
+│   └── img/
+├── FUENTES.md
+└── README.md
+```
+
+## Uso en GitHub
+
+Subir el contenido descomprimido dentro de la carpeta del proyecto. El archivo principal debe llamarse `index.html`.
+
+## v5 — fusión de ramas (corrección + nuevo contenido sobre la base de glosario/bibliografía)
+
+Esta versión une dos líneas de trabajo que habían avanzado por separado: la rama con Glosario y Bibliografía (v4), y una rama de corrección y ampliación de Mecánica de Suelos/Pavimentos. Ninguna de las dos pierde nada de la otra.
+
+**Bugs corregidos** (texto que se cortaba por exceder el ancho del SVG, o se superponía con otro elemento):
+- `granulometria-curva.svg`: leyenda final partida en dos líneas.
+- `contenciones.svg`: título partido en dos líneas, contenido reacomodado.
+- `pavimento-flexible.svg`: título partido en dos líneas, contenido reacomodado.
+- `fallas-pavimentos.svg`: tarjeta "Bache" recorrida para no tocar el borde del canvas.
+- `perforacion-ensayos.svg`: leyendas de salida bajadas para no pisar las cajas SPT/CPTu/PMT.
+
+**Contenido nuevo:**
+- Mecánica de Suelos: sección de **Densidad de campo** (cono de arena / densímetro nuclear / membrana de hule) con diagrama y tabla comparativa.
+- Mecánica de Suelos: **Corte directo** separado de triaxiales, con diagrama propio (caja de corte + envolvente τ = c + σ·tanφ).
+- Mecánica de Suelos: **Relaciones de fase** con diagrama de fases (volumen/peso), rangos típicos de e, n, Sr, Gs y una calculadora preliminar.
+- Pavimentos: sección de **Pavimento rígido** (losa, juntas, pasadores) con diagrama propio.
+- Pavimentos: **Indicadores de estado PCI e IRI**, con tablas de rangos y una calculadora de interpretación de PCI.
+
+**Consistencia:**
+- Se unificó el `<title>` de las páginas internas a "Guía Técnica" (antes algunas conservaban "CivilScope").
+- Se sumaron los pills correspondientes en la portada (`index.html`) para Mecánica de Suelos y Pavimentos.
+
+El Glosario (112 términos) y la Bibliografía (22 fuentes) de la v4 quedan sin cambios en esta etapa; se profundizan en etapas siguientes.
+
+## Fase B — completa (normativa específica y criterio de obra)
+
+Se tejió en el texto, sección por sección, la norma de ensayo exacta (ASTM/AASHTO/CIRSOC/NSR-10) junto con un criterio de obra concreto, evitando que el sitio quede solo en "rangos orientativos" sin respaldo.
+
+**Mecánica de Suelos (9/9 secciones):** Granulometría (ASTM D6913/D7928, AASHTO T27/T88), Atterberg (ASTM D4318, AASHTO M145), Compactación (ASTM D698/D1557, AASHTO T99/T180), Densidad de campo (ASTM D1556/D2167/D6938), Permeabilidad (ASTM D2434/D5084), Relaciones de fase (ASTM D854), Consolidación (ASTM D2435, construcción de Casagrande), Corte directo (ASTM D3080), Triaxiales UU/CU/CD (ASTM D2850/D4767/D7181).
+
+**Geotecnia Aplicada (7/7 secciones):** Investigación del subsuelo (CIRSOC 401/NSR-10 Título H), Perforación e in situ (SPT ASTM D1586, CPTu ASTM D5778, diamantina/RQD ASTM D2113/D6032), Esfuerzos efectivos (principio de Terzaghi), Cimentaciones (ASTM D1143/D4945/D5882 para pilotes), Contenciones (casos reales + CIRSOC/NSR-10), Taludes (ASTM D3080/D7181 + métodos de equilibrio), Instrumentación (criterio de lectura base).
+
+**Pavimentos (7/8 secciones, "Ensayos principales" queda como índice general):** Estructura flexible, Pavimento rígido (ASTM C39/C78), CBR/DCP (ASTM D1883/AASHTO T193, ASTM D6951), Material granular (ASTM C131), Mezclas asfálticas (ASTM D6927/D2726/D2041), Fallas típicas (ASTM D6433), PCI/IRI (ASTM D6433/E1926).
+
+**Nota para Fase D:** quedaron varias normas citadas en el texto que todavía no figuran como entrada propia en Bibliografía (D7181, AASHTO M145, D1586, D6951, D6927, entre otras). Se evalúa en la siguiente etapa qué tan exhaustiva conviene que sea esa lista.
+
+## Fase C — completa (casos escalonados en el Glosario)
+
+Se aplicó un criterio de progresión favorable → alerta → crítico a 15 términos del Glosario (112 en total), elegidos por tener un umbral numérico claro donde el juicio de obra realmente cambia, repartidos parejo entre las tres áreas:
+
+**Suelos:** Índice de plasticidad IP, OCR, Coeficiente de consolidación Cv, Permeabilidad k, SUCS.
+**Geotecnia:** SPT, RQD, Capacidad portante, Licuación, Asentamiento diferencial.
+**Pavimentos:** CBR, Módulo resiliente Mr, IRI, Ahuellamiento, Fatiga.
+
+Los demás 97 términos conservan su ejemplo único original; ampliar a todo el glosario se consideró desproporcionado para el valor que agrega.
+
+**Pendiente:** Fase D (Bibliografía), a definir en una próxima etapa.
+
+## Fase D — completa (reconciliación de Bibliografía)
+
+Se agregaron 17 entradas nuevas a la Bibliografía (de 22 a 39 fuentes), agrupando normas relacionadas en una sola entrada cuando tiene sentido (por ejemplo, D1143/D4945/D5882 para ensayos de pilotes, o D2726/D2041 para densidad de mezcla asfáltica) en vez de crear una entrada por cada designación suelta:
+
+- **Mecánica de suelos:** ASTM D6913/D7928 (granulometría), D854 (Gs), D2434/D5084 (permeabilidad), D7181 (triaxial CD).
+- **Geotecnia aplicada:** ASTM D1586 (SPT), D5778 (CPTu), D2113/D6032 (diamantina/RQD), D1143/D4945/D5882 (capacidad e integridad de pilotes). Nueva categoría de filtro.
+- **Pavimentos:** ASTM D1556/D2167 (densidad de campo), D6927 (Marshall), D2726/D2041 (densidad/Rice), D6951 (DCP), C131 (Los Ángeles), C39/C78 (hormigón para pavimento rígido), D6433 (PCI), E1926 (IRI).
+- **Normativa AASHTO:** una entrada consolidada con las equivalencias AASHTO (T27/T88, M145, T99/T180, T191, T193) citadas en el sitio. Nueva categoría de filtro.
+
+Se agregaron las dos categorías nuevas ("Geotecnia aplicada" y "Normativa AASHTO") también al filtro desplegable de la página, para que las nuevas fuentes sean reales y buscables, no solo datos sueltos.
+
+Con esto, las cuatro fases (A→B→C→D) quedan completas.
+
+## Ronda de feedback adicional (post-D)
+
+Tras revisar el sitio en producción, se incorporaron los siguientes ajustes y contenidos nuevos:
+
+**Geotecnia aplicada:** se aclaró que "Puntales" (arriostre temporal de excavación) no tiene relación con "Pilotes" (fundación profunda); se aclaró que "Plateas" = "Losas de fundación"; se agregaron símbolos entre paréntesis a los parámetros críticos de la tabla de Cimentaciones (q_adm, δ, k_s, Q_s, Q_p, Q_u, τ_s); se agregó una sub-tabla de valores orientativos (favorable/revisar/crítico) para los parámetros cuantificables de esa misma tabla.
+
+**Mecánica de suelos:** se agregó una tabla de valores de referencia para φ y c (bueno/intermedio/crítico) en Corte directo; se separó "Compactación y densidad de campo" en dos secciones distintas y se agregó una tabla comparativa Proctor estándar (ASTM D698) vs modificado (ASTM D1557) con energía, capas/golpes, maza, densidad y humedad típicas; se agregó una sección nueva completa de Geofísica (crosshole D4428, downhole D7400, MASW, refracción D5777, reflexión D7128, resistividad D6431, georradar D6432) con interpretación de Vs30 según clases de sitio NEHRP/IBC. **La página completa se reestructuró en pestañas clickeables** (10 pestañas: Granulometría, Atterberg, Compactación, Densidad de campo, Permeabilidad, Relaciones de fase, Consolidación, Corte directo, Triaxiales, Geofísica y Vs) en vez de scroll largo continuo, usando el mecanismo de tabs que ya existía en app.js.
+
+**Pavimentos:** se agregó una sección sobre capacidad estructural aeroportuaria (PCN/ACN históricos y su evolución a PCR/ACR desde la Enmienda 15 al Anexo 14 de OACI, vigente en forma obligatoria desde el 28/11/2024), aclarando que es un sistema distinto del PCI; se agregó una tabla de rangos CBR/Proctor por capa para pavimento aeroportuario.
+
+**Bibliografía:** se agregaron 4 entradas (39→43 fuentes): OACI Anexo 14/transición ACR-PCR, y tres grupos de normas ASTM de geofísica (D4428/D7400, D5777/D7128, D6429/D6431/D6432). Se corrigió además el enlace de CIRSOC 401, que apuntaba a un PDF directo caído; ahora apunta al portal de argentina.gob.ar que sí carga.
+
+**Pendiente para una próxima ronda:** extender la tabla de perforación/in situ con PMT, VST y la familia DPL/DPH/DPSH; evaluar si vale la pena sumar contenido de ensayos químicos/DRX/SEM (más orientado a ambiental/académico que a obra civil práctica); considerar un diagrama SVG propio para la nueva sección de Geofísica.

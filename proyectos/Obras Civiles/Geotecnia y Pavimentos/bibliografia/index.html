@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bibliografía | Guía Técnica</title>
+  <link rel="stylesheet" href="../assets/css/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="container nav">
+    <a class="brand" href="../index.html">Guía Técnica <span>Bibliografía</span></a>
+    <nav class="navlinks">
+      <a href="../mecanica-suelos/">Mecánica</a>
+      <a href="../geotecnia-aplicada/">Geotecnia</a>
+      <a href="../pavimentos/">Pavimentos</a>
+      <a href="../glosario/">Glosario</a>
+      <a class="active" href="./">Bibliografía</a>
+      <a href="../../index.html">Obras Civiles</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="container">
+      <div class="breadcrumb"><a href="../index.html">Inicio</a> / Bibliografía</div>
+      <h1>Bibliografía y fuentes técnicas</h1>
+      <p class="lead">
+        Fuentes públicas usadas como respaldo conceptual y normativo para la guía.
+        Incluye reglamentos, normas de ensayo, documentación institucional y bibliografía clásica.
+      </p>
+      <div class="kpi">
+        <span class="pill ok">Enlaces directos</span>
+        <span class="pill warn">Normativa</span>
+        <span class="pill">Ensayos</span>
+        <span class="pill">Bibliografía clásica</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="card">
+        <h2>Buscar fuente</h2>
+        <div class="ref-toolbar">
+          <input id="sourceSearch" class="searchbox" type="search" placeholder="Buscar: NSR-10, CIRSOC, CBR, Proctor, triaxial, INVÍAS..." autocomplete="off">
+          <select id="sourceArea" class="selectbox">
+            <option value="all">Todas las categorías</option>
+            <option value="Bibliografía clásica">Bibliografía clásica</option><option value="Ensayos Colombia">Ensayos Colombia</option><option value="Geotecnia aplicada">Geotecnia aplicada</option><option value="Mecánica de suelos">Mecánica de suelos</option><option value="Normativa AASHTO">Normativa AASHTO</option><option value="Normativa Argentina">Normativa Argentina</option><option value="Normativa Colombia">Normativa Colombia</option><option value="Pavimentos">Pavimentos</option>
+          </select>
+        </div>
+        <p class="muted" id="sourceCounter"></p>
+      </div>
+
+      <div class="source-note" style="margin-top:18px">
+        Nota técnica: las normas ASTM, AASHTO, CIRSOC, NSR e INVÍAS deben consultarse en su versión vigente
+        para uso contractual. Esta guía resume criterios generales y no reemplaza el pliego, la memoria de cálculo
+        ni la responsabilidad del profesional interviniente.
+      </div>
+
+      <div id="sourceList" class="ref-list"></div>
+      <div id="sourceEmpty" class="no-results">No se encontraron fuentes con ese filtro.</div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container">Bibliografía técnica de consulta · Enlaces directos a fuentes públicas o páginas editoriales/institucionales.</div>
+</footer>
+
+<script>
+const SOURCES = [
+  {
+    "area": "Normativa Colombia",
+    "title": "NSR-10 · Título H: Estudios Geotécnicos",
+    "org": "Reglamento Colombiano de Construcción Sismo Resistente / Sociedad Colombiana de Geotecnia",
+    "use": "Base normativa para estudios geotécnicos de edificaciones: investigación del subsuelo, recomendaciones de cimentaciones, excavaciones, rellenos, estructuras de contención y amenazas geotécnicas.",
+    "url": "https://www.scg.org.co/Titulo-H-NSR-10-Decreto%20Final-2010-01-14.pdf"
+  },
+  {
+    "area": "Normativa Argentina",
+    "title": "CIRSOC 401 · Reglamento Argentino de Estudios Geotécnicos",
+    "org": "INPRES-CIRSOC / INTI",
+    "use": "Referencia argentina para estudios geotécnicos vinculados a viviendas, edificios, estructuras industriales y obras civiles. Descargable en PDF desde el portal de Reglamentos INPRES-CIRSOC.",
+    "url": "https://www.argentina.gob.ar/interior/secretaria-de-planificacion-territorial-y-coordinacion-de-obra-publica/Reglamentos-INPRES-CIRSOC"
+  },
+  {
+    "area": "Normativa Argentina",
+    "title": "Reglamentos INPRES-CIRSOC",
+    "org": "Argentina.gob.ar",
+    "use": "Portal oficial de reglamentos INPRES-CIRSOC, incluyendo CIRSOC 401 y comentarios.",
+    "url": "https://www.argentina.gob.ar/interior/secretaria-de-planificacion-territorial-y-coordinacion-de-obra-publica/Reglamentos-INPRES-CIRSOC"
+  },
+  {
+    "area": "Normativa Argentina",
+    "title": "INTI · CIRSOC",
+    "org": "Instituto Nacional de Tecnología Industrial",
+    "use": "Sitio institucional del sistema CIRSOC para reglamentos de seguridad estructural y estudios geotécnicos.",
+    "url": "https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc"
+  },
+  {
+    "area": "Ensayos Colombia",
+    "title": "INVÍAS · Documentos técnicos",
+    "org": "Instituto Nacional de Vías de Colombia",
+    "use": "Repositorio público de documentos técnicos, normas de ensayo y especificaciones relacionadas con materiales viales.",
+    "url": "https://www.invias.gov.co/publicaciones/4154/documentos-tecnicos/"
+  },
+  {
+    "area": "Ensayos Colombia",
+    "title": "INVÍAS · Manual de Normas de Ensayo de Materiales para Carreteras",
+    "org": "Instituto Nacional de Vías de Colombia",
+    "use": "Manual usado como referencia para ensayos de materiales de carretera y control de laboratorio/obra.",
+    "url": "https://caminoscomunitarios.invias.gov.co/docs/caja-herramientas/anexos-modulo-tecnico/normas-ensayo/normas_ensayo_100.pdf"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D2487 · Unified Soil Classification System",
+    "org": "ASTM International",
+    "use": "Clasificación de suelos para ingeniería basada en granulometría, límite líquido e índice de plasticidad.",
+    "url": "https://www.astm.org/d2487-17.html"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D4318 · Liquid Limit, Plastic Limit and Plasticity Index",
+    "org": "ASTM International",
+    "use": "Ensayos de límites de Atterberg: LL, LP e IP para suelos finos.",
+    "url": "https://www.astm.org/d4318-17e01.html"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D698 · Laboratory Compaction Using Standard Effort",
+    "org": "ASTM International",
+    "use": "Proctor estándar: relación humedad-densidad seca para control de compactación.",
+    "url": "https://www.astm.org/d0698-12r21.html"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D1557 · Laboratory Compaction Using Modified Effort",
+    "org": "ASTM International",
+    "use": "Proctor modificado: compactación con mayor energía para suelos y mezclas suelo-agregado.",
+    "url": "https://www.astm.org/d1557-12r21.html"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D2435/D2435M · One-Dimensional Consolidation",
+    "org": "ASTM International",
+    "use": "Ensayo de consolidación unidimensional para estimar magnitud y velocidad de asentamientos.",
+    "url": "https://www.astm.org/d2435_d2435m-11r20.html"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D2166/D2166M · Unconfined Compressive Strength",
+    "org": "ASTM International",
+    "use": "Compresión inconfinada para resistencia de suelos cohesivos en términos de esfuerzos totales.",
+    "url": "https://www.astm.org/d2166_d2166m-24.html"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D3080/D3080M · Direct Shear Test",
+    "org": "ASTM International",
+    "use": "Corte directo en condición consolidada drenada para resistencia al corte en un plano definido.",
+    "url": "https://www.astm.org/d3080_d3080m-11.html"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D2850 · UU Triaxial Compression",
+    "org": "ASTM International",
+    "use": "Triaxial no consolidado-no drenado para resistencia no drenada en suelos cohesivos.",
+    "url": "https://store.astm.org/standards/d2850"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D4767 · CU Triaxial Compression",
+    "org": "ASTM International",
+    "use": "Triaxial consolidado-no drenado con medición de presión de poros para esfuerzos totales y efectivos.",
+    "url": "https://www.astm.org/d4767-11r20.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM D1883 · California Bearing Ratio CBR",
+    "org": "ASTM International",
+    "use": "CBR de suelos compactados en laboratorio para evaluar subrasante, subbase y base en diseño de pavimentos.",
+    "url": "https://store.astm.org/d1883-14.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM D6938 · In-Place Density and Water Content by Nuclear Methods",
+    "org": "ASTM International",
+    "use": "Densidad y humedad in situ con equipo nuclear para control de compactación de suelo y suelo-agregado.",
+    "url": "https://store.astm.org/d6938-17a.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "FHWA · Measuring Pavement Roughness / IRI",
+    "org": "Federal Highway Administration",
+    "use": "Referencia pública sobre obtención de IRI a partir de perfil longitudinal y práctica AASHTO/ASTM asociada.",
+    "url": "https://www.fhwa.dot.gov/ohim/hpmsmanl/appe.cfm"
+  },
+  {
+    "area": "Bibliografía clásica",
+    "title": "Terzaghi, Peck & Mesri · Soil Mechanics in Engineering Practice",
+    "org": "Wiley",
+    "use": "Texto clásico para criterios de mecánica de suelos, cimentaciones, consolidación y práctica geotécnica.",
+    "url": "https://www.wiley.com/en-us/Soil+Mechanics+in+Engineering+Practice%2C+3rd+Edition-p-9780471086581"
+  },
+  {
+    "area": "Bibliografía clásica",
+    "title": "Braja M. Das · Principles of Geotechnical Engineering",
+    "org": "Cengage",
+    "use": "Referencia académica y profesional para mecánica de suelos, resistencia, compactación, consolidación y cimentaciones.",
+    "url": "https://www.cengage.com/c/principles-of-geotechnical-engineering-10e-das/"
+  },
+  {
+    "area": "Bibliografía clásica",
+    "title": "Yoder & Witczak · Principles of Pavement Design",
+    "org": "Wiley",
+    "use": "Referencia clásica para diseño, materiales, comportamiento y evaluación de pavimentos.",
+    "url": "https://www.wiley.com/en-us/Principles+of+Pavement+Design%2C+2nd+Edition-p-9780471977803"
+  },
+  {
+    "area": "Bibliografía clásica",
+    "title": "Huang · Pavement Analysis and Design",
+    "org": "Pearson",
+    "use": "Referencia para análisis estructural de pavimentos, capas, cargas repetidas y diseño mecanístico.",
+    "url": "https://www.pearson.com/en-us/subject-catalog/p/pavement-analysis-and-design/P200000003386"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D6913 / D7928 · Particle-Size Distribution (Gradation) of Soils",
+    "org": "ASTM International",
+    "use": "Sucesoras de la D422 (retirada en 2016): D6913 cubre el tamizado de la fracción gruesa y D7928 la sedimentación por hidrómetro de la fracción fina.",
+    "url": "https://store.astm.org/d6913_d6913m-17.html"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D854 · Specific Gravity of Soil Solids by Water Pycnometer",
+    "org": "ASTM International",
+    "use": "Determinación de Gs, dato base para calcular relación de vacíos, porosidad y grado de saturación.",
+    "url": "https://store.astm.org/standards/d854"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D2434 / D5084 · Hydraulic Conductivity of Soils",
+    "org": "ASTM International",
+    "use": "D2434 (carga constante) para suelos granulares; D5084 (pared flexible) para suelos finos de baja permeabilidad.",
+    "url": "https://store.astm.org/d2434-22.html"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D7181 · Consolidated Drained Triaxial Compression Test for Soils",
+    "org": "ASTM International",
+    "use": "Triaxial CD: define c’ y φ’ en condición drenada, complementando los UU (D2850) y CU (D4767) ya citados.",
+    "url": "https://store.astm.org/d7181-20.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM D1556 / D2167 · In-Place Density by Sand-Cone and Rubber Balloon Methods",
+    "org": "ASTM International",
+    "use": "Métodos de densidad de campo alternativos al nuclear (D6938): cono de arena y membrana de hule.",
+    "url": "https://store.astm.org/standards/d1556"
+  },
+  {
+    "area": "Geotecnia aplicada",
+    "title": "ASTM D1586 · Standard Penetration Test (SPT) and Split-Barrel Sampling",
+    "org": "ASTM International",
+    "use": "Procedimiento normalizado del ensayo SPT: hincado, conteo de golpes N y muestreo alterado en perforación.",
+    "url": "https://store.astm.org/d1586_d1586m-18e01.html"
+  },
+  {
+    "area": "Geotecnia aplicada",
+    "title": "ASTM D5778 · Electronic Friction Cone and Piezocone Penetration Testing",
+    "org": "ASTM International",
+    "use": "Procedimiento normalizado del CPT/CPTu: penetración continua con medición de qc, fs y u2.",
+    "url": "https://store.astm.org/standards/d5778"
+  },
+  {
+    "area": "Geotecnia aplicada",
+    "title": "ASTM D2113 / D6032 · Rock Core Drilling and Rock Quality Designation (RQD)",
+    "org": "ASTM International",
+    "use": "D2113 cubre la perforación con diamantina y recuperación de testigo; D6032 define el cálculo de RQD (índice introducido por D.U. Deere).",
+    "url": "https://store.astm.org/d6032_d6032m-17.html"
+  },
+  {
+    "area": "Geotecnia aplicada",
+    "title": "ASTM D1143 / D4945 / D5882 · Load Testing and Integrity Testing of Deep Foundations",
+    "org": "ASTM International",
+    "use": "D1143 (carga estática axial, referencia más confiable), D4945 (dinámica de alta deformación) y D5882 (integridad de baja deformación) para verificar capacidad e integridad de pilotes.",
+    "url": "https://store.astm.org/d4945-17.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM D6927 · Marshall Stability and Flow of Asphalt Mixtures",
+    "org": "ASTM International",
+    "use": "Ensayo Marshall: estabilidad y flujo de mezcla asfáltica compactada, base del diseño de mezcla por este método.",
+    "url": "https://store.astm.org/d6927-15.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM D2726 / D2041 · Bulk and Theoretical Maximum Specific Gravity of Asphalt Mixtures",
+    "org": "ASTM International",
+    "use": "D2726 (densidad de la mezcla compactada) y D2041 (Rice, densidad máxima teórica): combinadas permiten calcular el porcentaje de vacíos.",
+    "url": "https://store.astm.org/d2726_d2726m-21.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM D6951 · Use of the Dynamic Cone Penetrometer (DCP) in Shallow Pavement Applications",
+    "org": "ASTM International",
+    "use": "Procedimiento normalizado del DCP, usado para estimar CBR in situ de forma rápida.",
+    "url": "https://store.astm.org/standards/d6951"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM C131 · Resistance to Degradation by Abrasion and Impact in the Los Angeles Machine",
+    "org": "ASTM International",
+    "use": "Ensayo de desgaste \"Los Ángeles\" de agregados, usado para evaluar durabilidad de material granular en base/subbase.",
+    "url": "https://store.astm.org/c0131_c0131m-20.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM C39 / C78 · Compressive and Flexural Strength of Concrete",
+    "org": "ASTM International",
+    "use": "Ensayos de resistencia del hormigón usados para verificar la losa en pavimento rígido (compresión y flexión con viga simplemente apoyada).",
+    "url": "https://store.astm.org/standards/c39"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM D6433 · Pavement Condition Index (PCI) Surveys for Roads and Parking Lots",
+    "org": "ASTM International",
+    "use": "Metodología de relevamiento visual y cálculo del PCI; catálogo de fallas y severidades usado como base del diagnóstico de pavimentos.",
+    "url": "https://store.astm.org/d6433-20.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM E1926 · Computing International Roughness Index (IRI) of Roads",
+    "org": "ASTM International",
+    "use": "Cálculo formal del IRI a partir del perfil longitudinal medido; complementa la referencia pública de FHWA ya citada.",
+    "url": "https://store.astm.org/standards/e1926"
+  },
+  {
+    "area": "Normativa AASHTO",
+    "title": "AASHTO · Equivalencias con ASTM en ensayos de suelos y pavimentos",
+    "org": "American Association of State Highway and Transportation Officials",
+    "use": "Designaciones AASHTO equivalentes citadas en el sitio: T27/T88 (granulometría), M145 (clasificación, origen 1929 con Hogentogler y Terzaghi), T99/T180 (Proctor estándar/modificado), T191 (densidad por cono de arena) y T193 (CBR).",
+    "url": "https://www.transportation.org/"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "OACI Anexo 14 Vol. I · Transición de ACN-PCN a ACR-PCR",
+    "org": "OACI (resumen público difundido por FAA)",
+    "use": "Estándar internacional para clasificar la capacidad portante de pavimentos aeroportuarios. La Enmienda 15 introdujo el sistema ACR-PCR (análisis elástico en capas), de aplicación obligatoria plena desde el 28 de noviembre de 2024, reemplazando al histórico ACN-PCN (1981-2024).",
+    "url": "https://www.faa.gov/sites/faa.gov/files/2022-05/508.RPA_P5_ACR_PCR.pdf"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D4428 / D7400 · Crosshole and Downhole Seismic Testing",
+    "org": "ASTM International",
+    "use": "Métodos sísmicos intrusivos para determinar Vp y Vs in situ: D4428 (crosshole, entre perforaciones, más preciso) y D7400 (downhole, una sola perforación, más económico).",
+    "url": "https://store.astm.org/d7400_d7400m-19.html"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D5777 / D7128 · Seismic Refraction and Reflection Methods",
+    "org": "ASTM International",
+    "use": "Guías para investigación del subsuelo con métodos sísmicos de superficie no invasivos: refracción (D5777) y reflexión (D7128).",
+    "url": "https://store.astm.org/standards/d5777"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D6429 / D6431 / D6432 · Selección de Métodos Geofísicos, Resistividad y Georradar",
+    "org": "ASTM International",
+    "use": "D6429 guía la selección del método geofísico según objetivo y condición de sitio; D6431 cubre resistividad eléctrica DC; D6432 cubre georradar (GPR) para investigación somera del subsuelo.",
+    "url": "https://store.astm.org/standards/d6429"
+  }
+];
+
+const list = document.getElementById("sourceList");
+const search = document.getElementById("sourceSearch");
+const area = document.getElementById("sourceArea");
+const counter = document.getElementById("sourceCounter");
+const empty = document.getElementById("sourceEmpty");
+
+function norm(s){
+  return (s || "").toString().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function renderSources(){
+  const q = norm(search.value);
+  const a = area.value;
+
+  const filtered = SOURCES.filter(src => {
+    const areaOk = a === "all" || src.area === a;
+    const hay = norm([src.area, src.title, src.org, src.use, src.url].join(" "));
+    const searchOk = !q || hay.includes(q);
+    return areaOk && searchOk;
+  });
+
+  list.innerHTML = filtered.map(src => `
+    <article class="ref-card">
+      <h3>${src.title}</h3>
+      <div class="term-meta">
+        <span class="term-chip">${src.area}</span>
+        <span class="term-chip">${src.org}</span>
+      </div>
+      <p><b>Uso dentro de la guía:</b> ${src.use}</p>
+      <div class="ref-actions">
+        <a href="${src.url}" target="_blank" rel="noopener noreferrer">Abrir fuente ↗</a>
+      </div>
+    </article>
+  `).join("");
+
+  counter.textContent = `${filtered.length} fuente(s) mostrada(s) de ${SOURCES.length}.`;
+  empty.style.display = filtered.length ? "none" : "block";
+}
+
+search.addEventListener("input", renderSources);
+area.addEventListener("change", renderSources);
+renderSources();
+</script>
+</body>
+</html>
