@@ -1,1 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Presupuestos | Obras Civiles</title>
+  <style>
+    :root{--fondo:#07111f;--card:#101d2f;--celeste:#38bdf8;--dorado:#c9a24d;--texto:#dbeafe;--blanco:#f8fafc;--borde:rgba(255,255,255,.14)}
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;font-family:Arial,sans-serif;background:linear-gradient(180deg,#07111f,#0b1f33);color:var(--blanco);display:flex;align-items:center;justify-content:center;padding:28px}
+    main{width:min(950px,100%);background:rgba(16,29,47,.96);border:1px solid var(--borde);border-radius:22px;padding:30px;box-shadow:0 14px 34px rgba(0,0,0,.32)}
+    h1{margin:0 0 10px;color:var(--celeste);font-size:clamp(2rem,4vw,2.8rem)}
+    p{color:var(--texto);line-height:1.6;margin:0 0 24px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    a{display:block;text-decoration:none;background:#07111f;border:1px solid var(--borde);border-radius:16px;padding:22px;color:var(--blanco);font-weight:900;transition:.22s ease}
+    a:hover{border-color:var(--celeste);transform:translateY(-3px);background:rgba(56,189,248,.12)}
+    .volver{margin-top:20px;display:inline-block;color:var(--dorado);border-color:var(--dorado)}
+    @media(max-width:720px){.grid{grid-template-columns:1fr}main{padding:22px}}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Presupuestos y APU</h1>
+    <p>Seleccioná el presupuesto que querés abrir.</p>
+    <section class="grid">
+      <a href="./index_casa_dos_plantas.html">Presupuesto casa dos plantas →</a>
+      <a href="./index_ensayos.html">Presupuesto ensayos de laboratorio →</a>
+    </section>
+    <a class="volver" href="../index.html">← Volver a Obras Civiles</a>
+  </main>
+</body>
+</html>
 
