@@ -100,7 +100,7 @@ const TERMS = [
     "area": "Pavimentos",
     "def": "Deformación permanente longitudinal en las huellas de tránsito.",
     "param": "Se asocia a mezcla blanda, base débil, mala compactación o subrasante saturada.",
-    "example": "Si aparece en carriles pesados, revisar densidad de mezcla, temperatura de compactación y soporte de base."
+    "example": "<strong>Favorable:</strong> surco menor a 6 mm tras varios años, sin tendencia de aceleración. <strong>Alerta:</strong> surco entre 6-12 mm o crecimiento sostenido entre mediciones sucesivas. <strong>Crítico:</strong> surco mayor a 12-15 mm con agua acumulada en la huella, riesgo de hidroplaneo y aceleración del deterioro estructural."
   },
   {
     "term": "Anclaje activo",
@@ -135,7 +135,7 @@ const TERMS = [
     "area": "Geotecnia",
     "def": "Diferencia de asentamiento entre puntos de una estructura.",
     "param": "Suele ser más crítico que el asentamiento total.",
-    "example": "Una zapata sobre relleno y otra sobre suelo natural pueden generar fisuras por asentamiento diferencial."
+    "example": "<strong>Favorable:</strong> diferencia entre apoyos menor a L/500, sin fisuración visible. <strong>Alerta:</strong> diferencia entre L/500 y L/300, con fisuras finas en mampostería no estructural. <strong>Crítico:</strong> diferencia superior a L/300, con fisuras diagonales en elementos estructurales o puertas/ventanas que dejan de cerrar."
   },
   {
     "term": "Asentamiento primario",
@@ -198,7 +198,7 @@ const TERMS = [
     "area": "Geotecnia",
     "def": "Resistencia del suelo para soportar cargas sin falla por corte.",
     "param": "Depende de c, φ, γ, Df, B, nivel freático y factores de forma/profundidad.",
-    "example": "Si la capacidad admisible no cumple, se cambia tamaño de zapata, profundidad o tipo de cimentación."
+    "example": "<strong>Favorable:</strong> factor de seguridad ≥3 sobre la carga de servicio, con asentamiento estimado dentro de lo admisible. <strong>Alerta:</strong> FS entre 2 y 3, o asentamiento cercano al límite admisible que exige verificación adicional. <strong>Crítico:</strong> FS&lt;2 o asentamiento que supera el límite admisible: obliga a rediseñar zapata, profundizar o cambiar el tipo de cimentación."
   },
   {
     "term": "Carta de plasticidad",
@@ -212,7 +212,7 @@ const TERMS = [
     "area": "Pavimentos",
     "def": "Índice de soporte relativo usado para evaluar subrasantes y materiales granulares.",
     "param": "CBR bajo: <3 muy pobre; 3–5 pobre; 5–10 regular; >10 mejora la condición según obra.",
-    "example": "CBR 3% en subrasante de vía exige estabilizar, reemplazar o aumentar espesores."
+    "example": "<strong>Favorable:</strong> CBR&gt;10% en subrasante, soporte adecuado para la mayoría de las estructuras de tránsito medio. <strong>Alerta:</strong> CBR entre 5-10%, funciona con buen drenaje y compactación pero sin margen. <strong>Crítico:</strong> CBR&lt;3%, exige mejorar, estabilizar, reemplazar o rediseñar el paquete estructural completo."
   },
   {
     "term": "Cemento asfáltico",
@@ -240,7 +240,7 @@ const TERMS = [
     "area": "Suelos",
     "def": "Parámetro que representa la velocidad de disipación de presión de poros.",
     "param": "Controla tiempo de consolidación, no magnitud del asentamiento.",
-    "example": "Cv bajo en arcilla implica esperar más tiempo o usar drenes verticales."
+    "example": "<strong>Favorable:</strong> Cv alto, el asentamiento se completa en meses y no condiciona la etapa constructiva. <strong>Alerta:</strong> Cv medio, conviene programar etapas o monitoreo durante la obra. <strong>Crítico:</strong> Cv bajo en estrato espeso, el asentamiento puede tardar años; sin drenes o precarga puede comprometer el cronograma del proyecto."
   },
   {
     "term": "Coeficiente de curvatura Cc",
@@ -443,7 +443,7 @@ const TERMS = [
     "area": "Pavimentos",
     "def": "Daño acumulado por cargas repetidas que genera fisuración.",
     "param": "Se controla con espesor, módulo, mezcla y soporte de base/subrasante.",
-    "example": "Piel de cocodrilo suele indicar fatiga estructural o pérdida de soporte."
+    "example": "<strong>Favorable:</strong> fisuración leve y aislada, propia del envejecimiento normal del ligante. <strong>Alerta:</strong> piel de cocodrilo en parches localizados, indicando inicio de fatiga estructural. <strong>Crítico:</strong> piel de cocodrilo extendida con bombeo de finos en las fisuras: la estructura ya perdió capacidad y necesita rehabilitación, no solo sellado."
   },
   {
     "term": "FWD",
@@ -520,14 +520,14 @@ const TERMS = [
     "area": "Pavimentos",
     "def": "Índice internacional de rugosidad que mide regularidad superficial.",
     "param": "Valores altos indican mala comodidad y posible deterioro funcional.",
-    "example": "Una carpeta nueva con IRI alto puede ser rechazada aunque la mezcla cumpla laboratorio."
+    "example": "<strong>Favorable:</strong> IRI&lt;2 m/km, típico de obra nueva bien ejecutada, alto confort. <strong>Alerta:</strong> IRI entre 3.5-4.5 m/km, empieza a afectar confort y costo operativo, conviene programar intervención. <strong>Crítico:</strong> IRI&gt;6 m/km, puede justificar restricción de velocidad y es prioridad de intervención aunque el PCI no sea tan bajo."
   },
   {
     "term": "Licuación",
     "area": "Geotecnia",
     "def": "Pérdida significativa de resistencia por aumento de presión de poros en suelos granulares saturados.",
     "param": "Depende de compacidad, gradación, nivel freático y demanda sísmica.",
-    "example": "Arenas sueltas saturadas bajo cimentaciones requieren evaluación sísmica específica."
+    "example": "<strong>Favorable:</strong> arena densa o sobre el nivel freático, bajo riesgo de licuación ante el sismo de diseño. <strong>Alerta:</strong> arena suelta a media saturada con demanda sísmica moderada, requiere evaluación específica (CSR vs CRR). <strong>Crítico:</strong> arena suelta saturada bajo cimentaciones en zona de alta sismicidad: riesgo de pérdida de capacidad portante y necesidad de mejoramiento (densificación, drenes) antes de cimentar."
   },
   {
     "term": "Limo",
@@ -604,7 +604,7 @@ const TERMS = [
     "area": "Pavimentos",
     "def": "Rigidez recuperable de materiales bajo cargas repetidas.",
     "param": "Clave en diseño mecanístico de pavimentos.",
-    "example": "Subrasante con Mr bajo exige mayor estructura o estabilización."
+    "example": "<strong>Favorable:</strong> Mr alto y consistente en la subrasante, permite una estructura de pavimento más económica. <strong>Alerta:</strong> Mr variable entre estaciones de ensayo, sugiere heterogeneidad que conviene zonificar antes de diseñar. <strong>Crítico:</strong> Mr bajo generalizado, obliga a mayor espesor estructural o a estabilizar la subrasante para que el diseño sea viable."
   },
   {
     "term": "Nivel freático",
@@ -618,7 +618,7 @@ const TERMS = [
     "area": "Suelos",
     "def": "Relación entre presión de preconsolidación y esfuerzo efectivo actual.",
     "param": "OCR≈1 normalmente consolidado; OCR>1 sobreconsolidado.",
-    "example": "Si una arcilla supera σ’p por nueva carga, asentamientos aumentan notablemente."
+    "example": "<strong>Favorable:</strong> OCR&gt;1 con margen amplio respecto a la carga de proyecto, asentamientos pequeños en recompresión. <strong>Alerta:</strong> OCR cercano a 1-1.5, poco margen antes de entrar en compresión virgen. <strong>Crítico:</strong> la carga de proyecto supera σ’p: el suelo entra en compresión virgen y el asentamiento crece fuertemente con Cc."
   },
   {
     "term": "Pavimento flexible",
@@ -639,7 +639,7 @@ const TERMS = [
     "area": "Suelos",
     "def": "Facilidad con que el agua fluye por los vacíos del suelo.",
     "param": "Alta en gravas/arenas; baja en arcillas.",
-    "example": "En excavación, arenas permeables pueden requerir abatimiento intenso de napa."
+    "example": "<strong>Favorable:</strong> k alto en material de relleno o dren, cumple su función de evacuar agua rápido. <strong>Alerta:</strong> k intermedio en un material pensado como barrera, puede no cumplir su función de impermeabilización. <strong>Crítico:</strong> k bajo en una arcilla bajo una excavación con napa alta: la disipación de presión de poros es lenta y el riesgo de inestabilidad persiste durante toda la obra."
   },
   {
     "term": "Piezómetro",
@@ -723,7 +723,7 @@ const TERMS = [
     "area": "Geotecnia",
     "def": "Índice de calidad de roca basado en recuperación de testigos mayores a 10 cm.",
     "param": "Se interpreta junto con fracturas, alteración y orientación.",
-    "example": "RQD bajo puede indicar macizo fracturado aunque la roca intacta sea resistente."
+    "example": "<strong>Favorable:</strong> RQD&gt;75%, macizo rocoso de buena a excelente calidad, requiere poco soporte. <strong>Alerta:</strong> RQD entre 25-50%, macizo fracturado que necesita soporte adicional y revisión de orientación de discontinuidades. <strong>Crítico:</strong> RQD&lt;25%, macizo muy fracturado o roca triturada: aunque la roca intacta sea resistente, el macizo puede comportarse casi como un suelo grueso."
   },
   {
     "term": "Segregación",
@@ -744,7 +744,7 @@ const TERMS = [
     "area": "Geotecnia",
     "def": "Ensayo de penetración estándar dentro de una perforación.",
     "param": "Entrega N; corregido puede obtenerse N60.",
-    "example": "N bajo en arenas sueltas alerta sobre baja compacidad y posible asentamiento."
+    "example": "<strong>Favorable:</strong> N60&gt;30 en arena, compacidad densa, buen soporte para cimentaciones superficiales. <strong>Alerta:</strong> N60 entre 10-20, compacidad media que exige cruzar con CPT o ensayos de laboratorio antes de decidir. <strong>Crítico:</strong> N60&lt;10 en arena saturada, compacidad suelta con riesgo de asentamiento o licuación bajo sismo."
   },
   {
     "term": "Subbase granular",
@@ -765,7 +765,7 @@ const TERMS = [
     "area": "Suelos",
     "def": "Sistema Unificado de Clasificación de Suelos.",
     "param": "Usa granulometría y plasticidad: GW, GP, SW, SP, ML, CL, CH, etc.",
-    "example": "CL indica arcilla de baja plasticidad; CH arcilla de alta plasticidad."
+    "example": "<strong>Favorable:</strong> GW o SW, gradación bien distribuida con buena compactabilidad y drenaje. <strong>Alerta:</strong> doble símbolo (por ejemplo SC-SM), comportamiento mixto que cambia con la humedad y exige más control en obra. <strong>Crítico:</strong> CH de alta plasticidad o suelo con simbología de turba/orgánico (Pt): riesgo de expansión, baja resistencia o compresibilidad muy alta."
   },
   {
     "term": "Suelo expansivo",
@@ -849,7 +849,7 @@ const TERMS = [
     "area": "Suelos",
     "def": "Diferencia entre límite líquido y plástico: IP=LL-LP.",
     "param": "IP alto implica mayor plasticidad y sensibilidad al agua.",
-    "example": "IP>20 en subrasante suele requerir evaluación de estabilización o drenaje."
+    "example": "<strong>Favorable:</strong> IP&lt;7, baja plasticidad, suelo más trabajable. <strong>Alerta:</strong> IP entre 7-17, plasticidad media que exige controlar la humedad de compactación. <strong>Crítico:</strong> IP>20 en subrasante o material de base, riesgo de expansión, bombeo y pérdida de soporte con agua."
   }
 ];
 let activeLetter = "TODOS";

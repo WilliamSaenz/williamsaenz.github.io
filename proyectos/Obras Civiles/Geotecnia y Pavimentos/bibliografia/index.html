@@ -47,7 +47,7 @@
           <input id="sourceSearch" class="searchbox" type="search" placeholder="Buscar: NSR-10, CIRSOC, CBR, Proctor, triaxial, INVÍAS..." autocomplete="off">
           <select id="sourceArea" class="selectbox">
             <option value="all">Todas las categorías</option>
-            <option value="Bibliografía clásica">Bibliografía clásica</option><option value="Ensayos Colombia">Ensayos Colombia</option><option value="Mecánica de suelos">Mecánica de suelos</option><option value="Normativa Argentina">Normativa Argentina</option><option value="Normativa Colombia">Normativa Colombia</option><option value="Pavimentos">Pavimentos</option>
+            <option value="Bibliografía clásica">Bibliografía clásica</option><option value="Ensayos Colombia">Ensayos Colombia</option><option value="Geotecnia aplicada">Geotecnia aplicada</option><option value="Mecánica de suelos">Mecánica de suelos</option><option value="Normativa AASHTO">Normativa AASHTO</option><option value="Normativa Argentina">Normativa Argentina</option><option value="Normativa Colombia">Normativa Colombia</option><option value="Pavimentos">Pavimentos</option>
           </select>
         </div>
         <p class="muted" id="sourceCounter"></p>
@@ -224,6 +224,125 @@ const SOURCES = [
     "org": "Pearson",
     "use": "Referencia para análisis estructural de pavimentos, capas, cargas repetidas y diseño mecanístico.",
     "url": "https://www.pearson.com/en-us/subject-catalog/p/pavement-analysis-and-design/P200000003386"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D6913 / D7928 · Particle-Size Distribution (Gradation) of Soils",
+    "org": "ASTM International",
+    "use": "Sucesoras de la D422 (retirada en 2016): D6913 cubre el tamizado de la fracción gruesa y D7928 la sedimentación por hidrómetro de la fracción fina.",
+    "url": "https://store.astm.org/d6913_d6913m-17.html"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D854 · Specific Gravity of Soil Solids by Water Pycnometer",
+    "org": "ASTM International",
+    "use": "Determinación de Gs, dato base para calcular relación de vacíos, porosidad y grado de saturación.",
+    "url": "https://store.astm.org/standards/d854"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D2434 / D5084 · Hydraulic Conductivity of Soils",
+    "org": "ASTM International",
+    "use": "D2434 (carga constante) para suelos granulares; D5084 (pared flexible) para suelos finos de baja permeabilidad.",
+    "url": "https://store.astm.org/d2434-22.html"
+  },
+  {
+    "area": "Mecánica de suelos",
+    "title": "ASTM D7181 · Consolidated Drained Triaxial Compression Test for Soils",
+    "org": "ASTM International",
+    "use": "Triaxial CD: define c’ y φ’ en condición drenada, complementando los UU (D2850) y CU (D4767) ya citados.",
+    "url": "https://store.astm.org/d7181-20.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM D1556 / D2167 · In-Place Density by Sand-Cone and Rubber Balloon Methods",
+    "org": "ASTM International",
+    "use": "Métodos de densidad de campo alternativos al nuclear (D6938): cono de arena y membrana de hule.",
+    "url": "https://store.astm.org/standards/d1556"
+  },
+  {
+    "area": "Geotecnia aplicada",
+    "title": "ASTM D1586 · Standard Penetration Test (SPT) and Split-Barrel Sampling",
+    "org": "ASTM International",
+    "use": "Procedimiento normalizado del ensayo SPT: hincado, conteo de golpes N y muestreo alterado en perforación.",
+    "url": "https://store.astm.org/d1586_d1586m-18e01.html"
+  },
+  {
+    "area": "Geotecnia aplicada",
+    "title": "ASTM D5778 · Electronic Friction Cone and Piezocone Penetration Testing",
+    "org": "ASTM International",
+    "use": "Procedimiento normalizado del CPT/CPTu: penetración continua con medición de qc, fs y u2.",
+    "url": "https://store.astm.org/standards/d5778"
+  },
+  {
+    "area": "Geotecnia aplicada",
+    "title": "ASTM D2113 / D6032 · Rock Core Drilling and Rock Quality Designation (RQD)",
+    "org": "ASTM International",
+    "use": "D2113 cubre la perforación con diamantina y recuperación de testigo; D6032 define el cálculo de RQD (índice introducido por D.U. Deere).",
+    "url": "https://store.astm.org/d6032_d6032m-17.html"
+  },
+  {
+    "area": "Geotecnia aplicada",
+    "title": "ASTM D1143 / D4945 / D5882 · Load Testing and Integrity Testing of Deep Foundations",
+    "org": "ASTM International",
+    "use": "D1143 (carga estática axial, referencia más confiable), D4945 (dinámica de alta deformación) y D5882 (integridad de baja deformación) para verificar capacidad e integridad de pilotes.",
+    "url": "https://store.astm.org/d4945-17.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM D6927 · Marshall Stability and Flow of Asphalt Mixtures",
+    "org": "ASTM International",
+    "use": "Ensayo Marshall: estabilidad y flujo de mezcla asfáltica compactada, base del diseño de mezcla por este método.",
+    "url": "https://store.astm.org/d6927-15.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM D2726 / D2041 · Bulk and Theoretical Maximum Specific Gravity of Asphalt Mixtures",
+    "org": "ASTM International",
+    "use": "D2726 (densidad de la mezcla compactada) y D2041 (Rice, densidad máxima teórica): combinadas permiten calcular el porcentaje de vacíos.",
+    "url": "https://store.astm.org/d2726_d2726m-21.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM D6951 · Use of the Dynamic Cone Penetrometer (DCP) in Shallow Pavement Applications",
+    "org": "ASTM International",
+    "use": "Procedimiento normalizado del DCP, usado para estimar CBR in situ de forma rápida.",
+    "url": "https://store.astm.org/standards/d6951"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM C131 · Resistance to Degradation by Abrasion and Impact in the Los Angeles Machine",
+    "org": "ASTM International",
+    "use": "Ensayo de desgaste \"Los Ángeles\" de agregados, usado para evaluar durabilidad de material granular en base/subbase.",
+    "url": "https://store.astm.org/c0131_c0131m-20.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM C39 / C78 · Compressive and Flexural Strength of Concrete",
+    "org": "ASTM International",
+    "use": "Ensayos de resistencia del hormigón usados para verificar la losa en pavimento rígido (compresión y flexión con viga simplemente apoyada).",
+    "url": "https://store.astm.org/standards/c39"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM D6433 · Pavement Condition Index (PCI) Surveys for Roads and Parking Lots",
+    "org": "ASTM International",
+    "use": "Metodología de relevamiento visual y cálculo del PCI; catálogo de fallas y severidades usado como base del diagnóstico de pavimentos.",
+    "url": "https://store.astm.org/d6433-20.html"
+  },
+  {
+    "area": "Pavimentos",
+    "title": "ASTM E1926 · Computing International Roughness Index (IRI) of Roads",
+    "org": "ASTM International",
+    "use": "Cálculo formal del IRI a partir del perfil longitudinal medido; complementa la referencia pública de FHWA ya citada.",
+    "url": "https://store.astm.org/standards/e1926"
+  },
+  {
+    "area": "Normativa AASHTO",
+    "title": "AASHTO · Equivalencias con ASTM en ensayos de suelos y pavimentos",
+    "org": "American Association of State Highway and Transportation Officials",
+    "use": "Designaciones AASHTO equivalentes citadas en el sitio: T27/T88 (granulometría), M145 (clasificación, origen 1929 con Hogentogler y Terzaghi), T99/T180 (Proctor estándar/modificado), T191 (densidad por cono de arena) y T193 (CBR).",
+    "url": "https://www.transportation.org/"
   }
 ];
 
