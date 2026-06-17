@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-label="Ensayos in situ geotécnicos">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#07111f"/><stop offset="1" stop-color="#0b2742"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000" flood-opacity="0.35"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect width="900" height="560" rx="22" fill="url(#bg)"/>
+  <text x="40" y="55" fill="#38bdf8" font-family="Arial, sans-serif" font-size="28" font-weight="800" text-anchor="start">Ensayos in situ</text><line x1="130" y1="125" x2="130" y2="340" stroke="#38bdf8" stroke-width="6"/><circle cx="130" cy="360" r="28" fill="#c9a24d"/><rect x="70" y="395" width="120" height="80" rx="16" fill="#10233b" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+<text x="130.0" y="427" fill="#fde68a" font-family="Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">SPT</text>
+<text x="130.0" y="455" fill="#dbeafe" font-family="Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle">N / muestra</text><line x1="290" y1="125" x2="290" y2="340" stroke="#38bdf8" stroke-width="6"/><circle cx="290" cy="360" r="28" fill="#c9a24d"/><rect x="230" y="395" width="120" height="80" rx="16" fill="#10233b" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+<text x="290.0" y="427" fill="#fde68a" font-family="Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">CPTu</text>
+<text x="290.0" y="455" fill="#dbeafe" font-family="Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle">qc, fs, u2</text><line x1="450" y1="125" x2="450" y2="340" stroke="#38bdf8" stroke-width="6"/><circle cx="450" cy="360" r="28" fill="#c9a24d"/><rect x="390" y="395" width="120" height="80" rx="16" fill="#10233b" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+<text x="450.0" y="427" fill="#fde68a" font-family="Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">PMT</text>
+<text x="450.0" y="455" fill="#dbeafe" font-family="Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle">módulo y presión límite</text><line x1="610" y1="125" x2="610" y2="340" stroke="#38bdf8" stroke-width="6"/><circle cx="610" cy="360" r="28" fill="#c9a24d"/><rect x="550" y="395" width="120" height="80" rx="16" fill="#10233b" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+<text x="610.0" y="427" fill="#fde68a" font-family="Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">DMT</text>
+<text x="610.0" y="455" fill="#dbeafe" font-family="Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle">rigidez lateral</text><line x1="770" y1="125" x2="770" y2="340" stroke="#38bdf8" stroke-width="6"/><circle cx="770" cy="360" r="28" fill="#c9a24d"/><rect x="710" y="395" width="120" height="80" rx="16" fill="#10233b" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+<text x="770.0" y="427" fill="#fde68a" font-family="Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">VST</text>
+<text x="770.0" y="455" fill="#dbeafe" font-family="Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle">Su en arcillas</text><text x="70" y="530" fill="#dbeafe" font-family="Arial, sans-serif" font-size="16" font-weight="500" text-anchor="start">Interpretación: sirven para reducir incertidumbre y correlacionar con laboratorio; no reemplazan el juicio geotécnico.</text>
+</svg>

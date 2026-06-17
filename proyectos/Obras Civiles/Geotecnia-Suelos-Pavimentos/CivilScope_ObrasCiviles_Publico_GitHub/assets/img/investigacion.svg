@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" role="img" aria-label="Investigación del subsuelo">
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#07111f"/><stop offset="1" stop-color="#0b2742"/></linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#000" flood-opacity="0.35"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/></marker>
+  </defs>
+  <rect width="900" height="560" rx="22" fill="url(#bg)"/>
+  <text x="40" y="55" fill="#38bdf8" font-family="Arial, sans-serif" font-size="28" font-weight="800" text-anchor="start">Investigación del subsuelo</text><rect x="70" y="145" width="170" height="120" rx="16" fill="#10233b" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+<text x="155.0" y="177" fill="#fde68a" font-family="Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">Información previa</text>
+<text x="155.0" y="205" fill="#dbeafe" font-family="Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle">geología, topografía, antecedentes</text><line x1="240" y1="205" x2="275" y2="205" stroke="#38bdf8" stroke-width="4" marker-end="url(#arrow)"/><rect x="275" y="145" width="170" height="120" rx="16" fill="#10233b" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+<text x="360.0" y="177" fill="#fde68a" font-family="Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">Campo</text>
+<text x="360.0" y="205" fill="#dbeafe" font-family="Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle">calicatas, sondeos, SPT/CPT</text><line x1="445" y1="205" x2="480" y2="205" stroke="#38bdf8" stroke-width="4" marker-end="url(#arrow)"/><rect x="480" y="145" width="170" height="120" rx="16" fill="#10233b" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+<text x="565.0" y="177" fill="#fde68a" font-family="Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">Laboratorio</text>
+<text x="565.0" y="205" fill="#dbeafe" font-family="Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle">clasificación y parámetros</text><line x1="650" y1="205" x2="685" y2="205" stroke="#38bdf8" stroke-width="4" marker-end="url(#arrow)"/><rect x="685" y="145" width="170" height="120" rx="16" fill="#10233b" stroke="#38bdf8" stroke-width="2" filter="url(#shadow)"/>
+<text x="770.0" y="177" fill="#fde68a" font-family="Arial, sans-serif" font-size="19" font-weight="700" text-anchor="middle">Modelo geotécnico</text>
+<text x="770.0" y="205" fill="#dbeafe" font-family="Arial, sans-serif" font-size="15" font-weight="500" text-anchor="middle">perfil, NF, riesgos</text><text x="70" y="360" fill="#dbeafe" font-family="Arial, sans-serif" font-size="18" font-weight="500" text-anchor="start">Criterio: la campaña no se diseña por cantidad de perforaciones “de memoria”; se diseña por riesgo, variabilidad y etapa del proyecto.</text><text x="70" y="430" fill="#fde68a" font-family="Arial, sans-serif" font-size="18" font-weight="700" text-anchor="start">Producto final: perfil estratigráfico + nivel freático + parámetros + recomendaciones + limitaciones.</text>
+</svg>
