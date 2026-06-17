@@ -10,14 +10,13 @@
     :root{
       --bg:#07111f;
       --panel:#0d1b2d;
-      --panel-soft:#112238;
       --line:rgba(255,255,255,.16);
       --text:#f8fafc;
-      --muted:#c3d0e2;
+      --muted:#d4e0ee;
       --blue:#38bdf8;
       --gold:#d6ad4f;
       --green:#39ff14;
-      --shadow:0 22px 60px rgba(0,0,0,.35);
+      --shadow:0 24px 64px rgba(0,0,0,.38);
     }
 
     *{box-sizing:border-box}
@@ -25,77 +24,72 @@
     html, body{
       margin:0;
       width:100%;
-      min-height:100%;
+      height:100%;
       font-family:Arial, Helvetica, sans-serif;
       background:
-        radial-gradient(circle at 8% 10%, rgba(56,189,248,.16), transparent 28%),
-        radial-gradient(circle at 85% 18%, rgba(214,173,79,.12), transparent 24%),
+        radial-gradient(circle at 8% 10%, rgba(56,189,248,.17), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(214,173,79,.13), transparent 25%),
         linear-gradient(135deg, #07111f 0%, #0b1f33 100%);
       color:var(--text);
     }
 
-    body{
-      overflow-x:hidden;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
+    body{ overflow:hidden; }
+    a{ color:inherit; text-decoration:none; }
 
     .page{
-      min-height:100vh;
+      width:100%;
+      height:100vh;
       display:grid;
-      grid-template-rows:auto 1fr auto;
+      grid-template-rows:92px 1fr 30px;
     }
 
     header{
-      min-height:74px;
-      padding:16px clamp(18px,4vw,64px);
+      padding:18px 5vw;
       border-bottom:1px solid var(--line);
-      background:rgba(7,17,31,.78);
+      background:rgba(7,17,31,.80);
       backdrop-filter:blur(14px);
     }
 
     .topbar{
-      max-width:1200px;
+      width:100%;
+      max-width:1540px;
       height:100%;
       margin:0 auto;
       display:flex;
       justify-content:space-between;
       align-items:center;
-      gap:18px;
+      gap:22px;
     }
 
     .terminal{
       color:var(--green);
       font-family:"Courier New", monospace;
-      font-size:15px;
-      font-weight:700;
+      font-size:17px;
+      font-weight:800;
       letter-spacing:.2px;
       white-space:nowrap;
     }
 
     .contact-buttons{
       display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+      gap:12px;
       justify-content:flex-end;
+      align-items:center;
     }
 
     .btn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:44px;
-      padding:11px 17px;
-      border-radius:13px;
+      min-height:48px;
+      padding:12px 20px;
+      border-radius:14px;
       border:2px solid var(--blue);
       color:var(--text);
-      font-weight:800;
-      font-size:15px;
+      font-weight:900;
+      font-size:16px;
       transition:.22s ease;
-      background:rgba(7,17,31,.38);
+      background:rgba(7,17,31,.42);
     }
 
     .btn:hover{
@@ -105,369 +99,255 @@
       box-shadow:0 12px 25px rgba(56,189,248,.18);
     }
 
-    .btn.gold{
-      border-color:var(--gold);
-      color:var(--gold);
-    }
-
-    .btn.gold:hover{
-      background:var(--gold);
-      color:#07111f;
-      box-shadow:0 12px 25px rgba(214,173,79,.20);
-    }
+    .btn.gold{ border-color:var(--gold); color:var(--gold); }
+    .btn.gold:hover{ background:var(--gold); color:#07111f; box-shadow:0 12px 25px rgba(214,173,79,.20); }
 
     main{
-      width:100%;
-      max-width:1200px;
+      width:min(1540px, 92vw);
       margin:0 auto;
-      padding:28px clamp(18px,4vw,64px);
+      padding:34px 0;
       display:grid;
-      grid-template-columns:.98fr 1.12fr;
-      gap:28px;
-      align-items:stretch;
+      grid-template-columns:1fr 1.12fr;
+      gap:34px;
+      overflow:hidden;
     }
 
     .hero-card,
     .content-card{
+      height:100%;
+      min-height:0;
       border:1px solid var(--line);
-      background:rgba(13,27,45,.88);
-      border-radius:28px;
+      background:rgba(13,27,45,.89);
+      border-radius:30px;
       box-shadow:var(--shadow);
       overflow:hidden;
     }
 
     .hero-card{
-      padding:34px 36px;
+      padding:42px;
       display:flex;
       flex-direction:column;
       justify-content:flex-start;
-      gap:22px;
+      gap:26px;
     }
 
     .badge{
-      width:max-content;
-      max-width:100%;
       color:var(--green);
       font-family:"Courier New", monospace;
-      font-size:14px;
-      font-weight:700;
-      margin-bottom:6px;
+      font-size:15px;
+      font-weight:800;
+      margin-bottom:10px;
     }
 
     h1{
       margin:0;
-      font-size:clamp(58px,6.4vw,82px);
-      line-height:.92;
-      letter-spacing:-2.8px;
+      font-size:clamp(76px, 5.4vw, 104px);
+      line-height:.91;
+      letter-spacing:-3.4px;
     }
 
     .subtitle{
-      margin:22px 0 0;
+      margin:26px 0 0;
       color:var(--muted);
-      font-size:clamp(21px,2vw,26px);
-      line-height:1.34;
+      font-size:clamp(25px, 1.85vw, 32px);
+      line-height:1.32;
     }
 
-    .highlight{
-      color:var(--gold);
-      font-weight:900;
-    }
+    .highlight{ color:var(--gold); font-weight:900; }
 
     .quick-stats{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:12px;
-      margin-top:26px;
+      gap:16px;
+      margin-top:32px;
     }
 
     .stat{
-      padding:17px 14px;
-      border-radius:17px;
+      padding:20px 16px;
+      border-radius:20px;
       border:1px solid var(--line);
-      background:rgba(7,17,31,.42);
+      background:rgba(7,17,31,.44);
     }
 
     .stat strong{
       display:block;
       color:var(--blue);
-      font-size:23px;
-      margin-bottom:7px;
+      font-size:27px;
+      margin-bottom:8px;
     }
 
     .stat span{
-      color:#dbeafe;
-      font-size:14px;
+      color:#f2f8ff;
+      font-size:15.5px;
       line-height:1.28;
+      font-weight:700;
     }
 
     .main-cta{
-      margin-top:10px;
-      padding:26px;
-      border-radius:24px;
-      border:1px solid rgba(214,173,79,.60);
-      background:
-        linear-gradient(135deg, rgba(214,173,79,.18), rgba(56,189,248,.07)),
-        rgba(7,17,31,.48);
+      margin-top:8px;
+      padding:28px 30px;
+      border-radius:26px;
+      border:1px solid rgba(214,173,79,.66);
+      background:linear-gradient(135deg, rgba(214,173,79,.19), rgba(56,189,248,.07)), rgba(7,17,31,.52);
     }
 
     .main-cta small{
       color:var(--green);
       font-family:"Courier New", monospace;
-      font-weight:700;
+      font-weight:800;
       display:block;
-      margin-bottom:9px;
-      font-size:14px;
+      margin-bottom:10px;
+      font-size:15px;
     }
 
     .main-cta h2{
-      margin:0 0 12px;
+      margin:0 0 14px;
       color:var(--gold);
-      font-size:30px;
+      font-size:36px;
+      line-height:1.1;
       border:0;
       padding:0;
     }
 
     .main-cta p{
-      margin:0 0 20px;
-      color:#eef6ff;
-      font-size:16px;
-      line-height:1.55;
+      margin:0 0 24px;
+      color:#f4f9ff;
+      font-size:18px;
+      line-height:1.52;
+      font-weight:700;
     }
 
-    .content-card{
-      display:grid;
-      grid-template-rows:auto 1fr;
-    }
+    .content-card{ display:grid; grid-template-rows:72px 1fr; }
 
     .tabs{
       display:grid;
       grid-template-columns:repeat(4,1fr);
-      gap:0;
       border-bottom:1px solid var(--line);
-      background:rgba(7,17,31,.38);
+      background:rgba(7,17,31,.40);
     }
 
     .tab-btn{
       border:0;
       border-right:1px solid var(--line);
-      padding:20px 12px;
-      color:#cfe0f5;
+      padding:0 16px;
+      color:#dcecff;
       background:transparent;
       font-weight:900;
       cursor:pointer;
       transition:.2s ease;
-      font-size:15px;
+      font-size:17px;
     }
 
-    .tab-btn:last-child{
-      border-right:0;
-    }
+    .tab-btn:last-child{ border-right:0; }
+    .tab-btn:hover, .tab-btn.active{ color:#07111f; background:var(--gold); }
 
-    .tab-btn:hover,
-    .tab-btn.active{
-      color:#07111f;
-      background:var(--gold);
-    }
-
-    .panel-wrap{
-      position:relative;
-      overflow:hidden;
-    }
+    .panel-wrap{ overflow:hidden; }
 
     .panel{
       display:none;
-      padding:34px 36px;
+      height:100%;
+      padding:42px;
+      overflow:hidden;
       animation:fade .25s ease;
     }
 
-    .panel.active{
-      display:block;
-    }
+    .panel.active{ display:block; }
 
-    @keyframes fade{
-      from{opacity:0; transform:translateY(8px)}
-      to{opacity:1; transform:translateY(0)}
-    }
+    @keyframes fade{ from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:translateY(0)} }
 
     h2{
-      margin:0 0 18px;
+      margin:0 0 22px;
       color:var(--blue);
-      font-size:34px;
-      line-height:1.1;
+      font-size:43px;
+      line-height:1.08;
       border-bottom:1px solid var(--line);
-      padding-bottom:16px;
+      padding-bottom:20px;
     }
 
     p, li{
-      color:#edf6ff;
+      color:#f5faff;
       line-height:1.62;
-      font-size:18px;
+      font-size:21px;
+      font-weight:700;
     }
 
-    ul{
-      padding-left:24px;
-      margin:18px 0 0;
-    }
+    ul{ padding-left:28px; margin:22px 0 0; }
 
     .profile-box{
-      padding:24px;
-      border-radius:22px;
-      border:1px solid rgba(56,189,248,.28);
-      background:rgba(7,17,31,.38);
-      margin-top:18px;
+      padding:28px 32px;
+      border-radius:24px;
+      border:1px solid rgba(56,189,248,.32);
+      background:rgba(7,17,31,.42);
+      margin-top:24px;
     }
+
+    .profile-box p{ font-size:20px; margin:0 0 20px; }
+    .profile-box p:last-child{ margin-bottom:0; }
 
     .skill-grid{
       display:grid;
       grid-template-columns:repeat(3,1fr);
-      gap:15px;
-      margin-top:18px;
+      gap:18px;
+      margin-top:20px;
     }
 
     .skill-card{
-      padding:19px;
-      border-radius:18px;
+      padding:22px;
+      border-radius:20px;
       border:1px solid var(--line);
-      background:rgba(7,17,31,.44);
+      background:rgba(7,17,31,.46);
     }
 
-    .skill-card h3{
-      margin:0 0 10px;
-      color:var(--gold);
-      font-size:19px;
-    }
+    .skill-card h3{ margin:0 0 12px; color:var(--gold); font-size:23px; }
+    .skill-card p{ font-size:16.5px; margin:0; font-weight:700; }
 
-    .skill-card p{
-      font-size:15px;
-      margin:0;
-    }
-
-    .tags{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:15px;
-    }
+    .tags{ display:flex; flex-wrap:wrap; gap:9px; margin-top:17px; }
 
     .tag{
-      border:1px solid rgba(56,189,248,.38);
-      background:rgba(56,189,248,.12);
+      border:1px solid rgba(56,189,248,.42);
+      background:rgba(56,189,248,.13);
       border-radius:999px;
-      padding:8px 11px;
+      padding:9px 12px;
       color:var(--text);
-      font-size:13px;
-      font-weight:800;
+      font-size:14px;
+      font-weight:900;
     }
 
-    .application-list li{
-      margin-bottom:10px;
-    }
-
-    .doc-buttons{
-      display:flex;
-      flex-wrap:wrap;
-      gap:11px;
-      margin-top:22px;
-    }
+    .application-list li{ margin-bottom:14px; }
+    .doc-buttons{ display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
 
     footer{
-      padding:16px;
-      text-align:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       color:var(--muted);
       border-top:1px solid var(--line);
       font-size:14px;
-      background:rgba(7,17,31,.50);
+      background:rgba(7,17,31,.52);
+      font-weight:700;
     }
 
-    @media (min-width:981px){
-      html, body{
-        height:100%;
-      }
-
-      body{
-        overflow:hidden;
-      }
-
-      .page{
-        height:100vh;
-      }
-
-      main{
-        min-height:0;
-        overflow:hidden;
-      }
-
-      .hero-card,
-      .content-card{
-        min-height:0;
-        height:calc(100vh - 130px);
-      }
-
-      .panel-wrap{
-        overflow:hidden;
-      }
-
-      .panel{
-        height:100%;
-        overflow:hidden;
-      }
+    @media (max-width:1200px){
+      .page{ height:auto; min-height:100vh; grid-template-rows:auto 1fr auto; }
+      body{ overflow:auto; }
+      header{ padding:18px 24px; }
+      .topbar{ align-items:flex-start; flex-direction:column; }
+      .contact-buttons{ flex-wrap:wrap; justify-content:flex-start; }
+      main{ width:calc(100vw - 48px); grid-template-columns:1fr; overflow:visible; }
+      .hero-card, .content-card{ height:auto; }
+      .panel{ overflow:visible; }
     }
 
-    @media (max-width:980px){
-      body{
-        overflow:auto;
-      }
-
-      main{
-        grid-template-columns:1fr;
-      }
-
-      .hero-card,
-      .content-card{
-        min-height:auto;
-      }
-
-      .topbar{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-
-      .contact-buttons{
-        justify-content:flex-start;
-      }
-
-      .tabs{
-        grid-template-columns:1fr;
-      }
-
-      .tab-btn{
-        border-right:0;
-        border-bottom:1px solid var(--line);
-      }
-
-      .skill-grid,
-      .quick-stats{
-        grid-template-columns:1fr;
-      }
-    }
-
-    @media (max-width:560px){
-      .hero-card,
-      .panel{
-        padding:24px;
-      }
-
-      .btn{
-        width:100%;
-      }
-
-      .contact-buttons{
-        width:100%;
-      }
-
-      h1{
-        font-size:48px;
-      }
+    @media (max-width:720px){
+      .tabs{ grid-template-columns:1fr; }
+      .tab-btn{ min-height:54px; border-right:0; border-bottom:1px solid var(--line); }
+      .quick-stats, .skill-grid{ grid-template-columns:1fr; }
+      h1{ font-size:56px; }
+      h2{ font-size:34px; }
+      p, li{ font-size:18px; }
+      .hero-card, .panel{ padding:28px; }
+      .btn{ width:100%; }
+      .contact-buttons{ width:100%; }
     }
   </style>
 </head>
@@ -500,28 +380,16 @@
           </p>
 
           <div class="quick-stats">
-            <div class="stat">
-              <strong>Civil</strong>
-              <span>Obra, suelos, pavimentos y oficina técnica</span>
-            </div>
-            <div class="stat">
-              <strong>Data</strong>
-              <span>Reportes, tableros, SQL, Python y Power BI</span>
-            </div>
-            <div class="stat">
-              <strong>Gestión</strong>
-              <span>Planificación, KPIs, control y trazabilidad</span>
-            </div>
+            <div class="stat"><strong>Civil</strong><span>Obra, suelos, pavimentos y oficina técnica</span></div>
+            <div class="stat"><strong>Data</strong><span>Reportes, tableros, SQL, Python y Power BI</span></div>
+            <div class="stat"><strong>Gestión</strong><span>Planificación, KPIs, control y trazabilidad</span></div>
           </div>
         </div>
 
         <div class="main-cta">
           <small>> acceso destacado</small>
           <h2>Portafolio de proyectos</h2>
-          <p>
-            Entrada principal a proyectos técnicos trabajados en ingeniería civil,
-            presupuestos, gestión, automatización, análisis de datos y reportabilidad.
-          </p>
+          <p>Entrada principal a proyectos técnicos trabajados en ingeniería civil, presupuestos, gestión, automatización, análisis de datos y reportabilidad.</p>
           <a class="btn gold" href="proyectos/">Entrar al portafolio</a>
         </div>
       </section>
@@ -537,76 +405,24 @@
         <div class="panel-wrap">
           <article class="panel active" id="profile">
             <h2>Perfil profesional</h2>
-
-            <p>
-              Ingeniero Civil con experiencia en gestión técnica, control documental,
-              geotecnia, pavimentos, planificación de obra y análisis de datos.
-            </p>
-
+            <p>Ingeniero Civil con experiencia en gestión técnica, control documental, geotecnia, pavimentos, planificación de obra y análisis de datos.</p>
             <div class="profile-box">
-              <p>
-                Perfil orientado a integrar ingeniería, data analytics y gestión ejecutiva
-                para organizar información técnica, generar reportes claros, dar trazabilidad
-                a procesos y apoyar la toma de decisiones en proyectos de infraestructura.
-              </p>
-
-              <p>
-                Actualmente complementa su formación con Ciencia de Datos, orientando su carrera
-                hacia soluciones data-driven aplicadas a ingeniería civil, operaciones, oficina
-                técnica y seguimiento ejecutivo de proyectos.
-              </p>
+              <p>Perfil orientado a integrar ingeniería, data analytics y gestión ejecutiva para organizar información técnica, generar reportes claros, dar trazabilidad a procesos y apoyar la toma de decisiones en proyectos de infraestructura.</p>
+              <p>Actualmente complementa su formación con Ciencia de Datos, orientando su carrera hacia soluciones data-driven aplicadas a ingeniería civil, operaciones, oficina técnica y seguimiento ejecutivo de proyectos.</p>
             </div>
           </article>
 
           <article class="panel" id="tools">
             <h2>Áreas y herramientas clave</h2>
-
             <div class="skill-grid">
-              <div class="skill-card">
-                <h3>Ingeniería Civil</h3>
-                <p>Obra, oficina técnica, geotecnia, pavimentos e infraestructura.</p>
-                <div class="tags">
-                  <span class="tag">AutoCAD</span>
-                  <span class="tag">Civil 3D</span>
-                  <span class="tag">Revit</span>
-                  <span class="tag">Geotecnia</span>
-                  <span class="tag">Pavimentos</span>
-                  <span class="tag">Presupuestos</span>
-                  <span class="tag">Cubicaciones</span>
-                </div>
-              </div>
-
-              <div class="skill-card">
-                <h3>Data & Analytics</h3>
-                <p>Procesamiento, modelado, reportes, indicadores y soporte a decisiones.</p>
-                <div class="tags">
-                  <span class="tag">Excel avanzado</span>
-                  <span class="tag">Power Query</span>
-                  <span class="tag">Power BI</span>
-                  <span class="tag">SQL</span>
-                  <span class="tag">Python</span>
-                  <span class="tag">ETL</span>
-                </div>
-              </div>
-
-              <div class="skill-card">
-                <h3>Gestión Ejecutiva</h3>
-                <p>Seguimiento técnico, planificación, control y reportabilidad.</p>
-                <div class="tags">
-                  <span class="tag">MS Project</span>
-                  <span class="tag">Primavera P6</span>
-                  <span class="tag">Curva S</span>
-                  <span class="tag">SPI / CPI</span>
-                  <span class="tag">KPIs</span>
-                  <span class="tag">Control documental</span>
-                </div>
-              </div>
+              <div class="skill-card"><h3>Ingeniería Civil</h3><p>Obra, oficina técnica, geotecnia, pavimentos e infraestructura.</p><div class="tags"><span class="tag">AutoCAD</span><span class="tag">Civil 3D</span><span class="tag">Revit</span><span class="tag">Geotecnia</span><span class="tag">Pavimentos</span><span class="tag">Presupuestos</span><span class="tag">Cubicaciones</span></div></div>
+              <div class="skill-card"><h3>Data & Analytics</h3><p>Procesamiento, modelado, reportes, indicadores y soporte a decisiones.</p><div class="tags"><span class="tag">Excel avanzado</span><span class="tag">Power Query</span><span class="tag">Power BI</span><span class="tag">SQL</span><span class="tag">Python</span><span class="tag">ETL</span></div></div>
+              <div class="skill-card"><h3>Gestión Ejecutiva</h3><p>Seguimiento técnico, planificación, control y reportabilidad.</p><div class="tags"><span class="tag">MS Project</span><span class="tag">Primavera P6</span><span class="tag">Curva S</span><span class="tag">SPI / CPI</span><span class="tag">KPIs</span><span class="tag">Control documental</span></div></div>
             </div>
           </article>
 
           <article class="panel" id="application">
             <h2>Aplicación profesional</h2>
-
             <ul class="application-list">
               <li>Procesamiento de datos de laboratorio, obra y oficina técnica.</li>
               <li>Dashboards y reportes técnicos para seguimiento de KPIs de proyectos.</li>
@@ -619,12 +435,7 @@
 
           <article class="panel" id="credentials">
             <h2>Credenciales y referencias</h2>
-
-            <p>
-              Documentación profesional seleccionada para consulta: título profesional,
-              plan de estudios, certificado de maestría, tarjeta profesional y referencias laborales.
-            </p>
-
+            <p>Documentación profesional seleccionada para consulta: título profesional, plan de estudios, certificado de maestría, tarjeta profesional y referencias laborales.</p>
             <div class="doc-buttons">
               <a class="btn gold" href="docs/titulo-profesional-apostillado.pdf" target="_blank">Título profesional</a>
               <a class="btn gold" href="docs/plan_de_estudios_unal_med.pdf" target="_blank">Malla / Plan de estudios</a>
@@ -638,36 +449,23 @@
       </section>
     </main>
 
-    <footer>
-      © 2026 William D. Saenz | Ingeniería Civil + Data + Gestión Ejecutiva
-    </footer>
+    <footer>© 2026 William D. Saenz | Ingeniería Civil + Data + Gestión Ejecutiva</footer>
   </div>
 
   <script>
     const texto = "> cargando portafolio técnico... sistema listo";
     const terminal = document.getElementById("terminal");
     let i = 0;
-
-    function escribir(){
-      if(i < texto.length){
-        terminal.textContent += texto.charAt(i);
-        i++;
-        setTimeout(escribir, 45);
-      }
-    }
-
+    function escribir(){ if(i < texto.length){ terminal.textContent += texto.charAt(i); i++; setTimeout(escribir, 38); } }
     escribir();
 
     const buttons = document.querySelectorAll(".tab-btn");
     const panels = document.querySelectorAll(".panel");
-
     buttons.forEach(button => {
       button.addEventListener("click", () => {
         const target = button.dataset.tab;
-
         buttons.forEach(btn => btn.classList.remove("active"));
         panels.forEach(panel => panel.classList.remove("active"));
-
         button.classList.add("active");
         document.getElementById(target).classList.add("active");
       });
