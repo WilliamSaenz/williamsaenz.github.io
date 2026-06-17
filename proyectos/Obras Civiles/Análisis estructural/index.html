@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="google" content="notranslate" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>StructuralScope Pro | Guía de Estructuras</title>
 
   <style>
@@ -28,13 +28,9 @@
   --radius:26px;
 }
 
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
-html{
-  scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth}
 
 body{
   margin:0;
@@ -49,9 +45,7 @@ body{
   overflow-x:hidden;
 }
 
-a{
-  color:inherit;
-}
+a{color:inherit}
 
 .topbar{
   position:sticky;
@@ -99,10 +93,7 @@ a{
   font-weight:700;
 }
 
-.brand .gold{
-  color:var(--dorado);
-  font-weight:900;
-}
+.brand .gold{color:var(--dorado);font-weight:900}
 
 .badge{
   border:1px solid rgba(214,173,79,0.60);
@@ -139,10 +130,7 @@ a{
   transition:.22s ease;
 }
 
-.back-btn.secondary{
-  border-color:var(--celeste);
-  color:var(--blanco);
-}
+.back-btn.secondary{border-color:var(--celeste);color:var(--blanco)}
 
 .back-btn:hover{
   transform:translateY(-2px);
@@ -273,16 +261,15 @@ a{
   transform:translateX(3px);
 }
 
+/* Corrección clave: el concepto activo actual queda bien visible */
 .side-menu button.active{
-  background:rgba(56,189,248,0.12);
-  color:var(--dorado);
-  border-color:rgba(214,173,79,0.75);
-  box-shadow:inset 5px 0 0 var(--dorado);
+  background:linear-gradient(90deg, rgba(214,173,79,.25), rgba(56,189,248,.10));
+  color:#ffe8a3;
+  border-color:rgba(214,173,79,0.92);
+  box-shadow:inset 6px 0 0 var(--dorado), 0 12px 24px rgba(214,173,79,.08);
 }
 
-.content{
-  min-width:0;
-}
+.content{min-width:0}
 
 .hero{
   background:
@@ -343,9 +330,7 @@ a{
   font-weight:700;
 }
 
-.searchbar input::placeholder{
-  color:#9eb5cf;
-}
+.searchbar input::placeholder{color:#9eb5cf}
 
 .searchbar input:focus{
   border-color:var(--celeste);
@@ -509,9 +494,7 @@ p, li{
   font-weight:900;
 }
 
-.info-box,
-.warn-box,
-.senior-box{
+.info-box,.warn-box,.senior-box{
   border-radius:18px;
   padding:18px 20px;
   margin:18px 0;
@@ -526,9 +509,7 @@ p, li{
   color:#dbeafe;
 }
 
-.info-box strong{
-  color:var(--celeste);
-}
+.info-box strong{color:var(--celeste)}
 
 .warn-box{
   border:1px solid rgba(249,115,22,0.38);
@@ -537,9 +518,7 @@ p, li{
   color:#fed7aa;
 }
 
-.warn-box strong{
-  color:#fdba74;
-}
+.warn-box strong{color:#fdba74}
 
 .senior-box{
   border:1px solid rgba(214,173,79,0.42);
@@ -579,9 +558,7 @@ th{
   letter-spacing:.04em;
 }
 
-tr:last-child td{
-  border-bottom:none;
-}
+tr:last-child td{border-bottom:none}
 
 td.value{
   font-weight:900;
@@ -686,6 +663,85 @@ details[open] summary{
   color:var(--dorado);
 }
 
+/* Diagramas técnicos inline */
+.diagram{
+  background:
+    radial-gradient(circle at 18% 12%, rgba(56,189,248,.10), transparent 28%),
+    rgba(7,17,31,.64);
+  border:1px solid rgba(56,189,248,.32);
+  border-radius:22px;
+  padding:18px;
+  margin:18px 0;
+  box-shadow:0 14px 30px rgba(0,0,0,.18);
+}
+
+.diagram-title{
+  color:var(--dorado);
+  font-weight:900;
+  font-size:18px;
+  margin-bottom:12px;
+}
+
+.diagram svg{
+  width:100%;
+  height:auto;
+  display:block;
+  background:rgba(255,255,255,.03);
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.diagram-note{
+  color:#cfe5ff;
+  font-size:15px;
+  font-weight:800;
+  margin-top:12px;
+}
+
+.calc-box{
+  background:rgba(7,17,31,.65);
+  border:1px solid rgba(214,173,79,.35);
+  border-radius:20px;
+  padding:20px;
+  margin:18px 0;
+}
+
+.calc-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+}
+
+.calc-box label{
+  color:#dbeafe;
+  font-weight:900;
+  font-size:14px;
+  display:block;
+  margin-bottom:6px;
+}
+
+.calc-box input,
+.calc-box select{
+  width:100%;
+  min-height:46px;
+  background:#07111f;
+  color:var(--blanco);
+  border:1px solid rgba(56,189,248,.40);
+  border-radius:13px;
+  padding:10px 12px;
+  font-weight:800;
+}
+
+.calc-result{
+  margin-top:16px;
+  padding:16px;
+  border-radius:16px;
+  background:rgba(56,189,248,.10);
+  border:1px solid rgba(56,189,248,.32);
+  color:#eaf6ff;
+  font-weight:800;
+}
+
 .tool-cards{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
@@ -719,9 +775,7 @@ details[open] summary{
     align-items:flex-start;
   }
 
-  .top-actions{
-    justify-content:flex-start;
-  }
+  .top-actions{justify-content:flex-start}
 
   .shell{
     grid-template-columns:1fr;
@@ -734,66 +788,37 @@ details[open] summary{
     max-height:none;
   }
 
-  .side-menu{
-    grid-template-columns:repeat(2,minmax(0,1fr));
-  }
+  .side-menu{grid-template-columns:repeat(2,minmax(0,1fr))}
 
-  .grid,
-  .grid-2,
-  .tool-cards{
-    grid-template-columns:1fr;
-  }
+  .grid,.grid-2,.tool-cards,.calc-grid{grid-template-columns:1fr}
 
-  .searchbar{
-    grid-template-columns:1fr;
-  }
+  .searchbar{grid-template-columns:1fr}
 
-  .nav{
-    width:min(100% - 32px, 1000px);
-  }
+  .nav{width:min(100% - 32px, 1000px)}
 }
 
 @media(max-width:680px){
-  .brand h1{
-    font-size:32px;
-  }
+  .brand h1{font-size:32px}
+  .brand p{font-size:16px}
 
-  .brand p{
-    font-size:16px;
-  }
-
-  .hero,
-  .section,
-  .sidebar{
+  .hero,.section,.sidebar{
     padding:22px;
     border-radius:22px;
   }
 
-  .side-menu{
-    grid-template-columns:1fr;
-  }
+  .side-menu{grid-template-columns:1fr}
 
-  .hero h2{
-    font-size:30px;
-  }
-
-  .section h2{
-    font-size:28px;
-  }
+  .hero h2{font-size:30px}
+  .section h2{font-size:28px}
 
   th,td{
     padding:10px;
     font-size:13px;
   }
 
-  .flow-step{
-    grid-template-columns:1fr;
-  }
+  .flow-step{grid-template-columns:1fr}
 
-  .nav button,
-  .back-btn{
-    font-size:13px;
-  }
+  .nav button,.back-btn{font-size:13px}
 }
 
   </style>
@@ -853,6 +878,37 @@ const modules = {
         <div class="section">
           <h2>Visión general</h2>
           <p class="lead">Esta guía resume cómo piensa un ingeniero estructural al transformar arquitectura, cargas, suelo y normativa en un sistema resistente verificable.</p>
+          
+        <div class="diagram">
+          <div class="diagram-title">Camino de cargas: de la losa al suelo</div>
+          <svg viewBox="0 0 1000 360" role="img" aria-label="Camino de cargas en una estructura">
+            <defs>
+              <marker id="arrowLoad" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#d6ad4f"></path>
+              </marker>
+            </defs>
+            <rect x="100" y="55" width="800" height="38" fill="#38bdf8" opacity=".28" stroke="#38bdf8"/>
+            <rect x="160" y="120" width="680" height="34" fill="#d6ad4f" opacity=".24" stroke="#d6ad4f"/>
+            <rect x="230" y="185" width="70" height="105" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+            <rect x="700" y="185" width="70" height="105" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+            <rect x="170" y="290" width="190" height="42" fill="#102033" stroke="#d6ad4f" stroke-width="3"/>
+            <rect x="640" y="290" width="190" height="42" fill="#102033" stroke="#d6ad4f" stroke-width="3"/>
+            <text x="500" y="35" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="900">Camino de cargas verticales</text>
+            <text x="500" y="80" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Losa</text>
+            <text x="500" y="143" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Viga</text>
+            <text x="265" y="245" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Columna</text>
+            <text x="735" y="245" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Columna</text>
+            <text x="265" y="318" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Fundación</text>
+            <text x="735" y="318" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Fundación</text>
+            <line x1="500" y1="95" x2="500" y2="118" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
+            <line x1="500" y1="155" x2="265" y2="185" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
+            <line x1="500" y1="155" x2="735" y2="185" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
+            <line x1="265" y1="290" x2="265" y2="330" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
+            <line x1="735" y1="290" x2="735" y2="330" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
+          </svg>
+          <div class="diagram-note">Si no podés explicar por dónde viaja la carga, el modelo está incompleto o mal conceptualizado.</div>
+        </div>
+
           <div class="grid">
             <div class="card"><h3>Hormigón armado</h3><p>Losas, vigas, columnas, muros, zapatas, cuantías, recubrimientos, fisuración, corte y punzonamiento.</p><div class="pill-row"><span class="pill">f'c</span><span class="pill">fy</span><span class="pill">servicio</span></div></div>
             <div class="card"><h3>Acero estructural</h3><p>Perfiles, pórticos, cerchas, arriostramientos, pandeo, conexiones, soldaduras, pernos y montaje.</p><div class="pill-row"><span class="pill">A36</span><span class="pill">Gr.50</span><span class="pill">AISC</span></div></div>
@@ -966,6 +1022,30 @@ const modules = {
       materiales: `
         <div class="section">
           <h2>Materiales preliminares</h2>
+          <div class="diagram">
+            <div class="diagram-title">Selección del material: criterio rápido</div>
+            <svg viewBox="0 0 1000 300" role="img" aria-label="Criterio de selección de material estructural">
+              <rect x="60" y="70" width="220" height="120" rx="20" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+              <rect x="390" y="70" width="220" height="120" rx="20" fill="#0d1b2d" stroke="#d6ad4f" stroke-width="3"/>
+              <rect x="720" y="70" width="220" height="120" rx="20" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+              <text x="170" y="120" text-anchor="middle" fill="#f8fafc" font-size="23" font-weight="900">Hormigón</text>
+              <text x="170" y="150" text-anchor="middle" fill="#eef6ff" font-size="15">masa, rigidez, fuego</text>
+              <text x="500" y="120" text-anchor="middle" fill="#f8fafc" font-size="23" font-weight="900">Acero</text>
+              <text x="500" y="150" text-anchor="middle" fill="#eef6ff" font-size="15">rapidez, luces, montaje</text>
+              <text x="830" y="120" text-anchor="middle" fill="#f8fafc" font-size="23" font-weight="900">Mixto</text>
+              <text x="830" y="150" text-anchor="middle" fill="#eef6ff" font-size="15">eficiencia + coordinación</text>
+              <text x="500" y="245" text-anchor="middle" fill="#d6ad4f" font-size="18" font-weight="900">La decisión técnica también es de obra: costo, plazo, disponibilidad y mano de obra.</text>
+            </svg>
+          </div>
+          <table>
+            <thead><tr><th>Resistencia de hormigón/concreto</th><th>Uso orientativo</th><th>Criterio práctico</th></tr></thead>
+            <tbody>
+              <tr><td class="value">21 MPa</td><td>Elementos corrientes de baja demanda, obras pequeñas, fundaciones simples según proyecto.</td><td>Verificar durabilidad, norma local y control de calidad.</td></tr>
+              <tr><td class="value">25 MPa</td><td>Vivienda, losas, vigas y columnas de demanda moderada.</td><td>Muy usado como punto de partida en edificación común.</td></tr>
+              <tr><td class="value">28 MPa</td><td>Edificación con mayores solicitaciones o mejor control de desempeño.</td><td>Buen equilibrio entre resistencia, durabilidad y disponibilidad.</td></tr>
+              <tr><td class="value">35 MPa o más</td><td>Columnas cargadas, muros, edificios altos, elementos especiales.</td><td>No usar “más resistencia” para tapar mala geometría o mal detalle.</td></tr>
+            </tbody>
+          </table>
           <table>
             <thead><tr><th>Material</th><th>Datos mínimos</th><th>Comentario de obra</th></tr></thead>
             <tbody>
@@ -1173,6 +1253,37 @@ const modules = {
         <div class="section">
           <h2>Camino de cargas</h2>
           <p class="lead">Toda carga debe tener una ruta clara hasta el terreno. Si no sabés por dónde baja, no está diseñado: está dibujado.</p>
+
+        <div class="diagram">
+          <div class="diagram-title">Camino de cargas: de la losa al suelo</div>
+          <svg viewBox="0 0 1000 360" role="img" aria-label="Camino de cargas en una estructura">
+            <defs>
+              <marker id="arrowLoad" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#d6ad4f"></path>
+              </marker>
+            </defs>
+            <rect x="100" y="55" width="800" height="38" fill="#38bdf8" opacity=".28" stroke="#38bdf8"/>
+            <rect x="160" y="120" width="680" height="34" fill="#d6ad4f" opacity=".24" stroke="#d6ad4f"/>
+            <rect x="230" y="185" width="70" height="105" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+            <rect x="700" y="185" width="70" height="105" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+            <rect x="170" y="290" width="190" height="42" fill="#102033" stroke="#d6ad4f" stroke-width="3"/>
+            <rect x="640" y="290" width="190" height="42" fill="#102033" stroke="#d6ad4f" stroke-width="3"/>
+            <text x="500" y="35" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="900">Camino de cargas verticales</text>
+            <text x="500" y="80" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Losa</text>
+            <text x="500" y="143" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Viga</text>
+            <text x="265" y="245" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Columna</text>
+            <text x="735" y="245" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Columna</text>
+            <text x="265" y="318" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Fundación</text>
+            <text x="735" y="318" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Fundación</text>
+            <line x1="500" y1="95" x2="500" y2="118" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
+            <line x1="500" y1="155" x2="265" y2="185" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
+            <line x1="500" y1="155" x2="735" y2="185" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
+            <line x1="265" y1="290" x2="265" y2="330" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
+            <line x1="735" y1="290" x2="735" y2="330" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
+          </svg>
+          <div class="diagram-note">Si no podés explicar por dónde viaja la carga, el modelo está incompleto o mal conceptualizado.</div>
+        </div>
+
           <table>
             <thead><tr><th>Carga</th><th>Ruta típica</th><th>Qué revisar</th></tr></thead>
             <tbody>
@@ -1247,19 +1358,65 @@ const modules = {
     ],
     sections: {
       losas_pred: `
+
         <div class="section">
-          <h2>Predimensionamiento de losas</h2>
+          <h2>Predimensionamiento y criterio de losas</h2>
+          <p class="lead">El primer criterio no es “poner una losa”, sino decidir cómo trabaja: una dirección, dos direcciones, maciza, nervada, plana o apoyada en vigas. La relación de luces, apoyos, carga, flecha, arquitectura y constructibilidad mandan.</p>
+          
+        <div class="diagram">
+          <div class="diagram-title">Lectura rápida: losa en una dirección vs dos direcciones</div>
+          <svg viewBox="0 0 980 360" role="img" aria-label="Comparación de losas en una y dos direcciones">
+            <defs>
+              <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#38bdf8"></path>
+              </marker>
+              <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                <path d="M0,0 L0,6 L9,3 z" fill="#d6ad4f"></path>
+              </marker>
+            </defs>
+            <rect x="30" y="45" width="390" height="210" rx="18" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+            <rect x="65" y="80" width="320" height="140" fill="rgba(56,189,248,.12)" stroke="#c3d0e2" stroke-width="2"/>
+            <line x1="70" y1="150" x2="380" y2="150" stroke="#38bdf8" stroke-width="5" marker-end="url(#arrowBlue)"/>
+            <line x1="70" y1="180" x2="380" y2="180" stroke="#38bdf8" stroke-width="5" marker-end="url(#arrowBlue)"/>
+            <text x="225" y="30" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="800">Losa en una dirección</text>
+            <text x="225" y="285" text-anchor="middle" fill="#d6ad4f" font-size="18" font-weight="800">Largo / corto ≥ 2</text>
+            <text x="225" y="315" text-anchor="middle" fill="#eef6ff" font-size="16">Carga trabaja principalmente hacia 2 apoyos</text>
+            <rect x="560" y="45" width="390" height="210" rx="18" fill="#0d1b2d" stroke="#d6ad4f" stroke-width="3"/>
+            <rect x="595" y="80" width="320" height="140" fill="rgba(214,173,79,.12)" stroke="#c3d0e2" stroke-width="2"/>
+            <line x1="755" y1="150" x2="910" y2="150" stroke="#38bdf8" stroke-width="4" marker-end="url(#arrowBlue)"/>
+            <line x1="755" y1="150" x2="600" y2="150" stroke="#38bdf8" stroke-width="4" marker-end="url(#arrowBlue)"/>
+            <line x1="755" y1="150" x2="755" y2="85" stroke="#d6ad4f" stroke-width="4" marker-end="url(#arrowGold)"/>
+            <line x1="755" y1="150" x2="755" y2="215" stroke="#d6ad4f" stroke-width="4" marker-end="url(#arrowGold)"/>
+            <text x="755" y="30" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="800">Losa en dos direcciones</text>
+            <text x="755" y="285" text-anchor="middle" fill="#d6ad4f" font-size="18" font-weight="800">Largo / corto &lt; 2</text>
+            <text x="755" y="315" text-anchor="middle" fill="#eef6ff" font-size="16">Carga se reparte hacia 4 bordes</text>
+          </svg>
+          <div class="diagram-note">Criterio práctico: la relación entre luces orienta el tipo de análisis; las condiciones de borde y continuidad también importan.</div>
+        </div>
+
           <table>
-            <thead><tr><th>Tipo</th><th>Regla orientativa inicial</th><th>Control principal</th></tr></thead>
+            <thead><tr><th>Tipo de losa</th><th>Cuándo conviene</th><th>Regla orientativa inicial</th><th>Control que suele gobernar</th></tr></thead>
             <tbody>
-              <tr><td class="value">Losa maciza 1 dirección</td><td>h ≈ L/20 a L/25</td><td>Flecha y fisuración.</td></tr>
-              <tr><td class="value">Losa maciza 2 direcciones</td><td>h ≈ L/25 a L/30</td><td>Momento en dos direcciones.</td></tr>
-              <tr><td class="value">Losa aligerada / nervada</td><td>h ≈ L/25 a L/30, según sistema</td><td>Peso propio, flecha y vibración.</td></tr>
-              <tr><td class="value">Losa plana</td><td>Mayor espesor inicial; revisar punzonamiento</td><td>Punzonamiento, deriva y flecha.</td></tr>
+              <tr><td class="value">Losa maciza 1 dirección</td><td>Paños alargados, relación largo/corto ≥ 2, apoyada principalmente en dos bordes o vigas paralelas.</td><td>h ≈ L/20 a L/25</td><td>Flecha, fisuración y momento positivo en la luz corta.</td></tr>
+              <tr><td class="value">Losa maciza 2 direcciones</td><td>Paños más cuadrados, relación largo/corto &lt; 2, apoyada en cuatro lados.</td><td>h ≈ L/25 a L/30</td><td>Momentos en ambas direcciones, continuidad y torsión de esquinas.</td></tr>
+              <tr><td class="value">Losa nervada / casetonada</td><td>Luces medias, necesidad de bajar peso propio y controlar flecha.</td><td>h ≈ L/25 a L/30, según sistema</td><td>Separación de nervios, capa de compresión, corte y vibración.</td></tr>
+              <tr><td class="value">Losa plana</td><td>Plantas libres, estacionamientos, oficinas, menor altura entre pisos.</td><td>Mayor espesor inicial; revisar ábacos/capiteles si aplica.</td><td>Punzonamiento, flecha, derivas y transferencia en columnas.</td></tr>
+              <tr><td class="value">Losa colaborante</td><td>Estructuras metálicas, montaje rápido, entrepisos livianos.</td><td>Según chapa, luz, conectores y fabricante.</td><td>Vibración, conectores, fuego y etapa constructiva.</td></tr>
             </tbody>
           </table>
-          <div class="warn-box"><strong>Alerta:</strong> estos rangos son punto de partida. La norma, el sistema, las cargas y las restricciones pueden exigir más.</div>
+          <div class="senior-box"><h3>Criterio senior</h3><p>Para vivienda común, una losa maciza puede ser muy práctica por mano de obra y control. Para plantas grandes o repetitivas, una losa nervada o plana puede ser eficiente, pero jamás se decide sin revisar flecha, punzonamiento, instalaciones, altura disponible y costo de encofrado.</p></div>
+          <div class="calc-box">
+            <h3>Mini criterio interactivo de losa</h3>
+            <div class="calc-grid">
+              <div><label>Luz corta Lx (m)</label><input id="lxLosa" type="number" value="4.5" step="0.1"></div>
+              <div><label>Luz larga Ly (m)</label><input id="lyLosa" type="number" value="6.0" step="0.1"></div>
+              <div><label>Sistema</label><select id="tipoLosa"><option value="maciza">Maciza</option><option value="nervada">Nervada</option><option value="plana">Plana</option></select></div>
+            </div>
+            <button class="searchbar button-losa" type="button" onclick="calcularLosa()" style="margin-top:14px;border:2px solid var(--dorado);background:transparent;color:var(--dorado);border-radius:14px;padding:12px 18px;font-weight:900;cursor:pointer;">Evaluar criterio</button>
+            <div id="resultadoLosa" class="calc-result">Cargá luces y presioná evaluar.</div>
+          </div>
         </div>
+
       `,
       vigas_pred: `
         <div class="section">
@@ -1379,6 +1536,32 @@ const modules = {
       geometria_modelo: `
         <div class="section">
           <h2>Geometría del modelo</h2>
+
+        <div class="diagram">
+          <div class="diagram-title">Modelo estructural: lo que debe revisarse antes de confiar</div>
+          <svg viewBox="0 0 1000 360" role="img" aria-label="Diagrama de validación de modelo estructural">
+            <rect x="70" y="70" width="180" height="80" rx="14" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+            <rect x="310" y="70" width="180" height="80" rx="14" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+            <rect x="550" y="70" width="180" height="80" rx="14" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+            <rect x="790" y="70" width="150" height="80" rx="14" fill="#0d1b2d" stroke="#d6ad4f" stroke-width="3"/>
+            <rect x="190" y="230" width="220" height="80" rx="14" fill="#0d1b2d" stroke="#d6ad4f" stroke-width="3"/>
+            <rect x="590" y="230" width="220" height="80" rx="14" fill="#0d1b2d" stroke="#d6ad4f" stroke-width="3"/>
+            <text x="160" y="105" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="900">Geometría</text>
+            <text x="400" y="105" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="900">Apoyos</text>
+            <text x="640" y="105" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="900">Cargas</text>
+            <text x="865" y="105" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="900">Masas</text>
+            <text x="300" y="265" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="900">Deformada</text>
+            <text x="700" y="265" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="900">Reacciones</text>
+            <line x1="250" y1="110" x2="310" y2="110" stroke="#38bdf8" stroke-width="4"/>
+            <line x1="490" y1="110" x2="550" y2="110" stroke="#38bdf8" stroke-width="4"/>
+            <line x1="730" y1="110" x2="790" y2="110" stroke="#38bdf8" stroke-width="4"/>
+            <line x1="400" y1="150" x2="300" y2="230" stroke="#d6ad4f" stroke-width="4"/>
+            <line x1="640" y1="150" x2="700" y2="230" stroke="#d6ad4f" stroke-width="4"/>
+            <text x="500" y="35" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="900">Checklist visual del modelo</text>
+          </svg>
+          <div class="diagram-note">Nunca firmes resultados sin revisar equilibrio, deformada, reacciones, masas, modos y unidades.</div>
+        </div>
+
           <table>
             <thead><tr><th>Dato</th><th>Qué revisar</th><th>Error típico</th></tr></thead>
             <tbody>
@@ -1450,6 +1633,27 @@ const modules = {
       diafragmas: `
         <div class="section">
           <h2>Diafragmas</h2>
+
+        <div class="diagram">
+          <div class="diagram-title">Sistema lateral: centro de masa, rigidez y torsión</div>
+          <svg viewBox="0 0 980 360" role="img" aria-label="Diagrama de torsión estructural por excentricidad">
+            <rect x="170" y="65" width="640" height="210" rx="18" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+            <rect x="210" y="95" width="55" height="150" fill="#d6ad4f" opacity=".55"/>
+            <rect x="715" y="95" width="55" height="150" fill="#d6ad4f" opacity=".55"/>
+            <circle cx="410" cy="170" r="18" fill="#38bdf8"/>
+            <circle cx="560" cy="170" r="18" fill="#d6ad4f"/>
+            <text x="410" y="215" text-anchor="middle" fill="#eef6ff" font-size="16" font-weight="800">CM</text>
+            <text x="560" y="215" text-anchor="middle" fill="#eef6ff" font-size="16" font-weight="800">CR</text>
+            <line x1="410" y1="170" x2="560" y2="170" stroke="#fb7185" stroke-width="4" stroke-dasharray="10 8"/>
+            <text x="485" y="155" text-anchor="middle" fill="#fb7185" font-size="16" font-weight="900">excentricidad</text>
+            <path d="M490 80 C650 95 680 235 520 260" fill="none" stroke="#fb7185" stroke-width="5"/>
+            <polygon points="520,260 542,253 530,238" fill="#fb7185"/>
+            <text x="490" y="40" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="900">Deriva y torsión en planta</text>
+            <text x="490" y="315" text-anchor="middle" fill="#eef6ff" font-size="16">CM = centro de masa · CR = centro de rigidez</text>
+          </svg>
+          <div class="diagram-note">En sismo/viento no basta con resistir: hay que controlar derivas, torsión y distribución de rigidez.</div>
+        </div>
+
           <p class="lead">El diafragma distribuye fuerzas horizontales hacia pórticos, muros o arriostres.</p>
           <table>
             <thead><tr><th>Tipo</th><th>Uso</th><th>Alerta</th></tr></thead>
@@ -1899,7 +2103,6 @@ const modules = {
       {id:"voc_hormigon", label:"Hormigón armado"},
       {id:"voc_acero", label:"Acero estructural"},
       {id:"voc_modelado", label:"Modelado y análisis"},
-      {id:"voc_servicio", label:"Servicio y desempeño"},
       {id:"voc_obra", label:"Obra e inspección"},
       {id:"voc_col_arg", label:"Colombia / Argentina"}
     ],
@@ -1910,13 +2113,11 @@ const modules = {
           <table>
             <thead><tr><th>Término</th><th>Qué significa</th><th>Uso práctico</th></tr></thead>
             <tbody>
-              <tr><td class="value">f'c</td><td>Resistencia especificada a compresión del hormigón.</td><td>Base para diseño de columnas, vigas, losas, muros y fundaciones.</td></tr>
+              <tr><td class="value">f'c</td><td>Resistencia especificada a compresión del hormigón/concreto.</td><td>Base para diseño de columnas, vigas, losas, muros y fundaciones.</td></tr>
               <tr><td class="value">fy</td><td>Resistencia de fluencia del acero de refuerzo.</td><td>Controla capacidad de flexión, corte y cuantías.</td></tr>
-              <tr><td class="value">Recubrimiento</td><td>Distancia entre superficie del hormigón y barra de acero.</td><td>Protege contra corrosión, fuego y pérdida de adherencia.</td></tr>
+              <tr><td class="value">Recubrimiento</td><td>Distancia entre superficie y barra de acero.</td><td>Protección contra corrosión, fuego y pérdida de adherencia.</td></tr>
               <tr><td class="value">Cuantía</td><td>Relación entre área de acero y sección de hormigón.</td><td>Permite revisar si el elemento está razonablemente armado.</td></tr>
               <tr><td class="value">Punzonamiento</td><td>Falla local por corte alrededor de columnas o cargas concentradas.</td><td>Crítico en losas planas y zapatas.</td></tr>
-              <tr><td class="value">Confinamiento</td><td>Estribos o refuerzo transversal que mejora ductilidad.</td><td>Clave en columnas, zonas sísmicas y extremos de elementos.</td></tr>
-              <tr><td class="value">Longitud de desarrollo</td><td>Longitud necesaria para que una barra transfiera fuerza al hormigón.</td><td>Define anclajes, empalmes y detalles de armado.</td></tr>
             </tbody>
           </table>
         </div>
@@ -1931,8 +2132,6 @@ const modules = {
               <tr><td class="value">Pandeo</td><td>Inestabilidad de un elemento comprimido.</td><td>Controla columnas, diagonales y barras de cercha.</td></tr>
               <tr><td class="value">Pandeo lateral torsional</td><td>Inestabilidad de vigas por flexión y torsión.</td><td>Requiere arriostramiento lateral adecuado.</td></tr>
               <tr><td class="value">Conexión</td><td>Unión entre elementos mediante pernos, soldadura o placas.</td><td>Puede gobernar diseño, costo y montaje.</td></tr>
-              <tr><td class="value">Placa base</td><td>Elemento que transfiere carga de columna metálica a fundación.</td><td>Revisa presión, pernos de anclaje y rigidizadores.</td></tr>
-              <tr><td class="value">Arriostramiento</td><td>Sistema que estabiliza la estructura frente a cargas laterales o pandeo.</td><td>Esencial en naves, pórticos y cubiertas.</td></tr>
             </tbody>
           </table>
         </div>
@@ -1940,30 +2139,14 @@ const modules = {
       voc_modelado: `
         <div class="section">
           <h2>Vocabulario de modelado y análisis</h2>
+          ${diagram_modelo}
           <table>
             <thead><tr><th>Término</th><th>Qué significa</th><th>Uso práctico</th></tr></thead>
             <tbody>
               <tr><td class="value">Diafragma</td><td>Elemento que distribuye acciones laterales hacia muros, pórticos o arriostres.</td><td>Puede ser rígido, semirrígido o flexible.</td></tr>
               <tr><td class="value">Masa sísmica</td><td>Masa que participa en la respuesta dinámica.</td><td>Incluye peso propio y parte de cargas variables según norma.</td></tr>
-              <tr><td class="value">Modo de vibración</td><td>Forma característica de movimiento de la estructura.</td><td>Ayuda a entender traslación, torsión y participación modal.</td></tr>
-              <tr><td class="value">Deriva</td><td>Desplazamiento relativo entre pisos.</td><td>Controla daño no estructural y desempeño sísmico/viento.</td></tr>
+              <tr><td class="value">Deriva</td><td>Desplazamiento relativo entre pisos.</td><td>Controla daño no estructural y desempeño lateral.</td></tr>
               <tr><td class="value">P-Delta</td><td>Efecto de segundo orden por cargas axiales y desplazamientos laterales.</td><td>Importante en estructuras altas o flexibles.</td></tr>
-              <tr><td class="value">Shell / Frame</td><td>Tipos de elementos finitos para placas/muros y barras.</td><td>Losas y muros suelen ir como shell; vigas/columnas como frame.</td></tr>
-            </tbody>
-          </table>
-        </div>
-      `,
-      voc_servicio: `
-        <div class="section">
-          <h2>Vocabulario de servicio y desempeño</h2>
-          <table>
-            <thead><tr><th>Término</th><th>Qué significa</th><th>Revisión típica</th></tr></thead>
-            <tbody>
-              <tr><td class="value">Flecha</td><td>Deformación vertical de vigas o losas.</td><td>Control de fisuras, terminaciones y confort.</td></tr>
-              <tr><td class="value">Fisuración</td><td>Aparición de grietas en el hormigón.</td><td>Normal en hormigón armado, pero debe controlarse.</td></tr>
-              <tr><td class="value">Vibración</td><td>Respuesta dinámica perceptible.</td><td>Importante en entrepisos livianos, pasarelas y grandes luces.</td></tr>
-              <tr><td class="value">Durabilidad</td><td>Capacidad de mantener desempeño con el tiempo.</td><td>Depende de ambiente, recubrimiento, materiales y mantenimiento.</td></tr>
-              <tr><td class="value">Estado límite</td><td>Condición más allá de la cual no se cumple seguridad o servicio.</td><td>Resistencia, servicio, estabilidad, fatiga, durabilidad.</td></tr>
             </tbody>
           </table>
         </div>
@@ -1978,8 +2161,6 @@ const modules = {
               <tr><td class="value">Apuntalamiento</td><td>Soporte temporal de losas y vigas.</td><td>Retiro temprano puede causar fisuras o falla.</td></tr>
               <tr><td class="value">Vibrado</td><td>Compactación del hormigón fresco.</td><td>Falta de vibrado produce hormigueros; exceso puede segregar.</td></tr>
               <tr><td class="value">Curado</td><td>Mantener humedad/temperatura para ganar resistencia.</td><td>Sin curado, baja durabilidad y aumenta fisuración.</td></tr>
-              <tr><td class="value">Soldadura</td><td>Procedimiento, cordón, inspección y compatibilidad.</td><td>No todo cordón bonito es estructuralmente correcto.</td></tr>
-              <tr><td class="value">Pernos</td><td>Diámetro, grado, torque, arandela y perforación.</td><td>Una conexión mal ejecutada puede gobernar la estructura.</td></tr>
             </tbody>
           </table>
         </div>
@@ -1994,12 +2175,9 @@ const modules = {
               <tr><td class="value">Formaleta</td><td>Encofrado</td><td>Molde temporal para dar forma al hormigón/concreto.</td></tr>
               <tr><td class="value">Acero de refuerzo</td><td>Armadura / hierro</td><td>Barras corrugadas embebidas en hormigón.</td></tr>
               <tr><td class="value">Placa</td><td>Losa</td><td>Elemento horizontal de entrepiso o cubierta.</td></tr>
-              <tr><td class="value">Viga de amarre</td><td>Viga de encadenado / fundación</td><td>Elemento que vincula apoyos o muros.</td></tr>
               <tr><td class="value">Cimentación</td><td>Fundación</td><td>Sistema que transmite cargas al suelo.</td></tr>
-              <tr><td class="value">Mampostería</td><td>Mampostería</td><td>Muros de bloques, ladrillos o unidades similares.</td></tr>
             </tbody>
           </table>
-          <div class="info-box"><strong>Tip:</strong> en CV, LinkedIn y portafolio conviene usar ambos términos cuando el público puede ser colombiano y argentino: “concreto/hormigón”, “cimentaciones/fundaciones”, “formaleta/encofrado”.</div>
         </div>
       `
     }
@@ -2008,13 +2186,12 @@ const modules = {
   bibliografia: {
     label: "Bibliografía",
     color: "#94a3b8",
-    subtitle: "Fuentes normativas y libros base",
-    heroTitle: "Bibliografía técnica Colombia + Argentina + referencias internacionales",
-    heroText: "Fuentes de consulta para cargas, sismo, hormigón/concreto, acero, geotecnia, modelado y criterios de diseño. Usar siempre la versión vigente y el marco legal del proyecto.",
+    subtitle: "Fuentes usadas y recomendadas",
+    heroTitle: "Bibliografía técnica y normativa de apoyo",
+    heroText: "Fuentes de referencia para normativa, diseño de hormigón, acero, cargas y criterios estructurales. Los contenidos fueron parafraseados y simplificados para consulta rápida.",
     menu: [
       {id:"norm_col_arg", label:"Colombia y Argentina"},
       {id:"internacional", label:"Referencias internacionales"},
-      {id:"libros", label:"Libros recomendados"},
       {id:"nota_bib", label:"Nota de uso"}
     ],
     sections: {
@@ -2024,11 +2201,10 @@ const modules = {
           <table>
             <thead><tr><th>Fuente</th><th>Uso dentro de la guía</th><th>Enlace</th></tr></thead>
             <tbody>
-              <tr><td class="value">NSR-10 · Reglamento Colombiano de Construcción Sismo Resistente</td><td>Base colombiana para requisitos generales, cargas, concreto estructural, estructuras metálicas, geotecnia y supervisión técnica.</td><td><a href="https://www.idrd.gov.co/construcciones/lineamientos-y-especificaciones-tecnicas-idrd" target="_blank" rel="noopener">Consultar títulos NSR-10</a></td></tr>
-              <tr><td class="value">Decreto 1401 de 2023 · Colombia</td><td>Modificación parcial del Reglamento Colombiano de Construcción Sismo Resistente NSR-10.</td><td><a href="https://www.alcaldiabogota.gov.co/sisjur/normas/Norma1.jsp?i=145699" target="_blank" rel="noopener">Abrir decreto</a></td></tr>
-              <tr><td class="value">INTI · CIRSOC Argentina</td><td>Organismo de referencia para reglamentos argentinos de seguridad estructural en obras civiles.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc" target="_blank" rel="noopener">Abrir CIRSOC</a></td></tr>
-              <tr><td class="value">Reglamentos CIRSOC e INPRES-CIRSOC</td><td>Cargas, viento, sismo, hormigón, acero, mampostería y madera según reglamentos argentinos.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">Consultar reglamentos</a></td></tr>
-              <tr><td class="value">CIRSOC 201 · Estructuras de hormigón</td><td>Referencia argentina para diseño de estructuras de hormigón.</td><td><a href="https://contenidos.inpres.gob.ar/docs/Reglamentos/CIRSOC-201-Reglamento.pdf" target="_blank" rel="noopener">Abrir PDF</a></td></tr>
+              <tr><td class="value">Ministerio de Vivienda Colombia · Decreto 0926 de 2010</td><td>Referencia oficial de la NSR-10 para construcciones sismo resistentes.</td><td><a href="https://minvivienda.gov.co/normativa/decreto-0926-2010" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+              <tr><td class="value">Gestor Normativo Colombia · Decreto 926 de 2010</td><td>Adopción del Reglamento Colombiano de Construcción Sismorresistente NSR-10.</td><td><a href="https://www.funcionpublica.gov.co/eva/gestornormativo/norma.php?i=39255" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+              <tr><td class="value">INTI · CIRSOC</td><td>Reglamentos nacionales argentinos de seguridad estructural para obras civiles.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+              <tr><td class="value">INTI · Reglamentos CIRSOC e INPRES-CIRSOC</td><td>Consulta de reglamentos argentinos disponibles.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -2039,26 +2215,10 @@ const modules = {
           <table>
             <thead><tr><th>Fuente</th><th>Uso dentro de la guía</th><th>Enlace</th></tr></thead>
             <tbody>
-              <tr><td class="value">ACI 318</td><td>Hormigón/concreto estructural: resistencia, servicio, detalle, durabilidad y requisitos de diseño.</td><td><a href="https://www.concrete.org/store/productdetail.aspx?ItemID=318U19" target="_blank" rel="noopener">Abrir ACI</a></td></tr>
-              <tr><td class="value">AISC 360</td><td>Diseño y construcción de estructuras de acero.</td><td><a href="https://www.aisc.org/aisc/explore-aisc/aisc-360/" target="_blank" rel="noopener">Abrir AISC 360</a></td></tr>
-              <tr><td class="value">AISC Current Standards</td><td>Estándares vigentes y recursos técnicos de acero estructural.</td><td><a href="https://www.aisc.org/aisc/publications/current-standards/" target="_blank" rel="noopener">Abrir estándares</a></td></tr>
-              <tr><td class="value">ASCE 7</td><td>Cargas mínimas de diseño, viento, sismo y combinaciones.</td><td><a href="https://www.asce.org/publications-and-news/asce-7" target="_blank" rel="noopener">Abrir ASCE 7</a></td></tr>
-            </tbody>
-          </table>
-        </div>
-      `,
-      libros: `
-        <div class="section">
-          <h2>Libros recomendados para criterio estructural</h2>
-          <table>
-            <thead><tr><th>Referencia</th><th>Tema</th><th>Uso práctico</th></tr></thead>
-            <tbody>
-              <tr><td class="value">Nilson, Darwin & Dolan</td><td>Diseño de estructuras de concreto.</td><td>Base conceptual para flexión, corte, servicio y detalle.</td></tr>
-              <tr><td class="value">McCormac & Brown</td><td>Diseño de hormigón armado.</td><td>Lectura práctica para predimensionamiento y diseño.</td></tr>
-              <tr><td class="value">Salmon, Johnson & Malhas</td><td>Steel Structures.</td><td>Diseño de acero, miembros y conexiones.</td></tr>
-              <tr><td class="value">Segui</td><td>Steel Design.</td><td>Acero estructural con enfoque didáctico.</td></tr>
-              <tr><td class="value">Chopra</td><td>Dynamics of Structures.</td><td>Dinámica estructural, sismo, modos y espectros.</td></tr>
-              <tr><td class="value">Bowles</td><td>Foundation Analysis and Design.</td><td>Cimentaciones/fundaciones e interacción con suelo.</td></tr>
+              <tr><td class="value">ACI 318</td><td>Hormigón estructural: resistencia, servicio, detalle, durabilidad y requisitos de diseño.</td><td><a href="https://www.concrete.org/store/productdetail.aspx?ItemID=318U19" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+              <tr><td class="value">AISC 360</td><td>Diseño y construcción de estructuras de acero.</td><td><a href="https://www.aisc.org/aisc/explore-aisc/aisc-360/" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+              <tr><td class="value">AISC Current Standards</td><td>Estándares vigentes y recursos técnicos de acero estructural.</td><td><a href="https://www.aisc.org/aisc/publications/current-standards/" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
+              <tr><td class="value">ASCE 7</td><td>Cargas mínimas de diseño, viento, sismo y combinaciones.</td><td><a href="https://www.asce.org/publications-and-news/asce-7" target="_blank" rel="noopener">Abrir fuente</a></td></tr>
             </tbody>
           </table>
         </div>
@@ -2066,8 +2226,7 @@ const modules = {
       nota_bib: `
         <div class="section">
           <h2>Nota de uso</h2>
-          <div class="warn-box"><strong>Importante:</strong> esta guía no reproduce normas completas ni reemplaza documentos oficiales. Usa conceptos parafraseados y rangos orientativos. Cada proyecto debe verificarse con norma vigente, contrato, autoridad local, estudio geotécnico y profesional responsable.</div>
-          <div class="senior-box"><h3>Criterio de 20+ años</h3><p>La bibliografía sirve para construir criterio, no para copiar fórmulas a ciegas. El proyecto manda: uso, suelo, cargas, sistema resistente, constructibilidad, detalle y control de calidad.</p></div>
+          <div class="warn-box"><strong>Importante:</strong> esta guía no reproduce normas completas ni reemplaza documentos oficiales. Usa conceptos parafraseados y rangos orientativos. Cada proyecto debe verificarse con la norma vigente, el contrato, la autoridad local y el profesional responsable.</div>
         </div>
       `
     }
@@ -2214,6 +2373,29 @@ function hexToRgba(hex, alpha){
 }
 
 render();
+
+function calcularLosa(){
+  const lx = parseFloat(document.getElementById("lxLosa")?.value || 0);
+  const ly = parseFloat(document.getElementById("lyLosa")?.value || 0);
+  const tipo = document.getElementById("tipoLosa")?.value || "maciza";
+  const out = document.getElementById("resultadoLosa");
+  if(!out || !lx || !ly){
+    if(out) out.textContent = "Ingresá luces válidas.";
+    return;
+  }
+  const corto = Math.min(lx, ly);
+  const largo = Math.max(lx, ly);
+  const r = largo / corto;
+  let trabajo = r >= 2 ? "una dirección" : "dos direcciones";
+  let h1 = tipo === "maciza" ? corto/25 : tipo === "nervada" ? corto/28 : corto/22;
+  let h2 = tipo === "maciza" ? corto/20 : tipo === "nervada" ? corto/25 : corto/20;
+  out.innerHTML = `
+    <strong>Relación largo/corto:</strong> ${r.toFixed(2)} → criterio inicial: <strong>${trabajo}</strong>.<br>
+    <strong>Espesor preliminar orientativo:</strong> ${(h1*100).toFixed(0)} a ${(h2*100).toFixed(0)} cm, antes de verificar cargas, flecha, punzonamiento, continuidad, norma y constructibilidad.<br>
+    <strong>Lectura senior:</strong> si hay cargas altas, grandes luces, tabiques pesados o exigencia de servicio, no te quedes con el mínimo; verificá flecha y fisuración desde el inicio.
+  `;
+}
+
 </script>
 </body>
 </html>
