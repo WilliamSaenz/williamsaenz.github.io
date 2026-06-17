@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = """<!DOCTYPE html>
 <html lang="es" class="notranslate">
 <head>
   <meta charset="UTF-8">
@@ -397,13 +399,17 @@
 
       <p>
         Documentación profesional seleccionada para consulta: título profesional,
-        certificado de maestría, tarjeta profesional y referencias laborales.
+        plan de estudios, certificado de maestría, tarjeta profesional y referencias laborales.
       </p>
 
       <div class="grid-buttons">
 
         <a class="button gold" href="docs/titulo-profesional-apostillado.pdf" target="_blank">
           Título profesional
+        </a>
+
+        <a class="button gold" href="docs/plan_de_estudios_unal_med.pdf" target="_blank">
+          Malla curricular / Plan de estudios
         </a>
 
         <a class="button gold" href="docs/certificado-maestria.pdf" target="_blank">
@@ -464,4 +470,8 @@
 
 </body>
 </html>
-```
+"""
+
+path = Path("/mnt/data/index_portafolio_actualizado_plan_estudios.html")
+path.write_text(html, encoding="utf-8")
+path.as_posix()
