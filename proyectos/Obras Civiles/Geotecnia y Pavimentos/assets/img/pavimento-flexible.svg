@@ -1,9 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" role="img" aria-label="Estructura de pavimento flexible"><defs><style>.bg{fill:#06172a}.panel{fill:#0b2034;stroke:#38bdf8;stroke-width:2}.line{stroke:#38bdf8;stroke-width:4;fill:none;stroke-linecap:round;stroke-linejoin:round}.gold{stroke:#f7d154;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.green{stroke:#22c55e;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.red{stroke:#fb7185;fill:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:round}.txt{fill:#f4f7fb;font-family:Arial, sans-serif;font-size:22px;font-weight:700}.small{fill:#c8d7ec;font-family:Arial, sans-serif;font-size:16px}.tiny{fill:#dff4ff;font-family:Arial, sans-serif;font-size:13px;font-weight:700}.yellow{fill:#f7d154}.cyan{fill:#38bdf8}.muted{fill:#9fb4cd}.white{fill:#fff}.grid{stroke:#294258;stroke-width:1}.arrow{marker-end:url(#arr)} </style><marker id="arr" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#38bdf8"/></marker></defs><rect class="bg" width="900" height="520" rx="24"/>
-<text x="36" y="48" class="txt">Pavimento flexible: estructura por capas, falla por agua + tránsito + pérdida de soporte</text>
-<rect x="80" y="96" width="720" height="310" rx="18" class="panel"/>
-<rect x="150" y="130" width="600" height="48" fill="#2f2f36" stroke="#fff"/><text x="175" y="162" class="tiny">Carpeta asfáltica: fatiga, temperatura, vacíos, compactación</text>
-<rect x="150" y="178" width="600" height="70" fill="#7c6a50" stroke="#fff"/><text x="175" y="221" class="tiny">Base granular: gradación, CBR, compactación, segregación</text>
-<rect x="150" y="248" width="600" height="70" fill="#9b8461" stroke="#fff"/><text x="175" y="291" class="tiny">Subbase: drenaje, filtro, soporte, control de finos</text>
-<rect x="150" y="318" width="600" height="54" fill="#60452e" stroke="#fff"/><text x="175" y="352" class="tiny">Subrasante: CBR, IP, humedad, expansión, bombeo</text>
-<path d="M85,430 C220,385 340,412 470,392 C610,369 720,400 835,365" class="line"/><text x="90" y="468" class="small">Regla: si la subrasante falla, el paquete superior empieza a trabajar como curita cara.</text>
+<text x="36" y="40" class="txt">Pavimento flexible: estructura por capas,</text>
+<text x="36" y="66" class="txt">falla por agua + tránsito + pérdida de soporte</text>
+<rect x="80" y="122" width="720" height="310" rx="18" class="panel"/>
+<rect x="150" y="156" width="600" height="48" fill="#2f2f36" stroke="#fff"/><text x="175" y="188" class="tiny">Carpeta asfáltica: fatiga, temperatura, vacíos, compactación</text>
+<rect x="150" y="204" width="600" height="70" fill="#7c6a50" stroke="#fff"/><text x="175" y="247" class="tiny">Base granular: gradación, CBR, compactación, segregación</text>
+<rect x="150" y="274" width="600" height="70" fill="#9b8461" stroke="#fff"/><text x="175" y="317" class="tiny">Subbase: drenaje, filtro, soporte, control de finos</text>
+<rect x="150" y="344" width="600" height="54" fill="#60452e" stroke="#fff"/><text x="175" y="378" class="tiny">Subrasante: CBR, IP, humedad, expansión, bombeo</text>
+<path d="M85,456 C220,411 340,438 470,418 C610,395 720,426 835,391" class="line"/><text x="90" y="494" class="small">Regla: si la subrasante falla, el paquete superior empieza a trabajar como curita cara.</text>
 </svg>

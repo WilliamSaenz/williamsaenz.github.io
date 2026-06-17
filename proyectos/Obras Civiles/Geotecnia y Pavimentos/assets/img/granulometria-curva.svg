@@ -13,5 +13,6 @@
 <text x="285" y="432" class="small">Tamaño de partícula decrece →</text><text x="20" y="245" class="small" transform="rotate(-90 20,245)">% pasa</text>
 <text x="575" y="150" class="small" fill="#22c55e">bien graduado</text><text x="555" y="254" class="small" fill="#f7d154">uniforme</text><text x="575" y="352" class="small" fill="#fb7185">gap-graded / segregable</text>
 <rect x="70" y="430" width="760" height="54" rx="12" fill="#0b2034" stroke="#294258"/>
-<text x="92" y="462" class="small">Lectura práctica: curva continua = compacta mejor; exceso de finos = agua atrapada; salto abrupto = riesgo de segregación.</text>
+<text x="92" y="452" class="small">Lectura práctica: curva continua = compacta mejor; exceso de finos = agua atrapada;</text>
+<text x="92" y="472" class="small">salto abrupto = riesgo de segregación.</text>
 </svg>

@@ -50,6 +50,31 @@ function calcDCP(){
   const txt=cbr<5?'subrasante débil o húmeda: verificar con CBR, humedad y densidad.':cbr<10?'soporte regular: revisar uniformidad y drenaje.':'soporte aceptable preliminar: no reemplaza especificación.';
   get('res_dcp').innerHTML=`CBR estimado ≈ ${fmt(cbr,1)} % <small>${txt} Correlación orientativa; calibrar localmente.</small>`;
 }
+function calcPhase(){
+  const Gs=+get('Gs_phase')?.value||2.65, gd=+get('gd_phase')?.value||1, w=+get('w_phase')?.value||0, gw=9.81;
+  const e=(Gs*gw/gd)-1;
+  const n=(e/(1+e))*100;
+  let Sr=e>0?(w*Gs/e):0;
+  const gh=gd*(1+w/100);
+  let txt;
+  if(e<=0) txt='γd implica e≤0: revisar Gs y γd, esa combinación no es físicamente posible.';
+  else if(Sr>100) txt='Sr>100%: revisar γd, Gs o w; los datos no son consistentes entre sí.';
+  else if(Sr<50) txt='predominio de aire en los vacíos: revisar colapso o cambios de volumen al humedecer.';
+  else if(Sr<90) txt='saturación parcial significativa: revisar presión de poros ante carga rápida.';
+  else txt='prácticamente saturado: analizar en esfuerzos efectivos y verificar presión de poros.';
+  get('res_phase').innerHTML=`e ≈ ${fmt(e,2)} · n ≈ ${fmt(n,1)}% · Sr ≈ ${fmt(Sr,1)}% · γ ≈ ${fmt(gh,2)} kN/m³ <small>${txt}</small>`;
+}
+function calcPCI(){
+  const pci=Math.max(0,Math.min(100,+get('pci_val')?.value||0));
+  let cond,acc;
+  if(pci>=85){cond='Excelente';acc='mantenimiento rutinario/preventivo.';}
+  else if(pci>=70){cond='Muy bueno';acc='sellado de fisuras y mantenimiento preventivo.';}
+  else if(pci>=55){cond='Bueno';acc='mantenimiento correctivo localizado.';}
+  else if(pci>=40){cond='Regular';acc='rehabilitación menor: fresado y recapado parcial.';}
+  else if(pci>=25){cond='Malo';acc='rehabilitación mayor; evaluar la estructura.';}
+  else {cond='Muy malo / fallado';acc='reconstrucción; el mantenimiento ya no es eficiente.';}
+  get('res_pci').innerHTML=`Condición: ${cond}. <small>Acción típica: ${acc}</small>`;
+}
 document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('[data-calc]').forEach(btn=>{
     btn.addEventListener('click',()=>{window[btn.dataset.calc]?.()});
