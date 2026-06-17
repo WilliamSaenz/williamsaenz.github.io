@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="google" content="notranslate" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Automatización ETL | William D. Saenz</title>
 
   <style>
@@ -17,15 +17,18 @@
       --gold:#d6ad4f;
       --green:#39ff14;
       --shadow:0 24px 64px rgba(0,0,0,.38);
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "SF Mono", "Cascadia Code", "Courier New", monospace;
     }
 
     *{box-sizing:border-box}
 
-    html, body{
+    html{-webkit-text-size-adjust:100%}
+
+    body{
       margin:0;
-      width:100%;
-      height:100%;
-      font-family:Arial, Helvetica, sans-serif;
+      min-height:100vh;
+      font-family:var(--font-body);
       background:
         radial-gradient(circle at 8% 10%, rgba(56,189,248,.17), transparent 30%),
         radial-gradient(circle at 82% 18%, rgba(214,173,79,.13), transparent 25%),
@@ -33,50 +36,58 @@
       color:var(--text);
     }
 
-    body{overflow:hidden}
+    a{color:inherit;text-decoration:none}
 
-    a{
-      color:inherit;
-      text-decoration:none;
+    a:focus-visible,
+    button:focus-visible{
+      outline:2px solid var(--blue);
+      outline-offset:3px;
+      border-radius:8px;
     }
 
     .page{
-      width:100%;
-      height:100vh;
-      display:grid;
-      grid-template-rows:92px 1fr 30px;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
     }
 
     header{
-      padding:18px 5vw;
+      padding:12px clamp(20px, 5vw, 64px);
       border-bottom:1px solid var(--line);
       background:rgba(7,17,31,.80);
       backdrop-filter:blur(14px);
+      position:sticky;
+      top:0;
+      z-index:10;
     }
 
     .topbar{
       width:100%;
-      max-width:1540px;
-      height:100%;
+      max-width:1700px;
       margin:0 auto;
       display:flex;
+      flex-wrap:wrap;
       justify-content:space-between;
       align-items:center;
-      gap:22px;
+      gap:14px;
     }
 
     .terminal{
       color:var(--green);
-      font-family:"Courier New", monospace;
-      font-size:17px;
+      font-family:var(--font-mono);
+      font-size:clamp(12px, 1.4vw, 16px);
       font-weight:800;
       letter-spacing:.2px;
       white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width:100%;
     }
 
     .top-actions{
       display:flex;
-      gap:12px;
+      flex-wrap:wrap;
+      gap:10px;
       justify-content:flex-end;
       align-items:center;
     }
@@ -85,14 +96,15 @@
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      min-height:48px;
-      padding:12px 20px;
-      border-radius:14px;
+      min-height:38px;
+      padding:8px 16px;
+      border-radius:12px;
       border:2px solid var(--blue);
       color:var(--text);
-      font-weight:900;
-      font-size:16px;
-      transition:.22s ease;
+      font-weight:700;
+      font-size:14px;
+      white-space:nowrap;
+      transition:transform .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease;
       background:rgba(7,17,31,.42);
       text-align:center;
     }
@@ -116,74 +128,68 @@
     }
 
     main{
-      width:min(1540px, 92vw);
+      flex:1;
+      width:min(1700px, 94vw);
       margin:0 auto;
-      padding:34px 0;
+      padding:clamp(12px, 2vw, 22px) 0;
       display:grid;
       grid-template-columns:.92fr 1.42fr;
-      gap:34px;
-      overflow:hidden;
+      align-items:start;
+      gap:clamp(14px, 2vw, 24px);
     }
 
     .intro-card,
     .demo-card{
-      height:100%;
-      min-height:0;
       border:1px solid var(--line);
       background:rgba(13,27,45,.89);
-      border-radius:30px;
+      border-radius:24px;
       box-shadow:var(--shadow);
-      overflow:hidden;
     }
 
     .intro-card{
-      padding:42px;
+      padding:clamp(18px, 2.5vw, 26px);
       display:flex;
       flex-direction:column;
-      justify-content:flex-start;
-      gap:32px;
+      gap:16px;
     }
 
     .badge{
       color:var(--green);
-      font-family:"Courier New", monospace;
-      font-size:15px;
+      font-family:var(--font-mono);
+      font-size:12px;
       font-weight:800;
-      margin-bottom:14px;
+      margin-bottom:6px;
     }
 
     h1{
       margin:0;
-      font-size:clamp(42px, 3.25vw, 58px);
-      line-height:.96;
-      letter-spacing:-1.6px;
+      font-size:clamp(32px, 2.6vw, 44px);
+      line-height:.97;
+      letter-spacing:-1px;
       max-width:100%;
-      white-space:normal;
-      overflow-wrap:normal;
     }
 
     .subtitle{
-      margin:26px 0 0;
+      margin:0;
       color:var(--muted);
-      font-size:clamp(22px, 1.65vw, 28px);
-      line-height:1.34;
+      font-size:clamp(15px, 1.2vw, 18px);
+      line-height:1.4;
     }
 
     .highlight{
       color:var(--gold);
-      font-weight:900;
+      font-weight:800;
     }
 
     .mini-stats{
       display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:14px;
-      margin-top:32px;
+      grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));
+      gap:10px;
     }
 
     .mini-stat{
-      padding:18px 16px;
-      border-radius:20px;
+      padding:12px 14px;
+      border-radius:16px;
       border:1px solid var(--line);
       background:rgba(7,17,31,.44);
     }
@@ -191,35 +197,34 @@
     .mini-stat strong{
       display:block;
       color:var(--blue);
-      font-size:25px;
-      margin-bottom:7px;
+      font-size:18px;
+      margin-bottom:4px;
     }
 
     .mini-stat span{
       color:#f2f8ff;
-      font-size:15px;
-      line-height:1.28;
-      font-weight:700;
+      font-size:12.5px;
+      line-height:1.3;
+      font-weight:600;
     }
 
     .process-box{
-      margin-top:6px;
-      padding:28px 30px;
-      border-radius:26px;
+      padding:clamp(14px, 1.8vw, 20px);
+      border-radius:20px;
       border:1px solid rgba(56,189,248,.30);
       background:rgba(7,17,31,.42);
     }
 
     .process-box h2{
-      margin:0 0 16px;
+      margin:0 0 10px;
       color:var(--blue);
-      font-size:30px;
-      line-height:1.1;
+      font-size:clamp(17px, 1.5vw, 20px);
+      line-height:1.15;
     }
 
     .process-list{
       display:grid;
-      gap:12px;
+      gap:8px;
       margin:0;
       padding:0;
       list-style:none;
@@ -227,93 +232,96 @@
 
     .process-list li{
       color:#f4f9ff;
-      font-size:17px;
-      line-height:1.45;
-      font-weight:800;
-      border-left:4px solid var(--gold);
-      padding-left:14px;
+      font-size:13.5px;
+      line-height:1.4;
+      font-weight:700;
+      border-left:3px solid var(--gold);
+      padding-left:10px;
     }
 
     .demo-card{
-      padding:42px;
+      padding:clamp(18px, 2.5vw, 26px);
       display:flex;
       flex-direction:column;
+      min-height:260px;
+      overflow:hidden;
     }
 
     .section-head{
-      padding-bottom:22px;
+      padding-bottom:14px;
       border-bottom:1px solid var(--line);
     }
 
     h2{
       margin:0;
       color:var(--blue);
-      font-size:48px;
-      line-height:1.05;
-      letter-spacing:-1px;
+      font-size:clamp(22px, 2.4vw, 32px);
+      line-height:1.1;
+      letter-spacing:-.5px;
     }
 
     .section-head p{
-      margin:16px 0 0;
+      margin:10px 0 0;
       color:#f5faff;
-      line-height:1.55;
-      font-size:19px;
-      font-weight:700;
+      line-height:1.5;
+      font-size:clamp(13.5px, 1vw, 15.5px);
+      font-weight:500;
       max-width:900px;
     }
 
     .project-card{
-      margin-top:30px;
-      padding:32px;
-      border-radius:26px;
+      margin-top:16px;
+      padding:20px;
+      border-radius:20px;
       border:1px solid var(--line);
       background:
         linear-gradient(180deg, rgba(17,34,56,.88), rgba(7,17,31,.68));
       display:grid;
       grid-template-columns:1fr auto;
-      gap:28px;
+      gap:18px;
       align-items:center;
     }
 
     .project-card h3{
-      margin:0 0 14px;
+      margin:0 0 8px;
       color:var(--gold);
-      font-size:32px;
-      line-height:1.08;
+      font-size:19px;
+      line-height:1.15;
     }
 
     .project-card p{
       margin:0;
       color:#f5faff;
-      line-height:1.56;
-      font-size:18px;
-      font-weight:700;
+      line-height:1.45;
+      font-size:13.5px;
+      font-weight:500;
       max-width:650px;
     }
 
     .tags{
       display:flex;
       flex-wrap:wrap;
-      gap:9px;
-      margin:22px 0 0;
+      gap:6px;
+      margin:12px 0 0;
     }
 
     .tag{
       border:1px solid rgba(56,189,248,.42);
       background:rgba(56,189,248,.13);
       border-radius:999px;
-      padding:9px 12px;
+      padding:5px 10px;
       color:var(--text);
-      font-size:14px;
-      font-weight:900;
+      font-size:12px;
+      font-weight:700;
     }
 
     .nav-card{
-      margin-top:auto;
-      padding-top:30px;
+      margin-top:18px;
+      padding-top:16px;
+      border-top:1px solid var(--line);
       display:flex;
       justify-content:center;
-      gap:14px;
+      gap:10px;
       flex-wrap:wrap;
     }
 
@@ -321,77 +329,38 @@
       display:flex;
       align-items:center;
       justify-content:center;
+      text-align:center;
       color:var(--muted);
       border-top:1px solid var(--line);
-      font-size:14px;
+      font-size:12px;
       background:rgba(7,17,31,.52);
-      font-weight:700;
+      font-weight:600;
+      padding:10px 20px;
     }
 
-    @media (max-width:1200px){
-      html, body{
-        height:auto;
-        min-height:100%;
-      }
+    @media (prefers-reduced-motion: reduce){
+      .btn:hover{transform:none}
+    }
 
-      body{overflow:auto}
-
-      .page{
-        height:auto;
-        min-height:100vh;
-        grid-template-rows:auto 1fr auto;
-      }
-
-      header{padding:18px 24px}
-
-      .topbar{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-
-      .top-actions{
-        flex-wrap:wrap;
-        justify-content:flex-start;
-      }
-
-      main{
-        width:calc(100vw - 48px);
-        grid-template-columns:1fr;
-        overflow:visible;
-      }
-
-      .intro-card,
-      .demo-card{
-        height:auto;
-      }
-
-      .project-card{
-        grid-template-columns:1fr;
-      }
+    @media (max-width:980px){
+      main{grid-template-columns:1fr}
+      .project-card{grid-template-columns:1fr}
     }
 
     @media (max-width:720px){
-      .mini-stats{
-        grid-template-columns:1fr;
-      }
-
-      h1{font-size:42px}
-
-      h2{font-size:36px}
-
-      .intro-card,
-      .demo-card{
-        padding:28px;
-      }
-
-      .btn{
+      header{padding:14px 18px}
+      .topbar{justify-content:center;text-align:center}
+      .terminal{order:2; max-width:100%}
+      .top-actions{
+        order:1;
         width:100%;
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
       }
-
-      .top-actions,
-      .nav-card{
-        width:100%;
-      }
+      main{width:calc(100% - 32px); padding:16px 0}
+      .intro-card,.demo-card{border-radius:20px}
+      .mini-stats{grid-template-columns:1fr}
+      .nav-card{width:100%}
     }
   </style>
 </head>
@@ -413,27 +382,27 @@
     <main>
       <section class="intro-card" aria-label="Presentación del módulo">
         <div>
-          <div class="badge">> módulo activo</div>
+          <div class="badge">&gt; módulo activo</div>
           <h1>Automatización<br>ETL</h1>
 
-          <p class="subtitle">
+          <p class="subtitle" style="margin-top:14px">
             Carga de datos, automatización, validación y análisis de información con enfoque
             <span class="highlight">operativo y académico.</span>
           </p>
+        </div>
 
-          <div class="mini-stats">
-            <div class="mini-stat">
-              <strong>HTML</strong>
-              <span>Interfaz web y estructura</span>
-            </div>
-            <div class="mini-stat">
-              <strong>JS</strong>
-              <span>Lógica, carga y validación</span>
-            </div>
-            <div class="mini-stat">
-              <strong>Data</strong>
-              <span>CSV, Excel e indicadores</span>
-            </div>
+        <div class="mini-stats">
+          <div class="mini-stat">
+            <strong>HTML</strong>
+            <span>Interfaz web y estructura</span>
+          </div>
+          <div class="mini-stat">
+            <strong>JS</strong>
+            <span>Lógica, carga y validación</span>
+          </div>
+          <div class="mini-stat">
+            <strong>Data</strong>
+            <span>CSV, Excel e indicadores</span>
           </div>
         </div>
 
