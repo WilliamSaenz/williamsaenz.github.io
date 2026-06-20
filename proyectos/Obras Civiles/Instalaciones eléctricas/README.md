@@ -6,9 +6,9 @@ Pieza preparada en el marco de la postulación al cargo de **Proyectista** en **
 
 ## Acceso rápido
 
-- 🖥️ **Ver la página de este módulo:** [index.html](./index.html) (incluye vista previa de la lámina)
-- 📂 **Descargar el plano:** [`Subestacion_Portfolio_WSaenz.dxf`](./Subestacion_Portfolio_WSaenz.dxf) — formato DXF (AutoCAD 2010), abre directo sin plugins.
-- 🖼️ **Vista previa (imagen):** [`preview-subestacion.png`](./preview-subestacion.png)
+- **Ver la página de este módulo:** [index.html](./index.html) (incluye vista previa de la lámina)
+- **Descargar el plano:** [`Subestacion_Portfolio_WSaenz.dxf`](./Subestacion_Portfolio_WSaenz.dxf) — formato DXF (AutoCAD 2010), abre directo sin plugins.
+- **Vista previa (imagen):** [`preview-subestacion.png`](./preview-subestacion.png)
 
 > El DXF no se puede previsualizar dentro de GitHub (no es un formato que renderice nativamente). Para verlo con capas, cotas y texto editable hay que descargarlo y abrirlo en AutoCAD. La imagen de preview existe justamente para que cualquiera pueda ver el resultado sin tener AutoCAD instalado.
 
