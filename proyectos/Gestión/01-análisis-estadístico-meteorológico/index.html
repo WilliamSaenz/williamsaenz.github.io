@@ -600,7 +600,7 @@ footer {
 <header>
   <div class="wrap">
     <div class="terminal"><span class="dot"></span>&gt; estación meteorológica · Corrientes, Mercedes · 554 registros 2023–2024</div>
-    <h1 class="title">Radiación Solar &amp; Clima de <span>Corrientes</span></h1>
+    <h1 class="title">Radiación Solar &; Clima de <span>Corrientes</span></h1>
     <p class="subtitle">Panel interactivo de estadística descriptiva, regresión lineal y validación no paramétrica para estimar radiación solar global a partir de variables meteorológicas accesibles — con lectura climatológica práctica de la zona.</p>
 
     <div class="instruments" aria-label="Indicadores meteorológicos en vivo">
@@ -672,17 +672,17 @@ footer {
   <div class="panel-block">
     <div class="eyebrow">Resumen ejecutivo</div>
     <h2>Estimar radiación solar con variables meteorológicas accesibles</h2>
-    <p class="lead">554 registros diarios sin valores faltantes (01/01/2023 – 22/11/2024) de una estación meteorológica en Corrientes, Mercedes. La variable a explicar es la <strong>radiación solar global</strong>; las predictoras son temperatura, humedad media y presión atmosférica.</p>
+    <p class="lead">554 registros diarios sin valores nulos (01/01/2023 – 22/11/2024) de una estación meteorológica en Corrientes, Mercedes — aunque con un <strong>faltante de datos de 87 días</strong> en la cobertura temporal de 2023, detallado en <strong>Calidad de datos</strong>. La variable a explicar es la <strong>radiación solar global</strong>; las predictoras son temperatura, humedad media y presión atmosférica.</p>
 
     <div class="grid">
-      <div class="card cyan"><div class="metric">554</div><h4>Registros diarios</h4><p class="small">2023–2024 · 0 valores faltantes · 22 discontinuidades temporales detectadas.</p></div>
+      <div class="card cyan"><div class="metric">554</div><h4>Registros diarios</h4><p class="small">2023–2024 · 0 valores nulos en las filas existentes · faltante de datos de 87 días sin cobertura.</p></div>
       <div class="card orange"><div class="metric">18.22 <span style="font-size:15px">MJ/m²</span></div><h4>Radiación media</h4><p class="small">CV = 45.83% → es la variable más variable del estudio.</p></div>
       <div class="card"><div class="metric">8.58%</div><h4>R² modelo simple</h4><p class="small">Solo con temperatura. Significativo pero insuficiente.</p></div>
       <div class="card green"><div class="metric">45.79%</div><h4>R² modelo múltiple</h4><p class="small">+Humedad +Presión. Casi 5,3× más poder explicativo.</p></div>
     </div>
 
     <div class="quote">
-      <strong>Lectura senior:</strong> la temperatura por sí sola explica apenas el 8.6% de la radiación solar — sirve como señal inicial, no como predictor operativo. Incorporar humedad y presión (ambas de bajo costo de medición) multiplica por 5 el poder explicativo del modelo, y el sentido físico de los coeficientes es coherente: más humedad → más nubosidad → menos radiación; más presión → cielo despejado → más radiación.
+      <strong>Análisis:</strong> la temperatura por sí sola explica apenas el 8.6% de la radiación solar — sirve como señal inicial, no como predictor operativo. Incorporar humedad y presión (ambas de bajo costo de medición) multiplica por 5 el poder explicativo del modelo, y el sentido físico de los coeficientes es coherente: más humedad → más nubosidad → menos radiación; más presión → cielo despejado → más radiación.
     </div>
 
     <div class="tags">
@@ -726,13 +726,17 @@ footer {
 <section id="datos">
   <div class="panel-block">
     <div class="eyebrow">Calidad y cobertura de datos</div>
-    <h2>El dataset tiene 554 días completos, pero no todos los meses están igual de cubiertos</h2>
+    <h2>El dataset tiene un faltante de datos de 87 días en otoño de 2023</h2>
     <p class="lead">Antes de modelar, se evalúa si la serie temporal tiene huecos que puedan sesgar las conclusiones — un paso de control de calidad que suele omitirse y que aquí resulta clave para interpretar correctamente la Parte II del análisis.</p>
 
+    <div class="quote red">
+      ⚠️ <strong>Sí hubo faltante de datos — es el hallazgo central de esta sección.</strong> Son dos cosas distintas: <strong>valores nulos</strong> mide huecos dentro de una fila ya existente (acá no hay ninguno: 0 NaN en los 554 registros), mientras que <strong>faltante de cobertura temporal</strong> mide días enteros sin ninguna fila — y de eso sí hay 22 casos, el mayor de 87 días consecutivos (22/03/2023 → 17/06/2023), tal como se documenta en el informe original (apartado I-E). Es este segundo problema el que condiciona la representatividad del modelo, no el primero.
+    </div>
+
     <div class="grid">
-      <div class="card cyan"><div class="metric">0</div><h4>Valores faltantes</h4><p class="small">Ningún NaN en las 4 variables sobre 554 registros.</p></div>
-      <div class="card red"><div class="metric">87 días</div><h4>Gap principal</h4><p class="small">22/03/2023 → 17/06/2023: sin mediciones.</p></div>
-      <div class="card"><div class="metric">22</div><h4>Discontinuidades totales</h4><p class="small">La mayoría de 2 a 11 días; una sola es estructural.</p></div>
+      <div class="card cyan"><div class="metric">0</div><h4>Valores nulos (NaN)</h4><p class="small">Ninguna celda vacía en las 4 variables, sobre las filas que sí existen.</p></div>
+      <div class="card red"><div class="metric">87 días</div><h4>Faltante de datos principal</h4><p class="small">22/03/2023 → 17/06/2023: ninguna fila, ninguna medición.</p></div>
+      <div class="card"><div class="metric">22</div><h4>Discontinuidades temporales</h4><p class="small">Días sin registro detectados en la serie. La mayoría de 2 a 11 días; una sola es estructural.</p></div>
       <div class="card"><div class="metric">20% / 80%</div><h4>Otoño 2023 vs 2024</h4><p class="small">El otoño 2023 está fuertemente subrepresentado.</p></div>
     </div>
 
@@ -766,6 +770,24 @@ footer {
     <div class="quote red">
       🍂 <strong>Lectura climatológica: "otoño 2023" es en realidad cola del verano.</strong> La diferencia de 6.86 °C es estadísticamente significativa (p&lt;0.001). Lo que el dataset etiqueta como otoño 2023 corresponde, climáticamente, a los últimos días del verano (temperaturas altas), no a la fase real de enfriamiento otoñal. Esta limitación se cuantifica sobre el modelo de regresión más adelante, en <strong>Sensibilidad temporal</strong>.
     </div>
+
+    <h3 style="margin-top:28px;">Detalle de las 22 discontinuidades temporales detectadas</h3>
+    <p class="small">Cada fila es un tramo de la serie sin ningún registro. Se calculan como la diferencia en días entre cada fecha y la anterior; cualquier salto mayor a 1 día cuenta como discontinuidad.</p>
+    <div class="tablewrap">
+      <table>
+        <tr><th>Período sin datos</th><th>Días faltantes</th><th>Observación</th></tr>
+        <tr><td>22/03/2023 → 17/06/2023</td><td class="num">87</td><td><span class="badge bad">Estructural</span> elimina casi todo el otoño 2023</td></tr>
+        <tr><td>17/01/2024 → 28/01/2024</td><td class="num">11</td><td>Verano 2024</td></tr>
+        <tr><td>03/01/2023 → 10/01/2023</td><td class="num">7</td><td>Verano 2023</td></tr>
+        <tr><td>10/07/2023 → 16/07/2023</td><td class="num">6</td><td>Invierno 2023</td></tr>
+        <tr><td>07/12/2023 → 12/12/2023</td><td class="num">5</td><td>Primavera 2023</td></tr>
+        <tr><td>09/01/2024 → 14/01/2024</td><td class="num">5</td><td>Verano 2024</td></tr>
+        <tr><td>21/06/2023 → 25/06/2023</td><td class="num">4</td><td>Invierno 2023</td></tr>
+        <tr><td>11/05/2024 → 15/05/2024</td><td class="num">4</td><td>Otoño 2024</td></tr>
+        <tr><td colspan="3" style="text-align:center;"><span class="badge info">+ 14 discontinuidades menores, de 2 a 3 días cada una, repartidas entre 2023 y 2024</span></td></tr>
+      </table>
+    </div>
+    <p class="small" style="margin-top:10px;">La suma total de días sin registro es de 138 días sobre un período calendario de 692 días (01/01/2023 a 22/11/2024) — un 19.9% de discontinuidad temporal agregada, concentrada mayormente en el gap estructural de 87 días.</p>
   </div>
 </section>
 
