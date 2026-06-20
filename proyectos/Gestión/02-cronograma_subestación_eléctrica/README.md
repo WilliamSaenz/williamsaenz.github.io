@@ -18,7 +18,7 @@ Pieza preparada en el marco de la postulación al cargo de **Proyectista** en **
 
 34 actividades en 5 fases, con dependencias fin-a-inicio, 2 hitos de control y 5 recursos asignados:
 
-| Fase                       | Actividades clave | Duración |
+| Fase                       | Actividades clave                                                                                    | Duración                        |
 |----------------------------|------------------------------------------------------------------------------------------------------|---------------------------------|
 | Ingeniería y Documentación | Relevamiento, diseño básico, ingeniería de detalle, aprobación                                       | 35 días hábiles                 |
 | Procura                    | Especificación técnica, compra de transformador (ítem de mayor plazo), interruptores, materiales PAT | hasta 60 días hábiles           |
