@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="es" class="notranslate">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="google" content="notranslate" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Instalaciones Eléctricas | William D. Saenz</title>
+
+  <style>
+
+:root{
+  --bg:#07111f;
+  --panel:#0d1b2d;
+  --line:rgba(255,255,255,.16);
+  --text:#f8fafc;
+  --muted:#d4e0ee;
+  --blue:#38bdf8;
+  --gold:#d6ad4f;
+  --green:#39ff14;
+  --shadow:0 24px 64px rgba(0,0,0,.38);
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SF Mono", "Cascadia Code", "Courier New", monospace;
+}
+
+*{box-sizing:border-box}
+
+html{-webkit-text-size-adjust:100%}
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:var(--font-body);
+  background:
+    radial-gradient(circle at 8% 10%, rgba(56,189,248,.17), transparent 30%),
+    radial-gradient(circle at 82% 18%, rgba(214,173,79,.13), transparent 25%),
+    linear-gradient(135deg, #07111f 0%, #0b1f33 100%);
+  color:var(--text);
+}
+
+a{color:inherit;text-decoration:none}
+
+a:focus-visible,
+button:focus-visible{
+  outline:2px solid var(--blue);
+  outline-offset:3px;
+  border-radius:8px;
+}
+
+.page{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+header{
+  padding:12px clamp(20px, 5vw, 64px);
+  border-bottom:1px solid var(--line);
+  background:rgba(7,17,31,.80);
+  backdrop-filter:blur(14px);
+  position:sticky;
+  top:0;
+  z-index:10;
+}
+
+.topbar{
+  width:100%;
+  max-width:1700px;
+  margin:0 auto;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  align-items:center;
+  gap:14px;
+}
+
+.terminal{
+  color:var(--green);
+  font-family:var(--font-mono);
+  font-size:clamp(12px, 1.4vw, 16px);
+  font-weight:800;
+  letter-spacing:.2px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  max-width:100%;
+}
+
+.top-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:flex-end;
+  align-items:center;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:38px;
+  padding:8px 16px;
+  border-radius:12px;
+  border:2px solid var(--blue);
+  color:var(--text);
+  font-weight:700;
+  font-size:14px;
+  white-space:nowrap;
+  transition:transform .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease;
+  background:rgba(7,17,31,.42);
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  background:var(--blue);
+  color:#07111f;
+  box-shadow:0 12px 25px rgba(56,189,248,.18);
+}
+
+.btn.gold{
+  border-color:var(--gold);
+  color:var(--gold);
+}
+
+.btn.gold:hover{
+  background:var(--gold);
+  color:#07111f;
+  box-shadow:0 12px 25px rgba(214,173,79,.20);
+}
+
+footer{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--muted);
+  border-top:1px solid var(--line);
+  font-size:12px;
+  background:rgba(7,17,31,.52);
+  font-weight:600;
+  padding:10px 20px;
+}
+
+.badge{
+  color:var(--green);
+  font-family:var(--font-mono);
+  font-size:12px;
+  font-weight:800;
+  margin-bottom:6px;
+}
+
+.highlight{
+  color:var(--gold);
+  font-weight:800;
+}
+
+main{
+  flex:1;
+  width:min(1700px, 94vw);
+  margin:0 auto;
+  padding:clamp(12px, 2vw, 22px) 0;
+  display:grid;
+  grid-template-columns:.9fr 1.38fr;
+  align-items:start;
+  gap:clamp(14px, 2vw, 24px);
+}
+
+.intro-card,
+.modules-card{
+  border:1px solid var(--line);
+  background:rgba(13,27,45,.89);
+  border-radius:24px;
+  box-shadow:var(--shadow);
+}
+
+.intro-card{
+  padding:clamp(18px, 2.5vw, 26px);
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+h1{
+  margin:0;
+  font-size:clamp(36px, 5vw, 58px);
+  line-height:.97;
+  letter-spacing:-1.4px;
+}
+
+.subtitle{
+  margin:0;
+  color:var(--muted);
+  font-size:clamp(15px, 1.2vw, 18px);
+  line-height:1.4;
+}
+
+.mini-stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+  gap:10px;
+}
+
+.mini-stat{
+  padding:12px 14px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:rgba(7,17,31,.44);
+}
+
+.mini-stat strong{
+  display:block;
+  color:var(--blue);
+  font-size:18px;
+  margin-bottom:4px;
+}
+
+.mini-stat span{
+  color:#f2f8ff;
+  font-size:12.5px;
+  line-height:1.3;
+  font-weight:600;
+}
+
+.summary-box{
+  padding:clamp(14px, 1.8vw, 20px);
+  border-radius:20px;
+  border:1px solid rgba(214,173,79,.66);
+  background:
+    linear-gradient(135deg, rgba(214,173,79,.18), rgba(56,189,248,.07)),
+    rgba(7,17,31,.52);
+}
+
+.summary-box h2{
+  margin:0 0 8px;
+  color:var(--gold);
+  font-size:clamp(18px, 1.7vw, 23px);
+  line-height:1.15;
+}
+
+.summary-box p{
+  margin:0 0 14px;
+  color:#f4f9ff;
+  font-size:clamp(13px, 1vw, 14.5px);
+  line-height:1.45;
+  font-weight:600;
+}
+
+.modules-card{
+  padding:clamp(18px, 2.5vw, 26px);
+  display:flex;
+  flex-direction:column;
+  min-height:260px;
+  overflow:hidden;
+}
+
+.section-head{
+  padding-bottom:14px;
+  border-bottom:1px solid var(--line);
+}
+
+h2{
+  margin:0;
+  color:var(--blue);
+  font-size:clamp(22px, 2.4vw, 32px);
+  line-height:1.1;
+  letter-spacing:-.5px;
+}
+
+.section-head p{
+  margin:10px 0 0;
+  color:#f5faff;
+  line-height:1.5;
+  font-size:clamp(13.5px, 1vw, 15.5px);
+  font-weight:500;
+  max-width:840px;
+}
+
+.preview-frame{
+  margin-top:16px;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:#0a1626;
+  box-shadow:0 12px 30px rgba(0,0,0,.30);
+}
+
+.preview-frame img{
+  width:100%;
+  display:block;
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin:14px 0 0;
+}
+
+.tag{
+  border:1px solid rgba(56,189,248,.42);
+  background:rgba(56,189,248,.13);
+  border-radius:999px;
+  padding:5px 10px;
+  color:var(--text);
+  font-size:12px;
+  font-weight:700;
+}
+
+.deliverable-note{
+  margin:16px 0 0;
+  padding:14px 16px;
+  border-radius:16px;
+  border:1px solid var(--line);
+  background:rgba(7,17,31,.44);
+  color:#f2f8ff;
+  font-size:13px;
+  line-height:1.5;
+  font-weight:500;
+}
+
+.bottom-actions{
+  margin-top:18px;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .btn:hover{transform:none}
+}
+
+@media (max-width:980px){
+  main{grid-template-columns:1fr}
+}
+
+@media (max-width:720px){
+  header{padding:14px 18px}
+  .topbar{justify-content:center;text-align:center}
+  .terminal{order:2; max-width:100%}
+  .top-actions{
+    order:1;
+    width:100%;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+  }
+  main{width:calc(100% - 32px); padding:16px 0}
+  .intro-card,.modules-card{border-radius:20px}
+  .mini-stats{grid-template-columns:1fr}
+  .bottom-actions{width:100%}
+}
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <header>
+      <div class="topbar">
+        <div class="terminal" id="terminal"></div>
+
+        <nav class="top-actions" aria-label="Navegación principal">
+          <a class="btn" href="../../../">Inicio</a>
+          <a class="btn" href="../../../docs/cv-william-saenz.pdf" target="_blank">Ver CV</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="intro-card" aria-label="Módulo de instalaciones eléctricas">
+        <div>
+          <div class="badge">&gt; módulo eléctrico listo</div>
+          <h1>Instalaciones<br>Eléctricas</h1>
+
+          <p class="subtitle" style="margin-top:14px">
+            Subestaciones, diagramas unifilares, puesta a tierra y canalizaciones en AutoCAD, con enfoque
+            <span class="highlight">técnico y aplicado.</span>
+          </p>
+        </div>
+
+        <div class="mini-stats">
+          <div class="mini-stat"><strong>5 vistas</strong><span>Unifilar, layout, PAT, ductos y leyenda</span></div>
+          <div class="mini-stat"><strong>AutoCAD</strong><span>Archivo DXF nativo, sin plugins</span></div>
+          <div class="mini-stat"><strong>Normativa</strong><span>CIRSOC, IRAM 2281, AEA 95301</span></div>
+        </div>
+
+        <div class="summary-box">
+          <div class="badge">&gt; pieza de portafolio</div>
+          <h2>Subestación 132/13.2 kV</h2>
+          <p>
+            Lámina técnica elaborada para la postulación al cargo de Proyectista en
+            Núcleo Eléctrica Argentina S.A. Incluye fichas técnicas, leyenda de simbología
+            y detalles constructivos.
+          </p>
+        </div>
+      </section>
+
+      <section class="modules-card" aria-label="Plano técnico">
+        <div class="section-head">
+          <h2>Plano técnico disponible</h2>
+          <p>
+            Lámina A2 con cinco vistas: diagrama unifilar, layout de equipos de patio de alta tensión,
+            malla de puesta a tierra, canalizaciones y ductos, y leyenda de simbología.
+          </p>
+        </div>
+
+        <div class="preview-frame">
+          <img src="preview-subestacion.png" alt="Vista previa del plano de subestación 132/13.2 kV con diagrama unifilar, layout de equipos, malla de puesta a tierra, canalizaciones y leyenda" />
+        </div>
+
+        <div class="tags">
+          <span class="tag">AutoCAD</span><span class="tag">DXF</span><span class="tag">Subestaciones</span>
+          <span class="tag">132/13.2 kV</span><span class="tag">Puesta a Tierra</span><span class="tag">Canalizaciones</span>
+        </div>
+
+        <p class="deliverable-note">
+          El archivo es un <strong>DXF</strong> (formato nativo de AutoCAD, sin plugins) — no se previsualiza
+          dentro de GitHub, por eso esta página incluye una imagen de referencia. Descargalo y abrilo
+          directamente en AutoCAD para ver capas, cotas y texto editable.
+        </p>
+
+        <div class="bottom-actions">
+          <a class="btn gold" href="Subestacion_Portfolio_WSaenz.dxf" download>Descargar plano DXF</a>
+          <a class="btn" href="README.md">Ver README técnico</a>
+          <a class="btn" href="../">← Volver a Obras Civiles</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>© 2026 William D. Saenz | Instalaciones Eléctricas</footer>
+  </div>
+
+  <script>
+    const texto = "> cargando instalaciones eléctricas... sistema listo";
+    const terminal = document.getElementById("terminal");
+    let i = 0;
+
+    function escribir(){
+      if(i < texto.length){
+        terminal.textContent += texto.charAt(i);
+        i++;
+        setTimeout(escribir, 38);
+      }
+    }
+
+    escribir();
+  </script>
+</body>
+</html>
