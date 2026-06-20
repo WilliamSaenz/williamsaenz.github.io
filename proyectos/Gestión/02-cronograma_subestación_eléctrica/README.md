@@ -6,9 +6,9 @@ Pieza preparada en el marco de la postulación al cargo de **Proyectista** en **
 
 ## Acceso rápido
 
-- 🖥️ **Ver la página de este módulo:** [index.html](./index.html) (incluye el Gantt en imagen)
-- 📂 **Descargar el cronograma:** [`Cronograma_Instalacion_Bahia_Subestacion.xml`](./Cronograma_Instalacion_Bahia_Subestacion.xml) — formato MSPDI (XML nativo de MS Project), `Archivo → Abrir` directo.
-- 🖼️ **Vista previa (Gantt):** [`gantt-cronograma.png`](./gantt-cronograma.png)
+- **Ver la página de este módulo:** [index.html](./index.html) (incluye el Gantt en imagen)
+- **Descargar el cronograma:** [`Cronograma_Instalacion_Bahia_Subestacion.xml`](./Cronograma_Instalacion_Bahia_Subestacion.xml) — formato MSPDI (XML nativo de MS Project), `Archivo → Abrir` directo.
+- **Vista previa (Gantt):** [`gantt-cronograma.png`](./gantt-cronograma.png)
 
 > El XML de Project no se previsualiza dentro de GitHub (muestra el código fuente crudo). La imagen de Gantt se generó a partir de los datos reales del archivo — no es un dibujo aparte, es literalmente el cronograma graficado.
 
@@ -18,13 +18,13 @@ Pieza preparada en el marco de la postulación al cargo de **Proyectista** en **
 
 34 actividades en 5 fases, con dependencias fin-a-inicio, 2 hitos de control y 5 recursos asignados:
 
-| Fase | Actividades clave | Duración |
-|---|---|---|
-| Ingeniería y Documentación | Relevamiento, diseño básico, ingeniería de detalle, aprobación | 35 días hábiles |
-| Procura | Especificación técnica, compra de transformador (ítem de mayor plazo), interruptores, materiales PAT | hasta 60 días hábiles |
-| Obra Civil | Replanteo, malla de tierra, trincheras, fundaciones, foso de contención, sala de control | en paralelo con Procura |
-| Montaje Electromecánico | Estructuras, transformador, interruptores, barra colectora, cableado | depende de Procura + Obra Civil |
-| Puesta en Servicio | Ensayos de PAT, ensayos en frío, pruebas funcionales, energización, acta de cierre | secuencial al final |
+| Fase                       | Actividades clave | Duración |
+|----------------------------|------------------------------------------------------------------------------------------------------|---------------------------------|
+| Ingeniería y Documentación | Relevamiento, diseño básico, ingeniería de detalle, aprobación                                       | 35 días hábiles                 |
+| Procura                    | Especificación técnica, compra de transformador (ítem de mayor plazo), interruptores, materiales PAT | hasta 60 días hábiles           |
+| Obra Civil                 | Replanteo, malla de tierra, trincheras, fundaciones, foso de contención, sala de control             | en paralelo con Procura         |
+| Montaje Electromecánico    | Estructuras, transformador, interruptores, barra colectora, cableado                                 | depende de Procura + Obra Civil |
+| Puesta en Servicio         | Ensayos de PAT, ensayos en frío, pruebas funcionales, energización, acta de cierre                   | secuencial al final             |
 
 **Duración total:** ~4.5 meses (99 días hábiles), calendario lunes a viernes 8-12 / 13-17.
 
