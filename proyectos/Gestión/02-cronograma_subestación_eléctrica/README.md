@@ -2,13 +2,13 @@
 
 **Planificación con MS Project · WBS · Camino Crítico marcado en el archivo · Línea Base · Recursos asignados**
 Elaborado por William Darío Sáenz Santamaría — Ing. Civil (UNAL) · Maestría en Ciencia de Datos (UNAJ)
-Pieza preparada en el marco de la postulación al cargo de **Proyectista** en **Núcleo Eléctrica Argentina S.A.**, como complemento del plano de la misma subestación (ver [Instalaciones Eléctricas](../../Obras%20Civiles/Instalaciones%20El%C3%A9ctricas/)).
+Pieza preparada en el marco de la postulación al cargo de **Proyectista**, como complemento del plano de la misma subestación (ver [Instalaciones Eléctricas](../../Obras%20Civiles/Instalaciones%20El%C3%A9ctricas/)).
 
 ## Acceso rápido
 
-- 🖥️ **Ver la página de este módulo:** [index.html](./index.html) (incluye el Gantt en imagen)
-- 📂 **Descargar el cronograma:** [`Cronograma_Instalacion_Bahia_Subestacion.xml`](./Cronograma_Instalacion_Bahia_Subestacion.xml) — formato MSPDI (XML nativo de MS Project), `Archivo → Abrir` directo.
-- 🖼️ **Vista previa (Gantt):** [`gantt-cronograma.png`](./gantt-cronograma.png)
+- **Ver la página de este módulo:** [index.html](./index.html) (incluye el Gantt en imagen)
+- **Descargar el cronograma:** [`Cronograma_Instalacion_Bahia_Subestacion.xml`](./Cronograma_Instalacion_Bahia_Subestacion.xml) — formato MSPDI (XML nativo de MS Project), `Archivo → Abrir` directo.
+- **Vista previa (Gantt):** [`gantt-cronograma.png`](./gantt-cronograma.png)
 
 > El XML de Project no se previsualiza dentro de GitHub (muestra el código fuente crudo). La imagen de Gantt se generó a partir de los datos reales del archivo — no es un dibujo aparte, es literalmente el cronograma graficado.
 
@@ -49,10 +49,10 @@ El archivo XML fue generado con Python usando la librería **mpxj** (la misma qu
 
 ---
 
-### Puntos para mencionar en la entrevista
+### Puntos para mencionar:
 
-- Por qué la obra civil y la procura corren en paralelo (no esperás a tener todo comprado para empezar a cavar) — eso es justamente lo que reduce el plazo total del proyecto.
-- Cómo identificaste el camino crítico y qué decisión de gestión se desprende de eso (acelerar la orden de compra del transformador).
-- Qué es una línea base y para qué sirve (congelar el plan aprobado para poder medir desvíos después) — y que la tuya está fechada tres días antes del arranque, como se haría en un proyecto real.
-- Que el cronograma y el plano (DXF) son piezas de un mismo proyecto ficticio — mostrás que pensás el proyecto de punta a punta, no solo el dibujo.
-- Qué le faltaría para ser un cronograma de producción real: costos por actividad, curva de avance (curva S), nivelación de recursos, calendario con feriados argentinos.
+- La obra civil y la procura corren en paralelo (no se espera a tener todo comprado para empezar a cavar) — eso es justamente lo que reduce el plazo total del proyecto.
+- Fundamental identificar el camino crítico y ver qué decisión de gestión se desprende de eso (acelerar la orden de compra del transformador).
+- Generar la línea base (sirve congelar, fotografíar, el plan aprobado para poder medir desvíos después) — y que esta LB esté fechada tres días antes del arranque, como se haría en un proyecto real.
+- El cronograma y el plano (DXF) son piezas de un mismo proyecto ficticio — se muestra el proyecto de punta a punta, no solo el dibujo.
+- Qué le faltaría para ser un cronograma de producción real: costos por actividad, curva de avance (curva S), nivelación de recursos y calendario con feriados.
