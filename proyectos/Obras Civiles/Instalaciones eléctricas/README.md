@@ -6,9 +6,9 @@ Pieza preparada en el marco de la postulación al cargo de **Proyectista** en **
 
 ## Acceso rápido
 
-- **Ver la página de este módulo:** [index.html](./index.html) (incluye vista previa de la lámina)
-- **Descargar el plano:** [`Subestacion_Portfolio_WSaenz.dxf`](./Subestacion_Portfolio_WSaenz.dxf) — formato DXF (AutoCAD 2010), abre directo sin plugins.
-- **Vista previa (imagen):** [`preview-subestacion.png`](./preview-subestacion.png)
+- 🖥️ **Ver la página de este módulo:** [index.html](./index.html) (incluye vista previa de la lámina)
+- 📂 **Descargar el plano:** [`Subestacion_Portfolio_WSaenz.dxf`](./Subestacion_Portfolio_WSaenz.dxf) — formato DXF (AutoCAD 2010), abre directo sin plugins.
+- 🖼️ **Vista previa (imagen):** [`preview-subestacion.png`](./preview-subestacion.png)
 
 > El DXF no se puede previsualizar dentro de GitHub (no es un formato que renderice nativamente). Para verlo con capas, cotas y texto editable hay que descargarlo y abrirlo en AutoCAD. La imagen de preview existe justamente para que cualquiera pueda ver el resultado sin tener AutoCAD instalado.
 
@@ -16,7 +16,7 @@ Pieza preparada en el marco de la postulación al cargo de **Proyectista** en **
 
 ## ¿Qué muestra este plano?
 
-Una lámina **A1** con cinco vistas técnicas de una bahía de transformador 132/13.2 kV, organizadas en una grilla simétrica, pensada como pieza de portfolio para demostrar manejo de AutoCAD aplicado a instalaciones eléctricas (**Rev. 2** — lámina ampliada a A1, texto ~40% más grande, corrección de caracteres especiales y de un solape entre encabezados de panel detectado al abrir en AutoCAD real):
+Una lámina **A1 extendida** con seis vistas técnicas de una bahía de transformador 132/13.2 kV, pensada como pieza de portfolio para demostrar manejo de AutoCAD aplicado a instalaciones eléctricas (**Rev. 3** — se agregó un sexto panel de corte/perfil en elevación):
 
 | Panel | Contenido | Qué demuestra |
 |---|---|---|
@@ -25,6 +25,7 @@ Una lámina **A1** con cinco vistas técnicas de una bahía de transformador 132
 | **C — Malla de Puesta a Tierra** | Grilla de conductores enterrados, detalle de unión jabalina-conductor | Diseño de sistemas de protección, referencia a IRAM 2281 |
 | **D — Canalizaciones y Ductos** | Corte tipo de trinchera con ductos de reserva, esquema de traza con cámaras | Criterio de separación BT/MT y documentación de obra civil eléctrica |
 | **E — Leyenda y Simbología** | Glosario visual de todos los símbolos + abreviaturas (AT, BT, MT, In, Icc, PAT, DPS) | Buenas prácticas de documentación — un plano se entiende solo, sin explicación verbal |
+| **F — Corte / Perfil** | Elevación del patio de AT: pórtico de línea, barra colectora, transformador con foso de contención, sala de control, alturas acotadas | Lectura en altura del mismo layout del Panel B — un proyectista no piensa solo en planta |
 
 Capas separadas por función (`AT-BARRAS`, `AT-EQUIPOS`, `TIERRA-MALLA`, `COTAS`, `ESTRUCTURAS`, `CERCO`, `CIVIL`), cajetín con datos del proyecto y notas generales.
 
@@ -38,6 +39,14 @@ Capas separadas por función (`AT-BARRAS`, `AT-EQUIPOS`, `TIERRA-MALLA`, `COTAS`
 - **Separación de canalizaciones**: cables de control/señal separados físicamente de los de fuerza/potencia mediante un separador, con ductos de reserva previstos para ampliaciones futuras.
 - **Leyenda y glosario**: un plano profesional se entiende sin que el autor esté al lado explicando — por eso el Panel E documenta toda la simbología y abreviaturas usadas.
 - **Referencias normativas**: CIRSOC (estructuras), IRAM 2281 (puesta a tierra), AEA 95301 (canalizaciones) — se citan como marco, no como cálculo de detalle.
+
+## Organización del archivo (lo que se ve en AutoCAD, no solo en el dibujo)
+
+Esto es lo que conviene mostrar si te piden abrir el archivo en la entrevista — no se ve a simple vista en el dibujo, se ve en los paneles de gestión de AutoCAD:
+
+- **Capas (`LAYER`)**: nombradas con prefijo por disciplina — `DEF-` (marco/cajetín), `ANO-` (texto, cotas, ejes), `ELE-` (eléctrico: conductores, equipos, PAT, canalizaciones), `CIV-` (estructuras, cerco, obra civil). 13 capas en total, cada una con su color y tipo de línea (no todas "Capa 0" con colores puestos a mano).
+- **Bloques (`INSERT` / `BLOCK`)**: los 8 símbolos eléctricos (seccionador, interruptor, TC, TT, transformador, pararrayos, símbolo de PAT, jabalina) están definidos **una sola vez** como bloque y se insertan donde hacen falta — 44 inserciones en total (la jabalina sola se repite 25 veces en la malla de tierra). Geometría en capa "0" con color *ByBlock*, así cada inserción hereda el color de la capa donde se la coloca — es la forma correcta de armar una biblioteca de símbolos reutilizable, no copiar y pegar líneas.
+- **Cotas (`DIMSTYLE`)**: estilo propio `COTAS-PORTFOLIO` (el `EZDXF` por defecto traía el texto a altura 0.25, prácticamente invisible). Las 8 cotas del plano muestran su valor real como texto propio de la cota, no como una etiqueta de texto suelta al lado que podía desincronizarse del valor real.
 
 ## Nota de honestidad técnica
 
@@ -57,6 +66,9 @@ El DXF es una lámina técnica completa: al abrirlo, AutoCAD hace zoom a toda la
 | 0 | Emisión inicial — unifilar, malla de tierra, layout (A3) |
 | 1 | + Canalizaciones y ductos, leyenda/simbología, fichas técnicas, foso de contención (A2) |
 | 2 | Corrección de un solape de texto entre encabezados de panel, reemplazo de caracteres especiales no soportados por la fuente de AutoCAD (—, √, °, Ø), lámina ampliada a **A1** con texto ~40% más grande, leyenda extendida (12 ítems) y bloque de revisiones en el cajetín |
+| 3 | + Panel F: corte/perfil en elevación del patio de alta tensión (pórtico, barra colectora, transformador con foso, sala de control, alturas acotadas). Lámina extendida en altura para sumarlo sin tocar los 5 paneles ya validados |
+| 4 | Los títulos de los paneles A y B volvían a hacer wrap a dos líneas en AutoCAD real (la fuente real es más ancha que la del visor usado para control de calidad) — letra de título ~17% más chica y textos acortados, con más margen de seguridad esta vez |
+| 5 | Reorganización profesional: capas renombradas con prefijo por disciplina (DEF-/ANO-/ELE-/CIV-), los 8 símbolos eléctricos pasaron de geometría suelta repetida a **bloques reales** (BLOCK + INSERT, 44 inserciones), capa de canalizaciones separada de puesta a tierra, dimstyle propio con texto legible (el genérico traía 0.25 de altura, ilegible) y las 8 cotas ahora muestran su valor real explícito en vez de depender de texto suelto al lado |
 
 ## Cómo se generó
 
@@ -66,8 +78,8 @@ El archivo DXF fue generado de forma paramétrica (Python + librería `ezdxf`), 
 
 ### Puntos para mencionar en la entrevista
 
-- Por qué separaste las capas como lo hiciste (orden y control de documentación — algo que valoran en el cargo).
-- Por qué elegiste mostrar **cinco** entregables distintos en vez de uno solo: cubre el ciclo típico de documentación de un proyectista eléctrico (esquemático → protección → implantación física → obra civil de canalizaciones → simbología).
+- Por qué separaste las capas por disciplina y por qué usaste bloques en vez de geometría suelta — orden y reutilización, exactamente lo que se evalúa en el manejo de AutoCAD.
+- Por qué elegiste mostrar **seis** entregables distintos en vez de uno solo: cubre el ciclo típico de documentación de un proyectista eléctrico (esquemático → protección → implantación física en planta → corte en elevación → obra civil de canalizaciones → simbología).
 - Que generaste la base de forma programática y la refinaste en AutoCAD — muestra versatilidad sin pretender ser algo que no sos todavía.
 - Que el Panel B referencia al Panel D con un llamado de corte — mostrás que entendés cómo se cruza la información entre planos en un proyecto real.
 - Qué le agregarías con más tiempo: cálculo de la malla de tierra (resistencia, gradientes de potencial), coordinación de aislación, lista de materiales (BOM), planilla de cables.
