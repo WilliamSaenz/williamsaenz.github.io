@@ -20,17 +20,11 @@ Una lámina **A1 extendida** con seis vistas técnicas de una bahía de transfor
 
 | Panel                            | Contenido                                                                                        | Qué demuestra             |
 |----------------------------------|--------------------------------------------------------------------------------------------------|---------------------------|
-
 | **A — Diagrama Unifilar**        | Topología de la bahía con fichas técnicas (In, Icc, relación de transformación, Z%, conexión)    | Lectura de esquemas eléctricos, numeración ANSI y criterios de selección de equipos |
-
 | **B — Layout de Equipos**        | Planta del patio de alta tensión, foso de contención de aceite, distancias de seguridad acotadas | Disposición física, criterios de implantación y obra civil asociada |
-
 | **C — Malla de Puesta a Tierra** | Grilla de conductores enterrados, detalle de unión jabalina-conductor                            | Diseño de sistemas de protección, referencia a IRAM 2281 |
-
 | **D — Canalizaciones y Ductos**  | Corte tipo de trinchera con ductos de reserva, esquema de traza con cámaras                      | Criterio de separación BT/MT y documentación de obra civil eléctrica |
-
 | **E — Leyenda y Simbología**     | Glosario visual de todos los símbolos + abreviaturas (AT, BT, MT, In, Icc, PAT, DPS)             | Buenas prácticas de documentación — un plano se entiende solo, sin explicación verbal |
-
 | **F — Corte / Perfil**           | Elevación del patio de AT: pórtico de línea, barra colectora, transformador con foso de contención, sala de control, alturas acotadas | Lectura en altura del mismo layout del Panel B — un proyectista no piensa solo en planta |
 
 Capas separadas por función (`AT-BARRAS`, `AT-EQUIPOS`, `TIERRA-MALLA`, `COTAS`, `ESTRUCTURAS`, `CERCO`, `CIVIL`), cajetín con datos del proyecto y notas generales.
