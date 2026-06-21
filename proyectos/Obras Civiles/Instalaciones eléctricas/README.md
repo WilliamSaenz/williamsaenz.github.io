@@ -2,13 +2,13 @@
 
 **Diagrama unifilar · Malla de puesta a tierra · Layout de equipos · Canalizaciones y ductos · Leyenda y simbología**
 Elaborado por William Darío Sáenz Santamaría — Ing. Civil (UNAL) · Maestría en Ciencia de Datos (UNAJ)
-Pieza preparada en el marco de la postulación al cargo de **Proyectista** en **Núcleo Eléctrica Argentina S.A.**
+Pieza preparada en el marco de la postulación al cargo de **Proyectista**
 
 ## Acceso rápido
 
-- 🖥️ **Ver la página de este módulo:** [index.html](./index.html) (incluye vista previa de la lámina)
-- 📂 **Descargar el plano:** [`Subestacion_Portfolio_WSaenz.dxf`](./Subestacion_Portfolio_WSaenz.dxf) — formato DXF (AutoCAD 2010), abre directo sin plugins.
-- 🖼️ **Vista previa (imagen):** [`preview-subestacion.png`](./preview-subestacion.png)
+- **Ver la página de este módulo:** [index.html](./index.html) (incluye vista previa de la lámina)
+- **Descargar el plano:** [`Subestacion_Portfolio_WSaenz.dxf`](./Subestacion_Portfolio_WSaenz.dxf) — formato DXF (AutoCAD 2010), abre directo sin plugins.
+- **Vista previa (imagen):** [`preview-subestacion.png`](./preview-subestacion.png)
 
 > El DXF no se puede previsualizar dentro de GitHub (no es un formato que renderice nativamente). Para verlo con capas, cotas y texto editable hay que descargarlo y abrirlo en AutoCAD. La imagen de preview existe justamente para que cualquiera pueda ver el resultado sin tener AutoCAD instalado.
 
@@ -16,7 +16,7 @@ Pieza preparada en el marco de la postulación al cargo de **Proyectista** en **
 
 ## ¿Qué muestra este plano?
 
-Una lámina **A1 extendida** con seis vistas técnicas de una bahía de transformador 132/13.2 kV, pensada como pieza de portfolio para demostrar manejo de AutoCAD aplicado a instalaciones eléctricas (**Rev. 3** — se agregó un sexto panel de corte/perfil en elevación):
+Una lámina **A1 extendida** con seis vistas técnicas de una bahía de transformador 132/13.2 kV, pensada como pieza de portfolio para demostrar manejo de AutoCAD aplicado a instalaciones eléctricas (**Rev. 1** — se agregó un sexto panel de corte/perfil en elevación):
 
 | Panel | Contenido | Qué demuestra |
 |---|---|---|
@@ -50,7 +50,7 @@ Esto es lo que conviene mostrar si te piden abrir el archivo en la entrevista �
 
 ## Nota de honestidad técnica
 
-Este plano es una **pieza ilustrativa de portfolio**, no un proyecto de ingeniería de detalle ni un documento de Núcleo Eléctrica Argentina. Las dimensiones y equipos son representativos, no corresponden a un cálculo de cortocircuito, coordinación de aislación ni estudio de campo eléctrico real. Eso se aclara explícitamente en las notas generales del propio plano — es preferible mostrarlo así: una base de drafting sólida y bien razonada, en lugar de simular una ingeniería que aún no se posee.
+Este plano es una **pieza ilustrativa de portfolio**, no un proyecto de ingeniería de detalle. Las dimensiones y equipos son representativos, no corresponden a un cálculo de cortocircuito, coordinación de aislación ni estudio de campo eléctrico real. Eso se aclara explícitamente en las notas generales del propio plano — es preferible mostrarlo así: una base de drafting sólida y bien razonada, en lugar de simular una ingeniería que aún no se posee.
 
 ## Cómo abrir el archivo (tip importante)
 
@@ -59,27 +59,6 @@ El DXF es una lámina técnica completa: al abrirlo, AutoCAD hace zoom a toda la
 1. Abrí el archivo en **Model** (pestaña abajo a la izquierda — no "Layout1", ese tab es para configuración de impresión y queda vacío porque todo el dibujo vive en Model Space).
 2. Usá `Zoom Window` (o la rueda del mouse) y acercate panel por panel — Unifilar, Layout, Malla de Tierra, Canalizaciones, Leyenda — en vez de mirarlo con Zoom Extents.
 
-## Historial de revisiones
-
-| Rev | Contenido |
-|---|---|
-| 0 | Emisión inicial — unifilar, malla de tierra, layout (A3) |
-| 1 | + Canalizaciones y ductos, leyenda/simbología, fichas técnicas, foso de contención (A2) |
-| 2 | Corrección de un solape de texto entre encabezados de panel, reemplazo de caracteres especiales no soportados por la fuente de AutoCAD (—, √, °, Ø), lámina ampliada a **A1** con texto ~40% más grande, leyenda extendida (12 ítems) y bloque de revisiones en el cajetín |
-| 3 | + Panel F: corte/perfil en elevación del patio de alta tensión (pórtico, barra colectora, transformador con foso, sala de control, alturas acotadas). Lámina extendida en altura para sumarlo sin tocar los 5 paneles ya validados |
-| 4 | Los títulos de los paneles A y B volvían a hacer wrap a dos líneas en AutoCAD real (la fuente real es más ancha que la del visor usado para control de calidad) — letra de título ~17% más chica y textos acortados, con más margen de seguridad esta vez |
-| 5 | Reorganización profesional: capas renombradas con prefijo por disciplina (DEF-/ANO-/ELE-/CIV-), los 8 símbolos eléctricos pasaron de geometría suelta repetida a **bloques reales** (BLOCK + INSERT, 44 inserciones), capa de canalizaciones separada de puesta a tierra, dimstyle propio con texto legible (el genérico traía 0.25 de altura, ilegible) y las 8 cotas ahora muestran su valor real explícito en vez de depender de texto suelto al lado |
-
 ## Cómo se generó
 
 El archivo DXF fue generado de forma paramétrica (Python + librería `ezdxf`), lo que permite versionarlo como código y regenerarlo o ajustarlo rápidamente. Cada revisión se detectó y corrigió abriendo el archivo en AutoCAD real — el control de calidad de un plano no termina cuando "compila", termina cuando se ve bien en la herramienta que lo va a usar la otra persona.
-
----
-
-### Puntos para mencionar en la entrevista
-
-- Por qué separaste las capas por disciplina y por qué usaste bloques en vez de geometría suelta — orden y reutilización, exactamente lo que se evalúa en el manejo de AutoCAD.
-- Por qué elegiste mostrar **seis** entregables distintos en vez de uno solo: cubre el ciclo típico de documentación de un proyectista eléctrico (esquemático → protección → implantación física en planta → corte en elevación → obra civil de canalizaciones → simbología).
-- Que generaste la base de forma programática y la refinaste en AutoCAD — muestra versatilidad sin pretender ser algo que no sos todavía.
-- Que el Panel B referencia al Panel D con un llamado de corte — mostrás que entendés cómo se cruza la información entre planos en un proyecto real.
-- Qué le agregarías con más tiempo: cálculo de la malla de tierra (resistencia, gradientes de potencial), coordinación de aislación, lista de materiales (BOM), planilla de cables.
