@@ -41,7 +41,7 @@
     <MoveCompletedEndsForward>0</MoveCompletedEndsForward>
     <BaselineForEarnedValue>0</BaselineForEarnedValue>
     <AutoAddNewResourcesAndTasks>1</AutoAddNewResourcesAndTasks>
-    <CurrentDate>2026-06-20T21:56:33</CurrentDate>
+    <CurrentDate>2026-07-06T08:00:00</CurrentDate>
     <MicrosoftProjectServerURL>1</MicrosoftProjectServerURL>
     <Autolink>1</Autolink>
     <NewTaskStartDate>0</NewTaskStartDate>
@@ -165,7 +165,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>1</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -177,6 +177,11 @@
             <HideBar>0</HideBar>
             <Rollup>0</Rollup>
             <EarnedValueMethod>0</EarnedValueMethod>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-07-06T08:00:00</Start>
+                <Finish>2026-11-20T08:00:00</Finish>
+            </Baseline>
         </Task>
         <Task>
             <UID>2</UID>
@@ -201,7 +206,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>1</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -213,6 +218,11 @@
             <HideBar>0</HideBar>
             <Rollup>0</Rollup>
             <EarnedValueMethod>0</EarnedValueMethod>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-07-06T08:00:00</Start>
+                <Finish>2026-08-24T08:00:00</Finish>
+            </Baseline>
         </Task>
         <Task>
             <UID>3</UID>
@@ -230,6 +240,7 @@
             <Finish>2026-07-10T17:00:00</Finish>
             <Duration>PT40H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT40H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -237,7 +248,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>0</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -250,6 +261,14 @@
             <HideBar>0</HideBar>
             <Rollup>0</Rollup>
             <EarnedValueMethod>0</EarnedValueMethod>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-07-06T08:00:00</Start>
+                <Finish>2026-07-10T17:00:00</Finish>
+                <Duration>PT40H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>4</UID>
@@ -267,6 +286,7 @@
             <Finish>2026-07-24T17:00:00</Finish>
             <Duration>PT80H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT80H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -274,7 +294,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>0</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -294,6 +314,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-07-13T08:00:00</Start>
+                <Finish>2026-07-24T17:00:00</Finish>
+                <Duration>PT80H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT80H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>5</UID>
@@ -311,6 +339,7 @@
             <Finish>2026-08-14T17:00:00</Finish>
             <Duration>PT120H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT120H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -338,6 +367,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-07-27T08:00:00</Start>
+                <Finish>2026-08-14T17:00:00</Finish>
+                <Duration>PT120H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT120H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>6</UID>
@@ -355,6 +392,7 @@
             <Finish>2026-08-21T17:00:00</Finish>
             <Duration>PT40H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT40H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -382,6 +420,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-17T08:00:00</Start>
+                <Finish>2026-08-21T17:00:00</Finish>
+                <Duration>PT40H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>7</UID>
@@ -425,6 +471,11 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-24T08:00:00</Start>
+                <Finish>2026-08-24T08:00:00</Finish>
+            </Baseline>
         </Task>
         <Task>
             <UID>8</UID>
@@ -449,7 +500,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>1</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -461,6 +512,11 @@
             <HideBar>0</HideBar>
             <Rollup>0</Rollup>
             <EarnedValueMethod>0</EarnedValueMethod>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-07-27T08:00:00</Start>
+                <Finish>2026-10-23T17:00:00</Finish>
+            </Baseline>
         </Task>
         <Task>
             <UID>9</UID>
@@ -478,6 +534,7 @@
             <Finish>2026-07-31T17:00:00</Finish>
             <Duration>PT40H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT40H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -485,7 +542,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>0</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -505,6 +562,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-07-27T08:00:00</Start>
+                <Finish>2026-07-31T17:00:00</Finish>
+                <Duration>PT40H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>10</UID>
@@ -522,6 +587,7 @@
             <Finish>2026-10-23T17:00:00</Finish>
             <Duration>PT480H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT480H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -529,7 +595,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>0</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -549,6 +615,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-03T08:00:00</Start>
+                <Finish>2026-10-23T17:00:00</Finish>
+                <Duration>PT480H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT480H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>11</UID>
@@ -566,6 +640,7 @@
             <Finish>2026-10-02T17:00:00</Finish>
             <Duration>PT360H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT360H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -593,6 +668,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-03T08:00:00</Start>
+                <Finish>2026-10-02T17:00:00</Finish>
+                <Duration>PT360H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT360H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>12</UID>
@@ -610,6 +693,7 @@
             <Finish>2026-08-21T17:00:00</Finish>
             <Duration>PT120H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT120H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -637,6 +721,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-03T08:00:00</Start>
+                <Finish>2026-08-21T17:00:00</Finish>
+                <Duration>PT120H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT120H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>13</UID>
@@ -673,6 +765,11 @@
             <HideBar>0</HideBar>
             <Rollup>0</Rollup>
             <EarnedValueMethod>0</EarnedValueMethod>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-24T08:00:00</Start>
+                <Finish>2026-09-23T17:00:00</Finish>
+            </Baseline>
         </Task>
         <Task>
             <UID>14</UID>
@@ -690,6 +787,7 @@
             <Finish>2026-08-26T17:00:00</Finish>
             <Duration>PT24H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT24H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -717,6 +815,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-24T08:00:00</Start>
+                <Finish>2026-08-26T17:00:00</Finish>
+                <Duration>PT24H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT24H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>15</UID>
@@ -734,6 +840,7 @@
             <Finish>2026-09-02T17:00:00</Finish>
             <Duration>PT40H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT40H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -761,6 +868,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-27T08:00:00</Start>
+                <Finish>2026-09-02T17:00:00</Finish>
+                <Duration>PT40H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>16</UID>
@@ -778,6 +893,7 @@
             <Finish>2026-09-14T17:00:00</Finish>
             <Duration>PT64H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT64H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -805,6 +921,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-03T08:00:00</Start>
+                <Finish>2026-09-14T17:00:00</Finish>
+                <Duration>PT64H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT64H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>17</UID>
@@ -822,6 +946,7 @@
             <Finish>2026-09-09T17:00:00</Finish>
             <Duration>PT80H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT80H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -849,6 +974,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-27T08:00:00</Start>
+                <Finish>2026-09-09T17:00:00</Finish>
+                <Duration>PT80H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT80H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>18</UID>
@@ -866,6 +999,7 @@
             <Finish>2026-09-16T17:00:00</Finish>
             <Duration>PT120H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT120H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -893,6 +1027,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-27T08:00:00</Start>
+                <Finish>2026-09-16T17:00:00</Finish>
+                <Duration>PT120H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT120H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>19</UID>
@@ -910,6 +1052,7 @@
             <Finish>2026-09-23T17:00:00</Finish>
             <Duration>PT40H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT40H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -937,6 +1080,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-17T08:00:00</Start>
+                <Finish>2026-09-23T17:00:00</Finish>
+                <Duration>PT40H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>20</UID>
@@ -954,6 +1105,7 @@
             <Finish>2026-09-23T17:00:00</Finish>
             <Duration>PT160H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT160H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -981,6 +1133,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-27T08:00:00</Start>
+                <Finish>2026-09-23T17:00:00</Finish>
+                <Duration>PT160H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT160H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>21</UID>
@@ -1005,7 +1165,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>1</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -1017,6 +1177,11 @@
             <HideBar>0</HideBar>
             <Rollup>0</Rollup>
             <EarnedValueMethod>0</EarnedValueMethod>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-10T08:00:00</Start>
+                <Finish>2026-10-30T17:00:00</Finish>
+            </Baseline>
         </Task>
         <Task>
             <UID>22</UID>
@@ -1034,6 +1199,7 @@
             <Finish>2026-09-30T17:00:00</Finish>
             <Duration>PT80H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT80H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -1061,6 +1227,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-17T08:00:00</Start>
+                <Finish>2026-09-30T17:00:00</Finish>
+                <Duration>PT80H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT80H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>23</UID>
@@ -1078,6 +1252,7 @@
             <Finish>2026-10-30T17:00:00</Finish>
             <Duration>PT40H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT40H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -1085,7 +1260,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>0</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -1112,6 +1287,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-10-26T08:00:00</Start>
+                <Finish>2026-10-30T17:00:00</Finish>
+                <Duration>PT40H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>24</UID>
@@ -1129,6 +1312,7 @@
             <Finish>2026-10-14T17:00:00</Finish>
             <Duration>PT64H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT64H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -1163,6 +1347,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-10-05T08:00:00</Start>
+                <Finish>2026-10-14T17:00:00</Finish>
+                <Duration>PT64H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT64H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>25</UID>
@@ -1180,6 +1372,7 @@
             <Finish>2026-10-07T17:00:00</Finish>
             <Duration>PT40H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT40H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -1207,6 +1400,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-10-01T08:00:00</Start>
+                <Finish>2026-10-07T17:00:00</Finish>
+                <Duration>PT40H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>26</UID>
@@ -1224,6 +1425,7 @@
             <Finish>2026-09-23T17:00:00</Finish>
             <Duration>PT80H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT80H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -1258,6 +1460,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-10T08:00:00</Start>
+                <Finish>2026-09-23T17:00:00</Finish>
+                <Duration>PT80H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT80H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>27</UID>
@@ -1275,6 +1485,7 @@
             <Finish>2026-10-05T17:00:00</Finish>
             <Duration>PT64H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT64H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -1302,6 +1513,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-24T08:00:00</Start>
+                <Finish>2026-10-05T17:00:00</Finish>
+                <Duration>PT64H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT64H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>28</UID>
@@ -1326,7 +1545,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>1</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -1338,6 +1557,11 @@
             <HideBar>0</HideBar>
             <Rollup>0</Rollup>
             <EarnedValueMethod>0</EarnedValueMethod>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-15T08:00:00</Start>
+                <Finish>2026-11-20T08:00:00</Finish>
+            </Baseline>
         </Task>
         <Task>
             <UID>29</UID>
@@ -1355,6 +1579,7 @@
             <Finish>2026-09-16T17:00:00</Finish>
             <Duration>PT16H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT16H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -1382,6 +1607,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-15T08:00:00</Start>
+                <Finish>2026-09-16T17:00:00</Finish>
+                <Duration>PT16H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT16H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>30</UID>
@@ -1399,6 +1632,7 @@
             <Finish>2026-11-06T17:00:00</Finish>
             <Duration>PT40H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT40H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -1406,7 +1640,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>0</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -1447,6 +1681,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-11-02T08:00:00</Start>
+                <Finish>2026-11-06T17:00:00</Finish>
+                <Duration>PT40H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>31</UID>
@@ -1464,6 +1706,7 @@
             <Finish>2026-11-13T17:00:00</Finish>
             <Duration>PT40H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT40H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -1471,7 +1714,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>0</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -1491,6 +1734,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-11-09T08:00:00</Start>
+                <Finish>2026-11-13T17:00:00</Finish>
+                <Duration>PT40H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>32</UID>
@@ -1508,6 +1759,7 @@
             <Finish>2026-11-18T17:00:00</Finish>
             <Duration>PT24H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT24H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -1515,7 +1767,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>0</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -1542,6 +1794,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-11-16T08:00:00</Start>
+                <Finish>2026-11-18T17:00:00</Finish>
+                <Duration>PT24H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT24H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>33</UID>
@@ -1559,6 +1819,7 @@
             <Finish>2026-11-19T17:00:00</Finish>
             <Duration>PT8H0M0S</Duration>
             <DurationFormat>7</DurationFormat>
+            <Work>PT8H0M0S</Work>
             <ResumeValid>0</ResumeValid>
             <EffortDriven>0</EffortDriven>
             <Recurring>0</Recurring>
@@ -1566,7 +1827,7 @@
             <Estimated>0</Estimated>
             <Milestone>0</Milestone>
             <Summary>0</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -1586,6 +1847,14 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-11-19T08:00:00</Start>
+                <Finish>2026-11-19T17:00:00</Finish>
+                <Duration>PT8H0M0S</Duration>
+                <DurationFormat>7</DurationFormat>
+                <Work>PT8H0M0S</Work>
+            </Baseline>
         </Task>
         <Task>
             <UID>34</UID>
@@ -1610,7 +1879,7 @@
             <Estimated>0</Estimated>
             <Milestone>1</Milestone>
             <Summary>0</Summary>
-            <Critical>0</Critical>
+            <Critical>1</Critical>
             <IsSubproject>0</IsSubproject>
             <IsSubprojectReadOnly>0</IsSubprojectReadOnly>
             <ExternalTask>0</ExternalTask>
@@ -1629,6 +1898,11 @@
                 <LinkLag>0</LinkLag>
                 <LagFormat>7</LagFormat>
             </PredecessorLink>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-11-20T08:00:00</Start>
+                <Finish>2026-11-20T08:00:00</Finish>
+            </Baseline>
         </Task>
     </Tasks>
     <Resources>
@@ -1638,6 +1912,8 @@
             <Name>Jefe de Proyecto</Name>
             <Type>1</Type>
             <IsNull>0</IsNull>
+            <Initials>JP</Initials>
+            <Group>Dirección</Group>
             <MaxUnits>1</MaxUnits>
             <PeakUnits>1</PeakUnits>
             <OverAllocated>0</OverAllocated>
@@ -1657,6 +1933,8 @@
             <Name>Proyectista</Name>
             <Type>1</Type>
             <IsNull>0</IsNull>
+            <Initials>PRY</Initials>
+            <Group>Ingeniería</Group>
             <MaxUnits>1</MaxUnits>
             <PeakUnits>1</PeakUnits>
             <OverAllocated>0</OverAllocated>
@@ -1676,6 +1954,8 @@
             <Name>Capataz Obra Civil</Name>
             <Type>1</Type>
             <IsNull>0</IsNull>
+            <Initials>COC</Initials>
+            <Group>Obra Civil</Group>
             <MaxUnits>1</MaxUnits>
             <PeakUnits>1</PeakUnits>
             <OverAllocated>0</OverAllocated>
@@ -1695,6 +1975,8 @@
             <Name>Técnico Electromecánico</Name>
             <Type>1</Type>
             <IsNull>0</IsNull>
+            <Initials>TEM</Initials>
+            <Group>Montaje</Group>
             <MaxUnits>1</MaxUnits>
             <PeakUnits>1</PeakUnits>
             <OverAllocated>0</OverAllocated>
@@ -1714,6 +1996,8 @@
             <Name>Técnico de Comisionamiento</Name>
             <Type>1</Type>
             <IsNull>0</IsNull>
+            <Initials>TCO</Initials>
+            <Group>Puesta en Servicio</Group>
             <MaxUnits>1</MaxUnits>
             <PeakUnits>1</PeakUnits>
             <OverAllocated>0</OverAllocated>
@@ -1741,6 +2025,12 @@
             <Start>2026-07-06T08:00:00</Start>
             <Units>1</Units>
             <Work>PT40H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-07-06T08:00:00</Start>
+                <Finish>2026-07-10T17:00:00</Finish>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>2</UID>
@@ -1754,6 +2044,12 @@
             <Start>2026-07-13T08:00:00</Start>
             <Units>1</Units>
             <Work>PT80H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-07-13T08:00:00</Start>
+                <Finish>2026-07-24T17:00:00</Finish>
+                <Work>PT80H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>3</UID>
@@ -1767,6 +2063,12 @@
             <Start>2026-07-27T08:00:00</Start>
             <Units>1</Units>
             <Work>PT120H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-07-27T08:00:00</Start>
+                <Finish>2026-08-14T17:00:00</Finish>
+                <Work>PT120H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>4</UID>
@@ -1780,6 +2082,12 @@
             <Start>2026-08-17T08:00:00</Start>
             <Units>1</Units>
             <Work>PT40H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-17T08:00:00</Start>
+                <Finish>2026-08-21T17:00:00</Finish>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>5</UID>
@@ -1793,6 +2101,12 @@
             <Start>2026-07-27T08:00:00</Start>
             <Units>1</Units>
             <Work>PT40H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-07-27T08:00:00</Start>
+                <Finish>2026-07-31T17:00:00</Finish>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>6</UID>
@@ -1806,6 +2120,12 @@
             <Start>2026-08-03T08:00:00</Start>
             <Units>1</Units>
             <Work>PT480H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-03T08:00:00</Start>
+                <Finish>2026-10-23T17:00:00</Finish>
+                <Work>PT480H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>7</UID>
@@ -1819,6 +2139,12 @@
             <Start>2026-08-03T08:00:00</Start>
             <Units>1</Units>
             <Work>PT360H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-03T08:00:00</Start>
+                <Finish>2026-10-02T17:00:00</Finish>
+                <Work>PT360H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>8</UID>
@@ -1832,6 +2158,12 @@
             <Start>2026-08-03T08:00:00</Start>
             <Units>1</Units>
             <Work>PT120H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-03T08:00:00</Start>
+                <Finish>2026-08-21T17:00:00</Finish>
+                <Work>PT120H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>9</UID>
@@ -1845,6 +2177,12 @@
             <Start>2026-08-24T08:00:00</Start>
             <Units>1</Units>
             <Work>PT24H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-24T08:00:00</Start>
+                <Finish>2026-08-26T17:00:00</Finish>
+                <Work>PT24H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>10</UID>
@@ -1858,6 +2196,12 @@
             <Start>2026-08-27T08:00:00</Start>
             <Units>1</Units>
             <Work>PT40H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-27T08:00:00</Start>
+                <Finish>2026-09-02T17:00:00</Finish>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>11</UID>
@@ -1871,6 +2215,12 @@
             <Start>2026-09-03T08:00:00</Start>
             <Units>1</Units>
             <Work>PT64H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-03T08:00:00</Start>
+                <Finish>2026-09-14T17:00:00</Finish>
+                <Work>PT64H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>12</UID>
@@ -1884,6 +2234,12 @@
             <Start>2026-08-27T08:00:00</Start>
             <Units>1</Units>
             <Work>PT80H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-27T08:00:00</Start>
+                <Finish>2026-09-09T17:00:00</Finish>
+                <Work>PT80H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>13</UID>
@@ -1897,6 +2253,12 @@
             <Start>2026-08-27T08:00:00</Start>
             <Units>1</Units>
             <Work>PT120H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-27T08:00:00</Start>
+                <Finish>2026-09-16T17:00:00</Finish>
+                <Work>PT120H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>14</UID>
@@ -1910,6 +2272,12 @@
             <Start>2026-09-17T08:00:00</Start>
             <Units>1</Units>
             <Work>PT40H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-17T08:00:00</Start>
+                <Finish>2026-09-23T17:00:00</Finish>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>15</UID>
@@ -1923,6 +2291,12 @@
             <Start>2026-08-27T08:00:00</Start>
             <Units>1</Units>
             <Work>PT160H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-08-27T08:00:00</Start>
+                <Finish>2026-09-23T17:00:00</Finish>
+                <Work>PT160H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>16</UID>
@@ -1936,6 +2310,12 @@
             <Start>2026-09-17T08:00:00</Start>
             <Units>1</Units>
             <Work>PT80H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-17T08:00:00</Start>
+                <Finish>2026-09-30T17:00:00</Finish>
+                <Work>PT80H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>17</UID>
@@ -1949,6 +2329,12 @@
             <Start>2026-10-26T08:00:00</Start>
             <Units>1</Units>
             <Work>PT40H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-10-26T08:00:00</Start>
+                <Finish>2026-10-30T17:00:00</Finish>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>18</UID>
@@ -1962,6 +2348,12 @@
             <Start>2026-10-05T08:00:00</Start>
             <Units>1</Units>
             <Work>PT64H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-10-05T08:00:00</Start>
+                <Finish>2026-10-14T17:00:00</Finish>
+                <Work>PT64H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>19</UID>
@@ -1975,6 +2367,12 @@
             <Start>2026-10-01T08:00:00</Start>
             <Units>1</Units>
             <Work>PT40H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-10-01T08:00:00</Start>
+                <Finish>2026-10-07T17:00:00</Finish>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>20</UID>
@@ -1988,6 +2386,12 @@
             <Start>2026-09-10T08:00:00</Start>
             <Units>1</Units>
             <Work>PT80H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-10T08:00:00</Start>
+                <Finish>2026-09-23T17:00:00</Finish>
+                <Work>PT80H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>21</UID>
@@ -2001,6 +2405,12 @@
             <Start>2026-09-24T08:00:00</Start>
             <Units>1</Units>
             <Work>PT64H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-24T08:00:00</Start>
+                <Finish>2026-10-05T17:00:00</Finish>
+                <Work>PT64H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>22</UID>
@@ -2014,6 +2424,12 @@
             <Start>2026-09-15T08:00:00</Start>
             <Units>1</Units>
             <Work>PT16H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-09-15T08:00:00</Start>
+                <Finish>2026-09-16T17:00:00</Finish>
+                <Work>PT16H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>23</UID>
@@ -2027,6 +2443,12 @@
             <Start>2026-11-02T08:00:00</Start>
             <Units>1</Units>
             <Work>PT40H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-11-02T08:00:00</Start>
+                <Finish>2026-11-06T17:00:00</Finish>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>24</UID>
@@ -2040,6 +2462,12 @@
             <Start>2026-11-09T08:00:00</Start>
             <Units>1</Units>
             <Work>PT40H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-11-09T08:00:00</Start>
+                <Finish>2026-11-13T17:00:00</Finish>
+                <Work>PT40H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>25</UID>
@@ -2053,6 +2481,12 @@
             <Start>2026-11-16T08:00:00</Start>
             <Units>1</Units>
             <Work>PT24H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-11-16T08:00:00</Start>
+                <Finish>2026-11-18T17:00:00</Finish>
+                <Work>PT24H0M0S</Work>
+            </Baseline>
         </Assignment>
         <Assignment>
             <UID>26</UID>
@@ -2066,6 +2500,12 @@
             <Start>2026-11-19T08:00:00</Start>
             <Units>1</Units>
             <Work>PT8H0M0S</Work>
+            <Baseline>
+                <Number>0</Number>
+                <Start>2026-11-19T08:00:00</Start>
+                <Finish>2026-11-19T17:00:00</Finish>
+                <Work>PT8H0M0S</Work>
+            </Baseline>
         </Assignment>
     </Assignments>
 </Project>
