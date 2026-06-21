@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="google" content="notranslate" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>StructuralScope Pro | Análisis estructural</title>
+  <title>StructuralScope Pro | Prediseño y predimensionamiento estructural</title>
 
   <style>
     :root{
@@ -628,6 +628,27 @@
       font-weight:800;
     }
 
+    .calc-box select{
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      appearance:none;
+      padding:10px 38px 10px 12px;
+      font-size:14px;
+      background-image:url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='%2338bdf8' d='M3.5 5.5l4.5 4.5 4.5-4.5z'/%3E%3C/svg%3E");
+      background-repeat:no-repeat;
+      background-position:right 12px center;
+      background-size:14px;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      overflow:hidden;
+    }
+
+    .calc-box select:focus{
+      border-color:var(--blue);
+      box-shadow:0 0 0 4px rgba(56,189,248,.13);
+      outline:none;
+    }
+
     .calc-result{
       margin-top:16px;
       padding:16px;
@@ -689,6 +710,159 @@
       }
     }
 
+    /* ===== EXTENSIONES v2: normativa, calculadoras PRO ===== */
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:11px;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      border:1px solid rgba(255,255,255,.2);
+    }
+
+    .badge.co{background:rgba(250,204,21,.14);color:#fde68a;border-color:rgba(250,204,21,.4)}
+    .badge.ar{background:rgba(56,189,248,.14);color:#bae6fd;border-color:rgba(56,189,248,.4)}
+
+    .table-wrap{
+      overflow-x:auto;
+      border-radius:18px;
+      margin:18px 0;
+    }
+
+    .table-wrap table{margin:0}
+
+    .nlink{
+      color:var(--blue);
+      text-decoration:underline;
+      text-decoration-color:rgba(56,189,248,.4);
+      text-underline-offset:3px;
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .nlink:hover{
+      color:var(--gold);
+      text-decoration-color:var(--gold);
+    }
+
+    .calc-grid.cols2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .calc-grid.cols4{grid-template-columns:repeat(4,minmax(0,1fr))}
+
+    .calc-box .hint{
+      color:var(--muted);
+      font-size:13px;
+      font-weight:700;
+      margin-top:4px;
+    }
+
+    .calc-box h3{
+      margin:0 0 4px;
+      color:var(--gold);
+      font-size:19px;
+    }
+
+    .calc-box .sub{
+      color:var(--muted);
+      font-size:14px;
+      font-weight:700;
+      margin:0 0 16px;
+    }
+
+    .calc-result strong{color:var(--gold)}
+    .calc-result .big{
+      display:block;
+      font-size:26px;
+      color:#bbf7d0;
+      font-weight:900;
+      margin:6px 0 10px;
+    }
+
+    .calc-result.error{
+      background:rgba(251,113,133,.10);
+      border-color:rgba(251,113,133,.35);
+      color:#fecdd3;
+    }
+
+    .result-row{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      padding:8px 0;
+      border-bottom:1px dashed rgba(255,255,255,.10);
+      font-size:15px;
+    }
+    .result-row:last-child{border-bottom:none}
+    .result-row span:first-child{color:var(--muted);font-weight:800}
+    .result-row span:last-child{color:#fff6d8;font-weight:900}
+
+    .reco-box{
+      margin-top:22px;
+      padding:22px;
+      border-radius:20px;
+      border:2px solid var(--gold);
+      background:linear-gradient(135deg,rgba(214,173,79,.14),rgba(7,17,31,.75));
+    }
+
+    .reco-box .label{margin-bottom:6px}
+    .reco-box h3{margin:0 0 10px;color:#ffe8a3;font-size:24px}
+    .reco-box p{margin:0 0 6px;color:#fff6d8;font-size:16px;line-height:1.55;font-weight:700}
+
+    .stepper{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+      gap:10px;
+      margin:18px 0;
+    }
+
+    .stepper .s{
+      background:rgba(7,17,31,.55);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px 14px;
+      text-align:center;
+      font-size:13px;
+      font-weight:900;
+      color:#dbeafe;
+    }
+
+    .stepper .s b{display:block;color:var(--blue);font-size:20px;margin-bottom:2px}
+
+    .norm-filter{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+
+    .norm-filter button{
+      border:1px solid rgba(56,189,248,.35);
+      background:rgba(7,17,31,.5);
+      color:#dbeafe;
+      padding:8px 13px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .norm-filter button.active{
+      background:var(--blue);
+      color:var(--bg);
+      border-color:var(--blue);
+    }
+
+    @media(max-width:900px){
+      .calc-grid.cols2,.calc-grid.cols4{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:680px){
+      .calc-grid.cols2,.calc-grid.cols4{grid-template-columns:1fr}
+    }
+
     @media(max-width:680px){
       .brand h1{font-size:32px}
       .brand p{font-size:16px}
@@ -725,9 +899,9 @@
   <header class="topbar">
     <div class="top-inner">
       <div class="brand">
-        <div class="terminal">> guía 04 estructuras... sistema listo</div>
+        <div class="terminal">> guía 04 estructuras... módulo de prediseño cargado</div>
         <h1>StructuralScope Pro</h1>
-        <p>Demo interactivo de <span class="gold">análisis estructural, hormigón/concreto y acero</span></p>
+        <p>Plataforma de <span class="gold">prediseño, predimensionamiento y criterio estructural</span> · Colombia + Argentina</p>
       </div>
 
       <div class="top-actions">
@@ -764,23 +938,23 @@
         <div class="diagram">
           <div class="diagram-title">Camino de cargas: de la losa al suelo</div>
           <svg viewBox="0 0 1000 360" role="img" aria-label="Camino de cargas en una estructura">
-            <defs><marker id="arrowLoad" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#d6ad4f"></path></marker></defs>
-            <rect x="100" y="55" width="800" height="38" fill="#38bdf8" opacity=".28" stroke="#38bdf8"/>
-            <rect x="160" y="120" width="680" height="34" fill="#d6ad4f" opacity=".24" stroke="#d6ad4f"/>
-            <rect x="230" y="185" width="70" height="105" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
-            <rect x="700" y="185" width="70" height="105" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
-            <rect x="170" y="290" width="190" height="42" fill="#102033" stroke="#d6ad4f" stroke-width="3"/>
-            <rect x="640" y="290" width="190" height="42" fill="#102033" stroke="#d6ad4f" stroke-width="3"/>
-            <text x="500" y="35" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="900">Camino de cargas verticales</text>
-            <text x="500" y="80" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Losa</text>
-            <text x="500" y="143" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Viga</text>
-            <text x="265" y="245" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Columna</text>
-            <text x="735" y="245" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Columna</text>
-            <text x="265" y="318" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Fundación</text>
-            <text x="735" y="318" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Fundación</text>
-            <line x1="500" y1="95" x2="500" y2="118" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
-            <line x1="500" y1="155" x2="265" y2="185" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
-            <line x1="500" y1="155" x2="735" y2="185" stroke="#d6ad4f" stroke-width="5" marker-end="url(#arrowLoad)"/>
+            <defs><marker id="arrowLoad" markerWidth="12" markerHeight="10" refX="12" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,10 L12,5 z" fill="#d6ad4f"></path></marker></defs>
+            <rect x="100" y="48" width="800" height="42" fill="#38bdf8" opacity=".28" stroke="#38bdf8"/>
+            <rect x="160" y="144" width="680" height="38" fill="#d6ad4f" opacity=".24" stroke="#d6ad4f"/>
+            <rect x="230" y="213" width="70" height="97" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+            <rect x="700" y="213" width="70" height="97" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+            <rect x="170" y="310" width="190" height="40" fill="#102033" stroke="#d6ad4f" stroke-width="3"/>
+            <rect x="640" y="310" width="190" height="40" fill="#102033" stroke="#d6ad4f" stroke-width="3"/>
+            <text x="500" y="30" text-anchor="middle" fill="#f8fafc" font-size="24" font-weight="900">Camino de cargas verticales</text>
+            <text x="500" y="75" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Losa</text>
+            <text x="500" y="169" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Viga</text>
+            <text x="265" y="266" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Columna</text>
+            <text x="735" y="266" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Columna</text>
+            <text x="265" y="335" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Fundación</text>
+            <text x="735" y="335" text-anchor="middle" fill="#eef6ff" font-size="17" font-weight="700">Fundación</text>
+            <line x1="500" y1="96" x2="500" y2="138" stroke="#d6ad4f" stroke-width="4" marker-end="url(#arrowLoad)"/>
+            <line x1="500" y1="188" x2="271" y2="209" stroke="#d6ad4f" stroke-width="4" marker-end="url(#arrowLoad)"/>
+            <line x1="500" y1="188" x2="729" y2="209" stroke="#d6ad4f" stroke-width="4" marker-end="url(#arrowLoad)"/>
           </svg>
           <div class="diagram-note">Si no podés explicar por dónde viaja la carga, el modelo está incompleto o mal conceptualizado.</div>
         </div>
@@ -790,8 +964,8 @@
           <div class="diagram-title">Losa en una dirección vs losa en dos direcciones</div>
           <svg viewBox="0 0 980 360" role="img" aria-label="Comparación de losas en una dirección y dos direcciones">
             <defs>
-              <marker id="arrowBlue" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#38bdf8"></path></marker>
-              <marker id="arrowGold" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#d6ad4f"></path></marker>
+              <marker id="arrowBlue" markerWidth="11" markerHeight="9" refX="11" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,9 L11,4.5 z" fill="#38bdf8"></path></marker>
+              <marker id="arrowGold" markerWidth="11" markerHeight="9" refX="11" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,9 L11,4.5 z" fill="#d6ad4f"></path></marker>
             </defs>
             <rect x="30" y="45" width="390" height="210" rx="18" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
             <rect x="65" y="80" width="320" height="140" fill="rgba(56,189,248,.12)" stroke="#c3d0e2" stroke-width="2"/>
@@ -856,6 +1030,49 @@
           </svg>
           <div class="diagram-note">Nunca firmes resultados sin revisar equilibrio, deformada, reacciones, masas, modos y unidades.</div>
         </div>
+      `,
+      secuencia: `
+        <div class="diagram">
+          <div class="diagram-title">Secuencia de trabajo en cálculo estructural</div>
+          <svg viewBox="0 0 1040 230" role="img" aria-label="Secuencia de 7 pasos del cálculo estructural">
+            <defs><marker id="arrowSeq" markerWidth="8" markerHeight="7" refX="8" refY="3.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L0,7 L8,3.5 z" fill="#38bdf8"></path></marker></defs>
+            ${["Definición\ndel proyecto","Normativa\ny acciones","Prediseño /\ncriterio","Predimensio-\nnamiento","Modelado\nestructural","Cálculo /\nanálisis","Diseño y\nverificación"].map((t,i)=>{
+              const x = 20 + i*146;
+              const lines = t.split("\n");
+              return `
+                <rect x="${x}" y="60" width="124" height="92" rx="14" fill="${i===6?'#16331f':'#0d1b2d'}" stroke="${i===6?'#39ff14':'#38bdf8'}" stroke-width="3"/>
+                <circle cx="${x+22}" cy="78" r="14" fill="#d6ad4f"/>
+                <text x="${x+22}" y="83" text-anchor="middle" fill="#07111f" font-size="15" font-weight="900">${i+1}</text>
+                ${lines.map((l,li)=>`<text x="${x+62}" y="${108+li*16}" text-anchor="middle" fill="#eef6ff" font-size="12.5" font-weight="800">${l}</text>`).join("")}
+                ${i<6?`<line x1="${x+124}" y1="106" x2="${x+146}" y2="106" stroke="#38bdf8" stroke-width="4" marker-end="url(#arrowSeq)"/>`:""}
+              `;
+            }).join("")}
+            <text x="520" y="25" text-anchor="middle" fill="#f8fafc" font-size="19" font-weight="900">Orden lógico — proceso iterativo: si una verificación no cumple, se vuelve atrás</text>
+          </svg>
+          <div class="diagram-note">Resultado final = planos estructurales + memoria de cálculo + detalles constructivos.</div>
+        </div>
+      `,
+      zapata: `
+        <div class="diagram">
+          <div class="diagram-title">Corte esquemático: zapata aislada</div>
+          <svg viewBox="0 0 700 300" role="img" aria-label="Corte de zapata aislada">
+            <rect x="80" y="190" width="540" height="14" fill="#3a3a3a" opacity=".4"/>
+            <rect x="80" y="204" width="540" height="80" fill="#241c12" opacity=".5"/>
+            <rect x="240" y="195" width="220" height="55" fill="#0d1b2d" stroke="#d6ad4f" stroke-width="3"/>
+            <rect x="305" y="90" width="90" height="105" fill="#0d1b2d" stroke="#38bdf8" stroke-width="3"/>
+            <line x1="240" y1="270" x2="460" y2="270" stroke="#38bdf8" stroke-width="2"/>
+            <line x1="240" y1="262" x2="240" y2="278" stroke="#38bdf8" stroke-width="2"/>
+            <line x1="460" y1="262" x2="460" y2="278" stroke="#38bdf8" stroke-width="2"/>
+            <text x="350" y="290" text-anchor="middle" fill="#bae6fd" font-size="14" font-weight="800">B (lado de zapata)</text>
+            <line x1="480" y1="195" x2="480" y2="250" stroke="#d6ad4f" stroke-width="2"/>
+            <text x="540" y="226" text-anchor="middle" fill="#ffe8a3" font-size="14" font-weight="800">h (espesor)</text>
+            <line x1="395" y1="92" x2="430" y2="92" stroke="#38bdf8" stroke-width="2"/>
+            <text x="470" y="96" text-anchor="middle" fill="#bae6fd" font-size="13" font-weight="800">pedestal</text>
+            <text x="350" y="30" text-anchor="middle" fill="#f8fafc" font-size="20" font-weight="900">Columna → pedestal → zapata → suelo</text>
+            <text x="350" y="55" text-anchor="middle" fill="#cfe5ff" font-size="14" font-weight="700">v = volado (240→305 y 395→460) · D = profundidad de desplante</text>
+          </svg>
+          <div class="diagram-note">A ≥ P / (qadm) · verificar siempre punzonamiento, volado y profundidad de desplante mínima.</div>
+        </div>
       `
     };
 
@@ -863,10 +1080,11 @@
       inicio:{
         label:"Inicio",
         subtitle:"Mapa de consulta",
-        heroTitle:"Del criterio al diseño: entender, modelar, verificar y construir",
-        heroText:"Guía visual para leer una estructura como sistema resistente: cargas, suelo, geometría, materiales, modelado, verificación, detalles y obra. No reemplaza la norma ni la memoria de cálculo; ordena el criterio técnico.",
+        heroTitle:"Del criterio al prediseño: entender, predimensionar, modelar y verificar",
+        heroText:"Plataforma de criterio y cálculo rápido para estructuras de hormigón/concreto y acero. Incluye selector de sistema resistente, calculadoras de predimensionamiento (losas, vigas, columnas, muros, zapatas) y tabla normativa cruzada Colombia–Argentina. No reemplaza la norma ni la memoria de cálculo: ordena el criterio técnico y acelera el primer número.",
         menu:[
           ["vision","Visión general"],
+          ["secuencia","Secuencia de trabajo"],
           ["camino","Camino de cargas"],
           ["flujo","Flujo profesional"],
           ["errores","Errores que no se perdonan"]
@@ -883,6 +1101,29 @@
                 <div class="card"><h3>2. Sistema resistente</h3><p>Losas, vigas, columnas, muros, pórticos, arriostres y fundaciones trabajando como conjunto.</p></div>
                 <div class="card"><h3>3. Verificación</h3><p>Resistencia, servicio, estabilidad, ductilidad, durabilidad, detalle y documentación.</p></div>
               </div>
+              <div class="pill-row">
+                <button class="btn gold" onclick="goTo('predim','resistente')">→ Ir al selector de sistema</button>
+                <button class="btn" onclick="goTo('predim','losas')">→ Predimensionar losa</button>
+                <button class="btn" onclick="goTo('normativa','master')">→ Tabla normativa CO/AR</button>
+              </div>
+            </div>
+          `,
+          secuencia:`
+            <div class="section">
+              <div class="label">> orden lógico</div>
+              <h2>Secuencia de trabajo en cálculo estructural</h2>
+              <p>Definición del proyecto → normativa y acciones → prediseño → predimensionamiento → modelado → cálculo/análisis → diseño y verificación. Si una verificación no cumple, se ajusta el predimensionamiento o el modelo y se recalcula: el proceso es iterativo, no lineal.</p>
+              ${diagrams.secuencia}
+              <div class="stepper">
+                <div class="s"><b>1</b>Definición del proyecto</div>
+                <div class="s"><b>2</b>Normativa y acciones</div>
+                <div class="s"><b>3</b>Prediseño / criterio</div>
+                <div class="s"><b>4</b>Predimensionamiento</div>
+                <div class="s"><b>5</b>Modelado estructural</div>
+                <div class="s"><b>6</b>Cálculo / análisis</div>
+                <div class="s"><b>7</b>Diseño y verificación</div>
+              </div>
+              <div class="box senior"><strong>Resultado final:</strong> planos estructurales + memoria de cálculo + detalles constructivos. Cada paso de esta plataforma está organizado siguiendo este mismo orden: Predimensionamiento, Modelado, Cálculo y Verificación.</div>
             </div>
           `,
           camino:`
@@ -929,68 +1170,696 @@
         }
       },
 
-      losas:{
-        label:"Losas",
-        subtitle:"Una dirección, dos direcciones y sistemas",
-        heroTitle:"Criterio de losas: no todas trabajan igual",
-        heroText:"La losa puede trabajar en una dirección, en dos direcciones, como losa plana, nervada, colaborante o vinculada a vigas. La relación de luces orienta, pero no decide sola.",
+      predim:{
+        label:"Predimensionamiento",
+        subtitle:"Sistema, secciones y cargas",
+        heroTitle:"Predimensionamiento: el módulo de cálculo rápido",
+        heroText:"Acá vive el corazón práctico de la plataforma: para cada tipo de elemento (sistema resistente, losas, vigas, columnas, muros y zapatas) hay un criterio de selección — qué tipo conviene y cuándo — y una calculadora que entrega un número inicial razonable. Las dimensiones finales siempre se ajustan con el análisis estructural completo.",
         menu:[
-          ["criterio","Cuándo usar cada una"],
-          ["tabla","Tabla de decisión"],
-          ["calc","Mini evaluador"],
-          ["detalles","Detalles y alertas"]
+          ["resistente","Sistema resistente"],
+          ["parametros","Qué controla el diseño"],
+          ["losas","Losas"],
+          ["vigas","Vigas"],
+          ["columnas","Columnas"],
+          ["muros","Muros"],
+          ["zapatas","Zapatas / fundaciones"]
         ],
         sections:{
-          criterio:`
+          resistente:`
             <div class="section">
-              <div class="label">> criterio de losas</div>
-              <h2>Una dirección vs dos direcciones</h2>
-              <p>Como primera lectura: si la luz larga es aproximadamente dos veces o más la luz corta, la losa tiende a trabajar en una dirección. Si el paño es más cuadrado, reparte carga en dos direcciones.</p>
-              ${diagrams.slabs}
-              <div class="box senior"><strong>Criterio senior:</strong> no te quedes solo con la relación de luces. Revisá continuidad, apoyos reales, rigidez de vigas, huecos, cargas lineales de muros, instalaciones, flecha y proceso constructivo.</div>
-            </div>
-          `,
-          tabla:`
-            <div class="section">
-              <div class="label">> selección técnica</div>
-              <h2>Tabla práctica para decidir tipo de losa</h2>
-              <table>
-                <thead><tr><th>Tipo</th><th>Cuándo conviene</th><th>Predimensión inicial</th><th>Control frecuente</th></tr></thead>
-                <tbody>
-                  <tr><td class="value">Maciza 1 dirección</td><td>Paños alargados, apoyos en dos bordes o vigas paralelas.</td><td>h ≈ L/20 a L/25</td><td>Flecha, fisuración, momento positivo.</td></tr>
-                  <tr><td class="value">Maciza 2 direcciones</td><td>Paños con relación largo/corto menor a 2 y apoyos en 4 lados.</td><td>h ≈ L/25 a L/30</td><td>Momentos en ambas direcciones y continuidad.</td></tr>
-                  <tr><td class="value">Nervada / casetonada</td><td>Luces medias, necesidad de bajar peso propio.</td><td>h ≈ L/25 a L/30</td><td>Separación de nervios, capa de compresión y vibración.</td></tr>
-                  <tr><td class="value">Losa plana</td><td>Plantas libres, menor altura de piso, estacionamientos u oficinas.</td><td>Mayor espesor; revisar punzonamiento.</td><td>Punzonamiento, flecha y transferencia en columnas.</td></tr>
-                  <tr><td class="value">Colaborante</td><td>Estructuras metálicas, montaje rápido, entrepisos livianos.</td><td>Según chapa, conectores y fabricante.</td><td>Vibración, fuego, etapa constructiva y conectores.</td></tr>
-                </tbody>
-              </table>
-            </div>
-          `,
-          calc:`
-            <div class="section">
-              <div class="label">> herramienta rápida</div>
-              <h2>Mini evaluador de criterio de losa</h2>
-              <p>Esto no diseña la losa: ayuda a leer el paño y plantear el análisis inicial.</p>
+              <div class="label">> elección de sistema</div>
+              <h2>¿Qué sistema resistente conviene?</h2>
+              <p>El sistema se elige con uso, altura, demanda sísmica/viento, luces y prioridad del proyecto (flexibilidad arquitectónica, rigidez lateral, economía o grandes luces). Cargá los datos y obtené una recomendación inicial.</p>
+
               <div class="calc-box">
-                <div class="calc-grid">
-                  <div><label>Luz corta Lx (m)</label><input id="lxLosa" type="number" value="4.5" step="0.1"></div>
-                  <div><label>Luz larga Ly (m)</label><input id="lyLosa" type="number" value="6.0" step="0.1"></div>
-                  <div><label>Sistema preliminar</label><select id="tipoLosa"><option value="maciza">Maciza</option><option value="nervada">Nervada</option><option value="plana">Plana</option></select></div>
+                <h3>Selector de sistema resistente</h3>
+                <p class="sub">Herramienta de criterio — no reemplaza el análisis sismorresistente completo.</p>
+                <div class="calc-grid cols4">
+                  <div><label>Niveles del edificio</label><input id="sisNiveles" type="number" value="5" min="1" step="1"></div>
+                  <div><label>Demanda sísmica/viento</label><select id="sisDemanda"><option value="baja">Baja</option><option value="media" selected>Media</option><option value="alta">Alta</option></select></div>
+                  <div><label>Luz típica (m)</label><input id="sisLuz" type="number" value="6" min="1" step="0.5"></div>
+                  <div><label>Prioridad del proyecto</label><select id="sisPrioridad">
+                    <option value="flex">Flexibilidad arquitectónica</option>
+                    <option value="rigidez">Rigidez lateral / control de deriva</option>
+                    <option value="economia">Economía y repetición</option>
+                    <option value="luces">Grandes luces libres</option>
+                  </select></div>
                 </div>
-                <button class="btn gold" type="button" onclick="calcularLosa()" style="margin-top:14px;">Evaluar criterio</button>
-                <div id="resultadoLosa" class="calc-result">Cargá luces y presioná evaluar.</div>
+                <button class="btn gold" type="button" onclick="evaluarSistema()" style="margin-top:14px;">Recomendar sistema</button>
+                <div id="resultadoSistema"></div>
+              </div>
+
+              <h3>Esquemas resistentes más usados</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Sistema</th><th>Uso práctico</th><th>Parámetros clave a revisar</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">1 · Pórticos resistentes a momento</td><td>Edificios bajos y medianos; buena flexibilidad arquitectónica.</td><td>Luces, altura entre pisos, derivas, nudos viga-columna.</td></tr>
+                    <tr><td class="value">2 · Muros estructurales / placas</td><td>Alta rigidez lateral; edificios medianos y altos.</td><td>Ubicación simétrica, continuidad vertical, aberturas, torsión.</td></tr>
+                    <tr><td class="value">3 · Sistema dual (pórticos + muros)</td><td>Uno de los más usados en zonas sísmicas; combina rigidez y flexibilidad.</td><td>Reparto de rigidez, centro de masa y rigidez, derivas, compatibilidad.</td></tr>
+                    <tr><td class="value">4 · Viga + losa + columnas</td><td>Típico en vivienda, oficinas y uso general.</td><td>Luces de losa, flechas, punzonamiento, sección de vigas y columnas.</td></tr>
+                    <tr><td class="value">5 · Losa plana + columnas</td><td>Espacios limpios; facilita instalaciones y arquitectura.</td><td>Punzonamiento, luces, control de derivas, apoyo en núcleo o muros.</td></tr>
+                    <tr><td class="value">6 · Cerchas / pórticos metálicos</td><td>Grandes luces: galpones, naves y cubiertas.</td><td>Luz, arriostramiento, pandeo, uniones.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="grid">
+                <div class="card"><h3>Edificios corrientes</h3><p>Viga-losa-columna o pórticos resistentes a momento.</p></div>
+                <div class="card"><h3>Mayor sismo o control de deriva</h3><p>Muros estructurales o sistema dual (pórtico + muro).</p></div>
+                <div class="card"><h3>Grandes luces</h3><p>Cerchas o pórticos metálicos.</p></div>
               </div>
             </div>
           `,
-          detalles:`
+
+          parametros:`
             <div class="section">
-              <div class="label">> detalles de losa</div>
-              <h2>Detalles y alertas de losas</h2>
+              <div class="label">> qué controla el diseño</div>
+              <h2>¿Qué parámetro suele gobernar la estructura?</h2>
+              <p>En la práctica no siempre controla la resistencia: muchas veces gobiernan la flecha, la deriva, la vibración o la constructibilidad. Identificar qué controla orienta la decisión de prediseño.</p>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Parámetro</th><th>Qué revisar</th><th>Elementos que suele gobernar</th><th>Decisión de prediseño</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Luces</td><td>Distancia entre apoyos, modulación, voladizos.</td><td>Losas, vigas, cerchas.</td><td>Definir sistema adecuado y canto inicial.</td></tr>
+                    <tr><td class="value">Flecha</td><td>Relación luz/canto, rigidez, carga de servicio.</td><td>Losas y vigas.</td><td>Aumentar canto/rigidez o reducir luz.</td></tr>
+                    <tr><td class="value">Deriva</td><td>Altura total, rigidez lateral, distribución de masa/rigidez.</td><td>Pórticos, muros, sistema dual.</td><td>Incorporar muros/núcleo o aumentar rigidez.</td></tr>
+                    <tr><td class="value">Sismo / viento</td><td>Zona sísmica, exposición al viento, regularidad, peso.</td><td>Sistema lateral completo.</td><td>Elegir pórtico, muros o sistema dual.</td></tr>
+                    <tr><td class="value">Punzonamiento</td><td>Cargas concentradas, columnas, espesor de losa.</td><td>Losa plana y capiteles.</td><td>Engrosar losa, usar capiteles o vigas.</td></tr>
+                    <tr><td class="value">Pandeo / esbeltez</td><td>Longitud libre, arriostramiento, sección.</td><td>Columnas y elementos metálicos comprimidos.</td><td>Aumentar sección o mejorar arriostramiento.</td></tr>
+                    <tr><td class="value">Vibración</td><td>Frecuencia natural, uso, masa, rigidez.</td><td>Entrepisos livianos, pasarelas, grandes luces.</td><td>Aumentar rigidez/masa o cambiar sistema.</td></tr>
+                    <tr><td class="value">Suelo / asentamientos</td><td>Capacidad portante, nivel freático, deformabilidad.</td><td>Fundaciones y esquema global.</td><td>Ajustar tipo de cimentación y reparto de cargas.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="box senior"><strong>Lectura rápida:</strong> si manda la luz → revisar canto y sistema · si manda la flecha → aumentar rigidez · si manda la deriva → reforzar el sistema lateral · si manda el suelo → revisar la fundación.</div>
+            </div>
+          `,
+          losas:`
+            <div class="section">
+              <div class="label">> losas</div>
+              <h2>Losas: tipo, criterio y calculadora</h2>
+              <p>Como primera lectura: si la luz larga es aproximadamente el doble (o más) de la luz corta, la losa tiende a trabajar en una dirección. Si el paño es más cuadrado, reparte carga en dos direcciones. Pero el tipo final también depende de cargas, instalaciones, altura disponible y constructibilidad.</p>
+              ${diagrams.slabs}
+
+              <h3>Tipos de losa y cuándo usar cada una</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Tipo</th><th>Cuándo conviene</th><th>Predimensión inicial</th><th>Control frecuente</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Maciza 1 dirección</td><td>Paños alargados (L≥4.0 m), apoyos en dos bordes o vigas paralelas.</td><td>h ≥ L / 20</td><td>Flecha, fisuración, momento positivo.</td></tr>
+                    <tr><td class="value">Maciza 2 direcciones</td><td>Paños con relación largo/corto &lt; 2 (L≤6.0 m), apoyos en 4 lados.</td><td>h ≥ L / 25</td><td>Momentos en ambas direcciones y continuidad.</td></tr>
+                    <tr><td class="value">Aligerada (vigueta y bovedilla)</td><td>Luces medias, necesidad de bajar peso propio, montaje rápido.</td><td>h ≥ L/25 y ≥ 20 cm</td><td>Separación de viguetas, capa de compresión, vibración.</td></tr>
+                    <tr><td class="value">Nervada / casetonada</td><td>Luces medias-grandes con menor peso propio que la maciza.</td><td>h ≥ L/30 y ≥ 30 cm</td><td>Separación de nervios, capa de compresión, fuego.</td></tr>
+                    <tr><td class="value">Losa plana</td><td>Plantas libres, menor altura de piso, estacionamientos u oficinas.</td><td>Mayor espesor; orden de L/28 a L/32.</td><td>Punzonamiento, flecha y transferencia en columnas.</td></tr>
+                    <tr><td class="value">Colaborante (steel deck)</td><td>Estructuras metálicas, montaje rápido, entrepisos livianos.</td><td>Según chapa, conectores y fabricante.</td><td>Vibración, fuego, etapa constructiva y conectores.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="calc-box">
+                <h3>Calculadora de espesor preliminar de losa</h3>
+                <p class="sub">Aplica las reglas empíricas L/20, L/25, L/30 según tipo. No reemplaza la verificación de flecha y punzonamiento.</p>
+                <div class="calc-grid cols4">
+                  <div><label>Luz corta Lx (m)</label><input id="lxLosa" type="number" value="4.5" step="0.1"></div>
+                  <div><label>Luz larga Ly (m)</label><input id="lyLosa" type="number" value="6.0" step="0.1"></div>
+                  <div><label>Tipo de losa</label><select id="tipoLosa">
+                    <option value="maciza1">Maciza 1 dirección</option>
+                    <option value="maciza2" selected>Maciza 2 direcciones</option>
+                    <option value="aligerada">Aligerada (vigueta/bovedilla)</option>
+                    <option value="nervada">Nervada / casetonada</option>
+                    <option value="plana">Losa plana</option>
+                  </select></div>
+                  <div><label>Redondeo práctico (cm)</label><select id="redondeoLosa"><option value="1">1 cm</option><option value="5" selected>5 cm</option></select></div>
+                </div>
+                <button class="btn gold" type="button" onclick="calcularLosa()" style="margin-top:14px;">Calcular espesor</button>
+                <div id="resultadoLosa" class="calc-result">Cargá luces y presioná calcular.</div>
+              </div>
+
+              <div class="box senior"><strong>Criterio senior:</strong> no te quedes solo con la relación de luces. Revisá continuidad, apoyos reales, rigidez de vigas, huecos, cargas lineales de muros, instalaciones, flecha y proceso constructivo.</div>
+
+              <h3>Detalles y alertas de losa</h3>
               <div class="grid">
                 <div class="card"><h3>Huecos</h3><p>Huecos cerca de columnas o apoyos cambian la ruta de carga y pueden exigir refuerzo perimetral.</p></div>
                 <div class="card"><h3>Muros sobre losa</h3><p>Los tabiques pesados pueden generar cargas lineales que no estaban en el cálculo inicial.</p></div>
                 <div class="card"><h3>Punzonamiento</h3><p>En losas planas y zapatas, el corte alrededor de columnas puede gobernar más que la flexión.</p></div>
               </div>
+            </div>
+          `,
+          vigas:`
+            <div class="section">
+              <div class="label">> vigas</div>
+              <h2>Vigas: tipo, criterio y calculadora</h2>
+              <p>La viga recibe reacciones de losas y cargas lineales, y las entrega a columnas o muros. El predimensionamiento parte de relaciones luz/canto; la sección final depende de corte, torsión y compatibilidad con la arquitectura.</p>
+
+              <h3>Tipos de viga y cuándo usar cada una</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Tipo</th><th>Cuándo conviene</th><th>Predimensión inicial</th><th>Nota</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Rectangular (principal)</td><td>Viga sobre línea de columnas; la más común en vivienda y oficinas.</td><td>h = L/10 a L/12 · b = (0.3 a 0.5)·h</td><td>Punto de partida estándar.</td></tr>
+                    <tr><td class="value">Rectangular (secundaria)</td><td>Apoya sobre vigas principales; luces menores.</td><td>h = L/12 a L/15 · b = (0.3 a 0.5)·h</td><td>Suele tener menor canto que la principal.</td></tr>
+                    <tr><td class="value">Viga de borde</td><td>Perimetral; recibe fachada, antepecho o muro.</td><td>h = L/10 a L/12 · b ≥ 25 cm</td><td>Revisar torsión y cargas de fachada.</td></tr>
+                    <tr><td class="value">Viga T (con losa colaborante)</td><td>Losa maciza vaciada monolíticamente con la viga.</td><td>Ala efectiva según norma; alma similar a rectangular.</td><td>Mayor rigidez y capacidad a momento positivo.</td></tr>
+                    <tr><td class="value">Viga banda / plana</td><td>Poca altura libre, cielorrasos planos exigidos por arquitectura.</td><td>h reducido, b ampliado (viga "ancha y baja").</td><td>Revisar punzonamiento en el nudo y deflexión.</td></tr>
+                    <tr><td class="value">Viga metálica (perfil I/H)</td><td>Luces medias-grandes, montaje rápido, refuerzo en remodelaciones.</td><td>h ≈ L/15 a L/20 (orientativo, perfil comercial).</td><td>Controlar pandeo lateral torsional y conexiones.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="calc-box">
+                <h3>Calculadora de predimensión de viga</h3>
+                <p class="sub">Relación luz/canto típica para hormigón armado.</p>
+                <div class="calc-grid cols4">
+                  <div><label>Luz L (m)</label><input id="lViga" type="number" value="6" min="0.5" step="0.1"></div>
+                  <div><label>Tipo de viga</label><select id="tipoViga">
+                    <option value="principal" selected>Principal</option>
+                    <option value="secundaria">Secundaria</option>
+                    <option value="borde">Borde</option>
+                  </select></div>
+                  <div><label>b/h objetivo</label><select id="relViga"><option value="0.3">0.30 · viga esbelta</option><option value="0.4" selected>0.40 · estándar</option><option value="0.5">0.50 · viga ancha</option></select></div>
+                  <div><label>Redondeo práctico (cm)</label><select id="redondeoViga"><option value="1">1 cm</option><option value="5" selected>5 cm</option></select></div>
+                </div>
+                <button class="btn gold" type="button" onclick="calcularViga()" style="margin-top:14px;">Calcular sección</button>
+                <div id="resultadoViga" class="calc-result">Cargá la luz y presioná calcular.</div>
+              </div>
+
+              <div class="box warn"><strong>Lo que no calcula esta herramienta:</strong> momento, corte, torsión, deflexión real, cuantía de refuerzo ni anclajes. Esos valores salen del análisis estructural y del diseño por resistencia (Título C / CIRSOC 201).</div>
+            </div>
+          `,
+
+          columnas:`
+            <div class="section">
+              <div class="label">> columnas</div>
+              <h2>Columnas: tipo, criterio y calculadora</h2>
+              <p>La columna baja cargas verticales y momentos hacia la fundación. El predimensionamiento empírico parte de la altura y el número de niveles; para cargas significativas conviene además una estimación rápida por carga axial.</p>
+
+              <h3>Tipos de columna (sección) y cuándo usar cada una</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Tipo</th><th>Cuándo conviene</th><th>Ventaja</th><th>Atención</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Cuadrada</td><td>Pórticos interiores con momento similar en ambas direcciones.</td><td>Misma rigidez en X e Y; formaleta simple.</td><td>Puede ser menos eficiente si hay un eje claramente dominante.</td></tr>
+                    <tr><td class="value">Rectangular</td><td>Pórticos perimetrales o con dirección de momento dominante.</td><td>Más eficiente orientando el lado mayor a la flexión principal.</td><td>Verificar la dirección débil igual.</td></tr>
+                    <tr><td class="value">Circular</td><td>Estacionamientos, fachadas vistas, alta ductilidad por confinamiento.</td><td>Buen confinamiento con estribos/zunchos; estética.</td><td>Formaleta especial; conexión con vigas rectangulares.</td></tr>
+                    <tr><td class="value">En L / en T</td><td>Esquinas o encuentro de muros y pórticos.</td><td>Se adapta a la geometría arquitectónica del borde.</td><td>Centro de rigidez excéntrico: revisar torsión.</td></tr>
+                    <tr><td class="value">Metálica (HEB/HEA/tubular)</td><td>Naves industriales, edificios de montaje rápido, refuerzos.</td><td>Alta relación resistencia/peso; rapidez de montaje.</td><td>Pandeo, placa base y anclajes a fundación.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h3>Predimensión empírica por niveles</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Altura del edificio</th><th>Relación lado/altura libre</th><th>Lado mínimo práctico</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">≤ 3 niveles</td><td>lado ≥ H/20</td><td>25 cm</td></tr>
+                    <tr><td class="value">4 a 8 niveles</td><td>lado ≥ H/25</td><td>30 cm</td></tr>
+                    <tr><td class="value">&gt; 8 niveles</td><td>lado ≥ H/30</td><td>35 cm</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="calc-box">
+                <h3>1 · Predimensión rápida por altura/niveles</h3>
+                <div class="calc-grid cols2">
+                  <div><label>Altura libre de piso H (m)</label><input id="hColEntrepiso" type="number" value="2.8" step="0.05"></div>
+                  <div><label>Niveles totales del edificio</label><input id="nivelesCol" type="number" value="5" min="1" step="1"></div>
+                </div>
+                <button class="btn gold" type="button" onclick="calcularColumnaNiveles()" style="margin-top:14px;">Calcular lado mínimo</button>
+                <div id="resultadoColumnaNiveles" class="calc-result">Cargá los datos y presioná calcular.</div>
+              </div>
+
+              <div class="calc-box" style="margin-top:18px;border-color:rgba(56,189,248,.4);">
+                <h3>2 · Estimación rápida por carga axial (Ag ≈ Pu / 0.45·f'c)</h3>
+                <p class="sub">Regla de prediseño habitual para columnas con carga predominantemente axial. No reemplaza la verificación de interacción P-M-M.</p>
+                <div class="calc-grid cols4">
+                  <div><label>Área tributaria (m²)</label><input id="areaTribCol" type="number" value="20" step="0.5"></div>
+                  <div><label>Niveles que carga</label><input id="nivelesCargaCol" type="number" value="5" min="1" step="1"></div>
+                  <div><label>CM (kN/m²)</label><input id="cmCol" type="number" value="5" step="0.5"></div>
+                  <div><label>CV (kN/m²)</label><input id="cvCol" type="number" value="2.5" step="0.5"></div>
+                  <div><label>f'c (MPa)</label><input id="fcCol" type="number" value="25" step="1"></div>
+                  <div><label>Forma de columna</label><select id="formaCol"><option value="cuadrada" selected>Cuadrada</option><option value="circular">Circular</option></select></div>
+                </div>
+                <button class="btn" type="button" onclick="calcularColumnaCarga()" style="margin-top:14px;">Estimar sección por carga</button>
+                <div id="resultadoColumnaCarga" class="calc-result">Cargá los datos y presioná estimar.</div>
+              </div>
+
+              <div class="box senior"><strong>Criterio senior:</strong> esbeltez, confinamiento (estribos/zunchos), continuidad de barras entre niveles y compatibilidad con vigas mandan tanto como la sección bruta.</div>
+            </div>
+          `,
+          muros:`
+            <div class="section">
+              <div class="label">> muros</div>
+              <h2>Muros: tipo, criterio y calculadora</h2>
+              <p>El muro estructural (de corte o portante) aporta rigidez lateral y/o carga vertical. No todo muro es estructural: distinguir el rol de cada uno evita confiar en elementos que no fueron diseñados para resistir.</p>
+
+              <h3>Tipos de muro y cuándo usar cada uno</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Tipo</th><th>Cuándo conviene</th><th>Rol estructural</th><th>Atención</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Muro de corte / pantalla (hormigón)</td><td>Edificios medianos-altos, núcleos de ascensor/escalera, zonas sísmicas.</td><td>Sistema lateral principal.</td><td>Ubicación simétrica, continuidad vertical, aberturas.</td></tr>
+                    <tr><td class="value">Muro portante de mampostería confinada</td><td>Vivienda de baja altura (1 a 2-3 pisos), economía y rapidez.</td><td>Carga vertical + parte de la carga lateral.</td><td>Confinamiento perimetral, densidad de muros por dirección.</td></tr>
+                    <tr><td class="value">Muro de contención</td><td>Sótanos, taludes, desniveles, muros perimetrales bajo nivel de terreno.</td><td>Resiste empuje de tierras y agua.</td><td>Drenaje, impermeabilización, estabilidad al volcamiento/deslizamiento.</td></tr>
+                    <tr><td class="value">Tabique / muro divisorio no estructural</td><td>Solo cerramiento o división de espacios.</td><td>Ninguno (no debería tomar carga).</td><td>Vincular con holgura o junta para no generar carga accidental sobre la estructura.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="calc-box">
+                <h3>Calculadora de espesor mínimo de muro de corte</h3>
+                <div class="calc-grid cols2">
+                  <div><label>Altura libre de piso H (m)</label><input id="hMuro" type="number" value="2.8" step="0.05"></div>
+                  <div><label>Longitud del muro en planta (m, opcional)</label><input id="lMuroPlanta" type="number" value="3" step="0.1"></div>
+                </div>
+                <button class="btn gold" type="button" onclick="calcularMuro()" style="margin-top:14px;">Calcular espesor</button>
+                <div id="resultadoMuro" class="calc-result">Cargá la altura y presioná calcular.</div>
+              </div>
+
+              <div class="box senior"><strong>Regla práctica:</strong> espesor t ≥ H/25 y t ≥ 15 cm · longitud mínima l ≥ 4t · relación H/t ≤ 30 a 35. Revisar siempre torsión accidental, excentricidades y aberturas grandes.</div>
+            </div>
+          `,
+
+          zapatas:`
+            <div class="section">
+              <div class="label">> fundaciones</div>
+              <h2>Zapatas y fundaciones: tipo, criterio y calculadora</h2>
+              <p>La fundación une la superestructura con el suelo. La elección depende de la carga, la capacidad portante, los asentamientos admisibles, el nivel freático, medianeras y el costo de excavación.</p>
+              ${diagrams.zapata}
+
+              <h3>Tipos de cimentación y cuándo usar cada una</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Tipo</th><th>Cuándo conviene</th><th>Predimensión inicial</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Zapata aislada</td><td>Columnas separadas, cargas moderadas, buen suelo superficial.</td><td>A ≥ P/qadm · h ≥ (0.25 a 0.35)·B</td></tr>
+                    <tr><td class="value">Zapata combinada</td><td>Columnas muy próximas o sobre medianera (no entra zapata aislada simétrica).</td><td>Repartir presión uniforme entre ambas columnas.</td></tr>
+                    <tr><td class="value">Zapata corrida</td><td>Muros portantes o línea de columnas cercanas.</td><td>B ≥ 0.6 a 0.8 · espesor del muro · h ≥ (0.25 a 0.35)·B</td></tr>
+                    <tr><td class="value">Losa / platea de cimentación</td><td>Suelos blandos, cargas distribuidas, necesidad de controlar asentamientos diferenciales.</td><td>h ≥ (0.20 a 0.30) · menor dimensión</td></tr>
+                    <tr><td class="value">Pilotes / pozos profundos</td><td>Mal suelo superficial, cargas altas o estrato resistente profundo.</td><td>Según capacidad por fuste + punta (estudio geotécnico).</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="calc-box">
+                <h3>1 · Zapata aislada</h3>
+                <div class="calc-grid cols4">
+                  <div><label>Carga de servicio P (kN)</label><input id="pZapata" type="number" value="800" step="10"></div>
+                  <div><label>q admisible del suelo (kPa)</label><input id="qZapata" type="number" value="150" step="10"></div>
+                  <div><label>Lado de columna/pedestal (cm, opcional)</label><input id="colZapata" type="number" value="35" step="1"></div>
+                  <div><label>Redondeo práctico (cm)</label><select id="redondeoZapata"><option value="5">5 cm</option><option value="10" selected>10 cm</option></select></div>
+                </div>
+                <button class="btn gold" type="button" onclick="calcularZapataAislada()" style="margin-top:14px;">Calcular zapata aislada</button>
+                <div id="resultadoZapataAislada" class="calc-result">Cargá los datos y presioná calcular.</div>
+              </div>
+
+              <div class="calc-box" style="margin-top:18px;border-color:rgba(56,189,248,.4);">
+                <h3>2 · Zapata corrida</h3>
+                <div class="calc-grid cols4">
+                  <div><label>Carga lineal de servicio w (kN/m)</label><input id="wZapataCorrida" type="number" value="120" step="5"></div>
+                  <div><label>q admisible del suelo (kPa)</label><input id="qZapataCorrida" type="number" value="150" step="10"></div>
+                  <div><label>Espesor del muro (cm, opcional)</label><input id="muroZapataCorrida" type="number" value="20" step="1"></div>
+                  <div><label>Redondeo práctico (cm)</label><select id="redondeoZapataCorrida"><option value="5" selected>5 cm</option><option value="10">10 cm</option></select></div>
+                </div>
+                <button class="btn" type="button" onclick="calcularZapataCorrida()" style="margin-top:14px;">Calcular zapata corrida</button>
+                <div id="resultadoZapataCorrida" class="calc-result">Cargá los datos y presioná calcular.</div>
+              </div>
+
+              <h3>Cómo leer un informe geotécnico</h3>
+              <ul>
+                <li>Perfil estratigráfico y profundidad de reconocimiento.</li>
+                <li>Parámetros: peso unitario, cohesión, fricción, SPT/CPT, módulo, compresibilidad.</li>
+                <li>Nivel freático y variación esperada.</li>
+                <li>Recomendaciones de cimentación/fundación, qadm propuesto y limitaciones.</li>
+                <li>Riesgos: expansividad, licuación, rellenos, colapsabilidad, agresividad química.</li>
+              </ul>
+
+              <div class="grid">
+                <div class="card"><h3>Medianeras</h3><p>Fundaciones excéntricas generan momentos y tensiones no uniformes; suele resolverse con zapata combinada o viga de equilibrio.</p></div>
+                <div class="card"><h3>Rellenos</h3><p>No asumir capacidad sin control de compactación y procedencia del relleno.</p></div>
+                <div class="card"><h3>Agua</h3><p>El nivel freático puede cambiar por estación o por obra vecina; afecta excavación y empuje.</p></div>
+              </div>
+            </div>
+          `
+        }
+      },
+
+      modelado:{
+        label:"Modelado",
+        subtitle:"Software con criterio",
+        heroTitle:"Modelado estructural: el software no piensa por vos",
+        heroText:"El modelo es una representación. Debe tener lógica física: unidades, geometría, apoyos, cargas, masas, rigidez, diafragmas, combinaciones y revisión de resultados.",
+        menu:[
+          ["check","Checklist del modelo"],
+          ["tipos","Tipos de modelo"],
+          ["apoyos","Apoyos y diafragmas"],
+          ["rigidez","Rigidez y masas"],
+          ["errores_modelo","Errores comunes"]
+        ],
+        sections:{
+          check:`
+            <div class="section">
+              <div class="label">> validar antes de diseñar</div>
+              <h2>Checklist visual del modelo</h2>
+              ${diagrams.model}
+              <div class="grid">
+                <div class="card"><h3>Geometría</h3><p>Niveles, ejes, longitudes, offsets, nudos duplicados y continuidad.</p></div>
+                <div class="card"><h3>Cargas</h3><p>Peso propio, sobrecargas, tabiques, viento, sismo y combinaciones.</p></div>
+                <div class="card"><h3>Resultados</h3><p>Reacciones, deformada, modos, derivas y equilibrio global.</p></div>
+              </div>
+              <h3>Pasos del modelado, en orden</h3>
+              <div class="flow">
+                <div class="flow-step"><div class="num">1</div><div><strong>Objetivo y alcance:</strong> qué se quiere evaluar (resistencia, servicio, sismo) y nivel de detalle requerido.</div></div>
+                <div class="flow-step"><div class="num">2</div><div><strong>Geometría:</strong> ejes, niveles, cotas y dimensiones de elementos (secciones del predimensionamiento).</div></div>
+                <div class="flow-step"><div class="num">3</div><div><strong>Materiales y rigideces:</strong> f'c, E, G, peso específico; usar rigideces efectivas (0.30–0.70·Ig en hormigón fisurado).</div></div>
+                <div class="flow-step"><div class="num">4</div><div><strong>Apoyos y diafragmas:</strong> condiciones de borde reales y tipo de diafragma por nivel.</div></div>
+                <div class="flow-step"><div class="num">5</div><div><strong>Cargas y combinaciones:</strong> permanentes, variables, sismo/viento según norma vigente.</div></div>
+                <div class="flow-step"><div class="num">6</div><div><strong>Verificar y validar:</strong> masas participativas ≥90%, periodos razonables, comparar con cálculo manual simple.</div></div>
+              </div>
+            </div>
+          `,
+          tipos:`
+            <div class="section">
+              <div class="label">> según el objetivo del análisis</div>
+              <h2>Tipos de modelo estructural</h2>
+              <p>La regla general: usar el modelo más simple que represente adecuadamente el comportamiento real para el objetivo del análisis. Sobre-modelar aumenta tiempo y complejidad sin sumar precisión útil.</p>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Modelo</th><th>Descripción</th><th>Usos típicos</th><th>Ventaja</th><th>Limitación</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">2D (pórtico plano)</td><td>Elementos tipo barra en un solo plano.</td><td>Edificios regulares en una dirección, pórticos, vigas continuas.</td><td>Rápido, simple, baja demanda computacional.</td><td>No captura torsión 3D ni efectos fuera del plano.</td></tr>
+                    <tr><td class="value">3D Frame (barras)</td><td>Elementos tipo barra en 3D (vigas, columnas, diagonales).</td><td>Análisis global de edificios de concreto o acero.</td><td>Representa comportamiento global, torsión y 3 direcciones.</td><td>No considera diafragmas flexibles ni detalle local de losas/muros.</td></tr>
+                    <tr><td class="value">3D Shell / placa</td><td>Elementos tipo lámina (losas, muros, diafragmas).</td><td>Losas, muros de corte, cimentaciones superficiales, cascarones.</td><td>Representa flexión y corte en superficies con precisión.</td><td>Mayor tiempo de modelado; requiere buen mallado.</td></tr>
+                    <tr><td class="value">3D Sólido</td><td>Elementos volumétricos.</td><td>Cimentaciones profundas, zonas de concentración de esfuerzos, análisis local.</td><td>Máximo detalle y precisión local.</td><td>Alto costo computacional; no necesario para análisis global.</td></tr>
+                    <tr><td class="value">Mixto</td><td>Combina barras, placas y sólidos según necesidad.</td><td>Edificios con muros + pórticos, estructuras complejas.</td><td>Balance entre precisión y eficiencia.</td><td>Requiere más criterio y experiencia.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="box senior"><strong>Cuándo usar cada uno:</strong> edificios bajos/regulares ≤3 niveles → 2D · edificios regulares en altura → 3D frame con diafragma rígido · edificios con muros, losas estructurales o geometría compleja → 3D shell o mixto · verificación rápida de cargas gravitacionales → 2D o 3D simplificado.</div>
+            </div>
+          `,
+          apoyos:`
+            <div class="section">
+              <div class="label">> condiciones de borde y respuesta lateral</div>
+              <h2>Apoyos, diafragmas y torsión</h2>
+              ${diagrams.seismic}
+              <p>Si el centro de masa (CM) y el centro de rigidez (CR) están separados, aparece torsión. En plantas irregulares, el modelo debe reflejar esa excentricidad.</p>
+              <div class="grid">
+                <div class="card"><h3>Apoyo fijo (empotrado)</h3><p>0 traslaciones, 0 rotaciones. Usar solo si la base realmente restringe el giro.</p></div>
+                <div class="card"><h3>Apoyo articulado</h3><p>Traslaciones restringidas, rotaciones libres. Típico en bases simples o conexiones rotuladas.</p></div>
+                <div class="card"><h3>Apoyo elástico (resorte)</h3><p>Representa interacción suelo-estructura mediante un coeficiente de balasto (k).</p></div>
+              </div>
+              <h3>Diafragmas</h3>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Tipo</th><th>Descripción</th><th>Uso recomendado</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Rígido</td><td>No permite deformaciones en su plano; todos los nodos del nivel se mueven solidariamente.</td><td>Edificios regulares con losas macizas y buen amarre.</td></tr>
+                    <tr><td class="value">Semirrígido</td><td>Permite pequeñas deformaciones en su plano.</td><td>Losas aligeradas, estructuras metálicas, madera.</td></tr>
+                    <tr><td class="value">Flexible</td><td>Sin continuidad real en su plano.</td><td>Edificios separados, naves con techos livianos, expansiones.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="box warn"><strong>Errores típicos:</strong> apoyos demasiado rígidos que ocultan deformaciones reales, diafragmas mal definidos y excentricidades ignoradas.</div>
+            </div>
+          `,
+          rigidez:`
+            <div class="section">
+              <div class="label">> qué mueve el resultado dinámico</div>
+              <h2>Rigidez de elementos y masas del modelo</h2>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Elemento</th><th>Rigidez principal</th><th>Qué controla</th><th>Parámetros clave</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Vigas</td><td>Flexión y corte.</td><td>Flechas y rotaciones.</td><td>E, I, A, G, factor de corte (k).</td></tr>
+                    <tr><td class="value">Columnas</td><td>Axial y flexión.</td><td>Derivas y estabilidad.</td><td>E, I, longitud efectiva (K·L).</td></tr>
+                    <tr><td class="value">Muros</td><td>Corte y flexión.</td><td>Derivas laterales.</td><td>E, G, espesor, longitud, rigidez a corte (GA/h).</td></tr>
+                    <tr><td class="value">Losas (shell)</td><td>Diafragma en su plano y flexión.</td><td>Distribución de cargas y rigidez lateral.</td><td>Espesor, E, rigidez en su plano (EAt/L).</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Masas: cómo definirlas</h3>
+              <div class="grid">
+                <div class="card"><h3>Masa concentrada (lumped)</h3><p>Se asigna en el punto maestro del diafragma. Uso típico: edificios regulares con diafragma rígido.</p></div>
+                <div class="card"><h3>Masa distribuida</h3><p>Se asigna como carga distribuida que el software convierte a masa. Uso típico: modelos detallados con elementos shell.</p></div>
+              </div>
+              <div class="box senior"><strong>Regla general:</strong> ubicar la masa en el centro de rigidez de cada nivel. Si no coincide con el centro de masa real, se genera torsión accidental que hay que verificar (norma: masa participativa ≥ 90% del total en cada dirección).</div>
+            </div>
+          `,
+          errores_modelo:`
+            <div class="section">
+              <div class="label">> errores de software</div>
+              <h2>Errores comunes de modelado</h2>
+              <div class="grid">
+                <div class="card"><h3>Unidades</h3><p>El clásico asesino silencioso: kN, tonf, kgf, m, cm, mm.</p></div>
+                <div class="card"><h3>Apoyos irreales</h3><p>Empotramientos mágicos o articulaciones donde no existen.</p></div>
+                <div class="card"><h3>Masa mal definida</h3><p>Sin masa correcta, el análisis dinámico no representa la estructura.</p></div>
+                <div class="card"><h3>Restricciones incorrectas</h3><p>Grados de libertad liberados o restringidos sin justificación física.</p></div>
+                <div class="card"><h3>Diafragmas mal definidos</h3><p>Asumir diafragma rígido donde la losa es aligerada o tiene aberturas grandes.</p></div>
+                <div class="card"><h3>Secciones no realistas</h3><p>Usar secciones del predimensionamiento sin ajustar tras el análisis.</p></div>
+              </div>
+            </div>
+          `
+        }
+      },
+
+      calculo:{
+        label:"Cálculo y verificación",
+        subtitle:"Análisis, diseño y control",
+        heroTitle:"Cálculo/análisis y diseño: del modelo a la memoria de cálculo",
+        heroText:"El análisis obtiene esfuerzos, reacciones, deformaciones, derivas y estabilidad global. El diseño arma y verifica cada elemento: resistencia, servicio, detalle, cuantías y seguridad.",
+        menu:[
+          ["proceso","Proceso de análisis"],
+          ["tipos_analisis","Tipos de análisis"],
+          ["verificaciones","Verificaciones y combinaciones"],
+          ["diseno_elemento","Diseño por elemento"]
+        ],
+        sections:{
+          proceso:`
+            <div class="section">
+              <div class="label">> del modelo al resultado</div>
+              <h2>Proceso de cálculo / análisis — paso a paso</h2>
+              <div class="flow">
+                <div class="flow-step"><div class="num">1</div><div><strong>Definir casos y combinaciones de carga:</strong> permanentes, variables, sísmicas según norma vigente.</div></div>
+                <div class="flow-step"><div class="num">2</div><div><strong>Ejecutar análisis:</strong> lineal elástico, modal espectral o P-Δ según corresponda; verificar convergencia.</div></div>
+                <div class="flow-step"><div class="num">3</div><div><strong>Obtener resultados:</strong> esfuerzos, reacciones, desplazamientos y derivas de piso.</div></div>
+                <div class="flow-step"><div class="num">4</div><div><strong>Revisar y validar:</strong> magnitudes atípicas, equilibrio global, periodos y modos, comparación con cálculo manual.</div></div>
+                <div class="flow-step"><div class="num">5</div><div><strong>Interpretar y documentar:</strong> diagramas, tablas, resumen de reacciones, derivas y periodos.</div></div>
+                <div class="flow-step"><div class="num">6</div><div><strong>Usar resultados para diseño:</strong> dimensionamiento, verificación de servicio y de resistencia/estabilidad.</div></div>
+              </div>
+              <h3>¿Qué se obtiene del análisis?</h3>
+              <div class="grid">
+                <div class="card"><h3>Esfuerzos internos</h3><p>Axiales (N), cortantes (V), momentos (M) y torsores (T) en cada elemento.</p></div>
+                <div class="card"><h3>Reacciones</h3><p>Fuerzas y momentos en apoyos y vínculos; deben cerrar con las cargas aplicadas.</p></div>
+                <div class="card"><h3>Deformaciones</h3><p>Desplazamientos y giros en nodos de la estructura.</p></div>
+                <div class="card"><h3>Derivas</h3><p>Desplazamientos relativos entre niveles (drift) para control de servicio y daño.</p></div>
+                <div class="card"><h3>Estabilidad global</h3><p>Efectos P-Δ, pandeo y comportamiento dinámico cuando aplica.</p></div>
+              </div>
+            </div>
+          `,
+          tipos_analisis:`
+            <div class="section">
+              <div class="label">> según irregularidad y altura</div>
+              <h2>Tipos de análisis más usuales</h2>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Tipo</th><th>Cuándo se usa</th><th>Qué entrega</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Estático lineal</td><td>Cargas constantes en el tiempo; estructuras regulares de baja a mediana altura.</td><td>Esfuerzos, reacciones y deformaciones bajo carga aplicada.</td></tr>
+                    <tr><td class="value">Sísmico equivalente (fuerzas laterales)</td><td>Método estático simplificado; estructuras regulares.</td><td>Fuerzas laterales por nivel, cortante basal, derivas.</td></tr>
+                    <tr><td class="value">Modal espectral (dinámico)</td><td>Estructuras irregulares o de gran altura.</td><td>Respuesta por espectro de diseño, periodos, modos, masa participativa.</td></tr>
+                    <tr><td class="value">Tiempo-historia</td><td>Evaluación detallada de comportamiento dinámico.</td><td>Respuesta completa en el tiempo ante un registro sísmico.</td></tr>
+                    <tr><td class="value">No lineal (pushover)</td><td>Evaluación de capacidad y desempeño sísmico.</td><td>Curva de capacidad (cortante vs. desplazamiento).</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Verificaciones clave del análisis</h3>
+              <div class="grid">
+                <div class="card"><h3>Equilibrio global</h3><p>ΣFx = 0 · ΣFy = 0 · ΣM = 0.</p></div>
+                <div class="card"><h3>Derivas máximas</h3><p>Δᵢ/hᵢ ≤ Δ admisible según norma.</p></div>
+                <div class="card"><h3>Periodos y modos</h3><p>Revisar que sean razonables y que la masa efectiva acumulada sea ≥ 90%.</p></div>
+                <div class="card"><h3>Estabilidad P-Δ</h3><p>Verificar efectos de segundo orden cuando el índice de estabilidad lo exige.</p></div>
+              </div>
+              <div class="box info"><strong>Herramientas usuales:</strong> ETABS y SAP2000 (edificios y estructuras generales), SAFE (losas y cimentaciones), Robot Structural / STAAD.Pro (análisis y diseño general).</div>
+            </div>
+          `,
+          verificaciones:`
+            <div class="section">
+              <div class="label">> estados límite</div>
+              <h2>Verificaciones por estado límite y combinaciones de carga</h2>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Estado límite</th><th>Qué se verifica</th><th>Criterio de cumplimiento</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Resistencia (último)</td><td>Capacidad del elemento para resistir cargas últimas sin colapso. Momento, corte, axial, punzonamiento.</td><td>Demanda ≤ Resistencia · φRₙ</td></tr>
+                    <tr><td class="value">Servicio</td><td>Deformaciones, fisuración y vibraciones para funcionalidad y confort.</td><td>Flecha/deriva/ancho de fisura ≤ límite admisible</td></tr>
+                    <tr><td class="value">Detalle y construcción</td><td>Longitudes de desarrollo, anclajes, empalmes, confinamiento.</td><td>Cumplir disposiciones mínimas de detallado de la norma</td></tr>
+                    <tr><td class="value">Cuantías</td><td>Cantidad de refuerzo mínimo y máximo.</td><td>ρmín ≤ ρprovista ≤ ρmáx</td></tr>
+                    <tr><td class="value">Durabilidad</td><td>Recubrimientos, relación a/c, control de fisuración y exposición.</td><td>Cumplir requisitos según clase de exposición</td></tr>
+                    <tr><td class="value">Seguridad y estabilidad</td><td>Factores de reducción de resistencia (φ) y de carga (γ); estabilidad global P-Δ.</td><td>Cumplir combinaciones e índices de seguridad de la norma</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Combinaciones de carga típicas (ACI 318 / NSR-10 / CIRSOC 201)</h3>
+              <div class="grid">
+                <div class="card"><h3>Resistencia (últimas)</h3><p>1.4D · 1.2D + 1.6L · 1.2D + 1.0L + 1.0E · 0.9D ± 1.0E</p></div>
+                <div class="card"><h3>Servicio</h3><p>1.0D + 1.0L · D + 0.7E</p></div>
+                <div class="card"><h3>Convención</h3><p>D = carga muerta · L = carga viva · E = sismo · W = viento.</p></div>
+              </div>
+              <div class="box warn"><strong>Importante:</strong> verificar siempre la norma vigente del proyecto: los coeficientes y combinaciones exactas pueden variar entre ediciones (ej. NSR-10 vs. Decreto 1401/2023; CIRSOC 2ª vs. 3ª generación).</div>
+            </div>
+          `,
+          diseno_elemento:`
+            <div class="section">
+              <div class="label">> qué se verifica en cada elemento</div>
+              <h2>Diseño y verificación por elemento</h2>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Elemento</th><th>Verificaciones principales</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Losas</td><td>Momento y corte, flecha, ancho de fisuras, punzonamiento, cuantía mínima/máxima, detallado y anclajes.</td></tr>
+                    <tr><td class="value">Vigas</td><td>Momento y corte, deflexión, ancho de fisuras, cuantía de refuerzo, longitudes de desarrollo, confinamiento en apoyos.</td></tr>
+                    <tr><td class="value">Columnas</td><td>Axial + momento (interacción P-M), pandeo y esbeltez, cortante, cuantía longitudinal, confinamiento (estribos), empalmes y anclajes.</td></tr>
+                    <tr><td class="value">Muros</td><td>Flexión y cortante, desplazamientos (deriva), cuantía vertical y horizontal, confinamiento en bordes, detallado especial.</td></tr>
+                    <tr><td class="value">Zapatas / cimentaciones</td><td>Presión de contacto, punzonamiento, flexión en zapata, deslizamiento y vuelco, asentamientos.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <h3>Salidas del diseño</h3>
+              <div class="grid">
+                <div class="card"><h3>Memoria de cálculo</h3><p>Criterios, hipótesis, normas aplicadas y resultados por elemento.</p></div>
+                <div class="card"><h3>Planos de refuerzo y detalle</h3><p>Cuantías, longitudes de desarrollo, empalmes y especificaciones de materiales.</p></div>
+                <div class="card"><h3>Informe de cumplimiento normativo</h3><p>Resumen de verificaciones de resistencia, servicio y durabilidad.</p></div>
+              </div>
+              <div class="box senior"><strong>Regla de oro:</strong> diseñá para que la estructura no solo resista, sino que funcione, sea durable y segura. Siempre consultar y cumplir la norma vigente del país del proyecto.</div>
+            </div>
+          `
+        }
+      },
+
+      normativa:{
+        label:"Normativa CO/AR",
+        subtitle:"Colombia (NSR-10) / Argentina (CIRSOC)",
+        heroTitle:"Tabla normativa cruzada: Colombia (NSR-10) y Argentina (CIRSOC / INPRES-CIRSOC)",
+        heroText:"Para cada tema o elemento estructural, qué título de la NSR-10 (Colombia) y qué reglamento CIRSOC (Argentina) aplica. Es un mapa de orientación rápida para saber dónde buscar; siempre se debe consultar el documento oficial vigente y el alcance legal exacto del proyecto.",
+        menu:[
+          ["master","Tabla maestra"],
+          ["porElemento","Fichas por elemento"],
+          ["actualizacion","Actualización 2025–2026"]
+        ],
+        sections:{
+          master:`
+            <div class="section">
+              <div class="label">> mapa normativo</div>
+              <h2>Tabla maestra Colombia ↔ Argentina</h2>
+              <div class="box warn"><strong>Importante:</strong> esta tabla es de orientación rápida, no reemplaza la consulta del texto oficial vigente. Colombia: NSR-10 + modificaciones (Decreto 1401 de 2023). Argentina: Reglamentos CIRSOC de 3ª generación, vigentes por Resolución 11/2026 (CIRSOC 101-2025, 102-2025, 200-2024, 201-2025) + CIRSOC 301-2018 (acero) + INPRES-CIRSOC 103 (sismo, por partes).</div>
+              <div class="box info"><strong>Tip:</strong> los títulos y reglamentos en <span style="text-decoration:underline;text-decoration-color:var(--blue);">celeste subrayado</span> son clickeables y abren el documento oficial en una pestaña nueva (IDRD para Colombia, INTI-CIRSOC/INPRES para Argentina).</div>
+
+              <div class="norm-filter" id="normFilter">
+                <button class="active" data-cat="all" onclick="filtrarNormativa('all',this)">Todos</button>
+                <button data-cat="cargas" onclick="filtrarNormativa('cargas',this)">Cargas / viento</button>
+                <button data-cat="sismo" onclick="filtrarNormativa('sismo',this)">Sismo</button>
+                <button data-cat="hormigon" onclick="filtrarNormativa('hormigon',this)">Hormigón / concreto</button>
+                <button data-cat="acero" onclick="filtrarNormativa('acero',this)">Acero</button>
+                <button data-cat="fundaciones" onclick="filtrarNormativa('fundaciones',this)">Fundaciones / geotecnia</button>
+                <button data-cat="mamposteria" onclick="filtrarNormativa('mamposteria',this)">Mampostería</button>
+                <button data-cat="otros" onclick="filtrarNormativa('otros',this)">Otros / madera</button>
+              </div>
+
+              <div class="table-wrap">
+                <table id="tablaNormativa">
+                  <thead><tr><th>Tema / elemento</th><th><span class="badge co">CO</span> NSR-10</th><th><span class="badge ar">AR</span> CIRSOC / INPRES-CIRSOC</th><th>Nota</th></tr></thead>
+                  <tbody>
+                    <tr data-cat="cargas"><td class="value">Cargas permanentes y variables</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/2titulo-b-nsr-100.pdf" target="_blank" rel="noopener">Título B</a></td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">CIRSOC 101-2025</a></td><td>Cargas muertas, vivas y combinaciones base.</td></tr>
+                    <tr data-cat="cargas"><td class="value">Acción del viento</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/2titulo-b-nsr-100.pdf" target="_blank" rel="noopener">Título B (Cap. B.6)</a></td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">CIRSOC 102-2025</a></td><td>Presiones de viento sobre construcciones.</td></tr>
+                    <tr data-cat="sismo"><td class="value">Requisitos generales y zonificación sísmica</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/titulo-a-nsr-100.pdf" target="_blank" rel="noopener">Título A</a></td><td><a class="nlink" href="https://www.inti.gob.ar/assets/uploads/files/cirsoc/06-reglamentos-2da-generacion/area100/06_Area100_INPRES-CIRSOC-103-Parte-1-Reglamento-2018.pdf" target="_blank" rel="noopener">INPRES-CIRSOC 103 · Parte I</a></td><td>Zonificación, espectro y clasificación de la edificación.</td></tr>
+                    <tr data-cat="sismo"><td class="value">Diseño sismorresistente en hormigón armado</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/titulo-a-nsr-100.pdf" target="_blank" rel="noopener">Título A</a> + <a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/3titulo-c-nsr-100.pdf" target="_blank" rel="noopener">Título C</a> (disposiciones especiales)</td><td><a class="nlink" href="https://www.inti.gob.ar/assets/uploads/files/cirsoc/06-reglamentos-2da-generacion/area100/06_Area100_06-Reglamento-IC-103-Parte-II-2021_APROBADO.pdf" target="_blank" rel="noopener">INPRES-CIRSOC 103 · Parte II</a></td><td>Ductilidad y detallado sismorresistente específico de hormigón.</td></tr>
+                    <tr data-cat="hormigon"><td class="value">Hormigón/concreto estructural — requisitos generales</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/3titulo-c-nsr-100.pdf" target="_blank" rel="noopener">Título C</a> (basado en ACI 318)</td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">CIRSOC 201-2025</a></td><td>Reorganizado por elemento (losas, vigas, columnas...) desde la ed. 2025.</td></tr>
+                    <tr data-cat="hormigon"><td class="value">Tecnología y materiales del hormigón</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/3titulo-c-nsr-100.pdf" target="_blank" rel="noopener">Título C</a> + NTC de materiales</td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">CIRSOC 200-2024</a></td><td>Dosificación, curado, control de calidad — complementa al 201.</td></tr>
+                    <tr data-cat="hormigon"><td class="value">Losas de hormigón</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/3titulo-c-nsr-100.pdf" target="_blank" rel="noopener">Título C</a> — sistemas de losa</td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">CIRSOC 201-2025</a> — capítulo de losas</td><td>Flexión, corte, punzonamiento y deflexiones.</td></tr>
+                    <tr data-cat="hormigon"><td class="value">Vigas de hormigón</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/3titulo-c-nsr-100.pdf" target="_blank" rel="noopener">Título C</a> — flexión y corte</td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">CIRSOC 201-2025</a> — capítulo de vigas</td><td>Flexión, corte, torsión y detallado.</td></tr>
+                    <tr data-cat="hormigon"><td class="value">Columnas de hormigón</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/3titulo-c-nsr-100.pdf" target="_blank" rel="noopener">Título C</a> — flexocompresión</td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">CIRSOC 201-2025</a> — capítulo de columnas</td><td>Interacción P-M, esbeltez y confinamiento.</td></tr>
+                    <tr data-cat="hormigon"><td class="value">Muros de hormigón</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/3titulo-c-nsr-100.pdf" target="_blank" rel="noopener">Título C</a> — muros</td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">CIRSOC 201-2025</a> — capítulo de muros</td><td>Corte, flexión y detallado de borde.</td></tr>
+                    <tr data-cat="fundaciones"><td class="value">Fundaciones de hormigón</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/3titulo-c-nsr-100.pdf" target="_blank" rel="noopener">Título C</a> (zapatas) + <a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/8titulo-h-nsr-100.pdf" target="_blank" rel="noopener">Título H</a></td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">CIRSOC 201-2025</a> — Cap. 13</td><td>AR: aún sin reglamento CIRSOC específico de fundaciones; se recomienda bibliografía complementaria (pilotes).</td></tr>
+                    <tr data-cat="fundaciones"><td class="value">Estudios geotécnicos</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/8titulo-h-nsr-100.pdf" target="_blank" rel="noopener">Título H</a></td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">Reglamento Argentino de Estudios Geotécnicos</a></td><td>Referenciado por INTI-CIRSOC como documento complementario.</td></tr>
+                    <tr data-cat="mamposteria"><td class="value">Mampostería estructural</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/4titulo-d-nsr-100.pdf" target="_blank" rel="noopener">Título D</a></td><td><a class="nlink" href="http://www.inti.gob.ar/assets/uploads/files/cirsoc/en%20tramite/reglamento103-parteIII.pdf" target="_blank" rel="noopener">INPRES-CIRSOC 103 · Parte III</a></td><td>Verificar vigencia puntual; en AR conviven criterios provinciales.</td></tr>
+                    <tr data-cat="otros"><td class="value">Viviendas de uno y dos pisos</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/5titulo-e-nsr-100.pdf" target="_blank" rel="noopener">Título E</a></td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">Sin reglamento nacional específico</a></td><td>AR: aplican CIRSOC 101/102/103 + reglamento del material usado.</td></tr>
+                    <tr data-cat="acero"><td class="value">Estructuras metálicas — requisitos generales</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/6titulo-f-nsr-100.pdf" target="_blank" rel="noopener">Título F</a></td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">CIRSOC 301-2018</a></td><td>Basado en AISC 360; vigente desde julio 2023.</td></tr>
+                    <tr data-cat="acero"><td class="value">Diseño sismorresistente en acero</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/titulo-a-nsr-100.pdf" target="_blank" rel="noopener">Título A</a> + <a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/6titulo-f-nsr-100.pdf" target="_blank" rel="noopener">Título F</a></td><td><a class="nlink" href="https://www.inti.gob.ar/assets/uploads/files/cirsoc/vigencia-2013/area100/area100a/Reglamentos103_4.pdf" target="_blank" rel="noopener">INPRES-CIRSOC 103 · Parte IV</a></td><td>Ductilidad y detallado sismorresistente en acero.</td></tr>
+                    <tr data-cat="otros"><td class="value">Madera y guadua</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/7titulo-g-nsr-100.pdf" target="_blank" rel="noopener">Título G</a></td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">Sin reglamento CIRSOC consolidado</a></td><td>AR: se referencian normas internacionales (Eurocódigo 5 / NDS).</td></tr>
+                    <tr data-cat="otros"><td class="value">Supervisión técnica</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/9titulo-i-nsr-100.pdf" target="_blank" rel="noopener">Título I</a></td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">Regulación de colegios/consejos profesionales</a></td><td>AR: no hay título CIRSOC equivalente; depende de cada provincia.</td></tr>
+                    <tr data-cat="otros"><td class="value">Protección contra incendio</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/10titulo-j-nsr-100.pdf" target="_blank" rel="noopener">Título J</a></td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">Normas IRAM + código de edificación local</a></td><td>Verificar normativa municipal específica del proyecto.</td></tr>
+                    <tr data-cat="otros"><td class="value">Requisitos complementarios (vidrio, fachadas)</td><td><a class="nlink" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/11titulo-k-nsr-100.pdf" target="_blank" rel="noopener">Título K</a></td><td><a class="nlink" href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank" rel="noopener">Código de edificación local</a></td><td>Depende fuertemente de la jurisdicción.</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          `,
+          porElemento:`
+            <div class="section">
+              <div class="label">> ficha rápida</div>
+              <h2>Fichas normativas por elemento</h2>
+              <p>Acceso directo entre el elemento estructural, la calculadora de predimensionamiento y la norma aplicable en cada país.</p>
+              <div class="grid">
+                <div class="card">
+                  <h3>Losas</h3>
+                  <p><span class="badge co">CO</span> NSR-10 Título C &nbsp; <span class="badge ar">AR</span> CIRSOC 201-2025</p>
+                  <div class="pill-row">
+                    <button class="btn" onclick="goTo('predim','losas')">Predimensionar</button>
+                    <a class="btn gold" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/3titulo-c-nsr-100.pdf" target="_blank" rel="noopener">Norma CO ↗</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <h3>Vigas</h3>
+                  <p><span class="badge co">CO</span> NSR-10 Título C &nbsp; <span class="badge ar">AR</span> CIRSOC 201-2025</p>
+                  <div class="pill-row">
+                    <button class="btn" onclick="goTo('predim','vigas')">Predimensionar</button>
+                    <a class="btn gold" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/3titulo-c-nsr-100.pdf" target="_blank" rel="noopener">Norma CO ↗</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <h3>Columnas</h3>
+                  <p><span class="badge co">CO</span> NSR-10 Título C &nbsp; <span class="badge ar">AR</span> CIRSOC 201-2025</p>
+                  <div class="pill-row">
+                    <button class="btn" onclick="goTo('predim','columnas')">Predimensionar</button>
+                    <a class="btn gold" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/3titulo-c-nsr-100.pdf" target="_blank" rel="noopener">Norma CO ↗</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <h3>Muros</h3>
+                  <p><span class="badge co">CO</span> NSR-10 Título C / A &nbsp; <span class="badge ar">AR</span> CIRSOC 201-2025 + INPRES-CIRSOC 103-II</p>
+                  <div class="pill-row">
+                    <button class="btn" onclick="goTo('predim','muros')">Predimensionar</button>
+                    <a class="btn gold" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/3titulo-c-nsr-100.pdf" target="_blank" rel="noopener">Norma CO ↗</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <h3>Zapatas / fundaciones</h3>
+                  <p><span class="badge co">CO</span> NSR-10 Título C / H &nbsp; <span class="badge ar">AR</span> CIRSOC 201-2025 Cap. 13</p>
+                  <div class="pill-row">
+                    <button class="btn" onclick="goTo('predim','zapatas')">Predimensionar</button>
+                    <a class="btn gold" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/8titulo-h-nsr-100.pdf" target="_blank" rel="noopener">Norma CO ↗</a>
+                  </div>
+                </div>
+                <div class="card">
+                  <h3>Acero estructural</h3>
+                  <p><span class="badge co">CO</span> NSR-10 Título F &nbsp; <span class="badge ar">AR</span> CIRSOC 301-2018</p>
+                  <div class="pill-row">
+                    <button class="btn" onclick="goTo('acero','conceptos')">Ver módulo</button>
+                    <a class="btn gold" href="https://www.idrd.gov.co/sites/default/files/documentos/Construcciones/6titulo-f-nsr-100.pdf" target="_blank" rel="noopener">Norma CO ↗</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `,
+          actualizacion:`
+            <div class="section">
+              <div class="label">> vigencia normativa</div>
+              <h2>Actualización normativa 2025–2026</h2>
+              <div class="box senior"><strong>Argentina — 3ª generación CIRSOC:</strong> desde enero de 2026 (Resolución 11/2026, Secretaría de Obras Públicas de la Nación) entraron en vigencia legal CIRSOC 101-2025 (cargas), 102-2025 (viento), 200-2024 (tecnología del hormigón) y 201-2025 (estructuras de hormigón). Se suman a CIRSOC 301-2018 (acero, vigente desde julio 2023). El CIRSOC 201-2025 reorganizó su contenido por elemento estructural (losas, vigas, columnas...) siguiendo el camino de las cargas gravitacionales.</div>
+              <div class="box senior"><strong>Colombia — NSR-10:</strong> reglamento vigente desde 2010, con modificaciones parciales incorporadas por el Decreto 1401 de 2023. Mantiene la estructura de Títulos A a K.</div>
+              <div class="box info"><strong>En preparación (Argentina):</strong> CIRSOC 203 (cáscaras y estructuras laminares) y CIRSOC 208 (evaluación, reparación y rehabilitación de estructuras existentes), ambos con publicación prevista para 2026.</div>
+              <div class="box warn"><strong>Recomendación profesional:</strong> antes de firmar una memoria de cálculo, confirmar la edición exacta vigente en la jurisdicción del proyecto (curaduría/secretaría de planeación en Colombia; comitente y autoridad fiscalizadora en Argentina) y dejar registrada la norma aplicada en la documentación.</div>
             </div>
           `
         }
@@ -1003,6 +1872,7 @@
         heroText:"El hormigón resiste compresión; el acero toma tracción y aporta ductilidad. El buen diseño vive en el detalle: recubrimientos, anclajes, empalmes, estribos, confinamiento y constructibilidad.",
         menu:[
           ["resistencias","Resistencias orientativas"],
+          ["valores","Valores de referencia"],
           ["elementos","Elementos típicos"],
           ["detalle","Detalle y armado"],
           ["obra","Control en obra"]
@@ -1021,7 +1891,48 @@
                   <tr><td class="value">35 MPa o más</td><td>Columnas cargadas, muros, edificios altos o elementos especiales.</td><td>No usar más resistencia para tapar mala geometría, mal detalle o mala concepción.</td></tr>
                 </tbody>
               </table>
-              <div class="box warn"><strong>Nota:</strong> estos valores son orientativos. El proyecto se verifica con norma, exposición ambiental, proveedor, control de calidad y memoria de cálculo.</div>
+              <div class="box warn"><strong>Nota:</strong> estos valores son orientativos. El proyecto se verifica con norma, exposición ambiental, proveedor, control de calidad y memoria de cálculo. Colombia: NSR-10 Título C. Argentina: CIRSOC 200-2024 + CIRSOC 201-2025.</div>
+            </div>
+          `,
+          valores:`
+            <div class="section">
+              <div class="label">> referencia rápida</div>
+              <h2>Valores típicos de materiales y servicio</h2>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Parámetro</th><th>Rango típico</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">f'c hormigón</td><td>21 – 35 MPa</td></tr>
+                    <tr><td class="value">E concreto (módulo de elasticidad)</td><td>21 – 28 GPa</td></tr>
+                    <tr><td class="value">fy acero de refuerzo (grado 420/60)</td><td>420 MPa</td></tr>
+                    <tr><td class="value">E acero de refuerzo</td><td>200 GPa</td></tr>
+                    <tr><td class="value">Peso específico del hormigón</td><td>22 – 25 kN/m³</td></tr>
+                    <tr><td class="value">Relación agua/cemento (a/c)</td><td>0.40 – 0.55</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Límite de servicio</th><th>Valor típico</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Deriva máxima de entrepiso</td><td>0.004 a 0.007 hᵢ (según norma)</td></tr>
+                    <tr><td class="value">Flecha en vigas</td><td>L/240 a L/360</td></tr>
+                    <tr><td class="value">Flecha en losas</td><td>L/240 a L/480</td></tr>
+                    <tr><td class="value">Ancho de fisura (ambiente normal)</td><td>≤ 0.3 mm</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead><tr><th>Recubrimiento mínimo</th><th>Ambiente normal</th><th>Ambiente agresivo</th></tr></thead>
+                  <tbody>
+                    <tr><td class="value">Losa</td><td>2.0 cm</td><td>3.5 cm</td></tr>
+                    <tr><td class="value">Viga / columna</td><td>2.5 cm</td><td>4.0 cm</td></tr>
+                    <tr><td class="value">Cimentación</td><td>5.0 cm</td><td>7.5 cm</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="box senior"><strong>Estos valores son referenciales:</strong> siempre verificar con la norma vigente y las condiciones específicas del proyecto (exposición, agresividad del suelo, vida útil de diseño).</div>
             </div>
           `,
           elementos:`
@@ -1085,6 +1996,7 @@
                 <div class="card"><h3>Estabilidad</h3><p>Pandeo global, local y lateral torsional.</p></div>
                 <div class="card"><h3>Conexiones</h3><p>Pernos, soldaduras, placas, rigidizadores y transferencia real de fuerzas.</p></div>
               </div>
+              <div class="box info"><strong>Norma base:</strong> Colombia — NSR-10 Título F. Argentina — CIRSOC 301-2018 (basado en AISC 360), vigente desde julio de 2023.</div>
             </div>
           `,
           pandeo:`
@@ -1117,131 +2029,6 @@
                 <div class="card"><h3>Izaje</h3><p>Secuencia de montaje, estabilidad temporal y puntos de izaje.</p></div>
                 <div class="card"><h3>Aplome</h3><p>Control de verticalidad y alineación antes del apriete final.</p></div>
                 <div class="card"><h3>Protección</h3><p>Pintura, galvanizado, fuego y mantenimiento según ambiente.</p></div>
-              </div>
-            </div>
-          `
-        }
-      },
-
-      modelado:{
-        label:"Modelado",
-        subtitle:"Software con criterio",
-        heroTitle:"Modelado estructural: el software no piensa por vos",
-        heroText:"El modelo es una representación. Debe tener lógica física: unidades, geometría, apoyos, cargas, masas, rigidez, diafragmas, combinaciones y revisión de resultados.",
-        menu:[
-          ["check","Checklist del modelo"],
-          ["diafragmas","Diafragmas y torsión"],
-          ["resultados","Resultados mínimos"],
-          ["errores_modelo","Errores comunes"]
-        ],
-        sections:{
-          check:`
-            <div class="section">
-              <div class="label">> validar antes de diseñar</div>
-              <h2>Checklist visual del modelo</h2>
-              ${diagrams.model}
-              <div class="grid">
-                <div class="card"><h3>Geometría</h3><p>Niveles, ejes, longitudes, offsets, nudos duplicados y continuidad.</p></div>
-                <div class="card"><h3>Cargas</h3><p>Peso propio, sobrecargas, tabiques, viento, sismo y combinaciones.</p></div>
-                <div class="card"><h3>Resultados</h3><p>Reacciones, deformada, modos, derivas y equilibrio global.</p></div>
-              </div>
-            </div>
-          `,
-          diafragmas:`
-            <div class="section">
-              <div class="label">> respuesta lateral</div>
-              <h2>Diafragmas, centro de masa y torsión</h2>
-              ${diagrams.seismic}
-              <p>Si el centro de masa y el centro de rigidez están separados, aparece torsión. En plantas irregulares, el modelo debe reflejar esa excentricidad.</p>
-            </div>
-          `,
-          resultados:`
-            <div class="section">
-              <div class="label">> salida mínima</div>
-              <h2>Resultados mínimos a revisar</h2>
-              <ul>
-                <li>Reacciones: deben cerrar con cargas aplicadas.</li>
-                <li>Deformada: debe tener sentido físico.</li>
-                <li>Derivas: revisar servicio y límite normativo.</li>
-                <li>Masas y modos: participación suficiente y forma modal coherente.</li>
-                <li>Diagramas: momentos, cortantes, axiales y torsión.</li>
-              </ul>
-            </div>
-          `,
-          errores_modelo:`
-            <div class="section">
-              <div class="label">> errores de software</div>
-              <h2>Errores comunes de modelado</h2>
-              <div class="grid">
-                <div class="card"><h3>Unidades</h3><p>El clásico asesino silencioso: kN, tonf, kgf, m, cm, mm.</p></div>
-                <div class="card"><h3>Apoyos irreales</h3><p>Empotramientos mágicos o articulaciones donde no existen.</p></div>
-                <div class="card"><h3>Masa mal definida</h3><p>Sin masa correcta, el análisis dinámico no representa la estructura.</p></div>
-              </div>
-            </div>
-          `
-        }
-      },
-
-      fundaciones:{
-        label:"Fundaciones",
-        subtitle:"Suelo, cargas y asentamientos",
-        heroTitle:"Fundaciones: la estructura no termina en la columna",
-        heroText:"La fundación une superestructura y suelo. No basta con capacidad portante; hay que revisar asentamientos, excentricidades, rigidez, nivel freático, excavación y constructibilidad.",
-        menu:[
-          ["criterio_fund","Criterio inicial"],
-          ["tipos_fund","Tipos"],
-          ["geotecnia","Lectura geotécnica"],
-          ["alertas_fund","Alertas"]
-        ],
-        sections:{
-          criterio_fund:`
-            <div class="section">
-              <div class="label">> suelo + estructura</div>
-              <h2>Criterio inicial de fundaciones</h2>
-              <p>La fundación se elige con cargas, suelo, asentamientos admisibles, profundidad, agua, medianeras, excavación y costo.</p>
-              <table>
-                <thead><tr><th>Dato</th><th>Por qué importa</th><th>Alerta</th></tr></thead>
-                <tbody>
-                  <tr><td class="value">Capacidad portante</td><td>Define presión admisible inicial.</td><td>No confundir capacidad última con admisible.</td></tr>
-                  <tr><td class="value">Asentamiento</td><td>Puede gobernar antes que la rotura.</td><td>Asentamientos diferenciales fisuran la estructura.</td></tr>
-                  <tr><td class="value">Nivel freático</td><td>Afecta excavación, empuje y durabilidad.</td><td>Puede exigir bombeo o cambio de solución.</td></tr>
-                </tbody>
-              </table>
-            </div>
-          `,
-          tipos_fund:`
-            <div class="section">
-              <div class="label">> selección de sistema</div>
-              <h2>Tipos de fundación</h2>
-              <div class="grid">
-                <div class="card"><h3>Zapata aislada</h3><p>Columnas separadas, cargas moderadas y buen suelo superficial.</p></div>
-                <div class="card"><h3>Zapata corrida</h3><p>Muros portantes o líneas de columnas cercanas.</p></div>
-                <div class="card"><h3>Plateas</h3><p>Suelos blandos, cargas distribuidas o necesidad de controlar asentamientos.</p></div>
-                <div class="card"><h3>Pilotes</h3><p>Mal suelo superficial, cargas altas o estratos resistentes profundos.</p></div>
-              </div>
-            </div>
-          `,
-          geotecnia:`
-            <div class="section">
-              <div class="label">> informe de suelos</div>
-              <h2>Cómo leer un informe geotécnico</h2>
-              <ul>
-                <li>Perfil estratigráfico y profundidad de reconocimiento.</li>
-                <li>Parámetros: peso unitario, cohesión, fricción, SPT/CPT, módulo, compresibilidad.</li>
-                <li>Nivel freático y variación esperada.</li>
-                <li>Recomendaciones de cimentación/fundación y limitaciones.</li>
-                <li>Riesgos: expansividad, licuación, rellenos, colapsabilidad, agresividad química.</li>
-              </ul>
-            </div>
-          `,
-          alertas_fund:`
-            <div class="section">
-              <div class="label">> cuidado</div>
-              <h2>Alertas en fundaciones</h2>
-              <div class="grid">
-                <div class="card"><h3>Medianeras</h3><p>Fundaciones excéntricas generan momentos y tensiones no uniformes.</p></div>
-                <div class="card"><h3>Rellenos</h3><p>No asumir capacidad sin control de compactación y procedencia.</p></div>
-                <div class="card"><h3>Agua</h3><p>El nivel freático puede cambiar por estación u obra vecina.</p></div>
               </div>
             </div>
           `
@@ -1315,6 +2102,7 @@
                   <tr><td class="value">Placa</td><td>Losa</td><td>Elemento horizontal de entrepiso o cubierta.</td></tr>
                   <tr><td class="value">Cimentación</td><td>Fundación</td><td>Sistema que transmite cargas al suelo.</td></tr>
                   <tr><td class="value">Acero de refuerzo</td><td>Armadura / hierro</td><td>Barras corrugadas dentro del hormigón.</td></tr>
+                  <tr><td class="value">Curaduría urbana</td><td>Municipio / comuna</td><td>Autoridad que aprueba y radica el proyecto.</td></tr>
                 </tbody>
               </table>
             </div>
@@ -1340,10 +2128,13 @@
               <table>
                 <thead><tr><th>Fuente</th><th>Uso</th><th>Consulta</th></tr></thead>
                 <tbody>
-                  <tr><td class="value">NSR-10 · Colombia</td><td>Reglamento colombiano de construcción sismo resistente.</td><td><a href="https://www.idrd.gov.co/construcciones/lineamientos-y-especificaciones-tecnicas-idrd" target="_blank">Consultar títulos</a></td></tr>
+                  <tr><td class="value">NSR-10 · Colombia</td><td>Reglamento colombiano de construcción sismo resistente (Títulos A–K).</td><td><a href="https://www.idrd.gov.co/construcciones/lineamientos-y-especificaciones-tecnicas-idrd" target="_blank">Consultar títulos</a></td></tr>
                   <tr><td class="value">Decreto 1401 de 2023</td><td>Modificaciones parciales al marco NSR-10.</td><td><a href="https://www.alcaldiabogota.gov.co/sisjur/normas/Norma1.jsp?i=145699" target="_blank">Abrir decreto</a></td></tr>
-                  <tr><td class="value">INTI · CIRSOC</td><td>Reglamentos argentinos de seguridad estructural.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc" target="_blank">Abrir CIRSOC</a></td></tr>
-                  <tr><td class="value">CIRSOC / INPRES-CIRSOC</td><td>Cargas, sismo, hormigón, acero y materiales.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank">Ver reglamentos</a></td></tr>
+                  <tr><td class="value">INTI · CIRSOC</td><td>Reglamentos argentinos de seguridad estructural (3ª generación vigente desde ene-2026).</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc" target="_blank">Abrir CIRSOC</a></td></tr>
+                  <tr><td class="value">CIRSOC 101-2025 / 102-2025</td><td>Cargas permanentes y sobrecargas / acción del viento.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank">Ver reglamentos</a></td></tr>
+                  <tr><td class="value">CIRSOC 200-2024 / 201-2025</td><td>Tecnología del hormigón / estructuras de hormigón.</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank">Ver reglamentos</a></td></tr>
+                  <tr><td class="value">CIRSOC 301-2018</td><td>Estructuras de acero para edificios (AISC 360).</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank">Ver reglamentos</a></td></tr>
+                  <tr><td class="value">INPRES-CIRSOC 103</td><td>Construcciones sismorresistentes (Parte I general, II hormigón, IV acero).</td><td><a href="https://www.inti.gob.ar/areas/servicios-industriales/construcciones-e-infraestructura/cirsoc/reglamentos" target="_blank">Ver reglamentos</a></td></tr>
                   <tr><td class="value">ACI 318 / AISC 360 / ASCE 7</td><td>Referencias internacionales para hormigón, acero y cargas.</td><td><a href="https://www.aisc.org/aisc/publications/current-standards/" target="_blank">AISC standards</a></td></tr>
                 </tbody>
               </table>
@@ -1369,7 +2160,7 @@
             <div class="section">
               <div class="label">> advertencia profesional</div>
               <h2>Nota de uso</h2>
-              <div class="box warn"><strong>Importante:</strong> esta guía no reproduce normas completas ni reemplaza documentos oficiales. Sirve como demo didáctico y mapa de criterio.</div>
+              <div class="box warn"><strong>Importante:</strong> esta guía no reproduce normas completas ni reemplaza documentos oficiales. Las calculadoras de predimensionamiento entregan valores iniciales orientativos: sirven como demo didáctico, mapa de criterio y punto de partida del modelo, no como diseño final.</div>
               <div class="box senior"><strong>Criterio de obra:</strong> la estructura real se valida con norma vigente, contrato, estudio geotécnico, planos, memoria de cálculo, supervisión técnica y profesional responsable.</div>
             </div>
           `
@@ -1429,16 +2220,17 @@
         <h2>${m.heroTitle}</h2>
         <p>${m.heroText}</p>
         <div class="searchbar">
-          <input id="searchInput" type="search" placeholder="Buscar: losa, hormigón, acero, pandeo, deriva, fundación, recubrimiento..." />
+          <input id="searchInput" type="search" placeholder="Buscar: losa, viga, columna, muro, zapata, sistema, hormigón, acero, deriva, pandeo, normativa..." />
           <button id="searchBtn">Buscar</button>
         </div>
         <div class="quick-tools">
-          <button type="button" data-module="losas">Losas</button>
-          <button type="button" data-module="hormigon">Hormigón/concreto</button>
-          <button type="button" data-module="acero">Acero</button>
-          <button type="button" data-module="modelado">Validar modelo</button>
-          <button type="button" data-module="vocabulario">Vocabulario</button>
-          <button type="button" data-module="bibliografia">Bibliografía</button>
+          <button type="button" data-module="predim" data-section="resistente">Sistema resistente</button>
+          <button type="button" data-module="predim" data-section="losas">Predim. losas</button>
+          <button type="button" data-module="predim" data-section="vigas">Predim. vigas</button>
+          <button type="button" data-module="predim" data-section="columnas">Predim. columnas</button>
+          <button type="button" data-module="predim" data-section="zapatas">Predim. zapatas</button>
+          <button type="button" data-module="normativa" data-section="master">Normativa CO/AR</button>
+          <button type="button" data-module="modelado" data-section="check">Validar modelo</button>
         </div>
       `;
 
@@ -1448,7 +2240,7 @@
       document.querySelectorAll(".quick-tools button").forEach(btn=>{
         btn.addEventListener("click",()=>{
           currentModule = btn.dataset.module;
-          currentSection = modules[currentModule].menu[0][0];
+          currentSection = btn.dataset.section || modules[currentModule].menu[0][0];
           render();
         });
       });
@@ -1474,7 +2266,7 @@
       });
 
       if(results.length === 0){
-        content.innerHTML = `<div class="section"><h2>Resultado de búsqueda</h2><div class="box warn">No encontré “${q}”. Probá con: losa, pandeo, deriva, hormigón, acero, fundación, recubrimiento o punzonamiento.</div></div>`;
+        content.innerHTML = `<div class="section"><h2>Resultado de búsqueda</h2><div class="box warn">No encontré “${q}”. Probá con: losa, viga, columna, muro, zapata, sistema resistente, pandeo, deriva, hormigón, acero, fundación o normativa.</div></div>`;
         return;
       }
 
@@ -1498,31 +2290,315 @@
       currentModule = m;
       currentSection = s;
       render();
+      window.scrollTo({top:0,behavior:"smooth"});
     }
 
-    function calcularLosa(){
-      const lx = parseFloat(document.getElementById("lxLosa")?.value || 0);
-      const ly = parseFloat(document.getElementById("lyLosa")?.value || 0);
-      const tipo = document.getElementById("tipoLosa")?.value || "maciza";
-      const out = document.getElementById("resultadoLosa");
+    /* ============ HELPERS DE CÁLCULO ============ */
+    function fmt(n,d=2){ return isFinite(n) ? n.toFixed(d) : "—"; }
+    function roundUp(value, step){ return Math.ceil(value/step)*step; }
+    function showError(elId, msg){
+      const out = document.getElementById(elId);
+      if(out){ out.className = "calc-result error"; out.innerHTML = `<strong>⚠ ${msg}</strong>`; }
+    }
+    function rangeWarning(value, max, msg){
+      return value > max ? `<div class="box warn" style="margin-top:8px;"><strong>⚠ Verificar datos:</strong> ${msg}</div>` : "";
+    }
 
-      if(!out || !lx || !ly){
-        if(out) out.textContent = "Ingresá luces válidas.";
-        return;
+    /* ============ SELECTOR DE SISTEMA RESISTENTE ============ */
+    function evaluarSistema(){
+      const niveles = parseFloat(document.getElementById("sisNiveles")?.value) || 1;
+      const demanda = document.getElementById("sisDemanda")?.value || "media";
+      const luz = parseFloat(document.getElementById("sisLuz")?.value) || 5;
+      const prioridad = document.getElementById("sisPrioridad")?.value || "flex";
+      const out = document.getElementById("resultadoSistema");
+      if(!out) return;
+
+      const prioridadTxt = {flex:"flexibilidad arquitectónica", rigidez:"rigidez lateral / control de deriva", economia:"economía y repetición", luces:"grandes luces libres"}[prioridad];
+      const demandaTxt = {baja:"baja", media:"media", alta:"alta"}[demanda];
+
+      let sistema, motivo, control;
+
+      if(luz >= 15 || prioridad === "luces"){
+        sistema = "Cerchas / pórticos metálicos para grandes luces";
+        motivo = `Con una luz típica de ${fmt(luz,1)} m, un sistema viga-losa-columna en hormigón deja de ser eficiente. Las cerchas o pórticos metálicos cubren grandes claros con menor peso propio y montaje más rápido.`;
+        control = "luz, arriostramiento, pandeo y diseño de uniones.";
+      } else if(niveles <= 3 && demanda !== "alta"){
+        sistema = "Pórticos resistentes a momento (viga + losa + columnas)";
+        motivo = `Para ${niveles} nivel(es) y demanda sísmica ${demandaTxt}, los pórticos ofrecen buena flexibilidad arquitectónica sin necesitar muros estructurales.`;
+        control = "derivas, nudos viga-columna y luces de losa.";
+      } else if(niveles > 8 || demanda === "alta"){
+        if(prioridad === "flex"){
+          sistema = "Sistema dual (pórticos + muros)";
+          motivo = `Edificio de ${niveles} niveles con demanda sísmica ${demandaTxt}: el sistema dual combina la rigidez de los muros con la flexibilidad de los pórticos, sin sacrificar tanto espacio en planta.`;
+        } else {
+          sistema = "Muros estructurales / placas";
+          motivo = `Edificio de ${niveles} niveles con demanda sísmica ${demandaTxt}: priorizar rigidez lateral con muros o núcleos suele controlar mejor la deriva que un sistema solo de pórticos.`;
+        }
+        control = "ubicación simétrica, continuidad vertical, aberturas y torsión.";
+      } else {
+        sistema = "Sistema dual (pórticos + muros)";
+        motivo = `Para ${niveles} niveles y demanda ${demandaTxt}, el sistema dual es uno de los más usados en zonas sísmicas: reparte rigidez entre pórticos y muros.`;
+        control = "reparto de rigidez, centro de masa y de rigidez, derivas.";
       }
 
-      const corto = Math.min(lx, ly);
-      const largo = Math.max(lx, ly);
-      const r = largo / corto;
-      const trabajo = r >= 2 ? "una dirección" : "dos direcciones";
-      const hMin = tipo === "maciza" ? corto/25 : tipo === "nervada" ? corto/28 : corto/22;
-      const hMax = tipo === "maciza" ? corto/20 : tipo === "nervada" ? corto/25 : corto/20;
-
       out.innerHTML = `
-        <strong>Relación largo/corto:</strong> ${r.toFixed(2)} → criterio inicial: <strong>${trabajo}</strong>.<br>
-        <strong>Espesor preliminar orientativo:</strong> ${(hMin*100).toFixed(0)} a ${(hMax*100).toFixed(0)} cm.<br>
-        <strong>Lectura senior:</strong> verificar cargas, flecha, fisuración, punzonamiento, continuidad, apoyos reales, norma y constructibilidad.
+        <div class="reco-box">
+          <div class="label">> recomendación</div>
+          <h3>${sistema}</h3>
+          <p>${motivo}</p>
+          <p><strong>Prioridad declarada:</strong> ${prioridadTxt}.</p>
+          <p><strong>Parámetros a controlar:</strong> ${control}</p>
+          <p style="margin-top:14px;font-size:14px;opacity:.85;">Para el sistema gravitacional (no sismorresistente) podés además evaluar <strong>losa plana + columnas</strong> si buscás plantas libres con pocas vigas.</p>
+        </div>`;
+    }
+
+    /* ============ LOSAS ============ */
+    function calcularLosa(){
+      const lx = parseFloat(document.getElementById("lxLosa")?.value);
+      const ly = parseFloat(document.getElementById("lyLosa")?.value);
+      const tipo = document.getElementById("tipoLosa")?.value || "maciza2";
+      const redondeo = parseFloat(document.getElementById("redondeoLosa")?.value) || 5;
+      const out = document.getElementById("resultadoLosa");
+      if(!out) return;
+
+      if(!lx || !ly || lx<=0 || ly<=0){ showError("resultadoLosa","Ingresá luces válidas (mayores a 0)."); return; }
+
+      const corto = Math.min(lx,ly);
+      const largo = Math.max(lx,ly);
+      const r = largo/corto;
+      const trabajo = r >= 2 ? "una dirección" : "dos direcciones";
+
+      const tipos = {
+        maciza1:{nombre:"Maciza 1 dirección", base:corto, div:20, min:0.10, cond:`Válida con L ≥ 4.0 m (luz de trabajo = ${fmt(corto,2)} m).`, alerta: corto<4.0?"La luz de trabajo es menor a 4.0 m: la regla L/20 es conservadora; el mínimo normativo absoluto ronda 10 cm.":null},
+        maciza2:{nombre:"Maciza 2 direcciones", base:corto, div:25, min:0.10, cond:`Recomendada con L ≤ 6.0 m (luz larga = ${fmt(largo,2)} m).`, alerta: largo>6.0?"La luz larga supera 6.0 m: verificar con tabla extendida (ACI 318 / NSR-10 / CIRSOC 201) o pasar a losa nervada/plana.":null},
+        aligerada:{nombre:"Aligerada (vigueta y bovedilla)", base:corto, div:25, min:0.20, cond:"h ≥ L/25 y ≥ 20 cm.", alerta:null},
+        nervada:{nombre:"Nervada / casetonada", base:corto, div:30, min:0.30, cond:"h ≥ L/30 y ≥ 30 cm.", alerta:null},
+        plana:{nombre:"Losa plana", base:corto, div:30, min:0.15, cond:"Orden de L/28 a L/32; el punzonamiento suele gobernar antes que la flexión.", alerta:"Losa plana: revisar SIEMPRE punzonamiento alrededor de columnas; puede requerir capiteles o ábacos."}
+      };
+
+      const t = tipos[tipo];
+      let hCalc = Math.max(t.base / t.div, t.min);
+      let hCm = roundUp(hCalc*100, redondeo);
+
+      out.className = "calc-result";
+      out.innerHTML = `
+        <div class="result-row"><span>Relación largo/corto</span><span>${fmt(r,2)} → trabajo en ${trabajo}</span></div>
+        <div class="result-row"><span>Tipo evaluado</span><span>${t.nombre}</span></div>
+        <div class="result-row"><span>Condición de la regla</span><span>${t.cond}</span></div>
+        <span class="big">h preliminar ≈ ${hCm} cm</span>
+        ${t.alerta ? `<div class="box warn" style="margin:10px 0 0;">${t.alerta}</div>` : ""}
+        ${rangeWarning(hCm, 60, `${hCm} cm es un espesor de losa inusualmente alto. Revisá las luces ingresadas (¿unidades en metros?) o considerá otro sistema (nervada/losa plana con capiteles).`)}
+        <div class="hint">Lectura senior: verificar cargas, flecha, fisuración, punzonamiento, continuidad, apoyos reales, norma y constructibilidad antes de fijar el espesor definitivo.</div>
       `;
+    }
+
+    /* ============ VIGAS ============ */
+    function calcularViga(){
+      const L = parseFloat(document.getElementById("lViga")?.value);
+      const tipo = document.getElementById("tipoViga")?.value || "principal";
+      const rel = parseFloat(document.getElementById("relViga")?.value) || 0.4;
+      const redondeo = parseFloat(document.getElementById("redondeoViga")?.value) || 5;
+      const out = document.getElementById("resultadoViga");
+      if(!out) return;
+      if(!L || L<=0){ showError("resultadoViga","Ingresá una luz válida (mayor a 0)."); return; }
+
+      let hMinM, hMaxM, bMinAbs = null;
+      if(tipo === "principal"){ hMinM = L/12; hMaxM = L/10; }
+      else if(tipo === "secundaria"){ hMinM = L/15; hMaxM = L/12; }
+      else { hMinM = L/12; hMaxM = L/10; bMinAbs = 0.25; }
+
+      const hProm = (hMinM+hMaxM)/2;
+      const hMinCm = roundUp(hMinM*100, redondeo);
+      const hMaxCm = roundUp(hMaxM*100, redondeo);
+      let bCm = roundUp(rel*hProm*100, redondeo);
+      if(bMinAbs && bCm < bMinAbs*100) bCm = roundUp(bMinAbs*100, redondeo);
+
+      const tipoTxt = {principal:"Viga principal", secundaria:"Viga secundaria", borde:"Viga de borde"}[tipo];
+
+      out.className = "calc-result";
+      out.innerHTML = `
+        <div class="result-row"><span>Tipo</span><span>${tipoTxt} · L = ${fmt(L,2)} m</span></div>
+        <div class="result-row"><span>Canto h (regla L/10 a L/15)</span><span>${hMinCm} – ${hMaxCm} cm</span></div>
+        <span class="big">h sugerido ≈ ${hMaxCm} cm · b sugerido ≈ ${bCm} cm</span>
+        ${bMinAbs ? `<div class="hint">Viga de borde: ancho mínimo recomendado ${(bMinAbs*100).toFixed(0)} cm por cargas de fachada y torsión.</div>` : ""}
+        ${rangeWarning(hMaxCm, 150, `${hMaxCm} cm de canto es muy alto para una viga de hormigón armado. Con luces grandes (&gt;12-14 m) conviene evaluar acero estructural o un sistema de cerchas/pórticos metálicos.`)}
+        <div class="hint">Esto NO calcula momento, corte, torsión, flecha real ni cuantía de refuerzo — son resultados del análisis y el diseño por resistencia.</div>
+      `;
+    }
+
+    /* ============ COLUMNAS ============ */
+    function calcularColumnaNiveles(){
+      const H = parseFloat(document.getElementById("hColEntrepiso")?.value);
+      const niveles = parseFloat(document.getElementById("nivelesCol")?.value);
+      const out = document.getElementById("resultadoColumnaNiveles");
+      if(!out) return;
+      if(!H || H<=0 || !niveles || niveles<=0){ showError("resultadoColumnaNiveles","Ingresá altura y número de niveles válidos."); return; }
+
+      let rel, ladoMinPractico, rango;
+      if(niveles<=3){ rel=1/20; ladoMinPractico=25; rango="≤ 3 niveles"; }
+      else if(niveles<=8){ rel=1/25; ladoMinPractico=30; rango="4 a 8 niveles"; }
+      else { rel=1/30; ladoMinPractico=35; rango="> 8 niveles"; }
+
+      const ladoPorEsbeltez = H*rel*100;
+      const ladoFinal = Math.max(ladoPorEsbeltez, ladoMinPractico);
+      const ladoRedondeado = roundUp(ladoFinal,5);
+
+      out.className = "calc-result";
+      out.innerHTML = `
+        <div class="result-row"><span>Categoría por altura</span><span>${rango}</span></div>
+        <div class="result-row"><span>Relación lado/altura libre</span><span>≥ H/${Math.round(1/rel)}</span></div>
+        <div class="result-row"><span>Lado mínimo práctico (tabla)</span><span>${ladoMinPractico} cm</span></div>
+        <span class="big">Lado de columna ≈ ${ladoRedondeado} cm</span>
+        ${rangeWarning(ladoRedondeado, 150, `${ladoRedondeado} cm es una sección muy grande para predimensionamiento empírico. Revisá la altura libre ingresada (¿está en metros?) o evaluá acero estructural.`)}
+        <div class="hint">Verificar siempre esbeltez (KL/r), confinamiento y continuidad de barras entre niveles.</div>
+      `;
+    }
+
+    function calcularColumnaCarga(){
+      const areaTrib = parseFloat(document.getElementById("areaTribCol")?.value);
+      const niveles = parseFloat(document.getElementById("nivelesCargaCol")?.value);
+      const cm = parseFloat(document.getElementById("cmCol")?.value);
+      const cv = parseFloat(document.getElementById("cvCol")?.value);
+      const fc = parseFloat(document.getElementById("fcCol")?.value);
+      const forma = document.getElementById("formaCol")?.value || "cuadrada";
+      const out = document.getElementById("resultadoColumnaCarga");
+      if(!out) return;
+      if(!areaTrib || !niveles || !cm || !cv || !fc || areaTrib<=0 || niveles<=0 || fc<=0){
+        showError("resultadoColumnaCarga","Completá todos los campos con valores mayores a 0."); return;
+      }
+
+      // Carga última aproximada (combinación 1.2D+1.6L) por nivel, acumulada
+      const cargaServicioPorNivel = areaTrib * (cm + cv); // kN
+      const PuTotal = niveles * areaTrib * (1.2*cm + 1.6*cv); // kN, estimación
+
+      // Ag requerida (mm²): Ag = Pu(N) / (0.45 * f'c (MPa = N/mm²))  — regla de prediseño usual
+      const PuN = PuTotal*1000;
+      const AgMm2 = PuN / (0.45*fc);
+      const AgCm2 = AgMm2/100;
+
+      let resultadoSeccion;
+      let ladoEquivalente;
+      if(forma === "cuadrada"){
+        const lado = Math.sqrt(AgCm2);
+        const ladoRedondeado = roundUp(Math.max(lado,20),5);
+        resultadoSeccion = `Columna cuadrada ≈ ${ladoRedondeado} × ${ladoRedondeado} cm`;
+        ladoEquivalente = ladoRedondeado;
+      } else {
+        const diam = 2*Math.sqrt(AgCm2/Math.PI);
+        const diamRedondeado = roundUp(Math.max(diam,25),5);
+        resultadoSeccion = `Columna circular ≈ Ø ${diamRedondeado} cm`;
+        ladoEquivalente = diamRedondeado;
+      }
+
+      out.className = "calc-result";
+      out.innerHTML = `
+        <div class="result-row"><span>Carga de servicio acumulada (aprox.)</span><span>${fmt(cargaServicioPorNivel*niveles,0)} kN</span></div>
+        <div class="result-row"><span>Carga última Pu estimada (1.2D+1.6L)</span><span>${fmt(PuTotal,0)} kN</span></div>
+        <div class="result-row"><span>Área bruta requerida (Ag ≈ Pu/0.45f'c)</span><span>${fmt(AgCm2,0)} cm²</span></div>
+        <span class="big">${resultadoSeccion}</span>
+        ${rangeWarning(ladoEquivalente, 150, `La sección resultante (${ladoEquivalente} cm) es muy grande. Revisá el área tributaria, las cargas CM/CV y el número de niveles ingresados.`)}
+        <div class="box warn" style="margin-top:8px;">Estimación preliminar por carga predominantemente axial. No reemplaza la verificación de interacción P-M-M, esbeltez ni el área tributaria real del proyecto.</div>
+      `;
+    }
+
+    /* ============ MUROS ============ */
+    function calcularMuro(){
+      const H = parseFloat(document.getElementById("hMuro")?.value);
+      const lPlanta = parseFloat(document.getElementById("lMuroPlanta")?.value);
+      const out = document.getElementById("resultadoMuro");
+      if(!out) return;
+      if(!H || H<=0){ showError("resultadoMuro","Ingresá una altura válida (mayor a 0)."); return; }
+
+      const tCm = Math.max(H*100/25, 15);
+      const tRedondeado = roundUp(tCm,5);
+      const lMinM = 4*(tRedondeado/100);
+      const relHt = (H*100/tRedondeado);
+
+      out.className = "calc-result";
+      out.innerHTML = `
+        <div class="result-row"><span>Espesor mínimo (t ≥ H/25 y ≥ 15 cm)</span><span>${tRedondeado} cm</span></div>
+        <div class="result-row"><span>Longitud mínima del muro (l ≥ 4t)</span><span>${fmt(lMinM,2)} m</span></div>
+        <div class="result-row"><span>Relación H/t</span><span>${fmt(relHt,1)} ${relHt<=35?"✓ dentro de 30–35":"⚠ revisar, supera 35"}</span></div>
+        ${ lPlanta ? `<div class="result-row"><span>Longitud en planta declarada</span><span>${fmt(lPlanta,2)} m ${lPlanta>=lMinM?"✓ cumple":"⚠ menor a la mínima"}</span></div>` : ""}
+        <span class="big">t recomendado ≈ ${tRedondeado} cm</span>
+        ${rangeWarning(tRedondeado, 100, `${tRedondeado} cm de espesor es inusual para un muro de corte. Revisá la altura ingresada (¿está en metros?).`)}
+        <div class="hint">Revisar torsión accidental, excentricidades, aberturas y conexión con diafragmas de losa.</div>
+      `;
+    }
+
+    /* ============ ZAPATAS / FUNDACIONES ============ */
+    function calcularZapataAislada(){
+      const P = parseFloat(document.getElementById("pZapata")?.value);
+      const q = parseFloat(document.getElementById("qZapata")?.value);
+      const colCm = parseFloat(document.getElementById("colZapata")?.value);
+      const redondeo = parseFloat(document.getElementById("redondeoZapata")?.value) || 10;
+      const out = document.getElementById("resultadoZapataAislada");
+      if(!out) return;
+      if(!P || !q || P<=0 || q<=0){ showError("resultadoZapataAislada","Ingresá carga y capacidad portante válidas (mayores a 0)."); return; }
+
+      const A = P/q; // m2
+      const B = Math.sqrt(A); // m, zapata cuadrada
+      const Bcm = roundUp(B*100, redondeo);
+      const hMinM = 0.25*(Bcm/100);
+      const hMaxM = 0.35*(Bcm/100);
+      const hCmMin = roundUp(hMinM*100,5);
+      const hCmMax = roundUp(hMaxM*100,5);
+
+      let voladoTxt = "";
+      if(colCm && colCm>0){
+        const volado = (Bcm-colCm)/2;
+        voladoTxt = `<div class="result-row"><span>Volado (cada lado)</span><span>${fmt(volado,0)} cm ${volado>=15?"✓ ≥ 15-20 cm":"⚠ revisar, parece corto"}</span></div>`;
+      }
+
+      out.className = "calc-result";
+      out.innerHTML = `
+        <div class="result-row"><span>Área requerida (A = P/qadm)</span><span>${fmt(A,2)} m²</span></div>
+        <div class="result-row"><span>Lado de zapata cuadrada (B = √A)</span><span>${Bcm} cm</span></div>
+        ${voladoTxt}
+        <div class="result-row"><span>Espesor h ≈ (0.25–0.35)·B</span><span>${hCmMin} – ${hCmMax} cm</span></div>
+        <span class="big">Zapata ≈ ${Bcm} × ${Bcm} cm · h ≈ ${hCmMax} cm</span>
+        ${rangeWarning(Bcm, 600, `${(Bcm/100).toFixed(1)} m de lado es una zapata aislada muy grande. Revisá unidades: P en kN, qadm en kPa. Con esta magnitud convendría evaluar una losa de cimentación o pilotes.`)}
+        <div class="hint">Profundidad de desplante mínima recomendada: 0.80 m (sujeta a estudio geotécnico). Verificar punzonamiento y FS de la capacidad portante usada.</div>
+      `;
+    }
+
+    function calcularZapataCorrida(){
+      const w = parseFloat(document.getElementById("wZapataCorrida")?.value);
+      const q = parseFloat(document.getElementById("qZapataCorrida")?.value);
+      const muroCm = parseFloat(document.getElementById("muroZapataCorrida")?.value);
+      const redondeo = parseFloat(document.getElementById("redondeoZapataCorrida")?.value) || 5;
+      const out = document.getElementById("resultadoZapataCorrida");
+      if(!out) return;
+      if(!w || !q || w<=0 || q<=0){ showError("resultadoZapataCorrida","Ingresá carga lineal y capacidad portante válidas (mayores a 0)."); return; }
+
+      const Bm = w/q; // m por metro lineal
+      let BcmCalc = roundUp(Bm*100, redondeo);
+
+      if(muroCm && muroCm>0){
+        const Bmin = roundUp(0.7*muroCm, redondeo); // 0.6 a 0.8, tomar promedio 0.7 de referencia práctica
+        if(Bmin > BcmCalc) BcmCalc = Bmin;
+      }
+
+      const hMin = roundUp(0.25*BcmCalc,5);
+      const hMax = roundUp(0.35*BcmCalc,5);
+
+      out.className = "calc-result";
+      out.innerHTML = `
+        <div class="result-row"><span>Ancho requerido (B = w/qadm)</span><span>${BcmCalc} cm</span></div>
+        <div class="result-row"><span>Espesor h ≈ (0.25–0.35)·B</span><span>${hMin} – ${hMax} cm</span></div>
+        <span class="big">Zapata corrida ≈ ${BcmCalc} cm de ancho · h ≈ ${hMax} cm</span>
+        ${rangeWarning(BcmCalc, 300, `${(BcmCalc/100).toFixed(1)} m de ancho es inusual para una zapata corrida. Revisá unidades: w en kN/m, qadm en kPa. Con esta magnitud convendría evaluar una losa de cimentación.`)}
+        <div class="hint">Profundidad de desplante mínima recomendada: 0.80 m. En suelos blandos o cargas muy distribuidas, comparar contra una losa de cimentación.</div>
+      `;
+    }
+
+    /* ============ FILTRO TABLA NORMATIVA ============ */
+    function filtrarNormativa(cat, btn){
+      document.querySelectorAll("#normFilter button").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      document.querySelectorAll("#tablaNormativa tbody tr").forEach(tr=>{
+        tr.style.display = (cat === "all" || tr.dataset.cat === cat) ? "" : "none";
+      });
     }
 
     function render(){
