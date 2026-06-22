@@ -27,7 +27,7 @@ Una lámina **A1 extendida** con seis vistas técnicas de una bahía de transfor
 | **E — Leyenda y Simbología**     | Glosario visual de todos los símbolos + abreviaturas (AT, BT, MT, In, Icc, PAT, DPS)             | Buenas prácticas de documentación — un plano se entiende solo, sin explicación verbal |
 | **F — Corte / Perfil**           | Elevación del patio de AT: pórtico de línea, barra colectora, transformador con foso de contención, sala de control, alturas acotadas | Lectura en altura del mismo layout del Panel B — un proyectista no piensa solo en planta |
 
-Capas separadas por función (`AT-BARRAS`, `AT-EQUIPOS`, `TIERRA-MALLA`, `COTAS`, `ESTRUCTURAS`, `CERCO`, `CIVIL`), cajetín con datos del proyecto y notas generales.
+Capas separadas por función con prefijo por disciplina (`DEF-`, `ANO-`, `ELE-`, `CIV-` — 13 en total, ver detalle más abajo), cajetín con datos del proyecto y notas generales.
 
 ## Criterios técnicos aplicados
 
@@ -45,8 +45,60 @@ Capas separadas por función (`AT-BARRAS`, `AT-EQUIPOS`, `TIERRA-MALLA`, `COTAS`
 Esto es lo que conviene mostrar si te piden abrir el archivo en la entrevista — no se ve a simple vista en el dibujo, se ve en los paneles de gestión de AutoCAD:
 
 - **Capas (`LAYER`)**: nombradas con prefijo por disciplina — `DEF-` (marco/cajetín), `ANO-` (texto, cotas, ejes), `ELE-` (eléctrico: conductores, equipos, PAT, canalizaciones), `CIV-` (estructuras, cerco, obra civil). 13 capas en total, cada una con su color y tipo de línea (no todas "Capa 0" con colores puestos a mano).
-- **Bloques (`INSERT` / `BLOCK`)**: los 8 símbolos eléctricos (seccionador, interruptor, TC, TT, transformador, pararrayos, símbolo de PAT, jabalina) están definidos **una sola vez** como bloque y se insertan donde hacen falta — 44 inserciones en total (la jabalina sola se repite 25 veces en la malla de tierra). Geometría en capa "0" con color *ByBlock*, así cada inserción hereda el color de la capa donde se la coloca — es la forma correcta de armar una biblioteca de símbolos reutilizable, no copiar y pegar líneas.
-- **Cotas (`DIMSTYLE`)**: estilo propio `COTAS-PORTFOLIO` (el `EZDXF` por defecto traía el texto a altura 0.25, prácticamente invisible). Las 8 cotas del plano muestran su valor real como texto propio de la cota, no como una etiqueta de texto suelta al lado que podía desincronizarse del valor real.
+- **Bloques (`INSERT` / `BLOCK`)**: los 8 símbolos eléctricos (seccionador, interruptor, TC, TT, transformador, pararrayos, símbolo de PAT, jabalina) están definidos **una sola vez** como bloque y se insertan donde hacen falta — 44 inserciones en total (la jabalina sola se repite 25 veces en la malla de tierra). Geometría en capa "0" con color *ByBlock*, así cada inserción hereda el color de la capa donde se la coloca — es la forma correcta de armar una biblioteca de símbolos reutilizable, no copiar y pegar líneas. ⚠️ *Pendiente de corregir*: la nota técnica del Panel C (malla de PAT) dice "Nro. JABALINAS: 24", pero la cantidad real insertada es 25 — desincronización entre el texto y el conteo real, a ajustar en el script generador.
+- **Cotas (`DIMSTYLE`)**: estilo propio `COTAS-PORTFOLIO` (el `EZDXF` por defecto traía el texto a altura 0.25, prácticamente invisible). El valor de las 8 cotas es texto propio de la cota (no una etiqueta de texto suelta al lado, que se podía desincronizar visualmente). Importante para ser honesto en una entrevista: ese valor es representativo, fijado a mano — no se recalcula solo si se mueve el punto de definición, porque el plano no está dibujado a escala real 1:1 de ingeniería, sino como esquema ilustrativo de portfolio.
+- **Unidades (`INSUNITS`) y escala**: el dibujo está construido a la escala de la hoja A1 extendida (en milímetros), pensado para plotear 1:1. Sobre la escala de cada vista: medí la proporción real entre la geometría dibujada y los valores de cota, y **no es constante entre vistas** (las cotas son texto representativo, no medición asociativa — ver punto anterior). Por eso, en vez de imprimir un número de escala único que sería falso (ej. "1:75" en todo el plano, cuando en realidad cada panel se armó con su propia proporción de composición), el criterio correcto — y el que ya usa el cajetín del plano — es declarar **"Escala: indicada por vista"** y marcar cada panel como **"Esc. indicativa"**, tal como ya está. Es la misma convención que usa cualquier diagrama unifilar real (nunca se dibuja a escala) y cualquier detalle constructivo esquemático. Si en la entrevista te preguntan la escala del plano, esa es la respuesta técnicamente honesta: no tiene una escala de ingeniería única, es indicativa por vista, y así está declarado.
+
+## Glosario de siglas
+
+Por si te preguntan qué significa cada prefijo de capa o abreviatura del plano — para no quedarte trabado en la entrevista:
+
+**Prefijos de capa (disciplina):**
+
+| Sigla | Significado                               |
+|-------|-------------------------------------------|
+| `DEF` | Definición — marco de la lámina y cajetín |
+| `ANO` | Anotación — texto, cotas, ejes            |
+| `ELE` | Eléctrico                                 |
+| `CIV` | Civil                                     |
+
+**Capas completas usadas en el archivo:**
+
+| Capa               | Significado                                                                           |
+|--------------------|---------------------------------------------------------------------------------------|
+| `DEF-MARCO`        | Marco de la lámina y cajetín de datos del proyecto                                    |
+| `ANO-TEXTO`        | Texto general (notas, fichas técnicas)                                                |
+| `ANO-TEXTO-TITULO` | Títulos de cada panel                                                                 |
+| `ANO-TEXTO-REF`    | Texto de referencia secundario (notas generales, abreviaturas)                        |
+| `ANO-COTAS`        | Cotas y acotamiento                                                                   |
+| `ANO-EJES`         | Ejes / líneas de centro                                                               |
+| `ELE-AT-CONDUCTOR` | Conductores y barras de Alta Tensión                                                  |
+| `ELE-AT-EQUIPO`    | Equipos de Alta Tensión (seccionador, interruptor, TC, TT, transformador, pararrayos) |
+| `ELE-PAT`          | Puesta A Tierra (malla, jabalinas)                                                    |
+| `ELE-CANALIZACION` | Ductos y canalizaciones subterráneas                                                  |
+| `CIV-ESTRUCTURA`   | Estructuras civiles (pórticos, soportes)                                              |
+| `CIV-CERCO`        | Cerco perimetral del patio                                                            |
+| `CIV-OBRA`         | Obra civil (fundaciones, foso de contención)                                          |
+
+**Abreviaturas eléctricas (las que están en la leyenda del propio plano, Panel E):**
+
+| Sigla | Significado                               |
+|-------|-------------------------------------------|
+| AT    | Alta Tensión                              |
+| MT    | Media Tensión                             |
+| BT    | Baja Tensión                              |
+| In    | Corriente nominal                         |
+| Icc   | Corriente de cortocircuito                |
+| PAT   | Puesta A Tierra                           |
+| DPS   | Descargador de sobretensión (pararrayos)  |
+
+**Numeración ANSI de dispositivos (Panel A):**
+
+| Número | Dispositivo             |
+|--------|-------------------------|
+| 52     | Interruptor de potencia |
+| 89     | Seccionador             |
+| 96     | Pararrayos / DPS        |
 
 ## Nota de honestidad técnica
 

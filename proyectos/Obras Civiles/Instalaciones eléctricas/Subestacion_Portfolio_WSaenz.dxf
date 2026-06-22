@@ -265,7 +265,7 @@ $DIMBLK2
   9
 $DIMSTYLE
   2
-EZDXF
+Standard
   9
 $DIMCLRD
  70
@@ -501,19 +501,19 @@ $TDUCREATE
   9
 $TDUPDATE
  40
-2461213.525185185
+2461213.890277778
   9
 $TDUUPDATE
  40
-2461213.650185185
+2461214.015277778
   9
 $TDINDWG
  40
-0.0079861111
+0.0117245370
   9
 $TDUSRTIMER
  40
-0.0079861111
+0.0117245370
   9
 $USRTIMER
  70
@@ -553,7 +553,7 @@ $SPLINESEGS
   9
 $HANDSEED
   5
-31F
+36E
   9
 $SURFTAB1
  70
@@ -909,7 +909,7 @@ $LWDISPLAY
   9
 $INSUNITS
  70
-     6
+     4
   9
 $HYPERLINKBASE
   1
@@ -937,7 +937,7 @@ $FINGERPRINTGUID
   9
 $VERSIONGUID
   2
-{437F0CD4-A5FB-394E-9430-9F6DA7FC14F8}
+{18E3011B-67EE-434B-AD7B-8CE98BB28EE6}
   9
 $EXTNAMES
 290
@@ -1263,7 +1263,7 @@ ObjectDBX Classes
  90
      1152
  91
-        2
+        3
 280
      0
 281
@@ -1333,6 +1333,38 @@ ISM
 281
      0
   0
+CLASS
+  1
+ACAD_EVALUATION_GRAPH
+  2
+AcDbEvalGraph
+  3
+ObjectDBX Classes
+ 90
+     1153
+ 91
+        1
+280
+     0
+281
+     0
+  0
+CLASS
+  1
+ACAECUSTOBJ
+  2
+AcAeEditorObj
+  3
+AcAeEditorObj
+ 90
+     1024
+ 91
+        1
+280
+     0
+281
+     0
+  0
 ENDSEC
   0
 SECTION
@@ -1373,9 +1405,9 @@ AcDbViewportTableRecord
  21
 1.0
  12
-349.9487603284527
+570.4313421992797
  22
-512.1896751472681
+350.9284570995078
  13
 0.0
  23
@@ -1401,7 +1433,7 @@ AcDbViewportTableRecord
  37
 0.0
  40
-701.2714107915106
+716.506032479465
  41
 2.576248313090418
  42
@@ -2661,7 +2693,7 @@ STYLE
 100
 AcDbSymbolTable
  70
-    26
+     3
   0
 STYLE
   5
@@ -2688,314 +2720,6 @@ Standard
 2.5
   3
 txt
-  4
-
-  0
-STYLE
-  5
-41
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-OpenSans-Light
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-OpenSans-Light.ttf
-  4
-
-  0
-STYLE
-  5
-42
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-OpenSans-Light-Italic
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-OpenSans-LightItalic.ttf
-  4
-
-  0
-STYLE
-  5
-43
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-OpenSans
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-OpenSans-Regular.ttf
-  4
-
-  0
-STYLE
-  5
-44
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-OpenSans-Italic
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-OpenSans-Italic.ttf
-  4
-
-  0
-STYLE
-  5
-45
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-OpenSans-SemiBold
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-OpenSans-SemiBold.ttf
-  4
-
-  0
-STYLE
-  5
-46
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-OpenSans-SemiBoldItalic
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-OpenSans-SemiBoldItalic.ttf
-  4
-
-  0
-STYLE
-  5
-47
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-OpenSans-Bold
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-OpenSans-Bold.ttf
-  4
-
-  0
-STYLE
-  5
-48
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-OpenSans-BoldItalic
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-OpenSans-BoldItalic.ttf
-  4
-
-  0
-STYLE
-  5
-49
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-OpenSans-ExtraBold
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-OpenSans-ExtraBold.ttf
-  4
-
-  0
-STYLE
-  5
-4A
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-OpenSans-ExtraBoldItalic
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-OpenSans-ExtraBoldItalic.ttf
-  4
-
-  0
-STYLE
-  5
-4B
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-OpenSansCondensed-Bold
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-OpenSansCondensed-Bold.ttf
   4
 
   0
@@ -3029,7 +2753,7 @@ OpenSansCondensed-Light.ttf
   0
 STYLE
   5
-4D
+35D
 330
 5
 100
@@ -3037,7 +2761,7 @@ AcDbSymbolTableRecord
 100
 AcDbTextStyleTableRecord
   2
-OpenSansCondensed-Italic
+OpenSans
  70
      0
  40
@@ -3051,343 +2775,7 @@ OpenSansCondensed-Italic
  42
 2.5
   3
-OpenSansCondensed-LightItalic.ttf
-  4
 
-  0
-STYLE
-  5
-4E
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-LiberationSans
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-LiberationSans-Regular.ttf
-  4
-
-  0
-STYLE
-  5
-4F
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-LiberationSans-Bold
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-LiberationSans-Bold.ttf
-  4
-
-  0
-STYLE
-  5
-50
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-LiberationSans-BoldItalic
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-LiberationSans-BoldItalic.ttf
-  4
-
-  0
-STYLE
-  5
-51
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-LiberationSans-Italic
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-LiberationSans-Italic.ttf
-  4
-
-  0
-STYLE
-  5
-52
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-LiberationSerif
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-LiberationSerif-Regular.ttf
-  4
-
-  0
-STYLE
-  5
-53
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-LiberationSerif-Bold
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-LiberationSerif-Bold.ttf
-  4
-
-  0
-STYLE
-  5
-54
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-LiberationSerif-BoldItalic
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-LiberationSerif-BoldItalic.ttf
-  4
-
-  0
-STYLE
-  5
-55
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-LiberationSerif-Italic
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-LiberationSerif-Italic.ttf
-  4
-
-  0
-STYLE
-  5
-56
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-LiberationMono
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-LiberationMono-Regular.ttf
-  4
-
-  0
-STYLE
-  5
-57
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-LiberationMono-Bold
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-LiberationMono-Bold.ttf
-  4
-
-  0
-STYLE
-  5
-58
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-LiberationMono-BoldItalic
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-LiberationMono-BoldItalic.ttf
-  4
-
-  0
-STYLE
-  5
-59
-330
-5
-100
-AcDbSymbolTableRecord
-100
-AcDbTextStyleTableRecord
-  2
-LiberationMono-Italic
- 70
-     0
- 40
-0.0
- 41
-1.0
- 50
-0.0
- 71
-     0
- 42
-2.5
-  3
-LiberationMono-Italic.ttf
   4
 
   0
@@ -3515,7 +2903,7 @@ DIMSTYLE
 100
 AcDbSymbolTable
  70
-    13
+     2
 100
 AcDbDimStyleTable
  71
@@ -3580,770 +2968,6 @@ Standard
      0
 284
      8
-  0
-DIMSTYLE
-105
-73
-330
-4
-100
-AcDbSymbolTableRecord
-100
-AcDbDimStyleTableRecord
-  2
-EZDXF
- 70
-     0
- 41
-0.175
- 42
-0.125
- 43
-3.75
- 44
-0.375
- 49
-2.5
- 73
-     0
- 74
-     0
- 77
-     1
- 78
-    12
- 79
-     3
-140
-0.25
-141
-2.5
-143
-0.03937007874
-144
-100.0
-146
-0.5
-147
-0.1
-171
-     3
-172
-     1
-179
-     2
-271
-     2
-272
-     2
-274
-     3
-279
-     2
-283
-     0
-284
-     8
-288
-     1
-340
-4C
-342
-74
-  0
-DIMSTYLE
-105
-7C
-330
-4
-100
-AcDbSymbolTableRecord
-100
-AcDbDimStyleTableRecord
-  2
-EZ_M_100_H25_CM
- 70
-     0
- 41
-0.25
- 42
-0.125
- 43
-3.75
- 44
-0.375
- 49
-2.5
- 73
-     0
- 74
-     0
- 77
-     1
- 78
-    12
- 79
-     3
-140
-0.25
-141
-2.5
-142
-0.125
-143
-0.03937007874
-144
-100.0
-146
-0.5
-147
-0.1
-171
-     3
-172
-     1
-179
-     2
-271
-     2
-272
-     2
-274
-     3
-279
-     2
-283
-     0
-284
-     8
-288
-     1
-340
-4C
-  0
-DIMSTYLE
-105
-7D
-330
-4
-100
-AcDbSymbolTableRecord
-100
-AcDbDimStyleTableRecord
-  2
-EZ_M_50_H25_CM
- 70
-     0
- 41
-0.125
- 43
-3.75
- 44
-0.1875
- 49
-2.5
- 73
-     0
- 74
-     0
- 77
-     1
- 78
-    12
- 79
-     3
-140
-0.125
-141
-2.5
-142
-0.0625
-143
-0.03937007874
-144
-100.0
-146
-0.5
-147
-0.05
-171
-     3
-172
-     1
-179
-     2
-271
-     2
-272
-     2
-274
-     3
-279
-     2
-283
-     0
-284
-     8
-288
-     1
-340
-4C
-  0
-DIMSTYLE
-105
-7E
-330
-4
-100
-AcDbSymbolTableRecord
-100
-AcDbDimStyleTableRecord
-  2
-EZ_M_25_H25_CM
- 70
-     0
- 41
-0.0625
- 42
-0.03125
- 43
-3.75
- 44
-0.09375
- 49
-2.5
- 73
-     0
- 74
-     0
- 77
-     1
- 78
-    12
- 79
-     3
-140
-0.0625
-141
-2.5
-142
-0.03125
-143
-0.03937007874
-144
-100.0
-146
-0.5
-147
-0.025
-171
-     3
-172
-     1
-179
-     2
-271
-     2
-272
-     2
-274
-     3
-279
-     2
-283
-     0
-284
-     8
-288
-     1
-340
-4C
-  0
-DIMSTYLE
-105
-7F
-330
-4
-100
-AcDbSymbolTableRecord
-100
-AcDbDimStyleTableRecord
-  2
-EZ_M_20_H25_CM
- 70
-     0
- 41
-0.05
- 42
-0.025
- 43
-3.75
- 44
-0.075
- 49
-2.5
- 73
-     0
- 74
-     0
- 77
-     1
- 78
-    12
- 79
-     3
-140
-0.05
-141
-2.5
-142
-0.025
-143
-0.03937007874
-144
-100.0
-146
-0.5
-147
-0.02
-171
-     3
-172
-     1
-179
-     2
-271
-     2
-272
-     2
-274
-     3
-279
-     2
-283
-     0
-284
-     8
-288
-     1
-340
-4C
-  0
-DIMSTYLE
-105
-80
-330
-4
-100
-AcDbSymbolTableRecord
-100
-AcDbDimStyleTableRecord
-  2
-EZ_M_10_H25_CM
- 70
-     0
- 41
-0.025
- 42
-0.0125
- 43
-3.75
- 44
-0.0375
- 49
-2.5
- 73
-     0
- 74
-     0
- 77
-     1
- 78
-    12
- 79
-     3
-140
-0.025
-141
-2.5
-142
-0.0125
-143
-0.03937007874
-144
-100.0
-146
-0.5
-147
-0.01
-171
-     3
-172
-     1
-179
-     2
-271
-     2
-272
-     2
-274
-     3
-279
-     2
-283
-     0
-284
-     8
-288
-     1
-340
-4C
-  0
-DIMSTYLE
-105
-81
-330
-4
-100
-AcDbSymbolTableRecord
-100
-AcDbDimStyleTableRecord
-  2
-EZ_M_5_H25_CM
- 70
-     0
- 41
-0.0125
- 42
-0.00625
- 43
-3.75
- 44
-0.01875
- 49
-2.5
- 73
-     0
- 74
-     0
- 77
-     1
- 78
-    12
- 79
-     3
-140
-0.0125
-141
-2.5
-142
-0.00625
-143
-0.03937007874
-144
-100.0
-146
-0.5
-147
-0.005
-171
-     3
-172
-     1
-179
-     2
-271
-     2
-272
-     2
-274
-     3
-279
-     2
-283
-     0
-284
-     8
-288
-     1
-340
-4C
-  0
-DIMSTYLE
-105
-82
-330
-4
-100
-AcDbSymbolTableRecord
-100
-AcDbDimStyleTableRecord
-  2
-EZ_M_1_H25_CM
- 70
-     0
- 41
-0.0025
- 42
-0.00125
- 43
-3.75
- 44
-0.00375
- 49
-2.5
- 73
-     0
- 74
-     0
- 77
-     1
- 78
-    12
- 79
-     3
-140
-0.0025
-141
-2.5
-142
-0.00125
-143
-0.03937007874
-144
-100.0
-146
-0.5
-147
-0.001
-171
-     3
-172
-     1
-179
-     2
-271
-     2
-272
-     2
-274
-     3
-279
-     2
-283
-     0
-284
-     8
-288
-     1
-340
-4C
-  0
-DIMSTYLE
-105
-83
-330
-4
-100
-AcDbSymbolTableRecord
-100
-AcDbDimStyleTableRecord
-  2
-EZ_RADIUS
- 70
-     0
- 41
-0.25
- 42
-0.125
- 43
-3.75
- 44
-0.375
- 49
-2.5
- 73
-     0
- 74
-     0
- 77
-     1
- 78
-    12
- 79
-     3
-140
-0.25
-141
-0.0
-143
-0.03937007874
-144
-100.0
-146
-0.5
-147
-0.1
-171
-     3
-179
-     2
-271
-     2
-272
-     2
-274
-     3
-279
-     1
-283
-     0
-284
-     8
-288
-     1
-340
-4C
-342
-84
-  0
-DIMSTYLE
-105
-88
-330
-4
-100
-AcDbSymbolTableRecord
-100
-AcDbDimStyleTableRecord
-  2
-EZ_RADIUS_INSIDE
- 70
-     0
- 41
-0.25
- 42
-0.125
- 43
-3.75
- 44
-0.375
- 49
-2.5
- 73
-     0
- 74
-     0
- 78
-    12
- 79
-     3
-140
-0.25
-141
-0.0
-143
-0.03937007874
-144
-100.0
-146
-0.5
-147
-0.1
-171
-     3
-174
-     1
-179
-     2
-271
-     2
-272
-     2
-274
-     3
-283
-     0
-284
-     8
-288
-     1
-289
-     0
-340
-4C
-342
-84
-  0
-DIMSTYLE
-105
-89
-330
-4
-100
-AcDbSymbolTableRecord
-100
-AcDbDimStyleTableRecord
-  2
-EZ_CURVED
- 70
-     0
- 41
-0.25
- 42
-0.125
- 43
-3.75
- 44
-0.375
- 49
-2.5
- 73
-     0
- 74
-     0
- 77
-     1
- 78
-    12
- 79
-     2
- 90
-        2
-140
-0.25
-141
-2.5
-143
-0.03937007874
-144
-100.0
-146
-0.5
-147
-0.1
-171
-     3
-172
-     1
-179
-     2
-271
-     2
-272
-     2
-274
-     3
-279
-     2
-283
-     0
-284
-     8
-288
-     1
-340
-4C
   0
 DIMSTYLE
 105
@@ -4422,6 +3046,8 @@ COTAS-PORTFOLIO
      2
 274
      3
+278
+    44
 279
      2
 283
@@ -4505,6 +3131,10 @@ _ARCHTICK
 102
 {BLKREFS
 331
+1E6
+331
+2B7
+331
 11B
 331
 11D
@@ -4532,10 +3162,6 @@ _ARCHTICK
 2AA
 331
 2B9
-331
-1E6
-331
-2B7
 102
 }
  70
@@ -4601,11 +3227,11 @@ SIM-SECCIONADOR
 102
 {BLKREFS
 331
-1FC
-331
 16D
 331
 181
+331
+1FC
 102
 }
  70
@@ -4631,10 +3257,6 @@ SIM-INTERRUPTOR
 102
 {BLKREFS
 331
-1AE
-331
-200
-331
 177
 331
 197
@@ -4642,6 +3264,10 @@ SIM-INTERRUPTOR
 1A0
 331
 1A7
+331
+1AE
+331
+200
 102
 }
  70
@@ -4667,9 +3293,9 @@ SIM-TC
 102
 {BLKREFS
 331
-204
-331
 17C
+331
+204
 102
 }
  70
@@ -4695,9 +3321,9 @@ SIM-TT
 102
 {BLKREFS
 331
-208
-331
 172
+331
+208
 102
 }
  70
@@ -4723,9 +3349,9 @@ SIM-TRAFO-POTENCIA
 102
 {BLKREFS
 331
-20C
-331
 18B
+331
+20C
 102
 }
  70
@@ -4807,6 +3433,10 @@ SIM-JABALINA
 102
 {BLKREFS
 331
+260
+331
+262
+331
 217
 331
 234
@@ -4852,10 +3482,6 @@ SIM-JABALINA
 25C
 331
 25E
-331
-260
-331
-262
 102
 }
  70
@@ -6015,7 +4641,7 @@ AcDbEntity
 100
 AcDbLine
  10
-98.20100000000001
+98.201
  20
 594.0059999999999
  30
@@ -6041,15 +4667,15 @@ AcDbEntity
 100
 AcDbLine
  10
-98.20100000000001
+98.201
  20
-644.9207999999997
+644.9207999999996
  30
 0.0
  11
 83.85799999999997
  21
-644.9207999999997
+644.9207999999996
  31
 0.0
   0
@@ -6099,7 +4725,7 @@ _ARCHTICK
  10
 84.85799999999997
  20
-644.9207999999997
+644.9207999999996
  30
 0.0
  41
@@ -6131,7 +4757,7 @@ AcDbLine
  11
 84.85799999999997
  21
-644.9207999999997
+644.9207999999996
  31
 0.0
   0
@@ -6235,7 +4861,7 @@ AcDbPoint
  10
 99.00100000000001
  20
-644.9207999999997
+644.9207999999996
  30
 0.0
   0
@@ -8357,7 +6983,7 @@ AcDbMText
  10
 21.86721642172502
  20
-694.0964643359034
+694.0964643359032
  30
 0.0
  40
@@ -10295,7 +8921,7 @@ AcDbLine
  11
 99.00100000000001
  21
-644.9207999999997
+644.9207999999996
  31
 0.0
   0
@@ -10319,7 +8945,7 @@ AcDbLine
  11
 141.4299999999999
  21
-644.9207999999997
+644.9207999999996
  31
 0.0
   0
@@ -10337,13 +8963,13 @@ AcDbLine
  10
 99.00100000000001
  20
-644.9207999999997
+644.9207999999996
  30
 0.0
  11
 141.4299999999999
  21
-644.9207999999997
+644.9207999999996
  31
 0.0
   0
@@ -10401,7 +9027,7 @@ AcDbAlignedDimension
  14
 99.00100000000001
  24
-644.9207999999997
+644.9207999999996
  34
 0.0
  50
@@ -10693,7 +9319,7 @@ AcDbText
  30
 0.0
  40
-1.980019999999997
+1.980019999999996
   1
 FOSO DE CONTENCIÓN
 100
@@ -11153,7 +9779,7 @@ AcDbMText
  30
 0.0
  40
-1.980019999999997
+1.980019999999996
  41
 763.722
  46
@@ -14017,7 +12643,7 @@ AcDbMText
  30
 0.0
  40
-1.980019999999997
+1.980019999999996
  41
 25.4574
  46
@@ -14939,7 +13565,7 @@ ELE-AT-CONDUCTOR
 100
 AcDbLine
  10
-644.9207999999997
+644.9207999999996
  20
 424.99715
  30
@@ -14989,7 +13615,7 @@ DASHED
 100
 AcDbLine
  10
-644.9207999999997
+644.9207999999996
  20
 413.6827499999998
  30
@@ -15043,7 +13669,7 @@ AcDbPolyline
  43
 0.0
  10
-644.9207999999997
+644.9207999999996
  20
 400.1054699999998
  10
@@ -15055,7 +13681,7 @@ AcDbPolyline
  20
 404.6312299999998
  10
-644.9207999999997
+644.9207999999996
  20
 404.6312299999998
   0
@@ -15095,7 +13721,7 @@ CIV-OBRA
 100
 AcDbLine
  10
-644.9207999999997
+644.9207999999996
  20
 391.05395
  30
@@ -15149,7 +13775,7 @@ AcDbCircle
  30
 0.0
  40
-1.980019999999997
+1.980019999999996
   0
 TEXT
   5
@@ -16277,7 +14903,7 @@ AcDbMText
  30
 0.0
  40
-1.980019999999997
+1.980019999999996
  41
 62.22919999999999
  46
@@ -16575,7 +15201,7 @@ AcDbMText
  72
      5
   3
-CONDUCTOR: Cobre desnudo 4/0 AWG (107.2 mm2)  |  PROFUNDIDAD: 0.50 m\PJABALINAS: Copperweld D 5/8" x 1.50 m         |  UNIONES: Soldadura exotérmica (Cadweld)\PRESIST. DE PAT OBJETIVO: <= 1 ohm (IRAM 2281) |  Nro. JABALINAS: 24 (perimetrales + interi
+CONDUCTOR: Cobre desnudo 4/0 AWG (107.2 mm2)  |  PROFUNDIDAD: 0.50 m\PJABALINAS: Copperweld D 5/8" x 1.50 m         |  UNIONES: Soldadura exotérmica (Cadweld)\PRESIST. DE PAT OBJETIVO: <= 1 ohm (IRAM 2281) |  Nro. JABALINAS: 25 (perimetrales + interi
   1
 ores)
  73
@@ -18237,13 +16863,13 @@ AcDbMText
  72
      5
   3
-1. Plano de carácter ilustrativo, elaborado como pieza de portafolio técnico personal - Rev. 1.\P2. Simbología eléctrica según convención ANSI/IEC simplificada (símbolos como BLOQUES). Ver Panel E.\P3. Cotas en metros salvo indicación contraria. Vist
+1. Plano de carácter ilustrativo, elaborado como pieza de portafolio técnico personal - Rev. 2.\P2. Simbología eléctrica según convención ANSI/IEC simplificada (símbolos como BLOQUES). Ver Panel E.\P3. Cotas en metros salvo indicación contraria. Vist
   3
 as sin escala (S/E) o escala indicativa.\P4. Capas con prefijo por disciplina: DEF-, ANO- (anotación), ELE- (eléctrico), CIV- (civil).\P5. Elaborado en el marco de un proceso de postulación laboral - no constituye documento de ingeniería de detalle.\
   3
-P6. Referencias normativas: CIRSOC (estructuras), IRAM 2281 (puesta a tierra), AEA 95301 (canalizaciones).\P\PNOTA:\PTrabajar en subestaciones y líneas, tener estos a mano:^J^JEléctricas:^JAEA 95301, AEA 95402, AEA 95101, AEA 90364.^J^JCiviles/estructural
+P6. Referencias normativas: CIRSOC (estructuras), IRAM 2281 (puesta a tierra), AEA 95301 (canalizaciones).\P\PNOTA:\PAl Trabajar en subestaciones y líneas, tener a mano:^J^JEléctricas:^JAEA 95301, AEA 95402, AEA 95101, AEA 90364.^J^JCiviles/estructurales 
   1
-es CIRSOC:^JCIRSOC 101, 102, 103, 104, 201, 301, 304, 305, 401.^J^JDibujo:^JIRAM dibujo técnico + simbología eléctrica IRAM/IEC + normas CAD del comitente.
+CIRSOC:^JCIRSOC 101, 102, 103, 104, 201, 301, 304, 305, 401.^J^JDibujo:^JIRAM dibujo técnico + simbología eléctrica IRAM/IEC + normas CAD del comitente.
  73
      1
  44
@@ -18517,13 +17143,13 @@ ANO-TEXTO
 100
 AcDbMText
  10
-644.9207999999997
+644.9207999999996
  20
 62.22919999999999
  30
 0.0
  40
-1.980019999999997
+1.980019999999996
  41
 172.5445999999999
  46
@@ -18533,7 +17159,7 @@ AcDbMText
  72
      5
   1
-Plano Nro.: PORT-2026-001\PRev.1: Lámina A1 + Panel F (corte)\PRev.1: Capas, bloques y cotas\Pnormalizados (ver README)
+Plano Nro.: PORT-2026-001\PRev.1: Lámina A1 + Panel F (corte)\PRev.2: Capas, bloques, cotas\Py unidades normalizados
  73
      1
  44
@@ -18617,7 +17243,7 @@ ACAD_VISUALSTYLE
   3
 ACDB_RECOMPOSE_DATA
 350
-31E
+36D
   3
 AcDbVariableDictionary
 350
@@ -18705,11 +17331,11 @@ AcDbXrecord
 280
      1
 300
-{437F0CD4-A5FB-394E-9430-9F6DA7FC14F8}
+{18E3011B-67EE-434B-AD7B-8CE98BB28EE6}
 301
 {5C75F9A6-9394-C544-A136-66E6D98EB9F5}
 302
-{437F0CD4-A5FB-394E-9430-9F6DA7FC14F8}
+{18E3011B-67EE-434B-AD7B-8CE98BB28EE6}
 303
 C:\Users\wdssw\Downloads\Subestacion_Portfolio_WSaenz.dxf
   0
@@ -19033,7 +17659,7 @@ X-Ray
   0
 XRECORD
   5
-31E
+36D
 102
 {ACAD_REACTORS
 330
@@ -27049,7 +25675,7 @@ DictionaryVariables
 280
      0
   1
-1.4.4 @ 2026-06-21T04:07:23.299520+00:00
+1.4.4 @ 2026-06-22T00:14:33.165412+00:00
   0
 DICTIONARY
   5
@@ -27065,11 +25691,11 @@ AcDbDictionary
   3
 ACAD_ROUNDTRIP_2008_TABLESTYLE_CELLSTYLEMAP
 360
-31D
+36C
   0
 CELLSTYLEMAP
   5
-31D
+36C
 102
 {ACAD_REACTORS
 330
