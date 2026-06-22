@@ -5,11 +5,6 @@ Elaborado por William Darío Sáenz Santamaría — Ing. Civil (UNAL) · Maestr�
 Pieza preparada en el marco de la postulación al cargo de **Proyectista**
 
 ## Acceso rápido
-
-- **Ver la página de este módulo:** [index.html](./index.html) (incluye vista previa de la lámina)
-- **Descargar el plano:** [`Subestacion_Portfolio_WSaenz.dxf`](./Subestacion_Portfolio_WSaenz.dxf) — formato DXF (AutoCAD 2010), abre directo sin plugins.
-- **Vista previa (imagen):** [`preview-subestacion.png`](./preview-subestacion.png)
-
 > El DXF no se puede previsualizar dentro de GitHub (no es un formato que renderice nativamente). Para verlo con capas, cotas y texto editable hay que descargarlo y abrirlo en AutoCAD. La imagen de preview existe justamente para que cualquiera pueda ver el resultado sin tener AutoCAD instalado.
 
 ---
@@ -82,23 +77,24 @@ Por si te preguntan qué significa cada prefijo de capa o abreviatura del plano 
 
 **Abreviaturas eléctricas (las que están en la leyenda del propio plano, Panel E):**
 
-| Sigla | Significado                               |
-|-------|-------------------------------------------|
-| AT    | Alta Tensión                              |
-| MT    | Media Tensión                             |
-| BT    | Baja Tensión                              |
-| In    | Corriente nominal                         |
-| Icc   | Corriente de cortocircuito                |
-| PAT   | Puesta A Tierra                           |
-| DPS   | Descargador de sobretensión (pararrayos)  |
+| Sigla | Significado                                                                                                         |
+|-------|---------------------------------------------------------------------------------------------------------------------|
+| AT    | Alta Tensión                                                                                                        |
+| MT    | Media Tensión                                                                                                       |
+| BT    | Baja Tensión                                                                                                        |
+| Un    | Tensión nominal: indica la tensión para la cual el equipo fue diseñado y puede operar de forma segura.              |
+| In    | Corriente nominal: indica la capacidad normal y continua de conducción de corriente de un equipo. Ej.: 1250 A.      |
+| Icc   | Corriente de cortocircuito                                                                                          |
+| PAT   | Puesta A Tierra                                                                                                     |
+| DPS   | Descargador de sobretensión (pararrayos)                                                                            |
 
 **Numeración ANSI de dispositivos (Panel A):**
 
-| Número | Dispositivo             |
-|--------|-------------------------|
-| 52     | Interruptor de potencia |
-| 89     | Seccionador             |
-| 96     | Pararrayos / DPS        |
+| Número | Dispositivo                                                                                       |
+|--------|---------------------------------------------------------------------------------------------------|
+| 52     | Interruptor de potencia: es el que realmente “corta la energía” cuando hay carga o una falla      |
+| 89     | Seccionador: aisla físicamente la entrada de línea para dejarla separada del resto del sistema.   |
+| 96     | Pararrayos / DPS: Proteger los equipos desviando las sobretensiones hacia la puesta a tierra      |
 
 ## Nota de honestidad técnica
 
